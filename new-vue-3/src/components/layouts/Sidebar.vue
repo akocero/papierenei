@@ -2,11 +2,11 @@
 	<div
 		class="
 			h-screen
-			bg-gray-200
-			text-slate-600
-			duration-75
+			bg-indigo-100
+			text-indigo-900
 			fixed
 			md:relative
+			duration-200
 		"
 		:class="expanded ? 'w-72 2xl:w-1/6' : 'w-16'"
 	>
@@ -16,8 +16,8 @@
 				absolute
 				top-[16px]
 				right-[-12px]
-				bg-slate-800
-				text-slate-50
+				bg-indigo-800
+				text-indigo-50
 				rounded
 				w-6
 				h-6
@@ -31,27 +31,27 @@
 		>
 			<VueFeather type="chevron-right" size="16" class="ml-[5px]" />
 		</a>
-		<div class="h-14 bg-gray-300 flex items-center px-5 relative">
+		<div class="h-14 bg-indigo-300 flex items-center px-5 relative">
 			<div class="relative flex items-center w-full">
-				<div class="flex items-center">
-					<VueFeather type="user" size="18" class="mr-3" />
-					<a href="#" v-if="expanded">John Doe</a>
+				<div class="flex items-center font-bold">
+					<VueFeather type="box" size="20" class="mr-3" />
+					<a href="#" v-if="expanded">Company Name</a>
 				</div>
 
 				<a
 					href="#"
 					class="
 						ml-auto
-						bg-gray-400
-						text-gray-200
+						bg-indigo-500
+						text-indigo-200
 						flex
 						items-center
 						justify-center
 						w-6
 						h-6
 						rounded
-						hover:bg-slate-800
-						hover:text-slate-200
+						hover:bg-indigo-800
+						hover:text-indigo-200
 						duration-75
 					"
 					@click="expanded = !expanded"
@@ -59,13 +59,13 @@
 				>
 					<VueFeather
 						type="chevron-left"
-						size="16"
+						size="18"
 						class="mr-[2px]"
 					/>
 				</a>
 			</div>
 		</div>
-		<ul class="flex flex-col space-y-4 mt-4 relative">
+		<ul class="flex flex-col space-y-5 mt-5 relative">
 			<SidebarItem
 				v-for="sidebarRoute in sidebarRoutes"
 				:key="sidebarRoute.text"
@@ -85,23 +85,49 @@ const expanded = ref(true);
 const sidebarRoutes = [
 	{
 		text: 'Dashboard',
+		routeName: 'dashboard',
 		icon: 'pie-chart',
 		items: []
 	},
 	{
-		text: 'Statistics',
-		icon: 'bar-chart-2',
+		text: 'Inventory',
+		routeName: '',
+		icon: 'archive',
 		items: []
 	},
 	{
-		text: 'Design',
-		icon: 'framer',
+		text: 'Sales',
+		routeName: 'invoices',
+		icon: 'shopping-bag',
+		items: [{ text: 'Invoices' }, { text: 'Customers' }]
+	},
+	{
+		text: 'Purchases',
+		routeName: '',
+		icon: 'shopping-cart',
 		items: [{ text: 'Courses' }, { text: 'Categories' }]
 	},
 	{
-		text: 'Settings',
-		icon: 'life-buoy',
+		text: 'HR',
+		routeName: '',
+		icon: 'users',
 		items: [{ text: 'Courses' }, { text: 'Categories' }]
+	},
+	{
+		text: 'Banking',
+		routeName: '',
+		icon: 'credit-card'
+	},
+	{
+		text: 'Reports',
+		routeName: '',
+		icon: 'bar-chart-2',
+		items: [{ text: 'Courses' }, { text: 'Categories' }]
+	},
+	{
+		text: 'Apps',
+		routeName: '',
+		icon: 'smartphone'
 	}
 ];
 

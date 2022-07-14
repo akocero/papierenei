@@ -97,8 +97,8 @@
 							px-4
 							py-2
 							rounded-md
-							bg-slate-800
-							text-cyan-100
+							bg-indigo-800
+							text-white
 							cursor-pointer
 							block
 							w-full

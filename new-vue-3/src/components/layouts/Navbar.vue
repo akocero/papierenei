@@ -4,7 +4,7 @@
 			class="
 				flex
 				w-full
-				bg-slate-50
+				bg-white
 				shadow-sm
 				h-14
 				items-center
@@ -13,8 +13,12 @@
 			"
 		>
 			<div class="mr-auto flex items-center ml-20 sm:ml-3">
-				<vue-feather type="box" size="18" class="mr-2"></vue-feather
-				><span class="font-bold">Brand Logo</span>
+				<vue-feather type="search" size="18" class="mr-6"></vue-feather>
+				<vue-feather
+					type="refresh-cw"
+					size="18"
+					class="mr-2"
+				></vue-feather>
 			</div>
 			<ul class="flex space-x-4">
 				<!-- <li class="flex items-center">
