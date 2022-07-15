@@ -16,6 +16,7 @@
 import Navbar from './Navbar.vue';
 import Alert from '@/components/Alert.vue';
 import Sidebar from './Sidebar.vue';
+import Sidebar2 from './Sidebar2.vue';
 </script>
 
 <style></style>

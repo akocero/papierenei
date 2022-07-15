@@ -27,15 +27,17 @@
 				z-10
 			"
 			v-if="!expanded"
-			@click="expanded = !expanded"
+			@click="openSidebar"
 		>
 			<VueFeather type="chevron-right" size="16" class="ml-[5px]" />
 		</a>
 		<div class="h-14 bg-indigo-300 flex items-center px-5 relative">
 			<div class="relative flex items-center w-full">
-				<div class="flex items-center font-bold">
+				<div class="flex items-center font-semibold">
 					<VueFeather type="box" size="20" class="mr-3" />
-					<a href="#" v-if="expanded">Company Name</a>
+					<a href="#" v-if="expanded" class="whitespace-nowrap"
+						>Company Name</a
+					>
 				</div>
 
 				<a
@@ -54,7 +56,7 @@
 						hover:text-indigo-200
 						duration-75
 					"
-					@click="expanded = !expanded"
+					@click="closeSidebar"
 					v-if="expanded"
 				>
 					<VueFeather
@@ -67,6 +69,7 @@
 		</div>
 		<ul class="flex flex-col space-y-5 mt-5 relative">
 			<SidebarItem
+				@openSidebar="openSidebar"
 				v-for="sidebarRoute in sidebarRoutes"
 				:key="sidebarRoute.text"
 				:sidebarExpanded="expanded"
@@ -81,6 +84,14 @@ import { ref } from '@vue/reactivity';
 import SidebarItem from './SidebarItem.vue';
 
 const expanded = ref(true);
+
+const openSidebar = () => {
+	expanded.value = true;
+};
+
+const closeSidebar = () => {
+	expanded.value = false;
+};
 
 const sidebarRoutes = [
 	{
@@ -97,9 +108,12 @@ const sidebarRoutes = [
 	},
 	{
 		text: 'Sales',
-		routeName: 'invoices',
+		routeName: 'sales',
 		icon: 'shopping-bag',
-		items: [{ text: 'Invoices' }, { text: 'Customers' }]
+		items: [
+			{ text: 'Invoices', routeName: 'invoices' },
+			{ text: 'Customers', routeName: 'customers' }
+		]
 	},
 	{
 		text: 'Purchases',
@@ -130,10 +144,6 @@ const sidebarRoutes = [
 		icon: 'smartphone'
 	}
 ];
-
-const expand = () => {
-	expanded.value = !expanded.value;
-};
 </script>
 
 <style></style>

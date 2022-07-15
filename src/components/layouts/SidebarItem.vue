@@ -1,19 +1,26 @@
 <template>
 	<li class="relative px-5 duration-75" v-if="item">
 		<router-link
-			:to="{ name: item.routeName }"
+			:to="{ name: item.routeName ? item.routeName : '' }"
+			exact
 			class="
 				abosolute
 				flex
 				items-center
 				hover:text-indigo-900
 				hover:font-semibold
+				overflow-hidden
 			"
 			@click="expanded = !expanded"
 		>
 			<div class="flex items-center">
 				<VueFeather :type="item.icon" size="18" class="mr-3" />
-				<a href="#" v-show="sidebarExpanded">{{ item.text }}</a>
+				<a
+					href="#"
+					v-show="sidebarExpanded"
+					class="whitespace-nowrap"
+					>{{ item.text }}</a
+				>
 			</div>
 
 			<VueFeather
@@ -27,10 +34,14 @@
 
 		<ul
 			class="mt-4 ml-2 border-l-[2px] border-indigo-200 duration-75"
-			v-if="expanded && sidebarExpanded && item.items.length"
+			v-if="item?.items?.length && expanded && sidebarExpanded"
 		>
 			<li v-for="el in item.items" :key="el.text" class="px-5 py-1">
-				<a href="#">{{ el.text }}</a>
+				<router-link
+					:to="{ name: el.routeName ? el.routeName : '' }"
+					class="whitespace-nowrap"
+					>{{ el.text }}</router-link
+				>
 			</li>
 			<li
 				class="
@@ -43,7 +54,7 @@
 					font-semibold
 				"
 			>
-				<a href="#">Courses</a>
+				<a href="#" class="whitespace-nowrap">Courses</a>
 			</li>
 		</ul>
 	</li>
@@ -51,6 +62,7 @@
 
 <script setup>
 import { ref } from '@vue/reactivity';
+import { watch } from 'vue';
 
 const props = defineProps({
 	sidebarExpanded: Boolean,
@@ -58,6 +70,15 @@ const props = defineProps({
 });
 
 const expanded = ref(false);
+
+const emit = defineEmits(['openSidebar']);
+
+watch(expanded, (expanded, prevExpanded) => {
+	if (expanded && props.sidebarExpanded === false) {
+		emit('openSidebar');
+		console.log('Open Sidebar');
+	}
+});
 </script>
 
 <style></style>
