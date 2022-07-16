@@ -1,5 +1,5 @@
 <template>
-	<div class="card">Welcome, Customers</div>
+	<div class="card">Welcome, Inventory</div>
 </template>
 
 <script setup></script>

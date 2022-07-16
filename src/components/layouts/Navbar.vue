@@ -33,11 +33,11 @@
 					<RouterLink to="/signup">Signup</RouterLink>
 				</li> -->
 				<li class="flex items-center">
-					<vue-feather
+					<vueFeather
 						type="log-out"
 						size="18"
 						class="mr-2"
-					></vue-feather>
+					></vueFeather>
 					<RouterLink to="/login">Logout</RouterLink>
 				</li>
 			</ul>

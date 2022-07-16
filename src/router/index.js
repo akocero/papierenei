@@ -39,20 +39,19 @@ const router = createRouter({
 					component: () => import('../views/Dashboard.vue')
 				},
 				{
-					path: 'sales',
-					name: 'sales',
-					children: [
-						{
-							path: 'invoices',
-							name: 'invoices',
-							component: () => import('../views/Invoices.vue')
-						},
-						{
-							path: 'customers',
-							name: 'customers',
-							component: () => import('../views/Customers.vue')
-						}
-					]
+					path: 'sales/invoices',
+					name: 'sales.invoices',
+					component: () => import('../views/Invoices.vue')
+				},
+				{
+					path: 'sales/customers',
+					name: 'sales.customers',
+					component: () => import('../views/Customers.vue')
+				},
+				{
+					path: 'warehouse/inventory',
+					name: 'warehouse.inventory',
+					component: () => import('../views/Inventory.vue')
 				}
 			]
 		}

@@ -3,8 +3,102 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* @tailwind variants; */
 
 body {
 	background-color: #f1f5f9;
 	font-family: 'Source Sans Pro';
+}
+.nav-item {
+	@apply flex
+	items-center
+	hover:text-gray-50
+	hover:font-semibold
+	overflow-hidden;
+}
+.active.nav-item {
+	@apply font-semibold text-gray-50;
+}
+
+.nav-subitem {
+	@apply block
+	px-5
+	my-1
+	text-gray-400
+	whitespace-nowrap
+	hover:border-l-[1px]
+	hover:ml-[-1px]
+	hover:border-gray-50
+	hover:text-gray-50
+	hover:font-semibold;
+}
+
+.active.nav-subitem {
+	@apply border-l-[1px]
+	ml-[-1px]
+	border-gray-50
+	text-gray-50
+	font-semibold;
+}
+
+.btn-close-sidebar {
+	@apply absolute
+	top-[16px]
+	right-[-12px]
+	bg-blue-50
+	text-blue-900
+	border
+	rounded
+	w-6
+	h-6
+	flex
+	items-center
+	justify-items-center
+	z-10;
+}
+
+.btn-close-sidebar.hide {
+	@apply hidden;
+}
+
+.btn-open-sidebar {
+	@apply ml-auto
+	text-gray-200
+	flex
+	items-center
+	justify-center
+	w-6
+	h-6
+	rounded
+	hover:bg-blue-600
+	hover:text-gray-50
+	duration-75;
+}
+
+.btn-open-sidebar.hide {
+	@apply hidden;
+}
+
+.card {
+	@apply p-4 shadow-sm bg-white mb-4 rounded-sm;
+}
+
+.btn-table-action {
+	@apply border border-primary-200
+	rounded-sm
+	p-1
+	w-7
+	h-7
+	flex
+	items-center
+	justify-center hover:bg-primary-600 hover:border-0 hover:text-white;
+}
+
+.table-td {
+	@apply border-b border-primary-100
+	text-primary-800
+	py-1
+	px-4
+	font-medium
+	whitespace-nowrap;
 }
