@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="text-md fixed z-10 h-screen bg-[#051E34] text-gray-200 duration-200 md:relative"
+		class="text-md fixed z-10 h-screen bg-gray-800 text-gray-400 duration-200 md:relative"
 		:class="expanded ? 'w-72' : 'w-16'"
 	>
 		<a
@@ -12,7 +12,7 @@
 			<VueFeather type="chevron-right" size="16" class="" />
 		</a>
 		<div
-			class="relative flex h-14 items-center border-b-[1px] border-white/10 bg-[#051E34] px-[22px]"
+			class="relative flex h-14 items-center bg-indigo-500 px-[22px] text-gray-50"
 		>
 			<div class="relative flex w-full items-center">
 				<div class="flex items-center font-semibold">
@@ -39,7 +39,7 @@
 				</a>
 			</div>
 		</div>
-		<ul class="relative mt-1 flex flex-col">
+		<ul class="relative mt-4 flex flex-col">
 			<SidebarItem
 				@openSidebar="openSidebar"
 				v-for="sidebarRoute in sidebarRoutes"

@@ -2,53 +2,55 @@
 	<div class="card">
 		<div class="mb-4 flex items-baseline justify-between">
 			<h4 class="text-3xl">Macbooks</h4>
-			<BaseButtonVue text="Add Macbook" _class="" />
+			<BaseButtonVue text="Add Macbook" />
 		</div>
 
 		<!-- <BaseButtonVue text="Save Changes" _class="mr-2" />
 	<BaseButtonVue text="Add New" color="red" _class="mr-2" />
 	<BaseButtonVue text="Add New" color="yellow" /> -->
 
-		<div class="relative overflow-x-auto">
-			<table class="w-full text-left text-sm">
-				<thead class="text-md border text-gray-900">
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
 					<tr>
-						<th scope="col" class="bg-gray-50 py-4 px-4">
-							Product name
-						</th>
-						<th scope="col" class="bg-gray-50 py-4 px-4">Color</th>
-						<th scope="col" class="bg-gray-50 py-4 px-4">
-							Category
-						</th>
-						<th scope="col" class="bg-gray-50 py-4 px-4">Price</th>
-						<th scope="col" class="bg-gray-50 py-4 px-4">
-							Actions
+						<th v-for="header in headers" :key="header">
+							{{ header }}
 						</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr v-for="item in [1, 2, 3, 4]" class="">
-						<td class="table-td">Apple MacBook Pro 17"</td>
-						<td class="table-td">Grey</td>
-						<td class="table-td">Macbook</td>
-						<td class="table-td">$1,000.00</td>
+				<tbody class="">
+					<tr v-for="item in [1, 2, 3, 4]">
+						<td>Apple MacBook Pro 17"</td>
+						<td>Grey</td>
+						<td>Macbook</td>
+						<td>$1,000.00</td>
 
-						<td class="table-td flex space-x-2 p-2">
-							<a href="#" class="btn-table-action"
-								><VueFeather type="edit" size="16"
-							/></a>
-							<a href="#" class="btn-table-action"
-								><VueFeather type="eye" size="16"
-							/></a>
-							<a href="#" class="btn-table-action"
-								><VueFeather type="trash" size="16"
-							/></a>
-							<a href="#" class="btn-table-action"
-								><VueFeather type="printer" size="16"
-							/></a>
-							<a href="#" class="btn-table-action"
-								><VueFeather type="mail" size="16"
-							/></a>
+						<td class="flex space-x-2">
+							<BaseTableActionButton
+								icon="edit"
+								:route-object="{ name: 'sales.invoices' }"
+							/>
+
+							<BaseTableActionButton
+								_type="button"
+								text="View to"
+								@click="justAlert"
+							/>
+
+							<BaseTableActionButton
+								icon="trash"
+								:route-object="{ name: 'sales.invoices' }"
+							/>
+
+							<BaseTableActionButton
+								icon="printer"
+								:route-object="{ name: 'sales.invoices' }"
+							/>
+
+							<BaseTableActionButton
+								icon="mail"
+								:route-object="{ name: 'sales.invoices' }"
+							/>
 						</td>
 					</tr>
 				</tbody>
@@ -59,6 +61,12 @@
 
 <script setup>
 import BaseButtonVue from '../components/BaseButton.vue';
+import BaseTableActionButton from '../components/BaseTableActionButton.vue';
+const headers = ['Product Name', 'Color', 'Category', 'Price', 'Actions'];
+
+const justAlert = () => {
+	alert('View Button is Clicked');
+};
 </script>
 
 <style></style>
