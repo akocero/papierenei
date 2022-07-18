@@ -4,101 +4,99 @@
 @tailwind components;
 @tailwind utilities;
 /* @tailwind variants; */
-
-body {
-	background-color: #f1f5f9;
-	font-family: 'Source Sans Pro';
+@layer base {
+	body {
+		background-color: #f1f5f9;
+		font-family: 'Source Sans Pro';
+	}
 }
-.nav-item {
-	@apply flex
+
+@layer components {
+	.nav-item {
+		@apply flex
 	items-center
-	hover:text-gray-50
-	hover:font-semibold
-	overflow-hidden;
-}
-.active.nav-item {
-	@apply font-semibold text-gray-50;
-}
+	overflow-hidden
+	rounded-md
+	px-[13.5px] py-2 hover:bg-white/10 hover:text-gray-50;
+	}
+	.active.nav-item {
+		@apply rounded-md bg-white  text-gray-900;
+	}
 
-.nav-subitem {
-	@apply block
-	px-5
-	my-1
+	.nav-subitem {
+		@apply flex
+	items-center
+	whitespace-nowrap rounded-md
+	py-2
+	px-[13.5px]
 	text-gray-400
-	whitespace-nowrap
-	hover:border-l-[1px]
-	hover:ml-[-1px]
-	hover:border-gray-50
-	hover:text-gray-50
-	hover:font-semibold;
-}
+	hover:bg-white/10;
+	}
 
-.active.nav-subitem {
-	@apply border-l-[1px]
-	ml-[-1px]
-	border-gray-50
-	text-gray-50
-	font-semibold;
-}
+	.active.nav-subitem {
+		@apply bg-white/10 text-white;
+	}
 
-.btn-close-sidebar {
-	@apply absolute
+	.btn-open-sidebar {
+		@apply absolute
 	top-[16px]
 	right-[-12px]
-	bg-blue-50
-	text-blue-900
-	border
-	rounded
-	w-6
+	z-10
+	flex
 	h-6
-	flex
-	items-center
-	justify-items-center
-	z-10;
-}
-
-.btn-close-sidebar.hide {
-	@apply hidden;
-}
-
-.btn-open-sidebar {
-	@apply ml-auto
-	text-gray-200
-	flex
+	w-6
 	items-center
 	justify-center
-	w-6
-	h-6
 	rounded
-	hover:bg-blue-600
-	hover:text-gray-50
-	duration-75;
-}
+	border
+	border-gray-200
+	bg-white
+	text-gray-900;
+	}
 
-.btn-open-sidebar.hide {
-	@apply hidden;
-}
+	.btn-open-sidebar.hide {
+		@apply hidden;
+	}
 
-.card {
-	@apply p-4 shadow-sm bg-white mb-4 rounded-sm;
-}
-
-.btn-table-action {
-	@apply border border-primary-200
-	rounded-sm
-	p-1
-	w-7
-	h-7
+	.btn-close-sidebar {
+		@apply ml-auto
 	flex
+	h-6
+	w-6
 	items-center
-	justify-center hover:bg-primary-600 hover:border-0 hover:text-white;
-}
+	justify-center
+	rounded
+	text-gray-100
+	duration-75
+	hover:bg-white/10
+	hover:text-gray-50;
+	}
 
-.table-td {
-	@apply border-b border-primary-100
-	text-primary-800
+	.btn-close-sidebar.hide {
+		@apply hidden;
+	}
+
+	.card {
+		@apply mb-4 rounded-sm bg-white p-4 shadow-sm;
+	}
+
+	.btn-table-action {
+		@apply flex h-7
+	w-7
+	items-center
+	justify-center
+	rounded-sm
+	border
+	border-gray-200
+	p-1 hover:border-0 hover:bg-gray-600 hover:text-white;
+	}
+
+	.table-td {
+		@apply whitespace-nowrap border-b
+	border-gray-100
 	py-1
 	px-4
 	font-medium
-	whitespace-nowrap;
+	text-gray-800;
+	}
 }

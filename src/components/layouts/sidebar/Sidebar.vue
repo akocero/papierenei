@@ -1,26 +1,20 @@
 <template>
 	<div
-		class="
-			h-screen
-			bg-[#051E34]
-			text-gray-400
-			fixed
-			z-10
-			md:relative
-			duration-200
-		"
-		:class="expanded ? 'w-72 2xl:w-1/6' : 'w-16'"
+		class="text-md fixed z-10 h-screen bg-[#051E34] text-gray-200 duration-200 md:relative"
+		:class="expanded ? 'w-72' : 'w-16'"
 	>
 		<a
 			href="#"
 			:class="!expanded ? '' : 'hide'"
-			class="btn-close-sidebar"
+			class="btn-open-sidebar"
 			@click="openSidebar"
 		>
-			<VueFeather type="chevron-right" size="16" class="ml-[5px]" />
+			<VueFeather type="chevron-right" size="16" class="" />
 		</a>
-		<div class="h-14 bg-[#173755] flex items-center px-5 relative">
-			<div class="relative flex items-center w-full">
+		<div
+			class="relative flex h-14 items-center border-b-[1px] border-white/10 bg-[#051E34] px-[22px]"
+		>
+			<div class="relative flex w-full items-center">
 				<div class="flex items-center font-semibold">
 					<VueFeather type="box" size="20" class="mr-3" />
 					<a
@@ -33,7 +27,7 @@
 
 				<a
 					href="#"
-					class="btn-open-sidebar"
+					class="btn-close-sidebar"
 					@click="closeSidebar"
 					:class="expanded ? '' : 'hide'"
 				>
@@ -45,7 +39,7 @@
 				</a>
 			</div>
 		</div>
-		<ul class="flex flex-col space-y-5 mt-5 relative">
+		<ul class="relative mt-1 flex flex-col">
 			<SidebarItem
 				@openSidebar="openSidebar"
 				v-for="sidebarRoute in sidebarRoutes"
@@ -82,7 +76,7 @@ const sidebarRoutes = ref([
 		isRoute: true,
 		icon: 'pie-chart',
 		active: false,
-		items: []
+		items: [],
 	},
 	{
 		text: 'Sales',
@@ -92,8 +86,8 @@ const sidebarRoutes = ref([
 		active: false,
 		items: [
 			{ text: 'Invoices', routeName: 'sales.invoices', active: false },
-			{ text: 'Customers', routeName: 'sales.customers', active: false }
-		]
+			{ text: 'Customers', routeName: 'sales.customers', active: false },
+		],
 	},
 	{
 		text: 'Warehouse',
@@ -105,10 +99,10 @@ const sidebarRoutes = ref([
 			{
 				text: 'Inventory',
 				routeName: 'warehouse.inventory',
-				active: false
-			}
-		]
-	}
+				active: false,
+			},
+		],
+	},
 ]);
 
 onMounted(() => {
@@ -143,7 +137,7 @@ watch(
 	() => route.name,
 	() => {
 		generateActiveRoute(route.name);
-	}
+	},
 );
 </script>
 

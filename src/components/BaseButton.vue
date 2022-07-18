@@ -1,26 +1,16 @@
 <template>
 	<router-link
 		:to="{ name: 'warehouse.inventory' }"
-		class="
-			py-2
-			px-5
-			mt-2
-			transition-all
-			duration-200
-			rounded-md
-			inline-block
-			hover:translate-y-[-2px]
-			shadow-lg
-		"
+		class="mt-2 inline-block rounded-md py-2 px-5 shadow-lg transition-all duration-200 hover:translate-y-[-2px]"
 		:class="[
 			{
 				'bg-primary-600 text-primary-50 shadow-primary-600/60':
 					color === 'primary',
-				'bg-yellow-500 text-yellow-50 shadow-yellow-400/60 border ':
+				'border bg-yellow-500 text-yellow-50 shadow-yellow-400/60 ':
 					color === 'yellow',
-				'bg-red-600 text-red-50 shadow-red-600/60': color === 'red'
+				'bg-red-600 text-red-50 shadow-red-600/60': color === 'red',
 			},
-			_class
+			_class,
 		]"
 		>{{ text }}</router-link
 	>
@@ -31,16 +21,16 @@ const props = defineProps({
 	text: String,
 	_type: {
 		type: String,
-		default: 'link'
+		default: 'link',
 	},
 	_class: {
 		type: String,
-		default: ''
+		default: '',
 	},
 	color: {
 		type: String,
-		default: 'primary'
-	}
+		default: 'primary',
+	},
 });
 </script>
 

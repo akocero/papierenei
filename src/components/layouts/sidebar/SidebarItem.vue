@@ -1,14 +1,14 @@
 <template>
-	<li class="relative px-5" v-if="item">
+	<li class="relative mx-2" v-if="item">
 		<router-link
 			:to="{ name: item.routeName }"
 			exact
 			class="nav-item"
-			:class="item.active && 'active'"
+			:class="{ active: item.active }"
 			@click="toggleSublinks"
 		>
 			<div class="flex items-center">
-				<VueFeather :type="item.icon" size="18" class="mr-3" />
+				<VueFeather :type="item.icon" size="18" class="mr-4" />
 				<a
 					href="#"
 					v-show="sidebarExpanded"
@@ -27,25 +27,21 @@
 		</router-link>
 
 		<ul
-			class="
-				mt-4
-				ml-2
-				border-l-[1px] border-gray-600
-				transition-all
-				duration-1000
-			"
+			class=""
 			:class="
 				item?.items?.length && expanded && sidebarExpanded
 					? 'block'
 					: 'hidden'
 			"
 		>
-			<li v-for="el in item.items" :key="el.text" class="">
+			<li v-for="el in item.items" :key="el.text" class="my-[2px]">
 				<router-link
 					:to="{ name: el.routeName }"
 					class="nav-subitem"
 					:class="el.active && 'active'"
-					>{{ el.text }}</router-link
+					><VueFeather type="circle" size="16" class="mr-4" /><span>{{
+						el.text
+					}}</span></router-link
 				>
 			</li>
 		</ul>
@@ -57,7 +53,7 @@ import { onMounted, ref } from 'vue';
 
 const props = defineProps({
 	sidebarExpanded: Boolean,
-	item: Object
+	item: Object,
 });
 
 const emit = defineEmits(['openSidebar']);

@@ -17,7 +17,7 @@ module.exports = {
 					600: '#4f46e5',
 					700: '#4338ca',
 					800: '#3730a3',
-					900: '#312e81'
+					900: '#312e81',
 				},
 				secondary: {
 					50: '#eef2ff',
@@ -29,9 +29,9 @@ module.exports = {
 					600: '#4f46e5',
 					700: '#4338ca',
 					800: '#3730a3',
-					900: '#312e81'
-				}
-			}
+					900: '#312e81',
+				},
+			},
 		},
 		colors: {
 			transparent: 'transparent',
@@ -43,8 +43,13 @@ module.exports = {
 			indigo: colors.indigo,
 			yellow: colors.yellow,
 			blue: colors.blue,
-			red: colors.red
-		}
+			red: colors.red,
+		},
 	},
-	plugins: []
+	variants: {
+		extend: {
+			shadow: ['hover'],
+		},
+	},
+	plugins: [require('@tailwindcss/forms')],
 };
