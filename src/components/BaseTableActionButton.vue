@@ -2,14 +2,14 @@
 	<router-link
 		v-if="_type === 'link'"
 		:to="routeObject"
-		class="min-w-7 flex h-7 items-center justify-center rounded-lg border border-gray-200 p-1 hover:border-0 hover:bg-gray-600 hover:text-white"
+		class="min-w-7 flex h-7 items-center justify-center rounded-sm border border-gray-200 p-1 hover:border-gray-700 hover:bg-gray-700 hover:text-white"
 	>
 		{{ text }}
 		<VueFeather :type="icon" size="16" v-if="icon" />
 	</router-link>
 	<button
 		v-else
-		class="min-w-7 flex h-7 items-center justify-center rounded-lg border border-gray-200 p-1 hover:border-0 hover:bg-gray-600 hover:text-white"
+		class="min-w-7 flex h-7 items-center justify-center rounded-sm border border-gray-200 p-1 hover:border-gray-700 hover:bg-gray-700 hover:text-white"
 	>
 		{{ text }}
 		<VueFeather :type="icon" size="16" v-if="icon" />

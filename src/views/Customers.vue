@@ -1,7 +1,0 @@
-<template>
-	<div class="card">Welcome, Customers</div>
-</template>
-
-<script setup></script>
-
-<style></style>

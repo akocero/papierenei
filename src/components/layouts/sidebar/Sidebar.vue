@@ -1,9 +1,9 @@
 <template>
 	<div
-		class="text-md fixed z-10 h-screen bg-gray-800 text-gray-400 duration-200 md:relative"
-		:class="expanded ? 'w-72' : 'w-16'"
+		class="sidebar text-md fixed z-10 w-64 bg-gray-800 text-gray-400 duration-300"
+		:class="isSidebarOpen ? 'visible left-0' : 'invisible -left-64'"
 	>
-		<a
+		<!-- <a
 			href="#"
 			:class="!expanded ? '' : 'hide'"
 			class="btn-open-sidebar"
@@ -38,8 +38,8 @@
 					/>
 				</a>
 			</div>
-		</div>
-		<ul class="relative mt-4 flex flex-col">
+		</div> -->
+		<ul class="relative flex flex-col">
 			<SidebarItem
 				@openSidebar="openSidebar"
 				v-for="sidebarRoute in sidebarRoutes"
@@ -56,6 +56,10 @@ import { ref } from '@vue/reactivity';
 import { onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import SidebarItem from './SidebarItem.vue';
+
+const props = defineProps({
+	isSidebarOpen: Boolean,
+});
 
 const expanded = ref(true);
 

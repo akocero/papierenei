@@ -1,37 +1,23 @@
 <template>
 	<div class="bg-slate-100 h-screen pt-16">
-		<div class="text-center text-gray-500 mb-8">
+		<div class="mb-8 text-center text-gray-500">
 			<VueFeather type="box" size="48" class="" />
 			<h2 class="text-2xl">EMPEROR</h2>
 		</div>
 		<div
-			class="
-				shadow-md
-				mx-auto
-				bg-white
-				rounded-md
-				lg:w-1/4
-				w-2/3
-				overflow-hidden
-			"
+			class="mx-auto w-2/3 overflow-hidden rounded-md bg-white shadow-md lg:w-1/4"
 		>
 			<div class="p-6">
-				<div class="text-center mb-7 text-gray-500">
-					<h2 class="text-xl mb-4">Log in to your account</h2>
+				<div class="mb-7 text-center text-gray-500">
+					<h2 class="mb-4 text-xl">Log in to your account</h2>
 				</div>
 				<form @submit.prevent="handleSubmit">
-					<label class="block mb-4">
-						<span class="block mb-1 text-md text-gray-500"
+					<label class="mb-4 block">
+						<span class="text-md mb-1 block text-gray-500"
 							>Email</span
 						>
 						<div
-							class="
-								relative
-								flex
-								items-center
-								text-gray-500
-								focus-within:text-gray-600
-							"
+							class="relative flex items-center text-gray-500 focus-within:text-gray-600"
 						>
 							<VueFeather
 								type="user"
@@ -42,32 +28,17 @@
 								v-model="email"
 								type="email"
 								placeholder="Email Address"
-								class="
-									py-2
-									px-4
-									border
-									w-full
-									pl-10
-									rounded-md
-									placeholder-gray-400
-									outline-0
-								"
+								class="mt-1 block w-full rounded-md border-gray-300 pl-9 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
 							/>
 						</div>
 					</label>
 
-					<label class="block mb-4">
-						<span class="block mb-1 text-md text-gray-500"
-							>Passoword</span
+					<label class="mb-4 block">
+						<span class="text-md mb-1 block text-gray-500"
+							>Password</span
 						>
 						<div
-							class="
-								relative
-								flex
-								items-center
-								text-gray-500
-								focus-within:text-gray-600
-							"
+							class="relative flex items-center text-gray-500 focus-within:text-gray-600"
 						>
 							<VueFeather
 								type="lock"
@@ -77,33 +48,14 @@
 							<input
 								v-model="password"
 								type="password"
-								placeholder="password"
-								class="
-									py-2
-									px-4
-									border
-									w-full
-									pl-10
-									rounded-md
-									placeholder-gray-400
-									outline-0
-								"
+								placeholder="Password"
+								class="mt-1 block w-full rounded-md border-gray-300 pl-9 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
 							/>
 						</div>
 					</label>
 					<input
 						type="submit"
-						class="
-							px-4
-							py-2
-							rounded-md
-							bg-indigo-800
-							text-white
-							cursor-pointer
-							block
-							w-full
-							mt-5
-						"
+						class="block w-full rounded-md bg-primary-500 px-2 py-2 text-white hover:bg-primary-600 focus:outline-none focus:ring focus:ring-primary-300 active:bg-primary-700"
 						value="Log In"
 					/>
 				</form>

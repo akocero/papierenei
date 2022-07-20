@@ -10,12 +10,12 @@ const router = createRouter({
 		{
 			path: '/login',
 			name: 'login',
-			component: Login
+			component: Login,
 		},
 		{
 			path: '/signup',
 			name: 'signup',
-			component: Signup
+			component: Signup,
 		},
 		{
 			path: '/about',
@@ -23,7 +23,7 @@ const router = createRouter({
 			// route level code-splitting
 			// this generates a separate chunk (About.[hash].js) for this route
 			// which is lazy-loaded when the route is visited.
-			component: () => import('../views/AboutView.vue')
+			component: () => import('../views/AboutView.vue'),
 		},
 		{
 			path: '/main',
@@ -36,26 +36,31 @@ const router = createRouter({
 				{
 					path: 'dashboard',
 					name: 'dashboard',
-					component: () => import('../views/Dashboard.vue')
+					component: () => import('../views/Dashboard.vue'),
 				},
 				{
 					path: 'sales/invoices',
 					name: 'sales.invoices',
-					component: () => import('../views/Invoices.vue')
+					component: () => import('../views/Invoices.vue'),
 				},
 				{
 					path: 'sales/customers',
 					name: 'sales.customers',
-					component: () => import('../views/Customers.vue')
+					component: () => import('../views/customer/index.vue'),
+				},
+				{
+					path: 'sales/customers/create',
+					name: 'sales.customers.create',
+					component: () => import('../views/customer/create.vue'),
 				},
 				{
 					path: 'warehouse/inventory',
 					name: 'warehouse.inventory',
-					component: () => import('../views/Inventory.vue')
-				}
-			]
-		}
-	]
+					component: () => import('../views/Inventory.vue'),
+				},
+			],
+		},
+	],
 });
 
 export default router;

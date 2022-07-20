@@ -1,7 +1,7 @@
 <template>
 	<router-link
-		:to="{ name: 'warehouse.inventory' }"
-		class="inline-block rounded-lg py-2 px-3"
+		:to="routeObject"
+		class="inline-block rounded-sm py-2 px-3"
 		:class="[
 			{
 				'bg-primary-600 text-primary-50 ': color === 'primary',
@@ -28,6 +28,10 @@ const props = defineProps({
 	color: {
 		type: String,
 		default: 'primary',
+	},
+	routeObject: {
+		type: Object,
+		default: {},
 	},
 });
 </script>

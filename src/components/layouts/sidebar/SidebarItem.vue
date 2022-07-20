@@ -1,5 +1,5 @@
 <template>
-	<li class="relative mx-2" v-if="item">
+	<li class="relative" v-if="item">
 		<router-link
 			:to="{ name: item.routeName }"
 			exact
@@ -18,10 +18,10 @@
 			</div>
 
 			<VueFeather
-				type="chevron-left"
+				type="chevron-right"
 				size="18"
-				class="ml-auto duration-75"
-				:class="expanded ? 'rotate-[-90deg]' : ''"
+				class="ml-auto duration-200"
+				:class="expanded ? 'rotate-90' : ''"
 				v-show="item?.items?.length"
 			/>
 		</router-link>

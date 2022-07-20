@@ -1,37 +1,34 @@
 <template>
-	<header>
-		<nav
-			class="
-				flex
-				w-full
-				bg-white
-				shadow-sm
-				h-14
-				items-center
-				px-4
-				text-slate-800
-			"
+	<header class="relative z-20 flex h-14">
+		<div
+			class="hidden w-64 items-center bg-indigo-600 px-4 text-white shadow-md sm:flex"
 		>
-			<div class="mr-auto flex items-center ml-20 sm:ml-3">
-				<vue-feather type="search" size="18" class="mr-6"></vue-feather>
+			<vue-feather type="box" size="18" class="mr-2"></vue-feather>
+			<span>Company Logo</span>
+			<a href="#" class="ml-auto" @click="$emit('toggleSidebar')">
 				<vue-feather
-					type="refresh-cw"
-					size="18"
-					class="mr-2"
+					:type="isSidebarOpen ? `toggle-right` : `toggle-left`"
+					size="20"
+					class="mt-[8px]"
 				></vue-feather>
+			</a>
+		</div>
+		<nav
+			class="flex flex-1 items-center bg-indigo-600 px-6 text-white shadow-sm sm:bg-white sm:text-gray-900"
+		>
+			<a href="#" class="sm:hidden" @click="$emit('toggleSidebar')">
+				<vue-feather
+					:type="isSidebarOpen ? `toggle-right` : `toggle-left`"
+					size="20"
+					class="mt-[8px]"
+				></vue-feather>
+			</a>
+			<div class="hidden sm:flex">
+				<vue-feather type="search" size="18" class="mr-4"></vue-feather>
+				<vue-feather type="refresh-cw" size="18" class=""></vue-feather>
 			</div>
-			<ul class="flex space-x-4">
-				<!-- <li class="flex items-center">
-					<vue-feather
-						type="user"
-						size="18"
-						class="mr-2"
-					></vue-feather
-					><RouterLink to="/login">Login</RouterLink>
-				</li> -->
-				<!-- <li class="ml-4">
-					<RouterLink to="/signup">Signup</RouterLink>
-				</li> -->
+
+			<ul class="ml-auto flex space-x-4">
 				<li class="flex items-center">
 					<vueFeather
 						type="log-out"
@@ -45,6 +42,10 @@
 	</header>
 </template>
 
-<script setup></script>
+<script setup>
+const props = defineProps({
+	isSidebarOpen: Boolean,
+});
+</script>
 
 <style></style>
