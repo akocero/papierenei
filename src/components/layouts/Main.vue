@@ -5,7 +5,7 @@
 			<Sidebar :isSidebarOpen="isSidebarOpen" />
 
 			<main
-				class="w-48 grow p-6 pt-8 duration-300"
+				class="w-48 grow px-6 pt-8 duration-300"
 				:class="{ 'lg:pl-[17.5rem]': isSidebarOpen }"
 			>
 				<!-- <Alert /> -->
@@ -19,7 +19,6 @@
 import Navbar from './Navbar.vue';
 import Alert from '@/components/Alert.vue';
 import Sidebar from './sidebar/Sidebar.vue';
-import Sidebar2 from './Sidebar2.vue';
 import { ref } from 'vue';
 
 const isSidebarOpen = ref(true);

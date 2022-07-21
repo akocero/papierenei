@@ -9,12 +9,7 @@
 		>
 			<div class="flex items-center">
 				<VueFeather :type="item.icon" size="18" class="mr-4" />
-				<a
-					href="#"
-					v-show="sidebarExpanded"
-					class="whitespace-nowrap"
-					>{{ item.text }}</a
-				>
+				<a href="#" class="whitespace-nowrap">{{ item.text }}</a>
 			</div>
 
 			<VueFeather
@@ -26,14 +21,7 @@
 			/>
 		</router-link>
 
-		<ul
-			class=""
-			:class="
-				item?.items?.length && expanded && sidebarExpanded
-					? 'block'
-					: 'hidden'
-			"
-		>
+		<ul v-if="item?.items?.length" :class="expanded ? 'block' : 'hidden'">
 			<li v-for="el in item.items" :key="el.text" class="my-[2px]">
 				<router-link
 					:to="{ name: el.routeName }"
@@ -52,22 +40,13 @@
 import { onMounted, ref } from 'vue';
 
 const props = defineProps({
-	sidebarExpanded: Boolean,
 	item: Object,
 });
-
-const emit = defineEmits(['openSidebar']);
 
 const expanded = ref(false);
 
 const toggleSublinks = () => {
 	expanded.value = expanded.value ? false : true;
-
-	// open sidebar if nav-item is click and sidebar is close
-	if (!props.sidebarExpanded) {
-		expanded.value = true;
-		emit('openSidebar');
-	}
 };
 
 onMounted(() => {

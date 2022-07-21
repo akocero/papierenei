@@ -3,42 +3,6 @@
 		class="sidebar text-md fixed z-10 w-64 bg-gray-800 text-gray-400 duration-300"
 		:class="isSidebarOpen ? 'visible left-0' : 'invisible -left-64'"
 	>
-		<!-- <a
-			href="#"
-			:class="!expanded ? '' : 'hide'"
-			class="btn-open-sidebar"
-			@click="openSidebar"
-		>
-			<VueFeather type="chevron-right" size="16" class="" />
-		</a>
-		<div
-			class="relative flex h-14 items-center bg-indigo-500 px-[22px] text-gray-50"
-		>
-			<div class="relative flex w-full items-center">
-				<div class="flex items-center font-semibold">
-					<VueFeather type="box" size="20" class="mr-3" />
-					<a
-						href="#"
-						:class="expanded ? '' : 'hidden'"
-						class="whitespace-nowrap"
-						>Company Name</a
-					>
-				</div>
-
-				<a
-					href="#"
-					class="btn-close-sidebar"
-					@click="closeSidebar"
-					:class="expanded ? '' : 'hide'"
-				>
-					<VueFeather
-						type="chevron-left"
-						size="18"
-						class="mr-[2px]"
-					/>
-				</a>
-			</div>
-		</div> -->
 		<ul class="relative flex flex-col">
 			<SidebarItem
 				@openSidebar="openSidebar"
@@ -63,14 +27,6 @@ const props = defineProps({
 
 const expanded = ref(true);
 
-const openSidebar = () => {
-	expanded.value = true;
-};
-
-const closeSidebar = () => {
-	expanded.value = false;
-};
-
 const route = useRoute();
 
 const sidebarRoutes = ref([
@@ -91,6 +47,7 @@ const sidebarRoutes = ref([
 		items: [
 			{ text: 'Invoices', routeName: 'sales.invoices', active: false },
 			{ text: 'Customers', routeName: 'sales.customers', active: false },
+			{ text: 'Date', routeName: 'sales.customers', active: false },
 		],
 	},
 	{
