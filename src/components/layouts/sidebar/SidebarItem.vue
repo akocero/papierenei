@@ -61,8 +61,4 @@ onMounted(() => {
 });
 </script>
 
-<style>
-.route-parent:has(.router-link-exact-active) {
-	color: red !important;
-}
-</style>
+<style></style>
