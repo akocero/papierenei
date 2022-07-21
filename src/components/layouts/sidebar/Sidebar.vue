@@ -5,10 +5,8 @@
 	>
 		<ul class="relative flex flex-col">
 			<SidebarItem
-				@openSidebar="openSidebar"
 				v-for="sidebarRoute in sidebarRoutes"
 				:key="sidebarRoute.text"
-				:sidebarExpanded="expanded"
 				:item="sidebarRoute"
 			/>
 		</ul>

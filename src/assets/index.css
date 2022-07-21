@@ -31,22 +31,6 @@
 		@apply bg-gray-700 text-white;
 	}
 
-	.btn-open-sidebar {
-		@apply absolute top-[16px] right-[-12px] z-10 flex h-6 w-6 items-center justify-center rounded border border-gray-200 bg-white text-gray-900;
-	}
-
-	.btn-open-sidebar.hide {
-		@apply hidden;
-	}
-
-	.btn-close-sidebar {
-		@apply ml-auto flex h-6 w-6 items-center justify-center rounded text-gray-100 duration-75 hover:bg-white/10 hover:text-gray-50;
-	}
-
-	.btn-close-sidebar.hide {
-		@apply hidden;
-	}
-
 	.card {
 		@apply mb-4 w-full overflow-hidden rounded-sm bg-white p-6 shadow-sm;
 	}
