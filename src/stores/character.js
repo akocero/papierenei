@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import axios from '../config/axios-config';
 import storeHelpers from '../helpers/storeHelpers';
 
 export const useCharacterStore = defineStore({

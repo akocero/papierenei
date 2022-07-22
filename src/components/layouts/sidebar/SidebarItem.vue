@@ -1,7 +1,7 @@
 <template>
 	<li class="relative" v-if="item">
 		<router-link
-			:to="{ name: item.routeName }"
+			:to="item.routeObject"
 			exact
 			class="nav-item"
 			:class="{ active: item.active }"
@@ -24,7 +24,7 @@
 		<ul v-if="item?.items?.length" :class="expanded ? 'block' : 'hidden'">
 			<li v-for="el in item.items" :key="el.text" class="my-[2px]">
 				<router-link
-					:to="{ name: el.routeName }"
+					:to="el.routeObject"
 					class="nav-subitem"
 					:class="el.active && 'active'"
 					><VueFeather type="circle" size="16" class="mr-4" /><span>{{

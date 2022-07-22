@@ -11,10 +11,6 @@
 	}
 }
 
-.sidebar {
-	height: calc(100vh - 3.5rem);
-}
-
 @layer components {
 	.nav-item {
 		@apply flex items-center overflow-hidden px-[13.5px] py-2 hover:bg-white/10 hover:text-gray-50;
@@ -32,7 +28,7 @@
 	}
 
 	.card {
-		@apply mb-4 w-full overflow-hidden rounded-sm bg-white p-6 shadow-sm;
+		@apply mb-4 w-full rounded-sm bg-white p-6 shadow-sm;
 	}
 
 	.table {

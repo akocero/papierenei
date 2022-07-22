@@ -1,5 +1,6 @@
 <template>
 	<router-link
+		v-if="_type === 'link'"
 		:to="routeObject"
 		class="inline-block rounded-sm py-2 px-3"
 		:class="[
@@ -12,6 +13,22 @@
 		]"
 		>{{ text }}</router-link
 	>
+
+	<button
+		v-else
+		:type="_type"
+		class="inline-block rounded-sm py-2 px-3"
+		:class="[
+			{
+				'bg-primary-600 text-primary-50 ': color === 'primary',
+				'border bg-yellow-500 text-yellow-50 ': color === 'yellow',
+				'bg-red-600 text-red-50 ': color === 'red',
+			},
+			_class,
+		]"
+	>
+		{{ text }}
+	</button>
 </template>
 
 <script setup>

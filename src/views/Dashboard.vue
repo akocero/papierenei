@@ -3,6 +3,7 @@
 		<div class="mb-4 flex items-baseline justify-between">
 			<h4 class="text-2xl">Welcome, Dashboard</h4>
 			<BaseButton text="Open modal" @click="openModal" />
+			<BaseButton text="Open modal" @click="handleAlert" />
 		</div>
 	</div>
 	<BaseModal
@@ -34,9 +35,10 @@ import BaseButton from '../components/BaseButton.vue';
 import BaseModal from '../components/BaseModal.vue';
 import { ref } from 'vue';
 import { useCounterStore } from '../stores/counter';
+import useAlert from '../composables/useAlert';
 
 const counterStore = useCounterStore();
-
+const { pushAlert } = useAlert();
 const isOpen = ref(false);
 
 function closeModal() {
@@ -45,6 +47,13 @@ function closeModal() {
 function openModal() {
 	isOpen.value = true;
 }
+
+const handleAlert = () => {
+	pushAlert('error', 'Invalid Inputs');
+	pushAlert('success', 'Invalid Inputs');
+	pushAlert('warning', 'Invalid Inputs');
+	pushAlert('info', 'Invalid Inputs');
+};
 </script>
 
 <style></style>

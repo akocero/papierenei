@@ -1,5 +1,5 @@
 <template>
-	<header class="relative z-20 flex h-14">
+	<header class="fixed z-20 flex h-14 w-full">
 		<div
 			class="hidden w-60 items-center bg-indigo-600 px-4 text-white shadow-md sm:flex 2xl:w-64"
 		>
@@ -14,7 +14,7 @@
 			</a>
 		</div>
 		<nav
-			class="flex flex-1 items-center bg-indigo-600 px-6 text-white shadow-sm sm:bg-white sm:text-gray-900"
+			class="flex grow items-center bg-indigo-600 px-6 text-white shadow-sm sm:bg-white sm:text-gray-900"
 		>
 			<a href="#" class="sm:hidden" @click="$emit('toggleSidebar')">
 				<vue-feather
@@ -24,8 +24,8 @@
 				></vue-feather>
 			</a>
 			<div class="hidden sm:flex">
-				<vue-feather type="search" size="18" class="mr-4"></vue-feather>
-				<vue-feather type="refresh-cw" size="18" class=""></vue-feather>
+				<vue-feather type="search" size="16" class="mr-4"></vue-feather>
+				<vue-feather type="refresh-cw" size="16" class=""></vue-feather>
 			</div>
 
 			<Menu as="div" class="relative ml-auto inline-block text-left">

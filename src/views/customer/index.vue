@@ -8,10 +8,6 @@
 			/>
 		</div>
 
-		<!-- <BaseButtonVue text="Save Changes" _class="mr-2" />
-	<BaseButtonVue text="Add New" color="red" _class="mr-2" />
-	<BaseButtonVue text="Add New" color="yellow" /> -->
-		<div v-if="store.error">{{ store.error }}</div>
 		<div class="table-responsive">
 			<table class="table">
 				<thead>
@@ -85,16 +81,17 @@ import BaseTextArea from '@/components/BaseTextArea.vue';
 
 import BaseTableActionButton from '@/components/BaseTableActionButton.vue';
 import { useCharacterStore } from '@/stores/character';
+import useAlert from '../../composables/useAlert';
 
 const store = useCharacterStore();
+const { pushAlert } = useAlert();
+onBeforeMount(async () => {
+	await store.fetch();
 
-onBeforeMount(() => {
-	store.fetch();
+	if (store.error) {
+		pushAlert('error', store.error.message);
+	}
 });
-
-const justAlert = () => {
-	alert('View Button is Clicked');
-};
 </script>
 
 <style></style>
