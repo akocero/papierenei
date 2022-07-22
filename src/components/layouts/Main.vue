@@ -5,8 +5,8 @@
 			<Sidebar :isSidebarOpen="isSidebarOpen" />
 
 			<main
-				class="w-48 grow px-6 pt-8 duration-300"
-				:class="{ 'lg:pl-[17.5rem]': isSidebarOpen }"
+				class="w-52 grow px-6 pt-8 duration-300"
+				:class="{ 'sm:pl-[16.5rem] 2xl:pl-[17.5rem]': isSidebarOpen }"
 			>
 				<!-- <Alert /> -->
 				<RouterView />

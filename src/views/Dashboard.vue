@@ -2,7 +2,7 @@
 	<div class="card">
 		<div class="mb-4 flex items-baseline justify-between">
 			<h4 class="text-2xl">Welcome, Dashboard</h4>
-			<BaseButton text="Add Macbook" @click="openModal" />
+			<BaseButton text="Open modal" @click="openModal" />
 		</div>
 	</div>
 	<BaseModal
@@ -33,6 +33,9 @@
 import BaseButton from '../components/BaseButton.vue';
 import BaseModal from '../components/BaseModal.vue';
 import { ref } from 'vue';
+import { useCounterStore } from '../stores/counter';
+
+const counterStore = useCounterStore();
 
 const isOpen = ref(false);
 

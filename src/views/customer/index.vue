@@ -11,22 +11,33 @@
 		<!-- <BaseButtonVue text="Save Changes" _class="mr-2" />
 	<BaseButtonVue text="Add New" color="red" _class="mr-2" />
 	<BaseButtonVue text="Add New" color="yellow" /> -->
-
+		<div v-if="store.error">{{ store.error }}</div>
 		<div class="table-responsive">
 			<table class="table">
 				<thead>
 					<tr>
-						<th v-for="header in headers" :key="header">
-							{{ header }}
+						<th
+							class="group flex items-center space-x-3 border-0 hover:border-r"
+						>
+							<span>Name</span>
+							<VueFeather
+								type="chevron-down"
+								size="16"
+								class="mr-4 hidden group-hover:inline-block"
+							/>
 						</th>
+						<th>Gender</th>
+						<th>Nen Type</th>
+						<th>Profession</th>
+						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody class="">
-					<tr v-for="item in [1, 2, 3, 4]">
-						<td>Apple MacBook Pro 17"</td>
-						<td>Grey</td>
-						<td>Macbook</td>
-						<td>$1,000.00</td>
+					<tr v-for="item in store.list" v-if="!store.isLoading">
+						<td>{{ item.name }}</td>
+						<td>{{ item.gender }}</td>
+						<td>{{ item.nen_type[0] }}</td>
+						<td>{{ item.professions[0] }}</td>
 
 						<td class="flex space-x-2">
 							<BaseTableActionButton
@@ -56,6 +67,9 @@
 							/>
 						</td>
 					</tr>
+					<tr v-else>
+						<td colspan="10" class="bg-black">Loading...</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
@@ -63,15 +77,21 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import BaseButton from '@/components/BaseButton.vue';
 import BaseInput from '@/components/BaseInput.vue';
 import BaseSelect from '@/components/BaseSelect.vue';
 import BaseTextArea from '@/components/BaseTextArea.vue';
 
 import BaseTableActionButton from '@/components/BaseTableActionButton.vue';
-const headers = ['Product Name', 'Color', 'Category', 'Price', 'Actions'];
-const firstName = ref('');
+import { useCharacterStore } from '@/stores/character';
+
+const store = useCharacterStore();
+
+onBeforeMount(() => {
+	store.fetch();
+});
+
 const justAlert = () => {
 	alert('View Button is Clicked');
 };
