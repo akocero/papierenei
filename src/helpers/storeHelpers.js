@@ -1,15 +1,17 @@
 import axios from '../config/axios-config';
 
-const fetch = async (store) => {
+const fetch = async (store, query) => {
 	store.list = [];
 	store.isLoading = true;
 
 	try {
-		const res = await axios.get(store.url);
+		const res = await axios.get(store.url + query);
 		store.list = res.data.data;
-		console.log(res.data);
+
 		store.error = null;
 		store.isLoading = false;
+		store.response = res.data;
+		return res.data;
 	} catch (err) {
 		store.isLoading = false;
 		console.log(err.response.data.message);

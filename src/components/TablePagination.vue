@@ -1,0 +1,49 @@
+<template>
+	<div class="mt-2 flex" v-if="!store.isLoading">
+		<h5 class="text-base text-gray-500">
+			Showing {{ store.response.from }} to {{ store.response.to }} of
+			{{ store.response.total }} results
+		</h5>
+		<div class="ml-auto space-x-2">
+			<button
+				class="disabled:border-slate-200 rounded-md border py-1 px-3 hover:border-primary-500 hover:bg-primary-500 hover:text-white disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none"
+				@click="$emit('paginate', 1)"
+				:disabled="store.response._paginate.current_page === 1"
+			>
+				First
+			</button>
+			<button
+				:disabled="!store.response._paginate.previous_page"
+				class="disabled:border-slate-200 rounded-md border py-1 px-3 hover:border-primary-500 hover:bg-primary-500 hover:text-white disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none"
+				@click="
+					$emit('paginate', store.response._paginate.previous_page)
+				"
+			>
+				Prev
+			</button>
+			<button
+				:disabled="!store.response._paginate.next_page"
+				class="disabled:border-slate-200 rounded-md border py-1 px-3 hover:border-primary-500 hover:bg-primary-500 hover:text-white disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none"
+				@click="$emit('paginate', store.response._paginate.next_page)"
+			>
+				Next
+			</button>
+			<button
+				class="disabled:border-slate-200 rounded-md border py-1 px-3 hover:border-primary-500 hover:bg-primary-500 hover:text-white disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none"
+				@click="$emit('paginate', store.response._paginate.last_page)"
+				:disabled="
+					store.response._paginate.current_page ===
+					store.response._paginate.last_page
+				"
+			>
+				Last
+			</button>
+		</div>
+	</div>
+</template>
+
+<script setup>
+const props = defineProps({
+	store: Object,
+});
+</script>

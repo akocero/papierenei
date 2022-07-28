@@ -7,7 +7,9 @@ export const useCharacterStore = defineStore({
 		list: [],
 		isLoading: false,
 		item: null,
-		url: 'characters',
+		page: 1,
+		url: `characters`,
+		response: null,
 		error: null,
 	}),
 	getters: {
@@ -20,10 +22,8 @@ export const useCharacterStore = defineStore({
 		async udpate() {
 			this.counter--;
 		},
-		async fetch() {
-			if (this.list.length <= 0) {
-				await storeHelpers.fetch(this);
-			}
+		async fetch(query) {
+			await storeHelpers.fetch(this, query);
 		},
 		async find() {
 			this.counter--;
