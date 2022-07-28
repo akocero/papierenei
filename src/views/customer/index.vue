@@ -7,16 +7,11 @@
 				:routeObject="{ name: 'sales.customers.create' }"
 			/>
 		</div>
-		<div>
-			<input type="text" v-model="searchString" />
-			<BaseSelect
-				id="search_type"
-				v-model="searchType"
-				:options="searchOptions"
-				:emptyOption="false"
-			/>
-			<button class="bg-primary-400" @click="search">Search</button>
-		</div>
+		<TableSearch
+			:options="searchOptions"
+			selected-option="nen_type"
+			@search="search"
+		/>
 
 		<div class="table-responsive">
 			<table class="table">
@@ -76,8 +71,13 @@
 							/>
 						</td>
 					</tr>
-					<tr v-else>
+					<tr v-if="store.isLoading">
 						<td colspan="10" class="text-center">Loading...</td>
+					</tr>
+					<tr v-if="store.list.length <= 0 && !store.isLoading">
+						<td colspan="10" class="text-center">
+							No results found!
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -87,7 +87,7 @@
 </template>
 
 <script setup>
-import { onBeforeMount, ref } from 'vue';
+import { onBeforeMount, ref, watch } from 'vue';
 import BaseButton from '@/components/BaseButton.vue';
 import BaseSelect from '@/components/BaseSelect.vue';
 import TablePagination from '@/components/TablePagination.vue';
@@ -95,12 +95,11 @@ import TablePagination from '@/components/TablePagination.vue';
 import BaseTableActionButton from '@/components/BaseTableActionButton.vue';
 import { useCharacterStore } from '@/stores/character';
 import useAlert from '../../composables/useAlert';
+import TableSearch from '../../components/TableSearch.vue';
 
 const store = useCharacterStore();
 const { pushAlert } = useAlert();
 const searchString = ref('');
-
-const searchType = ref('name');
 const searchOptions = [
 	{ label: 'Name', value: 'name' },
 	{ label: 'Nen Type', value: 'nen_type' },
@@ -108,7 +107,7 @@ const searchOptions = [
 
 onBeforeMount(async () => {
 	if (store.list.length <= 0) {
-		await store.fetch('?page=1&limit=5');
+		fetchData();
 	}
 	if (store.error) {
 		pushAlert('error', store.error.message);
@@ -116,18 +115,24 @@ onBeforeMount(async () => {
 	}
 });
 
-const search = async () => {
-	await store.fetch(
-		`?${searchType.value}[regex]=${searchString.value}&page=1&limit=5`,
-	);
+const search = async (_searchString) => {
+	if (_searchString) {
+		await fetchData(1, _searchString);
+
+		if (store.list.length <= 0) {
+		}
+	} else {
+		await fetchData();
+	}
+	searchString.value = _searchString;
 };
 
-const paginate = async (page) => {
-	let search = '';
-	if (searchString.value) {
-		search = `${searchType.value}[regex]=${searchString.value}&`;
-	}
-	await store.fetch(`?${search}page=${page}&limit=5`);
+const paginate = (page) => {
+	fetchData(page, searchString.value || '');
+};
+
+const fetchData = async (page = 1, search = '', limit = 5) => {
+	await store.fetch(`?${search}page=${page}&limit=${limit}`);
 };
 </script>
 

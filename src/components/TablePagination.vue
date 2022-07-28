@@ -1,19 +1,22 @@
 <template>
 	<div class="mt-2 flex" v-if="!store.isLoading">
-		<h5 class="text-base text-gray-500">
+		<h5 class="hidden text-sm text-gray-500 sm:block">
 			Showing {{ store.response.from }} to {{ store.response.to }} of
 			{{ store.response.total }} results
 		</h5>
 		<div class="ml-auto space-x-2">
 			<button
-				class="disabled:border-slate-200 rounded-md border py-1 px-3 hover:border-primary-500 hover:bg-primary-500 hover:text-white disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none"
+				class="disabled:border-slate-200 hidden rounded-md border py-1 px-3 hover:border-primary-500 hover:bg-primary-500 hover:text-white disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none sm:inline-block"
 				@click="$emit('paginate', 1)"
 				:disabled="store.response._paginate.current_page === 1"
 			>
 				First
 			</button>
 			<button
-				:disabled="!store.response._paginate.previous_page"
+				:disabled="
+					!store.response._paginate.previous_page ||
+					store.list.length <= 0
+				"
 				class="disabled:border-slate-200 rounded-md border py-1 px-3 hover:border-primary-500 hover:bg-primary-500 hover:text-white disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none"
 				@click="
 					$emit('paginate', store.response._paginate.previous_page)
@@ -29,11 +32,12 @@
 				Next
 			</button>
 			<button
-				class="disabled:border-slate-200 rounded-md border py-1 px-3 hover:border-primary-500 hover:bg-primary-500 hover:text-white disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none"
+				class="disabled:border-slate-200 hidden rounded-md border py-1 px-3 hover:border-primary-500 hover:bg-primary-500 hover:text-white disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none sm:inline-block"
 				@click="$emit('paginate', store.response._paginate.last_page)"
 				:disabled="
 					store.response._paginate.current_page ===
-					store.response._paginate.last_page
+						store.response._paginate.last_page ||
+					store.list.length <= 0
 				"
 			>
 				Last
@@ -46,4 +50,12 @@
 const props = defineProps({
 	store: Object,
 });
+
+// const paginate = async (page) => {
+// 	// let search = '';
+// 	// if (searchString.value) {
+// 	// 	search = `${searchType.value}[regex]=${searchString.value}&`;
+// 	// }
+// 	await props.store.fetch(`?${search}page=${page}&limit=5`);
+// };
 </script>

@@ -44,7 +44,7 @@
 	}
 
 	.table-responsive {
-		@apply relative overflow-x-auto rounded-sm border;
+		@apply relative overflow-x-auto rounded-lg border;
 	}
 
 	.table tbody tr {
