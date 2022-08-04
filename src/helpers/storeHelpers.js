@@ -14,7 +14,7 @@ const fetch = async (store, query) => {
 		return res.data;
 	} catch (err) {
 		store.isLoading = false;
-		console.log(err.response.data.message);
+		// console.log(err.response);
 		store.error = err.response.data;
 	}
 };

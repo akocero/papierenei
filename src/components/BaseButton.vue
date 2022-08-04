@@ -2,7 +2,7 @@
 	<router-link
 		v-if="_type === 'link'"
 		:to="routeObject"
-		class="inline-block rounded-sm py-2 px-3"
+		class="inline-block rounded-lg py-2 px-3"
 		:class="[
 			{
 				'bg-primary-600 text-primary-50 ': color === 'primary',
@@ -17,7 +17,7 @@
 	<button
 		v-else
 		:type="_type"
-		class="inline-block rounded-sm py-2 px-3"
+		class="inline-block rounded-lg py-2 px-3"
 		:class="[
 			{
 				'bg-primary-600 text-primary-50 ': color === 'primary',

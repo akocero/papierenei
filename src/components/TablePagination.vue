@@ -1,5 +1,5 @@
 <template>
-	<div class="mt-2 flex" v-if="!store.isLoading">
+	<div class="mt-2 flex" v-if="!store.isLoading && !store.error">
 		<h5 class="hidden text-sm text-gray-500 sm:block">
 			Showing {{ store.response.from }} to {{ store.response.to }} of
 			{{ store.response.total }} results

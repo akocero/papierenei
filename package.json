@@ -10,6 +10,7 @@
     "@headlessui/vue": "^1.6.7",
     "axios": "^0.27.2",
     "feather-icons": "4",
+    "js-cookie": "^3.0.1",
     "pinia": "^2.0.14",
     "uuid": "^8.3.2",
     "vue": "3",

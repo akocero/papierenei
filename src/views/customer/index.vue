@@ -107,9 +107,10 @@ const searchOptions = [
 
 onBeforeMount(async () => {
 	if (store.list.length <= 0) {
-		fetchData();
+		await fetchData();
 	}
 	if (store.error) {
+		console.log('index', store.error);
 		pushAlert('error', store.error.message);
 		return;
 	}

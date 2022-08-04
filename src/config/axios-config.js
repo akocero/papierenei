@@ -4,7 +4,7 @@ import axios from 'axios';
 const axiosConfig = axios.create({
 	baseURL: 'http://localhost:4000/api/v1/',
 	headers: {
-		Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzkxYzVjZDJlY2E5OTBmMzRiZmNiYSIsImlhdCI6MTY1ODk4ODk5MSwiZXhwIjoxNjU5MDc1MzkxfQ.oT290jg0SgcsLv28Ty1x3puCOsaILmEjPFxqL3FWXEI`,
+		Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzkxYzVjZDJlY2E5OTBmMzRiZmNiYSIsImlhdCI6MTY1OTYxMzE1OCwiZXhwIjoxNjU5Njk5NTU4fQ.a76Cvp1AqI0MqKdotdH4kQuXYKQiHp_vLw4m0K2u8qE`,
 	},
 });
 
