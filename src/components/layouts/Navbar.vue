@@ -116,6 +116,7 @@
 											: 'text-gray-900',
 										'group flex w-full items-center space-x-3 px-4 py-2',
 									]"
+									@click="handleLogout"
 								>
 									<vue-feather
 										type="log-out"
@@ -135,9 +136,18 @@
 
 <script setup>
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
+import { useAuthStore } from '@/stores/auth';
 const props = defineProps({
 	isSidebarOpen: Boolean,
 });
+
+const store = useAuthStore();
+
+const handleLogout = () => {
+	store.logout();
+
+	window.location.reload();
+};
 </script>
 
 <style></style>
