@@ -66,11 +66,55 @@ export const useAuthStore = defineStore({
 				this.error = err.response.data;
 			}
 		},
-		async me() {
-			console.log('getMe');
+
+		async forgotPassword(email) {
+			this.isLoading = true;
+			this.error = null;
+			try {
+				const res = await axios.post(`${this.url}/forgotPassword`, {
+					email,
+				});
+				this.error = null;
+				this.isLoading = false;
+				return res.data;
+			} catch (err) {
+				this.isLoading = false;
+				console.log(err);
+				this.error = err.response.data;
+			}
+		},
+		async resetPassword(payload) {
+			const { password, passwordConfirm, resetToken } = payload;
+			this.isLoading = true;
+			this.error = null;
+			try {
+				const res = await axios.patch(
+					`${this.url}/resetPassword/${resetToken}`,
+					{
+						password,
+						passwordConfirm,
+					},
+				);
+				this.error = null;
+				this.isLoading = false;
+				return res.data;
+			} catch (err) {
+				this.isLoading = false;
+				console.log(err);
+				this.error = err.response.data;
+			}
+		},
+		logout() {
+			Cookies.remove('user');
+			Cookies.remove('token');
+			this.user = null;
+			this.token = null;
 		},
 		async updateMe() {
 			console.log('updateMe');
+		},
+		async me() {
+			console.log('getMe');
 		},
 	},
 });
