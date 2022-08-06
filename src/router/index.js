@@ -1,22 +1,55 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Login from '../views/Login.vue';
-import Signup from '../views/Signup.vue';
+import Login from '@/views/auth/Login.vue';
+import ForgotPassword from '@/views/auth/ForgotPassword.vue';
+import Auth from '@/components/layouts/Auth.vue';
+import Signup from '@/views/auth/Signup.vue';
+import ResetPassword from '@/views/auth/ResetPassword.vue';
 import Main from '@/components/layouts/Main.vue';
-import Dashboard from '../views/Dashboard.vue';
+import Dashboard from '@/views/Dashboard.vue';
+import { useAuthStore } from '@/stores/auth';
+
+const authRequired = (to, from, next) => {
+	const auth = useAuthStore();
+	const authorized = auth.user ? next() : next({ name: 'login' });
+};
+
+const noAuthRequired = (to, from, next) => {
+	const auth = useAuthStore();
+	const unauthorized = auth.user ? next({ name: 'dashboard' }) : next();
+};
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
 	routes: [
 		{
-			path: '/login',
-			name: 'login',
-			component: Login,
+			path: '/auth',
+			name: 'auth',
+			component: Auth,
+			beforeEnter: noAuthRequired,
+			children: [
+				{
+					path: 'login',
+					name: 'login',
+					component: Login,
+				},
+				{
+					path: 'forgot_password',
+					name: 'forgot-password',
+					component: ForgotPassword,
+				},
+				{
+					path: 'signup',
+					name: 'signup',
+					component: Signup,
+				},
+				{
+					path: 'reset_password/:resetToken',
+					name: 'reset-password',
+					component: ResetPassword,
+				},
+			],
 		},
-		{
-			path: '/signup',
-			name: 'signup',
-			component: Signup,
-		},
+
 		{
 			path: '/about',
 			name: 'about',
@@ -32,6 +65,7 @@ const router = createRouter({
 			// this generates a separate chunk (About.[hash].js) for this route
 			// which is lazy-loaded when the route is visited.
 			component: Main,
+			beforeEnter: authRequired,
 			children: [
 				{
 					path: 'dashboard',
