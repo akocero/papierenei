@@ -9,7 +9,7 @@
 		<textarea
 			:id="id"
 			:class="[error && errorField && 'border-2 border-red-300']"
-			class="mt-1 w-full rounded-sm border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+			class="mt-1 w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
 			:placeholder="placeholder"
 			:value="modelValue"
 			@input="$emit('update:modelValue', $event.target.value)"

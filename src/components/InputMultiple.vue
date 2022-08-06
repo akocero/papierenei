@@ -9,7 +9,7 @@
 			<span v-if="required" class="font-black text-red-600"> *</span>
 			<input
 				:type="type"
-				class="mt-1 w-full rounded-sm border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+				class="mt-1 w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
 				:class="[error && errorField && 'border-2 border-red-300']"
 				:id="id"
 				:placeholder="placeholder"
@@ -21,7 +21,7 @@
 			<button
 				@click="$emit('pushValue')"
 				type="button"
-				class="absolute right-1 top-[33px] flex h-8 w-8 items-center justify-center rounded-sm bg-primary-600 text-white"
+				class="absolute right-1 top-[33px] flex h-8 w-8 items-center justify-center rounded-md bg-primary-600 text-white"
 			>
 				<VueFeather type="plus" size="18" />
 			</button>
