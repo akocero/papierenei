@@ -73,11 +73,6 @@ const router = createRouter({
 					component: () => import('../views/Dashboard.vue'),
 				},
 				{
-					path: 'sales/invoices',
-					name: 'sales.invoices',
-					component: () => import('../views/Invoices.vue'),
-				},
-				{
 					path: 'sales/customers',
 					name: 'sales.customers',
 					component: () => import('../views/customer/index.vue'),
@@ -88,9 +83,79 @@ const router = createRouter({
 					component: () => import('../views/customer/create.vue'),
 				},
 				{
+					path: 'sales/customers/edit/:id',
+					name: 'sales.customers.edit',
+					component: () => import('../views/customer/edit.vue'),
+				},
+				{
+					path: 'sales/customers/view/:id',
+					name: 'sales.customers.view',
+					component: () => import('../views/customer/view.vue'),
+				},
+				{
 					path: 'warehouse/inventory',
 					name: 'warehouse.inventory',
 					component: () => import('../views/Inventory.vue'),
+				},
+				{
+					path: 'warehouse/products',
+					name: 'warehouse.products',
+					component: () => import('../views/product/index.vue'),
+				},
+				{
+					path: 'warehouse/products/create',
+					name: 'warehouse.products.create',
+					component: () => import('../views/product/create.vue'),
+				},
+				{
+					path: 'warehouse/products/edit/:id',
+					name: 'warehouse.products.edit',
+					component: () => import('../views/product/edit.vue'),
+				},
+				{
+					path: 'warehouse/products/view/:id',
+					name: 'warehouse.products.view',
+					component: () => import('../views/product/view.vue'),
+				},
+				{
+					path: 'sales/discounts',
+					name: 'sales.discounts',
+					component: () => import('../views/discount/index.vue'),
+				},
+				{
+					path: 'sales/discounts/create',
+					name: 'sales.discounts.create',
+					component: () => import('../views/discount/create.vue'),
+				},
+				{
+					path: 'sales/discounts/edit/:id',
+					name: 'sales.discounts.edit',
+					component: () => import('../views/discount/edit.vue'),
+				},
+				{
+					path: 'sales/discounts/view/:id',
+					name: 'sales.discounts.view',
+					component: () => import('../views/discount/view.vue'),
+				},
+				{
+					path: 'sales/invoices',
+					name: 'sales.invoices',
+					component: () => import('../views/invoice/index.vue'),
+				},
+				{
+					path: 'sales/invoices/create',
+					name: 'sales.invoices.create',
+					component: () => import('../views/invoice/create.vue'),
+				},
+				{
+					path: 'sales/invoices/edit/:id',
+					name: 'sales.invoices.edit',
+					component: () => import('../views/invoice/edit.vue'),
+				},
+				{
+					path: 'sales/invoices/view/:id',
+					name: 'sales.invoices.view',
+					component: () => import('../views/invoice/view.vue'),
 				},
 			],
 		},

@@ -49,11 +49,15 @@ const sidebarRoutes = ref([
 				active: false,
 			},
 			{
+				text: 'Discounts',
+				routeObject: { name: 'sales.discounts' },
+				active: false,
+			},
+			{
 				text: 'Customers',
 				routeObject: { name: 'sales.customers' },
 				active: false,
 			},
-			{ text: 'Date', routeObject: {}, active: false },
 		],
 	},
 	{
@@ -64,8 +68,8 @@ const sidebarRoutes = ref([
 		active: false,
 		items: [
 			{
-				text: 'Inventory',
-				routeObject: { name: 'warehouse.inventory' },
+				text: 'Products',
+				routeObject: { name: 'warehouse.products' },
 				active: false,
 			},
 		],

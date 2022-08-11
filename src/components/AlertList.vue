@@ -1,5 +1,5 @@
 <template>
-	<div class="fixed top-4 right-4 z-40 w-2/12">
+	<div class="fixed top-4 right-4 z-40 max-w-md">
 		<!-- <transition-group name="list" tag="div" class="alert-list" appear> -->
 		<Alert
 			v-for="alert in alerts"

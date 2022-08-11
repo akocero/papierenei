@@ -1,10 +1,10 @@
 <template>
 	<header class="fixed z-20 flex h-14 w-full">
 		<div
-			class="hidden w-60 items-center bg-indigo-600 px-4 text-white shadow-md sm:flex 2xl:w-64"
+			class="hidden w-60 items-center bg-indigo-600 px-3 text-white shadow-md sm:flex 2xl:w-64"
 		>
-			<vue-feather type="box" size="18" class="mr-2"></vue-feather>
-			<span>Company Logo</span>
+			<vue-feather type="box" size="20" class="mr-2"></vue-feather>
+			<span>Papierenei</span>
 			<a href="#" class="ml-auto" @click="$emit('toggleSidebar')">
 				<vue-feather
 					:type="isSidebarOpen ? `toggle-right` : `toggle-left`"
@@ -31,7 +31,7 @@
 			<Menu as="div" class="relative ml-auto inline-block text-left">
 				<div>
 					<MenuButton class="justify-cente flex w-full items-center">
-						<span>John Doe</span>
+						<span>{{ store.user.name }}</span>
 						<vue-feather
 							type="chevron-down"
 							size="18"

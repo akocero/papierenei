@@ -1,5 +1,9 @@
 <template>
-	<div class="relative mb-2 rounded-md p-4 text-white" :class="alertType">
+	<div
+		class="relative mb-2 rounded-md p-4 text-white"
+		:class="alertType"
+		style="min-width: 14rem"
+	>
 		<strong v-if="!customStatus" class="block uppercase"
 			>{{ status }}!
 		</strong>
@@ -49,7 +53,7 @@ if (props.status === 'error') {
 
 timeOut = setTimeout(() => {
 	popAlert(props.id);
-}, 10000);
+}, 5000);
 
 onBeforeUnmount(() => {
 	clearTimeout(timeOut);

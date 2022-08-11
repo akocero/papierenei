@@ -9,10 +9,11 @@
 		<textarea
 			:id="id"
 			:class="[error && errorField && 'border-2 border-red-300']"
-			class="mt-1 w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+			class="mt-1 w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 disabled:bg-gray-100 disabled:text-gray-500 disabled:shadow-none"
 			:placeholder="placeholder"
 			:value="modelValue"
 			@input="$emit('update:modelValue', $event.target.value)"
+			:disabled="disabled"
 		></textarea>
 	</label>
 	<small v-if="error && errorField" class="mt-1 block text-base text-red-500">
@@ -31,6 +32,10 @@ export default {
 		placeholder: String,
 		required: Boolean,
 		errorField: Object,
+		disabled: {
+			type: Boolean,
+			default: false,
+		},
 	},
 };
 </script>

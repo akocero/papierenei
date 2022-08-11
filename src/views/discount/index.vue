@@ -1,15 +1,15 @@
 <template>
 	<div class="card">
 		<div class="mb-4 flex items-baseline justify-between">
-			<h4 class="text-2xl">Customers</h4>
+			<h4 class="text-2xl">Discounts</h4>
 			<BaseButton
-				text="Add Customer"
-				:routeObject="{ name: 'sales.customers.create' }"
+				text="Add Discount"
+				:routeObject="{ name: 'sales.discounts.create' }"
 			/>
 		</div>
 		<TableSearch
 			:options="searchOptions"
-			selected-option="firstName"
+			selected-option="code"
 			@search="search"
 		/>
 
@@ -20,27 +20,27 @@
 						<th
 							class="group flex items-center space-x-3 border-0 hover:border-r"
 						>
-							<span>Email</span>
+							<span>Code</span>
 							<VueFeather
 								type="chevron-down"
 								size="16"
 								class="mr-4 hidden group-hover:inline-block"
 							/>
 						</th>
-						<th>Customer Name</th>
-						<th>Mobile No.</th>
+						<th>Type</th>
+						<th>Value</th>
 						<th>Created At</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody class="">
 					<tr v-for="item in store.list" v-if="!store.isLoading">
-						<td>{{ item.email }}</td>
-						<td class="capitalize">
-							{{ item.lastName }}, {{ item.firstName }}
+						<td>{{ item.code }}</td>
+						<td>{{ item.discountKind }}</td>
+						<td v-if="item.discountKind === 'percent'">
+							{{ item.discountValue }}%
 						</td>
-						<td>{{ item.mobileNumber }}</td>
-
+						<td v-else>₱{{ numberFormat(item.discountValue) }}</td>
 						<td>
 							{{ moment(item.createdAt).format('MM/DD/YYYY') }}
 						</td>
@@ -49,7 +49,7 @@
 							<BaseTableActionButton
 								icon="edit"
 								:route-object="{
-									name: 'sales.customers.edit',
+									name: 'sales.discounts.edit',
 									params: { id: item._id },
 								}"
 							/>
@@ -57,7 +57,7 @@
 							<BaseTableActionButton
 								icon="eye"
 								:route-object="{
-									name: 'sales.customers.view',
+									name: 'sales.discounts.view',
 									params: { id: item._id },
 								}"
 							/>
@@ -100,15 +100,17 @@ import BaseSelect from '@/components/BaseSelect.vue';
 import TablePagination from '@/components/TablePagination.vue';
 
 import BaseTableActionButton from '@/components/BaseTableActionButton.vue';
-import { useCustomerStore } from '@/stores/customer';
-import useAlert from '../../composables/useAlert';
-import TableSearch from '../../components/TableSearch.vue';
+import { useDiscountStore } from '@/stores/discount';
+import useAlert from '@/composables/useAlert';
+import useUtils from '@/composables/useUtils';
+import TableSearch from '@/components/TableSearch.vue';
 import moment from 'moment';
 
-const store = useCustomerStore();
+const store = useDiscountStore();
 const { pushAlert } = useAlert();
+const { numberFormat } = useUtils();
 const searchString = ref('');
-const searchOptions = [{ label: 'First Name', value: 'firstName' }];
+const searchOptions = [{ label: 'Code', value: 'code' }];
 
 onBeforeMount(async () => {
 	// if (store.list.length <= 0) {
