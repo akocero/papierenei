@@ -577,12 +577,14 @@ const handleSubmit = async () => {
 			item.value.datePaid.substring(0, 10);
 		} else {
 			console.log(item.value.status, item.value.datePaid);
-			error.value = {
+			invoiceStore.error = {
 				errors: {
-					datePaid: 'Date paid is required when status is paid',
+					datePaid: 'Please add date paid.',
 				},
 				message: 'Invalid Inputs!',
 			};
+
+			pushAlert('error', 'Date paid is required when status is paid!');
 			return false;
 		}
 	}

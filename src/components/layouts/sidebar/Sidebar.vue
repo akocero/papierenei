@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="sidebar text-md fixed z-10 h-screen w-56 bg-gray-800 pt-16 text-gray-400 duration-300 sm:w-60 2xl:w-64"
+		class="sidebar text-md fixed z-10 h-screen w-56 bg-gray-800 pt-16 text-gray-400 duration-300 print:hidden sm:w-60 2xl:w-64"
 		:class="isSidebarOpen ? 'visible left-0' : 'invisible -left-64'"
 	>
 		<ul class="relative flex flex-col">

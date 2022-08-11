@@ -74,6 +74,7 @@
 								text="Create account"
 								_type="submit"
 								color="primary"
+								:disabled="true"
 							/>
 
 							<BaseButton

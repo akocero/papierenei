@@ -6,6 +6,9 @@ module.exports = {
 	content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
 	theme: {
 		extend: {
+			fontFamily: {
+				comfortaa: ['Comfortaa'],
+			},
 			colors: {
 				primary: {
 					50: '#eef2ff',

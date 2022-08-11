@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,400;0,600;0,700;1,400&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -32,23 +34,39 @@
 	}
 
 	.table {
-		@apply w-full text-left text-sm;
+		@apply w-full text-left text-sm text-gray-700;
 	}
 
 	.table td {
-		@apply whitespace-nowrap py-3 px-4 text-gray-700;
+		@apply whitespace-nowrap py-3 px-4;
+	}
+
+	.table tr {
+		@apply border-b;
+	}
+
+	.table-print td {
+		@apply border-b py-2 px-4;
+	}
+
+	.table-print tr {
+		@apply border-b-0;
 	}
 
 	.table thead th {
 		@apply bg-gray-50 py-4 px-4 font-semibold text-gray-700;
 	}
 
+	.table-print thead th {
+		@apply py-2;
+	}
+
 	.table-responsive {
 		@apply relative overflow-x-auto rounded-lg border;
 	}
 
-	.table tbody tr {
-		@apply border-b;
+	.table td.no-bb {
+		@apply border-b-0;
 	}
 
 	.table thead {

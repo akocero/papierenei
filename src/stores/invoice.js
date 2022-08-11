@@ -11,6 +11,7 @@ export const useInvoiceStore = defineStore({
 		url: `invoices`,
 		response: null,
 		error: null,
+		print: null,
 	}),
 	getters: {
 		doubleCount: (state) => state.counter * 2,

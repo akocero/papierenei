@@ -14,7 +14,7 @@
 		/>
 
 		<div class="table-responsive">
-			<table class="table">
+			<table class="invoice-table table">
 				<thead>
 					<tr>
 						<th
@@ -27,7 +27,7 @@
 								class="mr-4 hidden group-hover:inline-block"
 							/>
 						</th>
-						<th>Invoice For</th>
+						<th>Bill to</th>
 						<th>Created at</th>
 						<th>Updated at</th>
 						<th>Status</th>
@@ -59,14 +59,15 @@
 							<Badge
 								:text="item.status"
 								v-if="item.status === 'overdue'"
-								color="dander"
+								color="danger"
 							/>
 						</td>
 						<td v-if="item.status === 'paid'">
 							{{ moment(item.datePaid).format('MM/DD/YYYY') }}
 						</td>
 						<td v-else>
-							<span class="text-danger">TO BE PAID</span>
+							<!-- <span class="text-danger"></span> -->
+							<Badge text="to be paid" color="danger" />
 						</td>
 
 						<td class="flex space-x-2">
@@ -86,15 +87,27 @@
 								}"
 							/>
 
+							<BaseTableActionButton
+								_type="button"
+								icon="printer"
+								@click="print(item)"
+							/>
+
+							<!-- <button
+								@click="print(item)"
+								v-if="!isPrinting"
+								class="btn btn-sm btn-default"
+								style="margin-left: 4px"
+							>
+								<i v-html="iconPrinter"></i>
+							</button> -->
+
 							<!-- <BaseTableActionButton
 								icon="trash"
 								:route-object="{ name: 'sales.invoices' }"
 							/>
 
-							<BaseTableActionButton
-								icon="printer"
-								:route-object="{ name: 'sales.invoices' }"
-							/>
+							
 
 							<BaseTableActionButton
 								icon="mail"
@@ -137,6 +150,9 @@ const { numberFormat } = useUtils();
 const searchString = ref('');
 const searchOptions = [{ label: 'Invoice For', value: 'invoiceFor' }];
 
+const isPrinting = ref(false);
+const printData = ref({});
+
 onBeforeMount(async () => {
 	// if (store.list.length <= 0) {
 	await fetchData();
@@ -147,6 +163,20 @@ onBeforeMount(async () => {
 		return;
 	}
 });
+
+const print = (item) => {
+	store.print = item;
+
+	// item.dueDate = item.dueDate.substring(0, 10);
+	// printData.value = item;
+	// isPrinting.value = true;
+	setTimeout(() => {
+		window.print();
+		isPrinting.value = false;
+	}, 500);
+
+	return true;
+};
 
 const search = async (_searchString) => {
 	if (_searchString) {
@@ -169,4 +199,32 @@ const fetchData = async (page = 1, search = '', limit = 10) => {
 };
 </script>
 
-<style></style>
+<style>
+@media print {
+	/* .invoice-table {
+		display: none;
+	}
+	body * {
+		visibility: hidden;
+	}
+	main {
+		padding-left: 0 !important;
+	}
+	#print-table,
+	#print-table * {
+		visibility: visible;
+	}
+	#print-table {
+		position: absolute;
+		left: 0;
+		top: 0;
+	} */
+}
+
+/* #print-table {
+	visibility: hidden;
+	position: absolute;
+	left: 0;
+	top: 0;
+} */
+</style>

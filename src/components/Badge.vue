@@ -3,11 +3,12 @@
 		class="rounded-full border px-2 font-semibold text-white"
 		:class="[
 			{
-				'border-yellow-500 bg-yellow-300/40 text-yellow-700':
+				'border-yellow-300 bg-yellow-300/40 text-yellow-700':
 					color === 'warning',
-				'bg-red-500': color === 'danger',
-				'bg-blue-500': color === 'info',
-				'border-green-500 bg-green-300/70 text-green-700':
+				'border-red-300 bg-red-300/40 text-red-700': color === 'danger',
+				'border-blue-300 bg-blue-300/40 text-blue-700':
+					color === 'info',
+				'border-green-300 bg-green-300/40 text-green-700':
 					color === 'success',
 				'bg-gray-500': color === '',
 			},
