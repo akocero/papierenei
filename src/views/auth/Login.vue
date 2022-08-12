@@ -107,5 +107,5 @@ const handleSubmit = async () => {
 	}
 };
 
-console.log(import.meta.env.VITE_BASE_URL);
+console.log('base', import.meta.env.VITE_BASE_URL);
 </script>
