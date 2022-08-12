@@ -32,6 +32,7 @@
 						<th>Updated at</th>
 						<th>Status</th>
 						<th>Date Paid</th>
+						<th>Due Date</th>
 						<th>Amount Due</th>
 						<th>Actions</th>
 					</tr>
@@ -69,6 +70,9 @@
 						<td v-else>
 							<!-- <span class="text-danger"></span> -->
 							<Badge text="to be paid" color="danger" />
+						</td>
+						<td>
+							{{ moment(item.dueDate).format('MM/DD/YYYY') }}
 						</td>
 						<td>₱{{ item.amountDue }}</td>
 
@@ -201,10 +205,11 @@ const fetchData = async (page = 1, search = '', limit = 10) => {
 
 	store.list = store.list.map((inv) => {
 		const amountDue = computeAll(inv);
+		new Date(inv.dueDate) > new Date(Date.now()) === false
+			? (inv.status = 'overdue')
+			: inv.status;
 		return { ...inv, amountDue };
 	});
-
-	console.log(list);
 };
 
 const computeAll = (item) => {
