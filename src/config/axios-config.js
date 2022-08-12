@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 const token = Cookies.get('token') || null;
 
 const axiosConfig = axios.create({
-	baseURL: 'https://papierenei.herokuapp.com/api/v1/',
+	baseURL: import.meta.env.VITE_BASE_URL,
 	headers: {
 		Authorization: `Bearer ${token}`,
 	},

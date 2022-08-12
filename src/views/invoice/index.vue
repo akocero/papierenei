@@ -32,6 +32,7 @@
 						<th>Updated at</th>
 						<th>Status</th>
 						<th>Date Paid</th>
+						<th>Amount Due</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -69,6 +70,7 @@
 							<!-- <span class="text-danger"></span> -->
 							<Badge text="to be paid" color="danger" />
 						</td>
+						<td>₱{{ item.amountDue }}</td>
 
 						<td class="flex space-x-2">
 							<BaseTableActionButton
@@ -196,6 +198,52 @@ const paginate = (page) => {
 
 const fetchData = async (page = 1, search = '', limit = 10) => {
 	await store.fetch(`?${search}page=${page}&limit=${limit}`);
+
+	store.list = store.list.map((inv) => {
+		const amountDue = computeAll(inv);
+		return { ...inv, amountDue };
+	});
+
+	console.log(list);
+};
+
+const computeAll = (item) => {
+	let _subtotal = 0;
+	let _total = 0;
+	let _discount = 0;
+	if (item) {
+		item.items.forEach((property) => {
+			_subtotal +=
+				parseFloat(property.unitPrice) * parseFloat(property.qty);
+		});
+
+		_total = _subtotal;
+	}
+
+	if (item.shippingFee) {
+		_total += parseFloat(item.shippingFee);
+	}
+
+	if (item.discount && item.discount.discountKind === 'percent') {
+		const _percent = parseFloat(item.discount.discountValue) / 100;
+		_discount = _subtotal * _percent;
+		_total -= _discount;
+
+		discountPercent.value = _percent * 100;
+		// discount.value = numberFormat(_discount);
+	}
+
+	if (item.discount && item.discount.discountKind === 'amount') {
+		_total -= parseFloat(item.discount.discountValue);
+
+		// discount.value = numberFormat(parseFloat(item.discount.discountValue));
+	}
+
+	// subtotal.value = numberFormat(_subtotal);
+	return numberFormat(_total);
+	console.log(_subtotal);
+
+	return numberFormat(total.value);
 };
 </script>
 
