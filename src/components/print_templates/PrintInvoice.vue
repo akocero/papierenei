@@ -1,5 +1,5 @@
 <template>
-	<div id="print-table" v-if="item" class="hidden font-comfortaa print:block">
+	<div id="print-table" v-if="item" class="hidden print:block">
 		<div class="grid grid-cols-6 gap-4">
 			<div class="col-span-3">
 				<h2 class="mb-2 text-[1.6rem]">Papier Renei</h2>
@@ -224,6 +224,7 @@ const numberFormat = (value) => {
 	color: #6eccff !important;
 	padding: 1.6rem;
 	font-size: 0.9rem;
+	font-family: 'Comfortaa';
 }
 
 #print-table p {
