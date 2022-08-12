@@ -104,7 +104,7 @@
 				<tr v-if="item.shippingFee">
 					<td colspan="3" class="no-bb"></td>
 					<td>Shipping Fee</td>
-					<td>₱{{ item.shippingFee }}</td>
+					<td>₱{{ numberFormat(item.shippingFee) }}</td>
 				</tr>
 				<tr
 					v-if="
@@ -192,7 +192,7 @@ const computeAll = (item) => {
 
 	if (item.discount && item.discount.discountKind === 'percent') {
 		const _percent = parseFloat(item.discount.discountValue) / 100;
-		_discount = _subtotal * _percent;
+		_discount = parseFloat(_subtotal * _percent);
 		_total -= _discount;
 
 		discountPercent.value = _percent * 100;

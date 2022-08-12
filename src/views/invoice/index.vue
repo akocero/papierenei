@@ -226,10 +226,10 @@ const computeAll = (item) => {
 
 	if (item.discount && item.discount.discountKind === 'percent') {
 		const _percent = parseFloat(item.discount.discountValue) / 100;
-		_discount = _subtotal * _percent;
+		_discount = parseFloat(_subtotal * _percent);
 		_total -= _discount;
 
-		discountPercent.value = _percent * 100;
+		// discountPercent.value = _percent * 100;
 		// discount.value = numberFormat(_discount);
 	}
 
