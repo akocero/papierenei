@@ -173,13 +173,12 @@ onBeforeMount(async () => {
 const print = (item) => {
 	store.print = item;
 
-	// item.dueDate = item.dueDate.substring(0, 10);
+	item.dueDate = item.dueDate.substring(0, 10);
 	// printData.value = item;
 	// isPrinting.value = true;
 	setTimeout(() => {
 		window.print();
-		isPrinting.value = false;
-	}, 500);
+	}, 1000);
 
 	return true;
 };
