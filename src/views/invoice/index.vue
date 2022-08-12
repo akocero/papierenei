@@ -205,7 +205,8 @@ const fetchData = async (page = 1, search = '', limit = 10) => {
 
 	store.list = store.list.map((inv) => {
 		const amountDue = computeAll(inv);
-		new Date(inv.dueDate) > new Date(Date.now()) === false
+		new Date(inv.dueDate) > new Date(Date.now()) === false &&
+		inv.status === 'unsettled'
 			? (inv.status = 'overdue')
 			: inv.status;
 		return { ...inv, amountDue };
