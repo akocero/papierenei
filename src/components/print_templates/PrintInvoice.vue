@@ -28,7 +28,10 @@
 			<div class="col-span-3">
 				<label class="mt-6 block text-[1.4rem]">Invoice for:</label>
 				<p>
-					{{ item?.invoiceFor?.name || '' }} <br />
+					<span class="capitalize">{{
+						item?.invoiceFor?.name || ''
+					}}</span>
+					<br />
 					{{ item?.invoiceFor?.streetAddress || '' }} <br />
 					{{ item?.invoiceFor?.state || '' }} <br />
 					{{ item?.invoiceFor?.city || '' }} <br />

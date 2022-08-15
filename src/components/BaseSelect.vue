@@ -24,6 +24,7 @@
 				:value="option.value || option[optionValue]"
 				v-for="option in options"
 				:key="option.value || option[optionValue]"
+				class="capitalize"
 			>
 				{{ option.label || option[optionLabel] }}
 			</option>
