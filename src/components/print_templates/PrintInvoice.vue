@@ -34,7 +34,8 @@
 					<br />
 					{{ item?.invoiceFor?.streetAddress || '' }} <br />
 					{{ item?.invoiceFor?.state || '' }} <br />
-					{{ item?.invoiceFor?.city || '' }} <br />
+					{{ item?.invoiceFor?.city || '' }},
+					{{ item?.invoiceFor?.zipCode || '' }} <br />
 					{{ item?.invoiceFor?.email || '' }} <br />
 					{{ item?.invoiceFor?.mobileNumber || '' }}
 				</p>
