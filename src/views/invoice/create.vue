@@ -282,7 +282,69 @@
 			<div class="card">
 				<form @submit.prevent="addItem" v-if="!isLoading">
 					<div class="grid grid-cols-6 gap-4">
-						<div class="col-span-full md:col-span-4">
+						<div class="justify col-span-full flex items-center justify-between">
+							<h4 class="text-xl">Items</h4>
+							<BaseButton
+								:text="
+									isCustomItem ? 'Select Item' : 'Custom Item'
+								"
+								color="default"
+								@click="isCustomItem = !isCustomItem"
+							/>
+						</div>
+						<div
+							class="col-span-full md:col-span-3"
+							v-if="isCustomItem"
+						>
+							<BaseInput
+								id="custom_item_name"
+								label="Item Name"
+								v-model="customItemName"
+								:error="error"
+								:errorField="
+									error?.errors?.customItemName || null
+								"
+								placeholder="Ex. Item 1"
+								:required="true"
+								type="text"
+							/>
+						</div>
+						<div
+							class="col-span-full md:col-span-2"
+							v-if="isCustomItem"
+						>
+							<BaseInput
+								id="custom_item_cost"
+								label="Item Cost"
+								v-model="customItemCost"
+								:error="error"
+								:errorField="
+									error?.errors?.customItemCost || null
+								"
+								placeholder="Ex. 2"
+								:required="true"
+								type="number"
+							/>
+						</div>
+						<div
+							class="col-span-full md:col-span-1"
+							v-if="isCustomItem"
+						>
+							<BaseInput
+								id="qty"
+								label="Quantity"
+								v-model="selectedQty"
+								:error="error"
+								:errorField="error?.errors?.qty || null"
+								placeholder="Ex. 2"
+								:required="true"
+								type="number"
+							/>
+						</div>
+						<div
+							class="col-span-full md:col-span-4"
+							v-if="!isCustomItem"
+						>
 							<BaseSelect
 								id="invoiceFor"
 								label="Select Item"
@@ -295,7 +357,11 @@
 								:required="true"
 							/>
 						</div>
-						<div class="col-span-full md:col-span-2">
+
+						<div
+							class="col-span-full md:col-span-2"
+							v-if="!isCustomItem"
+						>
 							<BaseInput
 								id="qty"
 								label="Quantity"
@@ -307,6 +373,7 @@
 								type="number"
 							/>
 						</div>
+
 						<div class="col-span-full">
 							<BaseButton
 								_type="submit"
@@ -368,6 +435,8 @@
 </template>
 
 <script setup>
+import { v4 as uuidv4 } from 'uuid';
+
 import BaseButton from '@/components/BaseButton.vue';
 import BaseInput from '@/components/BaseInput.vue';
 import InputMultiple from '@/components/InputMultiple.vue';
@@ -396,6 +465,10 @@ const discountStore = useDiscountStore();
 const productStore = useProductStore();
 
 const isLoading = ref(false);
+const isCustomItem = ref(false);
+
+const customItemName = ref('');
+const customItemCost = ref(0);
 
 const invoiceFor = ref({});
 const selectedInvoiceFor = ref({});
@@ -476,9 +549,18 @@ const addItem = () => {
 
 		return false;
 	}
-	const _item = productStore.list.find(
-		(item) => item._id === selectedItem.value,
-	);
+	let _item;
+	if (isCustomItem.value) {
+		_item = {
+			_id: uuidv4(),
+			name: customItemName.value,
+			unitCost: customItemCost.value,
+		};
+	} else {
+		_item = productStore.list.find(
+			(item) => item._id === selectedItem.value,
+		);
+	}
 
 	const isItemExist = addedItems.value.find((el) => _item._id === el.id);
 	console.log(_item);
@@ -496,6 +578,8 @@ const addItem = () => {
 
 	selectedItem.value = '';
 	selectedQty.value = '';
+	customItemCost.value = 0;
+	customItemName.value = '';
 	getTotal();
 };
 
