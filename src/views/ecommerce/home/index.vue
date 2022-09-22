@@ -9,10 +9,10 @@
 			</button>
 		</div>
 	</section>
-	<section class="mt-20 flex items-center text-center">
-		<div class="mx-auto max-w-7xl">
+	<section class="flex items-center bg-[#D8F4F8] py-16 text-center">
+		<div class="mx-auto w-full max-w-7xl">
 			<h2 class="mb-16 text-4xl font-bold">New Arrivals</h2>
-			<div class="grid h-96 grid-cols-3 gap-20">
+			<div class="grid h-96 w-full grid-cols-3 gap-20">
 				<div
 					class="relative flex rotate-2 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/bearly-art.jpg')] bg-cover bg-center shadow-md shadow-blue-200"
 				>
@@ -32,18 +32,19 @@
 					</h3>
 				</div>
 				<div
-					class="relative flex rotate-2 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/logos.jpg')] bg-cover bg-center shadow-md shadow-blue-200"
+					class="relative flex -rotate-2 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/logos.jpg')] bg-cover bg-center shadow-md shadow-blue-200"
 				>
 					<h3
-						class="mx-auto mt-48 block rotate-6 rounded-lg bg-white px-4 py-2 text-center text-4xl font-extrabold shadow-xl"
+						class="mx-auto mt-48 block -rotate-6 rounded-lg bg-white px-4 py-2 text-center text-4xl font-extrabold shadow-xl"
 					>
-						Custom Logos
+						Custom <br />
+						Logos
 					</h3>
 				</div>
 			</div>
 		</div>
 	</section>
-	<section class="mt-20 flex h-screen items-center bg-[#D8F4F8] text-center">
+	<section class="mt-20 flex h-screen items-center text-center">
 		<div class="mx-auto max-w-7xl">
 			<h2 class="mb-16 text-4xl font-bold">New Arrivals</h2>
 			<div class="grid h-96 grid-cols-3 gap-20">
