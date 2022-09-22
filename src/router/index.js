@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Login from '@/views/auth/Login.vue';
+import Home from '@/views/ecommerce/home/index.vue';
 import ForgotPassword from '@/views/auth/ForgotPassword.vue';
 import Auth from '@/components/layouts/Auth.vue';
 import Signup from '@/views/auth/Signup.vue';
 import ResetPassword from '@/views/auth/ResetPassword.vue';
 import Main from '@/components/layouts/Main.vue';
+import EComm from '@/components/ecommerce_layouts/Main.vue';
 import Dashboard from '@/views/Dashboard.vue';
 import { useAuthStore } from '@/stores/auth';
 
@@ -21,6 +23,31 @@ const noAuthRequired = (to, from, next) => {
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
 	routes: [
+		{
+			path: '/',
+			name: 'ecomm',
+			// route level code-splitting
+			// this generates a separate chunk (About.[hash].js) for this route
+			// which is lazy-loaded when the route is visited.
+			component: EComm,
+			children: [
+				{
+					path: '',
+					name: 'home',
+					component: Home,
+				},
+				{
+					path: '/about',
+					name: 'about',
+					component: () => import('../views/ecommerce/About.vue'),
+				},
+				{
+					path: '/terms',
+					name: 'terms',
+					component: () => import('../views/ecommerce/Terms.vue'),
+				},
+			],
+		},
 		{
 			path: '/auth',
 			name: 'auth',
@@ -48,15 +75,6 @@ const router = createRouter({
 					component: ResetPassword,
 				},
 			],
-		},
-
-		{
-			path: '/about',
-			name: 'about',
-			// route level code-splitting
-			// this generates a separate chunk (About.[hash].js) for this route
-			// which is lazy-loaded when the route is visited.
-			component: () => import('../views/AboutView.vue'),
 		},
 		{
 			path: '/main',
