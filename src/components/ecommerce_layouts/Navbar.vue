@@ -1,22 +1,22 @@
 <template>
-	<div class="bg-[#D8F4F8] px-12 text-lg font-bold">
-		<nav class="flex h-32 items-center justify-between">
-			<ul class="flex w-2/5 space-x-8">
+	<div class="bg-[#D8F4F8] px-4 text-lg font-bold md:px-12">
+		<nav class="flex h-20 items-center justify-between md:h-32">
+			<ul class="hidden space-x-6 md:flex">
 				<li>Blog</li>
 				<li>Collections</li>
 				<li>Crafts</li>
 				<li>Paper</li>
 				<li>About</li>
 			</ul>
-			<div class="mx-auto w-1/5 text-center">
+			<div class="">
 				<img
 					src="../../assets/logo-t.png"
 					alt=""
-					class="mx-auto w-36"
+					class="w-24 md:w-28"
 				/>
 			</div>
-			<div class="flex w-2/5 justify-end space-x-8">
-				<form>
+			<div class="flex justify-end space-x-6">
+				<form class="hidden md:block">
 					<div class="relative">
 						<vue-feather
 							type="search"
@@ -38,11 +38,70 @@
 					</div>
 					<vue-feather type="shopping-bag" size="28"></vue-feather>
 				</div>
+
+				<button
+					class="relative flex items-center md:hidden"
+					@click="disableBodyScroll(true)"
+				>
+					<vue-feather type="menu" size="28"></vue-feather>
+				</button>
 			</div>
 		</nav>
 	</div>
+	<div
+		v-if="openSidebar"
+		class="absolute top-0 left-0 z-10 h-screen w-full bg-white"
+	>
+		<button
+			class="absolute top-7 right-4 flex items-center md:hidden"
+			@click="disableBodyScroll(false)"
+		>
+			<vue-feather type="x" size="28"></vue-feather>
+		</button>
+		<ul class="mt-20 flex flex-col space-y-4 text-center text-xl font-bold">
+			<li
+				class="mx-6 -rotate-2 rounded-md bg-[#D8F4F8] py-3 transition-all hover:rotate-1 hover:bg-red-300 hover:text-white"
+			>
+				<a href="#" class="">Blog</a>
+			</li>
+			<li
+				class="mx-6 -rotate-2 rounded-md bg-[#D8F4F8] py-3 transition-all hover:rotate-1 hover:bg-red-300 hover:text-white"
+			>
+				<a href="#" class="">Collections</a>
+			</li>
+			<li
+				class="mx-6 -rotate-2 rounded-md bg-[#D8F4F8] py-3 transition-all hover:rotate-1 hover:bg-red-300 hover:text-white"
+			>
+				<a href="#" class="">Crafts</a>
+			</li>
+			<li
+				class="mx-6 -rotate-2 rounded-md bg-[#D8F4F8] py-3 transition-all hover:rotate-1 hover:bg-red-300 hover:text-white"
+			>
+				<a href="#" class="">Paper</a>
+			</li>
+			<li
+				class="mx-6 -rotate-2 rounded-md bg-[#D8F4F8] py-3 transition-all hover:rotate-1 hover:bg-red-300 hover:text-white"
+			>
+				<a href="#" class="">About</a>
+			</li>
+		</ul>
+	</div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from 'vue';
+
+const openSidebar = ref(false);
+
+const disableBodyScroll = (isOpenSidebar) => {
+	if (isOpenSidebar) {
+		openSidebar.value = true;
+		document.body.style.overflow = 'hidden';
+	} else {
+		openSidebar.value = false;
+		document.body.style.overflow = 'auto';
+	}
+};
+</script>
 
 <style></style>
