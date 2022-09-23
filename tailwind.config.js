@@ -10,6 +10,8 @@ module.exports = {
 				comfortaa: ['Comfortaa'],
 			},
 			colors: {
+				lightBlue: '#D8F4F8',
+				darkBlue: '#05A0B5',
 				primary: {
 					50: '#eef2ff',
 					100: '#e0e7ff',
