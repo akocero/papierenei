@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full bg-lightBlue py-6">
+	<div class="w-full bg-lightBlue-2 py-6 font-bold">
 		<div class="mx-auto flex max-w-7xl flex-col md:flex-row">
 			<div class="flex grow flex-col">
 				<div>
@@ -55,7 +55,7 @@
 		<div
 			class="mx-4 flex flex-col items-center md:mx-auto md:max-w-7xl md:flex-row md:justify-between"
 		>
-			<h4 class="my-3">© 2022 Cupkin. All rights reserved.</h4>
+			<h4 class="my-3">© 2022 Papierenei. All rights reserved.</h4>
 			<ul
 				class="my-3 flex flex-col items-center md:flex-row md:space-x-6"
 			>

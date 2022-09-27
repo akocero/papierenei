@@ -8,9 +8,14 @@ module.exports = {
 		extend: {
 			fontFamily: {
 				comfortaa: ['Comfortaa'],
+				quicksand: ['quicksand'],
 			},
 			colors: {
-				lightBlue: '#D8F4F8',
+				lightBlue: {
+					1: '#F2FBFD',
+					2: '#D8F4F8',
+				},
+				mediumBlue: '#A6E6EF',
 				darkBlue: '#05A0B5',
 				primary: {
 					50: '#eef2ff',

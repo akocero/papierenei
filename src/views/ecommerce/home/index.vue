@@ -16,76 +16,142 @@
 			</button>
 		</div>
 	</header>
-	<section class="flex items-center bg-lightBlue px-6 py-16 text-center">
+	<section class="bg-lightBlue flex items-center px-6 py-16 text-center">
 		<div class="mx-auto w-full max-w-7xl">
-			<h2 class="mb-16 text-3xl font-bold md:text-4xl">New Arrivals</h2>
+			<h2
+				class="mb-16 rounded-lg bg-mediumBlue py-3 text-3xl font-bold uppercase md:text-4xl"
+			>
+				Our Products
+			</h2>
 			<div
 				class="grid w-full grid-cols-1 gap-20 px-4 md:grid-cols-3 md:px-0"
 			>
 				<div
-					class="relative flex h-80 rotate-2 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/bearly-art.jpg')] bg-cover bg-center shadow-md shadow-blue-200"
+					class="relative h-80 overflow-hidden rounded-2xl bg-[url('../assets/bearly-art.jpg')] bg-cover bg-center shadow-md shadow-blue-200"
 				>
-					<h3
-						class="mx-auto block rotate-6 rounded-lg bg-white px-4 py-2 text-center text-4xl font-extrabold shadow-xl md:mt-48"
+					<a
+						href="#"
+						class="absolute top-0 left-0 flex h-full w-full justify-center bg-transparent text-transparent transition-all duration-300 hover:bg-darkBlue/60 hover:text-white"
 					>
-						Bearly Arts
-					</h3>
+						<div
+							class="flex flex-col justify-center space-y-5 rounded-lg px-4 py-2 text-4xl font-extrabold"
+						>
+							<vue-feather
+								type="external-link"
+								size="32"
+								class="mx-auto"
+							></vue-feather>
+							<span class="">Bearly Art</span>
+						</div>
+					</a>
 				</div>
 				<div
-					class="relative flex h-80 rotate-2 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/digital-arts.jpg')] bg-cover bg-center shadow-md shadow-blue-200"
+					class="relative flex h-80 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/digital-arts.jpg')] bg-cover bg-center shadow-md shadow-blue-200"
 				>
-					<h3
-						class="mx-auto block -rotate-6 rounded-lg bg-white px-4 py-2 text-center text-4xl font-extrabold shadow-xl md:mt-48"
+					<a
+						href="#"
+						class="absolute top-0 left-0 flex h-full w-full items-center justify-center bg-transparent text-transparent transition-all duration-300 hover:bg-darkBlue/60 hover:text-white"
 					>
-						Digital Arts
-					</h3>
+						<div
+							class="mx-auto flex flex-col justify-center space-y-5 rounded-lg px-4 py-2 text-4xl font-extrabold"
+						>
+							<vue-feather
+								type="external-link"
+								size="32"
+								class="mx-auto"
+							></vue-feather>
+							<span class="">Digital Arts</span>
+						</div>
+					</a>
 				</div>
 				<div
-					class="relative flex h-80 rotate-2 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/logos.jpg')] bg-cover bg-center shadow-md shadow-blue-200"
+					class="relative flex h-80 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/logos.jpg')] bg-cover bg-center shadow-md shadow-blue-200"
 				>
-					<h3
-						class="mx-auto block -rotate-6 rounded-lg bg-white px-4 py-2 text-center text-4xl font-extrabold shadow-xl md:mt-48"
+					<a
+						href="#"
+						class="absolute top-0 left-0 flex h-full w-full items-center justify-center bg-transparent text-transparent transition-all duration-300 hover:bg-darkBlue/60 hover:text-white"
 					>
-						Custom <br />
-						Logos
-					</h3>
+						<div
+							class="mx-auto flex flex-col justify-center space-y-5 rounded-lg px-4 py-2 text-4xl font-extrabold"
+						>
+							<vue-feather
+								type="external-link"
+								size="32"
+								class="mx-auto"
+							></vue-feather>
+							<span class="">Custom Logos</span>
+						</div>
+					</a>
 				</div>
 			</div>
 		</div>
 	</section>
-	<section class="flex items-center bg-white px-6 py-16 text-center">
+	<section class="bg-lightBlue flex items-center px-6 py-16 text-center">
 		<div class="mx-auto w-full max-w-7xl">
-			<h2 class="mb-16 text-3xl font-bold md:text-4xl">New Arrivals</h2>
+			<h2
+				class="mb-16 rounded-lg bg-mediumBlue py-3 text-3xl font-bold uppercase md:text-4xl"
+			>
+				New Arrivals
+			</h2>
 			<div
 				class="grid w-full grid-cols-1 gap-20 px-4 md:grid-cols-3 md:px-0"
 			>
 				<div
-					class="relative flex h-80 rotate-2 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/bearly-art.jpg')] bg-cover bg-center shadow-md shadow-blue-200"
+					class="relative flex h-80 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/bearly-art.jpg')] bg-cover bg-center shadow-md shadow-blue-200"
 				>
-					<h3
-						class="mx-auto block rotate-6 rounded-lg bg-white px-4 py-2 text-center text-4xl font-extrabold shadow-xl md:mt-48"
+					<a
+						href="#"
+						class="absolute top-0 left-0 flex h-full w-full items-center justify-center bg-transparent text-transparent transition-all duration-300 hover:bg-darkBlue/60 hover:text-white"
 					>
-						Bearly Arts
-					</h3>
+						<div
+							class="mx-auto flex flex-col justify-center space-y-5 rounded-lg px-4 py-2 text-4xl font-extrabold"
+						>
+							<vue-feather
+								type="external-link"
+								size="32"
+								class="mx-auto"
+							></vue-feather>
+							<span class="">Bearly Art</span>
+						</div>
+					</a>
 				</div>
 				<div
-					class="relative flex h-80 rotate-2 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/digital-arts.jpg')] bg-cover bg-center shadow-md shadow-blue-200"
+					class="relative flex h-80 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/digital-arts.jpg')] bg-cover bg-center shadow-md shadow-blue-200"
 				>
-					<h3
-						class="mx-auto block -rotate-6 rounded-lg bg-white px-4 py-2 text-center text-4xl font-extrabold shadow-xl md:mt-48"
+					<a
+						href="#"
+						class="absolute top-0 left-0 flex h-full w-full items-center justify-center bg-transparent text-transparent transition-all duration-300 hover:bg-darkBlue/60 hover:text-white"
 					>
-						Digital Arts
-					</h3>
+						<div
+							class="mx-auto flex flex-col justify-center space-y-5 rounded-lg px-4 py-2 text-4xl font-extrabold"
+						>
+							<vue-feather
+								type="external-link"
+								size="32"
+								class="mx-auto"
+							></vue-feather>
+							<span class="">Digital Arts</span>
+						</div>
+					</a>
 				</div>
 				<div
-					class="relative flex h-80 rotate-2 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/logos.jpg')] bg-cover bg-center shadow-md shadow-blue-200"
+					class="relative flex h-80 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/logos.jpg')] bg-cover bg-center shadow-md shadow-blue-200"
 				>
-					<h3
-						class="mx-auto block -rotate-6 rounded-lg bg-white px-4 py-2 text-center text-4xl font-extrabold shadow-xl md:mt-48"
+					<a
+						href="#"
+						class="absolute top-0 left-0 flex h-full w-full items-center justify-center bg-transparent text-transparent transition-all duration-300 hover:bg-darkBlue/60 hover:text-white"
 					>
-						Custom <br />
-						Logos
-					</h3>
+						<div
+							class="mx-auto flex flex-col justify-center space-y-5 rounded-lg px-4 py-2 text-4xl font-extrabold"
+						>
+							<vue-feather
+								type="external-link"
+								size="32"
+								class="mx-auto"
+							></vue-feather>
+							<span class="">Custom Logos</span>
+						</div>
+					</a>
 				</div>
 			</div>
 		</div>

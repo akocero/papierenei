@@ -1,5 +1,5 @@
 <template>
-	<div class="relative font-comfortaa text-[#05A0B5]">
+	<div class="relative font-quicksand text-[#05A0B5]">
 		<Navbar />
 		<main class="">
 			<RouterView />
