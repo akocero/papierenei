@@ -1,8 +1,6 @@
 <template>
-	<div>
-		<div
-			class="bg-lightBlue mx-auto flex max-w-7xl items-center justify-between px-3"
-		>
+	<div class="bg-lightBlue-1">
+		<div class="mx-auto flex max-w-7xl items-center justify-between px-3">
 			<a href="#">
 				<img
 					src="../../assets/logo-t.png"

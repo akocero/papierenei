@@ -19,7 +19,7 @@
 	<section class="bg-lightBlue flex items-center px-6 py-16 text-center">
 		<div class="mx-auto w-full max-w-7xl">
 			<h2
-				class="mb-16 rounded-lg bg-mediumBlue py-3 text-3xl font-bold uppercase md:text-4xl"
+				class="mb-16 rounded-lg bg-mediumBlue py-3 text-3xl font-bold uppercase"
 			>
 				Our Products
 			</h2>
@@ -27,7 +27,7 @@
 				class="grid w-full grid-cols-1 gap-20 px-4 md:grid-cols-3 md:px-0"
 			>
 				<div
-					class="relative h-80 overflow-hidden rounded-2xl bg-[url('../assets/bearly-art.jpg')] bg-cover bg-center shadow-md shadow-blue-200"
+					class="relative h-80 overflow-hidden rounded-2xl bg-[url('../assets/bearly-art.jpg')] bg-cover bg-center shadow-md"
 				>
 					<a
 						href="#"
@@ -46,7 +46,7 @@
 					</a>
 				</div>
 				<div
-					class="relative flex h-80 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/digital-arts.jpg')] bg-cover bg-center shadow-md shadow-blue-200"
+					class="relative flex h-80 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/digital-arts.jpg')] bg-cover bg-center shadow-md"
 				>
 					<a
 						href="#"
@@ -65,7 +65,7 @@
 					</a>
 				</div>
 				<div
-					class="relative flex h-80 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/logos.jpg')] bg-cover bg-center shadow-md shadow-blue-200"
+					class="relative flex h-80 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/logos.jpg')] bg-cover bg-center shadow-md"
 				>
 					<a
 						href="#"
@@ -89,7 +89,7 @@
 	<section class="bg-lightBlue flex items-center px-6 py-16 text-center">
 		<div class="mx-auto w-full max-w-7xl">
 			<h2
-				class="mb-16 rounded-lg bg-mediumBlue py-3 text-3xl font-bold uppercase md:text-4xl"
+				class="mb-16 rounded-lg bg-mediumBlue py-3 text-3xl font-bold uppercase"
 			>
 				New Arrivals
 			</h2>
@@ -97,7 +97,7 @@
 				class="grid w-full grid-cols-1 gap-20 px-4 md:grid-cols-3 md:px-0"
 			>
 				<div
-					class="relative flex h-80 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/bearly-art.jpg')] bg-cover bg-center shadow-md shadow-blue-200"
+					class="relative flex h-80 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/bearly-art.jpg')] bg-cover bg-center shadow-md"
 				>
 					<a
 						href="#"
@@ -107,7 +107,7 @@
 							class="mx-auto flex flex-col justify-center space-y-5 rounded-lg px-4 py-2 text-4xl font-extrabold"
 						>
 							<vue-feather
-								type="external-link"
+								type="search"
 								size="32"
 								class="mx-auto"
 							></vue-feather>
@@ -116,7 +116,7 @@
 					</a>
 				</div>
 				<div
-					class="relative flex h-80 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/digital-arts.jpg')] bg-cover bg-center shadow-md shadow-blue-200"
+					class="relative flex h-80 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/digital-arts.jpg')] bg-cover bg-center shadow-md"
 				>
 					<a
 						href="#"
@@ -126,7 +126,7 @@
 							class="mx-auto flex flex-col justify-center space-y-5 rounded-lg px-4 py-2 text-4xl font-extrabold"
 						>
 							<vue-feather
-								type="external-link"
+								type="search"
 								size="32"
 								class="mx-auto"
 							></vue-feather>
@@ -135,7 +135,7 @@
 					</a>
 				</div>
 				<div
-					class="relative flex h-80 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/logos.jpg')] bg-cover bg-center shadow-md shadow-blue-200"
+					class="relative flex h-80 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/logos.jpg')] bg-cover bg-center shadow-md"
 				>
 					<a
 						href="#"
@@ -145,7 +145,7 @@
 							class="mx-auto flex flex-col justify-center space-y-5 rounded-lg px-4 py-2 text-4xl font-extrabold"
 						>
 							<vue-feather
-								type="external-link"
+								type="search"
 								size="32"
 								class="mx-auto"
 							></vue-feather>

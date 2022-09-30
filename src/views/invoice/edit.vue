@@ -383,6 +383,7 @@
 								placeholder="Ex. 2"
 								:required="true"
 								type="number"
+								:step=".01"
 							/>
 						</div>
 						<div
