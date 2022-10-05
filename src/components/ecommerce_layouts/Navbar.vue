@@ -1,6 +1,6 @@
 <template>
 	<div class="bg-lightBlue-1">
-		<div class="mx-auto flex max-w-7xl items-center justify-between px-3">
+		<div class="mx-auto flex items-center justify-between space-x-10 px-4">
 			<a href="#">
 				<img
 					src="../../assets/logo-t.png"
@@ -8,18 +8,25 @@
 					class="w-20 md:w-32"
 				/>
 			</a>
-			<form class="hidden max-w-4xl grow md:block">
-				<div class="relative">
-					<vue-feather
+			<form class="hidden grow md:block">
+				<div class="flex">
+					<!-- <vue-feather
 						type="search"
 						size="20"
 						class="absolute left-3 top-[10px]"
-					></vue-feather>
+					></vue-feather> -->
 					<input
 						type="text"
-						class="w-full rounded-lg border border-lightBlue-2 bg-lightBlue-1 pl-10 text-lg placeholder:text-darkBlue"
+						class="w-full rounded-l-md border border-mediumBlue bg-lightBlue-1 text-lg placeholder:text-darkBlue"
 						placeholder="Search"
 					/>
+					<button class="rounded-r-md bg-mediumBlue py-1 px-3">
+						<vue-feather
+							type="search"
+							size="24"
+							class="mt-2"
+						></vue-feather>
+					</button>
 				</div>
 			</form>
 			<div class="flex space-x-4">
@@ -49,11 +56,11 @@
 		</div>
 		<nav class="hidden md:block">
 			<ul
-				class="flex h-12 items-center justify-center space-x-14 bg-mediumBlue text-xl font-bold"
+				class="flex h-12 items-center space-x-14 bg-lightBlue-2 px-10 text-lg font-bold"
 			>
-				<li>SHOP</li>
-				<li>SALE</li>
-				<li>ABOUT</li>
+				<li>Shop</li>
+				<li>Sale</li>
+				<li>About</li>
 				<li>FAQs</li>
 			</ul>
 		</nav>
