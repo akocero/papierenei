@@ -1,4 +1,35 @@
 <template>
+	<QuickView
+		@closeModal="closeModal"
+		:show="isOpen"
+		modalTitle="Default Modal"
+	>
+		<div class="mt-2 grid grid-cols-2 gap-8 text-darkBlue">
+			<div><img src="../../../assets/sample_product.webp" alt="" /></div>
+			<div class="flex flex-col">
+				<div>
+					<h4 class="text-3xl font-bold">
+						USB Electric Heated Hand Pillow
+					</h4>
+					<h5 class="font-mono text-2xl">₱45.00</h5>
+
+					<p>
+						Keep your pages marked with this motivational
+						papemelroti bookmark. You never have to worry about it
+						slipping out, t...
+					</p>
+				</div>
+				<div class="mt-10">
+					<ProductQuantity />
+					<button
+						class="mt-4 w-full rounded-lg bg-darkBlue px-6 py-2 text-xl font-bold text-white"
+					>
+						Add to Cart
+					</button>
+				</div>
+			</div>
+		</div>
+	</QuickView>
 	<header
 		class="relative flex h-screen w-full items-center justify-center overflow-hidden bg-[url('../assets/hero.jpg')] bg-cover bg-center"
 	>
@@ -96,68 +127,29 @@
 			<div
 				class="grid w-full grid-cols-1 gap-20 px-4 md:grid-cols-3 md:px-0"
 			>
-				<div
-					class="relative flex h-80 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/bearly-art.jpg')] bg-cover bg-center shadow-md"
-				>
-					<a
-						href="#"
-						class="absolute top-0 left-0 flex h-full w-full items-center justify-center bg-transparent text-transparent transition-all duration-300 hover:bg-darkBlue/60 hover:text-white"
-					>
-						<div
-							class="mx-auto flex flex-col justify-center space-y-5 rounded-lg px-4 py-2 text-4xl font-extrabold"
-						>
-							<vue-feather
-								type="search"
-								size="32"
-								class="mx-auto"
-							></vue-feather>
-							<span class="">Bearly Art</span>
-						</div>
-					</a>
+				<div v-for="product in [1, 2, 3, 4, 5, 6]">
+					<Product :key="product" @openModal="openModal" />
 				</div>
-				<div
-					class="relative flex h-80 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/digital-arts.jpg')] bg-cover bg-center shadow-md"
-				>
-					<a
-						href="#"
-						class="absolute top-0 left-0 flex h-full w-full items-center justify-center bg-transparent text-transparent transition-all duration-300 hover:bg-darkBlue/60 hover:text-white"
-					>
-						<div
-							class="mx-auto flex flex-col justify-center space-y-5 rounded-lg px-4 py-2 text-4xl font-extrabold"
-						>
-							<vue-feather
-								type="search"
-								size="32"
-								class="mx-auto"
-							></vue-feather>
-							<span class="">Digital Arts</span>
-						</div>
-					</a>
-				</div>
-				<div
-					class="relative flex h-80 items-center justify-center overflow-hidden rounded-2xl bg-[url('../assets/logos.jpg')] bg-cover bg-center shadow-md"
-				>
-					<a
-						href="#"
-						class="absolute top-0 left-0 flex h-full w-full items-center justify-center bg-transparent text-transparent transition-all duration-300 hover:bg-darkBlue/60 hover:text-white"
-					>
-						<div
-							class="mx-auto flex flex-col justify-center space-y-5 rounded-lg px-4 py-2 text-4xl font-extrabold"
-						>
-							<vue-feather
-								type="search"
-								size="32"
-								class="mx-auto"
-							></vue-feather>
-							<span class="">Custom Logos</span>
-						</div>
-					</a>
-				</div>
+				<!-- <Product /> -->
 			</div>
 		</div>
 	</section>
 </template>
 
-<script setup></script>
+<script setup>
+import Product from '@/components/ecommerce/Product.vue';
+import { ref } from 'vue';
+import QuickView from '@/components/ecommerce/QuickView.vue';
+import ProductQuantity from '../../../components/ecommerce/ProductQuantity.vue';
+const isOpen = ref(false);
+
+function openModal() {
+	isOpen.value = true;
+}
+
+function closeModal() {
+	isOpen.value = false;
+}
+</script>
 
 <style></style>

@@ -2,11 +2,12 @@
 	<div class="bg-lightBlue-1">
 		<div class="mx-auto flex items-center justify-between space-x-10 px-4">
 			<a href="#">
-				<img
-					src="../../assets/logo-t.png"
-					alt=""
-					class="w-20 md:w-32"
-				/>
+				<router-link to="/"
+					><img
+						src="../../assets/logo-t.png"
+						alt=""
+						class="w-20 md:w-32"
+				/></router-link>
 			</a>
 			<form class="hidden grow md:block">
 				<div class="flex">
@@ -20,7 +21,9 @@
 						class="w-full rounded-l-md border border-mediumBlue bg-lightBlue-1 text-lg placeholder:text-darkBlue"
 						placeholder="Search"
 					/>
-					<button class="rounded-r-md bg-mediumBlue py-1 px-3">
+					<button
+						class="rounded-r-md bg-darkBlue py-1 px-3 text-white"
+					>
 						<vue-feather
 							type="search"
 							size="24"
@@ -59,10 +62,10 @@
 				class="flex h-12 items-center justify-center bg-lightBlue-2 px-10 text-lg font-bold"
 			>
 				<li class="group">
-					<a
-						href="#"
+					<router-link
+						to="shop"
 						class="peer flex h-12 items-center px-6 hover:bg-mediumBlue"
-						>Shop</a
+						>Shop</router-link
 					>
 					<div
 						class="absolute left-0 top-20 -z-10 flex w-full gap-20 border-t border-mediumBlue bg-lightBlue-2 px-10 py-5 opacity-0 transition-all duration-700 ease-in-out group-hover:top-12 group-hover:z-10 group-hover:opacity-100"
@@ -89,40 +92,25 @@
 					</div>
 				</li>
 				<li class="group">
-					<a
-						href="#"
-						class="peer flex h-12 items-center px-6 hover:bg-mediumBlue"
-						>Sale</a
+					<router-link
+						to="shop"
+						class="flex h-12 items-center px-6 hover:bg-mediumBlue"
+						>Sale</router-link
 					>
-					<div
-						class="absolute left-0 top-20 -z-10 h-80 w-full bg-white opacity-0 transition-all duration-700 ease-in-out group-hover:top-12 group-hover:z-10 group-hover:opacity-100"
-					>
-						<a href="#">Sale</a>
-					</div>
 				</li>
 				<li class="group">
-					<a
-						href="#"
-						class="peer flex h-12 items-center px-6 hover:bg-mediumBlue"
-						>About</a
+					<router-link
+						to="about"
+						class="flex h-12 items-center px-6 hover:bg-mediumBlue"
+						>About</router-link
 					>
-					<div
-						class="absolute left-0 top-20 -z-10 h-80 w-full bg-white opacity-0 transition-all duration-700 ease-in-out group-hover:top-12 group-hover:z-10 group-hover:opacity-100"
-					>
-						<a href="#">About</a>
-					</div>
 				</li>
 				<li class="group">
-					<a
-						href="#"
-						class="peer flex h-12 items-center px-6 hover:bg-mediumBlue"
-						>FAQs</a
+					<router-link
+						to="terms"
+						class="flex h-12 items-center px-6 hover:bg-mediumBlue"
+						>FAQs</router-link
 					>
-					<div
-						class="absolute left-0 top-20 -z-10 h-80 w-full bg-white opacity-0 transition-all duration-700 ease-in-out group-hover:top-12 group-hover:z-10 group-hover:opacity-100"
-					>
-						<a href="#">FAQs</a>
-					</div>
 				</li>
 			</ul>
 		</nav>
