@@ -65,7 +65,7 @@
 						>Shop</a
 					>
 					<div
-						class="absolute left-0 top-20 -z-10 flex w-full gap-20 border-t border-mediumBlue bg-lightBlue-2 px-10 py-5 opacity-0 transition-all duration-500 ease-in group-hover:top-12 group-hover:z-10 group-hover:opacity-100"
+						class="absolute left-0 top-12 -z-10 flex w-full gap-20 border-t border-mediumBlue bg-lightBlue-2 px-10 py-5 opacity-0 transition-all duration-500 ease-in group-hover:z-10 group-hover:opacity-100"
 					>
 						<div>
 							<h5 class="font-bold underline">Shop by Kind</h5>
@@ -95,7 +95,7 @@
 						>Sale</a
 					>
 					<div
-						class="absolute left-0 top-20 -z-10 h-80 w-full bg-white opacity-0 transition-all duration-500 ease-in group-hover:top-12 group-hover:z-10 group-hover:opacity-100"
+						class="absolute left-0 top-12 -z-10 h-80 w-full bg-white opacity-0 transition-all duration-500 ease-in group-hover:z-10 group-hover:opacity-100"
 					>
 						<a href="#">Sale</a>
 					</div>
@@ -107,7 +107,7 @@
 						>About</a
 					>
 					<div
-						class="absolute left-0 top-20 -z-10 h-80 w-full bg-white opacity-0 transition-all duration-500 ease-in group-hover:top-12 group-hover:z-10 group-hover:opacity-100"
+						class="absolute left-0 top-12 -z-10 h-80 w-full bg-white opacity-0 transition-all duration-500 ease-in group-hover:z-10 group-hover:opacity-100"
 					>
 						<a href="#">About</a>
 					</div>
@@ -119,7 +119,7 @@
 						>FAQs</a
 					>
 					<div
-						class="absolute left-0 top-20 -z-10 h-80 w-full bg-white opacity-0 transition-all duration-500 ease-in group-hover:top-12 group-hover:z-10 group-hover:opacity-100"
+						class="absolute left-0 top-12 -z-10 h-80 w-full bg-white opacity-0 transition-all duration-500 ease-in group-hover:z-10 group-hover:opacity-100"
 					>
 						<a href="#">FAQs</a>
 					</div>
