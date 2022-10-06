@@ -57,7 +57,7 @@
 				</button>
 			</div>
 		</div>
-		<nav class="relative hidden drop-shadow-xl md:block">
+		<nav class="relative hidden drop-shadow md:block">
 			<ul
 				class="flex h-12 items-center justify-center bg-lightBlue-2 px-10 text-lg font-bold"
 			>
