@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-lightBlue-1">
+	<div class="top-0 z-30 bg-lightBlue-1" style="position: sticky">
 		<div class="mx-auto flex items-center justify-between space-x-10 px-4">
 			<a href="#">
 				<router-link to="/"
@@ -68,7 +68,7 @@
 						>Shop</router-link
 					>
 					<div
-						class="absolute left-0 top-20 -z-10 flex w-full gap-20 border-t border-mediumBlue bg-lightBlue-2 px-10 py-5 opacity-0 transition-all duration-700 ease-in-out group-hover:top-12 group-hover:z-10 group-hover:opacity-100"
+						class="invisible absolute left-0 top-20 flex w-full gap-20 border-t border-mediumBlue bg-lightBlue-2 px-10 py-5 opacity-0 transition-all duration-700 ease-in-out group-hover:visible group-hover:top-12 group-hover:opacity-100"
 					>
 						<div>
 							<h5 class="font-bold underline">Shop by Kind</h5>
