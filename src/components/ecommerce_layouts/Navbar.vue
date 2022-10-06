@@ -54,16 +54,79 @@
 				</button>
 			</div>
 		</div>
-		<nav class="hidden md:block">
+		<nav class="relative hidden md:block">
 			<ul
-				class="flex h-12 items-center space-x-14 bg-lightBlue-2 px-10 text-lg font-bold"
+				class="flex h-12 items-center bg-lightBlue-2 px-10 text-lg font-bold"
 			>
-				<li>Shop</li>
-				<li>Sale</li>
-				<li>About</li>
-				<li>FAQs</li>
+				<li class="group">
+					<a
+						href="#"
+						class="peer flex h-12 items-center px-6 hover:bg-mediumBlue"
+						>Shop</a
+					>
+					<div
+						class="absolute left-0 top-20 -z-10 flex w-full gap-20 border-t border-mediumBlue bg-lightBlue-2 px-10 py-5 opacity-0 transition-all duration-300 ease-in group-hover:top-12 group-hover:z-10 group-hover:opacity-100"
+					>
+						<div>
+							<h5 class="font-bold underline">Shop by Kind</h5>
+							<ul class="mt-2 text-[1rem] font-semibold">
+								<li>Bearly Art</li>
+								<li>Digital Files</li>
+								<li>Custom Digital Files</li>
+							</ul>
+						</div>
+						<div>
+							<h5 class="font-bold underline">
+								Shop by Collection
+							</h5>
+							<ul class="mt-2 text-[1rem] font-semibold">
+								<li>Spring</li>
+								<li>Summer</li>
+								<li>Fall</li>
+								<li>Winter</li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="group">
+					<a
+						href="#"
+						class="peer flex h-12 items-center px-6 hover:bg-mediumBlue"
+						>Sale</a
+					>
+					<div
+						class="absolute left-0 top-20 -z-10 h-80 w-full bg-white opacity-0 transition-all duration-300 ease-in group-hover:top-12 group-hover:z-10 group-hover:opacity-100"
+					>
+						<a href="#">Sale</a>
+					</div>
+				</li>
+				<li class="group">
+					<a
+						href="#"
+						class="peer flex h-12 items-center px-6 hover:bg-mediumBlue"
+						>About</a
+					>
+					<div
+						class="absolute left-0 top-20 -z-10 h-80 w-full bg-white opacity-0 transition-all duration-300 ease-in group-hover:top-12 group-hover:z-10 group-hover:opacity-100"
+					>
+						<a href="#">About</a>
+					</div>
+				</li>
+				<li class="group">
+					<a
+						href="#"
+						class="peer flex h-12 items-center px-6 hover:bg-mediumBlue"
+						>FAQs</a
+					>
+					<div
+						class="absolute left-0 top-20 -z-10 h-80 w-full bg-white opacity-0 transition-all duration-300 ease-in group-hover:top-12 group-hover:z-10 group-hover:opacity-100"
+					>
+						<a href="#">FAQs</a>
+					</div>
+				</li>
 			</ul>
 		</nav>
+
 		<div
 			v-if="openSidebar"
 			class="absolute top-0 left-0 z-10 h-screen w-full bg-white"
@@ -105,56 +168,6 @@
 			</ul>
 		</div>
 	</div>
-	<!-- <div class="bg-lightBlue px-4 text-lg font-bold md:px-12">
-		<nav class="flex h-20 items-center justify-between md:h-32">
-			<ul class="hidden space-x-6 md:flex">
-				<li>Blog</li>
-				<li>Collections</li>
-				<li>Crafts</li>
-				<li>Paper</li>
-				<li>About</li>
-			</ul>
-			<div class="">
-				<img
-					src="../../assets/logo-t.png"
-					alt=""
-					class="w-24 md:w-28"
-				/>
-			</div>
-			<div class="flex justify-end space-x-6">
-				<form class="hidden md:block">
-					<div class="relative">
-						<vue-feather
-							type="search"
-							size="20"
-							class="absolute left-3 top-[0.5rem]"
-						></vue-feather>
-						<input
-							type="text"
-							class="rounded-full border-0 bg-[#BEEDF3] pl-10 accent-[#05A0B5] placeholder:text-[#05A0B5]"
-							placeholder="Search"
-						/>
-					</div>
-				</form>
-				<div class="relative flex items-center">
-					<div
-						class="absolute top-6 left-[7.3px] h-5 bg-red-500 px-[2px] text-base text-white"
-					>
-						0
-					</div>
-					<vue-feather type="shopping-bag" size="28"></vue-feather>
-				</div>
-
-				<button
-					class="relative flex items-center md:hidden"
-					@click="disableBodyScroll(true)"
-				>
-					<vue-feather type="menu" size="28"></vue-feather>
-				</button>
-			</div>
-		</nav>
-	</div>
-	 -->
 </template>
 
 <script setup>
@@ -170,6 +183,10 @@ const disableBodyScroll = (isOpenSidebar) => {
 		openSidebar.value = false;
 		document.body.style.overflow = 'auto';
 	}
+};
+
+const hoverTest = () => {
+	console.log('test');
 };
 </script>
 
