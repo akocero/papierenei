@@ -17,6 +17,7 @@ module.exports = {
 				},
 				mediumBlue: '#A6E6EF',
 				darkBlue: '#05A0B5',
+				darkYellow: '#FEC126',
 				primary: {
 					50: '#eef2ff',
 					100: '#e0e7ff',

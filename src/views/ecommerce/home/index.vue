@@ -36,13 +36,13 @@
 		<!-- <img src="../../../assets/hero.jpg" alt="" class="object-cover" /> -->
 		<div class="">
 			<button
-				class="mx-auto flex items-center space-x-3 rounded-lg bg-red-300 py-3 pr-3 pl-5 text-xl font-bold text-white shadow-lg"
+				class="mx-auto flex items-center space-x-3 rounded-lg bg-darkYellow py-3 pr-3 pl-5 text-xl font-bold text-white shadow-lg"
 			>
 				SHOP NOW
 				<vue-feather
 					type="shopping-bag"
 					size="24"
-					class="ml-4 rounded-lg bg-red-400 p-2"
+					class="ml-4 mb-1"
 				></vue-feather>
 			</button>
 		</div>

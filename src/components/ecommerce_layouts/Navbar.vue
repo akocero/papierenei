@@ -36,7 +36,7 @@
 				<a href="#" class="flex items-center space-x-4">
 					<div class="relative">
 						<div
-							class="absolute -top-2 -right-3 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 font-mono text-white"
+							class="absolute -top-2 -right-3 flex h-5 w-5 items-center justify-center rounded-full bg-darkYellow font-mono text-gray-900"
 						>
 							0
 						</div>
@@ -129,27 +129,27 @@
 				class="mt-20 flex flex-col space-y-4 text-center text-xl font-bold"
 			>
 				<li
-					class="mx-6 rounded-md bg-lightBlue-2 py-3 transition-all hover:bg-red-300 hover:text-white"
+					class="mx-6 rounded-md bg-lightBlue-2 py-3 transition-all hover:bg-darkYellow hover:text-white"
 				>
 					<a href="#" class="">Blog</a>
 				</li>
 				<li
-					class="mx-6 rounded-md bg-lightBlue-2 py-3 transition-all hover:bg-red-300 hover:text-white"
+					class="mx-6 rounded-md bg-lightBlue-2 py-3 transition-all hover:bg-darkYellow hover:text-white"
 				>
 					<a href="#" class="">Collections</a>
 				</li>
 				<li
-					class="mx-6 rounded-md bg-lightBlue-2 py-3 transition-all hover:bg-red-300 hover:text-white"
+					class="mx-6 rounded-md bg-lightBlue-2 py-3 transition-all hover:bg-darkYellow hover:text-white"
 				>
 					<a href="#" class="">Crafts</a>
 				</li>
 				<li
-					class="mx-6 rounded-md bg-lightBlue-2 py-3 transition-all hover:bg-red-300 hover:text-white"
+					class="mx-6 rounded-md bg-lightBlue-2 py-3 transition-all hover:bg-darkYellow hover:text-white"
 				>
 					<a href="#" class="">Paper</a>
 				</li>
 				<li
-					class="mx-6 rounded-md bg-lightBlue-2 py-3 transition-all hover:bg-red-300 hover:text-white"
+					class="mx-6 rounded-md bg-lightBlue-2 py-3 transition-all hover:bg-darkYellow hover:text-white"
 				>
 					<a href="#" class="">About</a>
 				</li>

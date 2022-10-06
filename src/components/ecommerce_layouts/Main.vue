@@ -1,6 +1,6 @@
 <template>
 	<div class="relative font-quicksand text-[rgb(5,160,181)]">
-		<div class="bg-[#FEC126] p-2 text-center text-xl font-bold text-white">
+		<div class="bg-darkYellow p-2 text-center text-xl font-bold text-white">
 			BEAR MONTHS SALE HAPPENING NOW - UP TO 30% OFF!
 		</div>
 		<Navbar />
