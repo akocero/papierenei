@@ -18,7 +18,7 @@
 					></vue-feather> -->
 					<input
 						type="text"
-						class="w-full rounded-l-md border border-mediumBlue bg-lightBlue-1 text-lg placeholder:text-darkBlue"
+						class="w-full rounded-l-md border border-darkBlue bg-lightBlue-1 text-lg placeholder:text-darkBlue"
 						placeholder="Search"
 					/>
 					<button
@@ -33,7 +33,7 @@
 				</div>
 			</form>
 			<div class="flex space-x-4">
-				<a href="#" class="flex items-center space-x-4">
+				<router-link to="cart" class="flex items-center space-x-4">
 					<div class="relative">
 						<div
 							class="absolute -top-2 -right-3 flex h-5 w-5 items-center justify-center rounded-full bg-darkYellow font-mono text-gray-900"
@@ -48,7 +48,8 @@
 					</div>
 
 					<span class="hidden font-bold md:inline-block">Cart</span>
-				</a>
+				</router-link>
+
 				<button
 					class="relative flex items-center md:hidden"
 					@click="disableBodyScroll(true)"

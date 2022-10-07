@@ -1,7 +1,7 @@
 <template>
 	<div class="relative rounded-lg border p-5 text-left shadow">
 		<span
-			class="absolute top-5 -left-5 z-10 rounded-md bg-[#FEC126] px-5 py-2 font-bold text-white"
+			class="absolute right-3 top-3 z-10 rounded-md bg-[#FEC126] px-2 py-1 font-bold text-white"
 			>SALE!</span
 		>
 		<div class="group relative">
