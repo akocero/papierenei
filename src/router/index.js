@@ -190,6 +190,11 @@ const router = createRouter({
 					name: 'sales.invoices.view',
 					component: () => import('../views/invoice/view.vue'),
 				},
+				{
+					path: 'ecomm/settings',
+					name: 'ecomm.settings',
+					component: () => import('../views/ecomm/Setting.vue'),
+				},
 			],
 		},
 	],
