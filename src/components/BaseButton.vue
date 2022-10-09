@@ -6,7 +6,7 @@
 		:disabled="disabled"
 		:class="[
 			{
-				'bg-primary-600 text-primary-50 ': color === 'primary',
+				'bg-primary-600 text-white ': color === 'primary',
 				'border bg-yellow-500 text-yellow-50 ': color === 'yellow',
 				'border border-gray-200 bg-gray-100 text-gray-900':
 					color === 'default',
@@ -24,7 +24,7 @@
 		:disabled="disabled"
 		:class="[
 			{
-				'bg-primary-600 text-primary-50 ': color === 'primary',
+				'bg-primary-600 text-white ': color === 'primary',
 				'border border-gray-300 bg-gray-200 text-gray-900':
 					color === 'default',
 				'border bg-yellow-500 text-yellow-50 ': color === 'yellow',
