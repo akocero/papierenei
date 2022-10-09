@@ -77,4 +77,23 @@ const update = async (store, payload) => {
 	}
 };
 
-export default { fetch, create, find, update };
+const deleteImage = async (store, payload) => {
+	store.isLoading = true;
+	store.error = null;
+	try {
+		const res = await axios.post(
+			`${store.url}/deleteImage/${payload._id}`,
+			payload,
+		);
+		store.error = null;
+		store.isLoading = false;
+		console.log(res.data);
+		return res.data;
+	} catch (err) {
+		store.isLoading = false;
+		console.log(err.response.data.message);
+		store.error = err.response.data;
+	}
+};
+
+export default { fetch, create, find, update, deleteImage };
