@@ -1,7 +1,7 @@
 <template>
 	<header class="fixed z-20 flex h-14 w-full print:hidden">
 		<div
-			class="hidden w-60 items-center bg-indigo-600 px-3 text-white shadow-md sm:flex 2xl:w-64"
+			class="hidden w-60 items-center bg-primary-600 px-3 text-white shadow-md sm:flex 2xl:w-64"
 		>
 			<vue-feather type="box" size="20" class="mr-2"></vue-feather>
 			<span>Papierenei</span>
