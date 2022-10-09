@@ -74,6 +74,20 @@ const sidebarRoutes = ref([
 			},
 		],
 	},
+	{
+		text: 'Ecomm',
+		routeObject: {},
+		icon: 'shopping-bag',
+		isRoute: false,
+		active: false,
+		items: [
+			{
+				text: 'Settings',
+				routeObject: { name: 'ecomm.settings' },
+				active: false,
+			},
+		],
+	},
 ]);
 
 onMounted(() => {
