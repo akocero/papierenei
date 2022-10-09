@@ -28,5 +28,8 @@ export const useProductStore = defineStore({
 		async find(id) {
 			await storeHelpers.find(this, id);
 		},
+		async deleteImage(payload) {
+			await storeHelpers.deleteImage(this, payload);
+		},
 	},
 });
