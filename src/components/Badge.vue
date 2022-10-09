@@ -10,7 +10,7 @@
 					color === 'info',
 				'border-green-300 bg-green-300/40 text-green-700':
 					color === 'success',
-				'bg-gray-500': color === '',
+				'border text-gray-600': color === '',
 			},
 		]"
 		>{{ text }}</span
