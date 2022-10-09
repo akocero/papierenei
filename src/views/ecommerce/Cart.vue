@@ -25,6 +25,15 @@
 						</td>
 						<td class="py-2 text-right">$13.95</td>
 					</tr>
+					<tr class="border-b py-1">
+						<td class="py-2">
+							<div>All Around Town Sticker Book $13.95</div>
+						</td>
+						<td class="py-2">
+							<ProductQuantity />
+						</td>
+						<td class="py-2 text-right">$13.95</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>

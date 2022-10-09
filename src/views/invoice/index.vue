@@ -40,7 +40,7 @@
 				<tbody class="">
 					<tr v-for="item in store.list" v-if="!store.isLoading">
 						<td>{{ item.invoiceNo }}</td>
-						<td>{{ item.invoiceFor.name }}</td>
+						<td class="capitalize">{{ item.invoiceFor.name }}</td>
 						<td>
 							{{ moment(item.createdAt).format('MM/DD/YYYY') }}
 						</td>
