@@ -17,7 +17,7 @@ export const useProductStore = defineStore({
 	},
 	actions: {
 		async create(payload) {
-			await storeHelpers.create(this, payload);
+			return await storeHelpers.create(this, payload);
 		},
 		async update(payload) {
 			return await storeHelpers.update(this, payload);
