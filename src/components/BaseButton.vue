@@ -8,6 +8,7 @@
 			{
 				'bg-primary-600 text-white ': color === 'primary',
 				'border bg-yellow-500 text-yellow-50 ': color === 'yellow',
+				'border bg-green-500 text-green-50 ': color === 'green',
 				'border border-gray-200 bg-gray-100 text-gray-900':
 					color === 'default',
 				'bg-red-600 text-red-50 ': color === 'red',
@@ -28,6 +29,7 @@
 				'border border-gray-300 bg-gray-200 text-gray-900':
 					color === 'default',
 				'border bg-yellow-500 text-yellow-50 ': color === 'yellow',
+				'border bg-green-500 text-green-50 ': color === 'green',
 				'bg-red-600 text-red-50 ': color === 'red',
 			},
 			_class,
