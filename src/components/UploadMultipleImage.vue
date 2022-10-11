@@ -39,6 +39,20 @@
 				>
 					<VueFeather type="x" size="18" class="" />
 				</button>
+				<button
+					class="invisible absolute top-2 left-2 border bg-gray-100 py-1 px-4 text-gray-900 shadow group-hover:visible"
+					@click="setActive(image.public_id)"
+					v-if="!image.isActive && setActiveFunc"
+				>
+					Set as active
+				</button>
+				<button
+					class="absolute top-2 left-2 bg-yellow-500 py-1 px-4 text-white shadow"
+					@click="setInactive(image.public_id)"
+					v-if="image.isActive && setActiveFunc"
+				>
+					Set as inactive
+				</button>
 				<img
 					:src="image.secure_url"
 					alt=""
@@ -65,6 +79,10 @@ const props = defineProps({
 	title: {
 		type: String,
 		default: 'Photos',
+	},
+	setActiveFunc: {
+		type: Boolean,
+		default: false,
 	},
 });
 
@@ -149,7 +167,7 @@ const deleteImage = async (image_id) => {
 			_id: props.store.item._id,
 			image_id,
 			is_multiple_image: true,
-			column_name: 'images',
+			column_name: props.db_column,
 		});
 
 		if (props.store.error) {
@@ -162,5 +180,28 @@ const deleteImage = async (image_id) => {
 
 		pushAlert('info', `image is deleted`);
 	}
+};
+
+const setActive = (item_id) => {
+	props.store.item[props.db_column] = props.store.item[props.db_column].map(
+		(item) => {
+			item.isActive = false;
+			if (item.public_id === item_id) {
+				if (item.isActive) item.isActive = false;
+				else item.isActive = true;
+			}
+			return item;
+		},
+	);
+	console.log(props.store.item[props.db_column]);
+};
+
+const setInactive = () => {
+	props.store.item[props.db_column] = props.store.item[props.db_column].map(
+		(item) => {
+			item.isActive = false;
+			return item;
+		},
+	);
 };
 </script>
