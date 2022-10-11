@@ -109,7 +109,9 @@ const handleSubmit = async () => {
 		description: description.value,
 	};
 
-	await store.create(data);
+	const res = await store.create(data);
+
+	console.log(res);
 
 	if (store.error) {
 		pushAlert('error', store.error.message);
@@ -118,8 +120,11 @@ const handleSubmit = async () => {
 
 	pushAlert('success', 'Product added!');
 	router.push({
-		name: 'warehouse.products',
+		name: 'warehouse.products.edit',
+		params: { id: res.data._id },
 	});
+
+	// router.push({ name: 'user', params: { username } })
 };
 </script>
 
