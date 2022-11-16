@@ -32,7 +32,7 @@
 <script setup>
 import { ref } from 'vue';
 import BaseModal from '../components/BaseModal.vue';
-const isOpen = ref(true);
+const isOpen = ref(false);
 
 function openModal() {
 	isOpen.value = true;

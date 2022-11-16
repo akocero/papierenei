@@ -55,7 +55,7 @@
 		<div
 			class="mx-4 flex flex-col items-center md:mx-auto md:max-w-7xl md:flex-row md:justify-between"
 		>
-			<h4 class="my-3">© 2022 Papierenei. All rights reserved.</h4>
+			<h4 class="my-3">© 2022 Papier Renei. All rights reserved.</h4>
 			<ul
 				class="my-3 flex flex-col items-center md:flex-row md:space-x-6"
 			>
