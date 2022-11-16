@@ -154,7 +154,7 @@ const store = useInvoiceStore();
 const { pushAlert } = useAlert();
 const { numberFormat } = useUtils();
 const searchString = ref('');
-const searchOptions = [{ label: 'Invoice For', value: 'invoiceFor' }];
+const searchOptions = [{ label: 'Invoice For', value: 'invoiceFor.name' }];
 
 const isPrinting = ref(false);
 const printData = ref({});
