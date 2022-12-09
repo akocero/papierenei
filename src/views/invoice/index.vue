@@ -9,7 +9,7 @@
 		</div>
 		<TableSearch
 			:options="searchOptions"
-			selected-option="invoiceFor"
+			selected-option="invoiceFor.name"
 			@search="search"
 		/>
 

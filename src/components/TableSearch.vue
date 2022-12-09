@@ -39,6 +39,13 @@ import { ref } from 'vue';
 
 const props = defineProps({
 	options: Array,
+	/* 
+	this props value of the selectOption of your choice, not the label the value
+	{ 
+		label: 'Invoice For', 
+		value: 'invoiceFor.name'  <--- this one
+	}
+	*/
 	selectedOption: {
 		type: String,
 	},
@@ -46,7 +53,6 @@ const props = defineProps({
 
 const emit = defineEmits(['search']);
 
-console.log(props.selectedOption);
 const searchText = ref('');
 const searchType = ref(props.selectedOption);
 

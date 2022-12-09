@@ -18,7 +18,15 @@ module.exports = {
 				mediumBlue: '#A6E6EF',
 				darkBlue: '#05A0B5',
 				darkYellow: '#FEC126',
+				accent: {
+					1: '#FEC126',
+				},
 				primary: {
+					0: '#FBFEFE',
+					1: '#EDFDFF',
+					2: '#89DEEA',
+					3: '#05A0B5',
+					4: '#055560',
 					50: '#eef2ff',
 					100: '#e0e7ff',
 					200: '#c7d2fe',

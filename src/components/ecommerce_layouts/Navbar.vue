@@ -58,18 +58,18 @@
 				</button>
 			</div>
 		</div>
-		<nav class="relative hidden drop-shadow md:block">
+		<nav class="relative hidden md:block">
 			<ul
-				class="flex h-12 items-center justify-center bg-lightBlue-2 px-10 text-lg font-bold"
+				class="flex h-14 items-center bg-primary-2 px-10 text-lg font-bold uppercase text-primary-0"
 			>
 				<li class="group">
 					<router-link
 						to="shop"
-						class="peer flex h-12 items-center px-6 hover:bg-mediumBlue"
+						class="peer flex h-14 items-center px-6 hover:bg-mediumBlue"
 						>Shop</router-link
 					>
 					<div
-						class="invisible absolute left-0 top-20 flex w-full gap-20 border-t border-mediumBlue bg-lightBlue-2 px-10 py-5 opacity-0 transition-all duration-700 ease-in-out group-hover:visible group-hover:top-12 group-hover:opacity-100"
+						class="invisible absolute left-0 top-20 flex w-full gap-20 border-t border-mediumBlue bg-lightBlue-2 px-10 py-5 opacity-0 transition-all duration-700 ease-in-out group-hover:visible group-hover:top-14 group-hover:opacity-100"
 					>
 						<div>
 							<h5 class="font-bold underline">Shop by Kind</h5>
