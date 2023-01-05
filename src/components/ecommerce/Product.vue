@@ -44,7 +44,7 @@
 				</div>
 				<img
 					class="h-full w-full object-cover"
-					src="https://via.placeholder.com/150?text=Image+N/A"
+					src="https://via.placeholder.com/400?text=Image+N/A"
 					alt=""
 				/>
 			</div>
