@@ -1,39 +1,39 @@
 <template>
 	<div class="top-0 z-30 bg-lightBlue-1" style="position: sticky">
-		<div class="mx-auto flex items-center justify-between space-x-10 px-4">
-			<a href="#">
+		<div class="justity-end mx-auto flex max-w-screen-2xl space-x-10 px-4">
+			<!-- <a href="#">
 				<router-link to="/"
 					><img
 						src="../../assets/logo-t.png"
 						alt=""
 						class="w-20 md:w-32"
 				/></router-link>
-			</a>
-			<form class="hidden grow md:block">
-				<div class="flex">
+			</a> -->
+			<form class="hidden h-40 grow md:block">
+				<div class="flex h-full items-center justify-end">
 					<!-- <vue-feather
 						type="search"
 						size="20"
 						class="absolute left-3 top-[10px]"
 					></vue-feather> -->
-					<input
-						type="text"
-						class="w-full rounded-l-md border border-darkBlue bg-lightBlue-1 text-lg placeholder:text-darkBlue"
-						placeholder="Search"
-					/>
-					<button
-						class="rounded-r-md bg-darkBlue py-1 px-3 text-white"
-					>
-						<vue-feather
-							type="search"
-							size="24"
-							class="mt-2"
-						></vue-feather>
-					</button>
+					<div class="relative">
+						<button class="absolute left-3 top-1 text-darkBlue">
+							<vue-feather
+								type="search"
+								size="24"
+								class="mt-2"
+							></vue-feather>
+						</button>
+						<input
+							type="text"
+							class="w-80 rounded-full border-2 border-darkBlue bg-lightBlue-1 text-lg placeholder:text-darkBlue"
+							placeholder=""
+						/>
+					</div>
 				</div>
 			</form>
 			<div class="flex space-x-4">
-				<router-link to="cart" class="flex items-center space-x-4">
+				<!-- <router-link to="cart" class="flex items-center space-x-4">
 					<div class="relative">
 						<div
 							class="absolute -top-2 -right-3 flex h-5 w-5 items-center justify-center rounded-full bg-darkYellow font-mono text-gray-900"
@@ -48,7 +48,7 @@
 					</div>
 
 					<span class="hidden font-bold md:inline-block">Cart</span>
-				</router-link>
+				</router-link> -->
 
 				<button
 					class="relative flex items-center md:hidden"
@@ -58,9 +58,9 @@
 				</button>
 			</div>
 		</div>
-		<nav class="relative hidden md:block">
+		<nav class="relative hidden bg-primary-2 md:block">
 			<ul
-				class="flex h-14 items-center bg-primary-2 px-10 text-lg font-bold uppercase text-primary-0"
+				class="mx-auto flex h-14 max-w-screen-2xl items-center text-lg font-bold uppercase text-primary-0"
 			>
 				<li class="group">
 					<router-link
@@ -69,7 +69,7 @@
 						>Shop</router-link
 					>
 					<div
-						class="invisible absolute left-0 top-20 flex w-full gap-20 border-t border-mediumBlue bg-lightBlue-2 px-10 py-5 opacity-0 transition-all duration-700 ease-in-out group-hover:visible group-hover:top-14 group-hover:opacity-100"
+						class="invisible absolute left-0 top-20 flex w-full gap-20 border-t border-mediumBlue bg-primary-2 px-10 py-5 opacity-0 transition-all duration-700 ease-in-out group-hover:visible group-hover:top-14 group-hover:opacity-100"
 					>
 						<div>
 							<h5 class="font-bold underline">Shop by Kind</h5>
@@ -112,6 +112,25 @@
 						class="flex h-12 items-center px-6 hover:bg-mediumBlue"
 						>FAQs</router-link
 					>
+				</li>
+				<li class="group ml-auto">
+					<router-link
+						to="terms"
+						class="flex h-12 items-center px-6 hover:bg-mediumBlue"
+					>
+						<div class="relative mt-3">
+							<div
+								class="absolute -top-2 -right-3 flex h-5 w-5 items-center justify-center rounded-full bg-darkYellow font-mono text-gray-900"
+							>
+								0
+							</div>
+
+							<vue-feather
+								type="shopping-cart"
+								size="28"
+							></vue-feather>
+						</div>
+					</router-link>
 				</li>
 			</ul>
 		</nav>

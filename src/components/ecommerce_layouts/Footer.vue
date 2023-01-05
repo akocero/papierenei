@@ -1,6 +1,6 @@
 <template>
 	<div class="w-full bg-lightBlue-2 py-6 font-bold">
-		<div class="mx-auto flex max-w-7xl flex-col md:flex-row">
+		<div class="mx-auto flex max-w-screen-2xl flex-col md:flex-row">
 			<div class="flex grow flex-col">
 				<div>
 					<img
@@ -48,12 +48,12 @@
 				</ul>
 			</div>
 		</div>
-		<div class="mx-4 h-4 pt-4 md:mx-auto md:max-w-7xl">
+		<div class="mx-4 h-4 pt-4 md:mx-auto md:max-w-screen-2xl">
 			<hr class="border-[1px] border-darkBlue/25" />
 		</div>
 
 		<div
-			class="mx-4 flex flex-col items-center md:mx-auto md:max-w-7xl md:flex-row md:justify-between"
+			class="mx-4 flex flex-col items-center md:mx-auto md:max-w-screen-2xl md:flex-row md:justify-between"
 		>
 			<h4 class="my-3">© 2022 Papier Renei. All rights reserved.</h4>
 			<ul

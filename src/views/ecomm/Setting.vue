@@ -135,6 +135,8 @@ const _banner = ref({
 	isActive: false,
 });
 
+console.log('store', store.item);
+
 const addBanner = () => {
 	const bannerIsAdded = store.item.banners.find(
 		(banner) => _banner.value.name.toLowerCase() === banner.name,
