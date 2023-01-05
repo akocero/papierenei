@@ -50,7 +50,6 @@ import useAlert from '@/composables/useAlert';
 
 const { pushAlert } = useAlert();
 const props = defineProps({
-	item_id: String,
 	store: Object,
 	db_column: {
 		type: String,

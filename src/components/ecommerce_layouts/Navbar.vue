@@ -115,7 +115,7 @@
 				</li>
 				<li class="group ml-auto">
 					<router-link
-						to="terms"
+						to="cart"
 						class="flex h-12 items-center px-6 hover:bg-mediumBlue"
 					>
 						<div class="relative mt-3">

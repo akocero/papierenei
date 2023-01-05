@@ -31,7 +31,6 @@ onBeforeMount(async () => {
 	if (!activeBanner.value) {
 		activeBanner.value = store.item.banners[0];
 	}
-	console.log('main', store.item);
 });
 </script>
 

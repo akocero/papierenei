@@ -110,7 +110,6 @@
 		</div>
 	</div>
 	<UploadMultipleImage
-		item_id="34"
 		:store="store"
 		v-if="store.item"
 		title="Heros"

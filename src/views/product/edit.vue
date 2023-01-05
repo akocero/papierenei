@@ -151,14 +151,12 @@
 				v-if="store.item && !store.isLoading"
 			/>
 			<UploadImage
-				item_id="34"
 				:store="store"
 				v-if="store.item && !store.isLoading"
 				title="Cover Photo"
 				db_column="coverPhoto"
 			/>
 			<UploadMultipleImage
-				item_id="34"
 				:store="store"
 				v-if="store.item && !store.isLoading"
 			/>

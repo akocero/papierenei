@@ -32,7 +32,7 @@
 	</QuickView>
 	<header
 		class="relative mx-auto mt-8 flex h-screen w-full max-w-screen-2xl items-center justify-center overflow-hidden bg-cover bg-center"
-		v-if="store.item && activeHero"
+		v-if="ecommSettingsStore.item && activeHero"
 		:style="{ 'background-image': 'url(' + activeHero.secure_url + ')' }"
 	>
 		<!-- <img src="../../../assets/hero.jpg" alt="" class="object-cover" /> -->
@@ -49,6 +49,7 @@
 			</button>
 		</div>
 	</header>
+	<!-- Our Product Section  -->
 	<section class="bg-lightBlue flex items-center px-6 py-16 text-center">
 		<div class="mx-auto w-full max-w-screen-2xl">
 			<div
@@ -56,7 +57,7 @@
 			>
 				<OurProduct
 					v-for="ourProduct in ourProducts"
-					:index="ourProduct.text"
+					:key="ourProduct.text"
 					:ourProduct="ourProduct"
 				/>
 			</div>
@@ -69,10 +70,15 @@
 				New Arrivals
 			</h2>
 			<div
-				class="grid w-full grid-cols-1 gap-20 px-4 md:grid-cols-3 md:px-0"
+				class="grid w-full grid-cols-1 gap-8 px-4 md:grid-cols-5 md:px-0"
+				v-if="productStore.list.length > 0"
 			>
-				<div v-for="product in [1, 2, 3, 4, 5, 6]">
-					<Product :key="product" @openModal="openModal" />
+				<div v-for="product in productStore.list">
+					<Product
+						:key="product"
+						@openModal="openModal"
+						:product="product"
+					/>
 				</div>
 				<!-- <Product /> -->
 			</div>
@@ -87,40 +93,54 @@ import { onMounted, onBeforeMount, ref } from 'vue';
 import QuickView from '@/components/ecommerce/QuickView.vue';
 import ProductQuantity from '../../../components/ecommerce/ProductQuantity.vue';
 import { useEcommSettingStore } from '@/stores/ecomm_setting';
+import { useProductStore } from '@/stores/product';
 import logoImg from '@/assets/logos.png';
 import digitalArtImg from '@/assets/digital-arts.png';
 import bearlyArtImg from '@/assets/bearly-art.png';
 
-const store = useEcommSettingStore();
+const ecommSettingsStore = useEcommSettingStore();
+const productStore = useProductStore();
 const activeHero = ref(null);
 const isOpen = ref(false);
 
+// our product data
 const ourProducts = ref([
-	{ url: logoImg, text: 'Createables' },
-	{ url: logoImg, text: 'Custom Logos' },
-	{ url: digitalArtImg, text: 'Digital Arts' },
-	{ url: bearlyArtImg, text: 'Bearly Art' },
+	{ img: logoImg, text: 'Createables' },
+	{ img: logoImg, text: 'Custom Logos' },
+	{ img: digitalArtImg, text: 'Digital Arts' },
+	{ img: bearlyArtImg, text: 'Bearly Art' },
 ]);
 
 onBeforeMount(async () => {
-	await store.fetch('?limit=1');
-	if (store.list.length <= 0) {
-		await store.init();
-		await store.fetch('?limit=1');
+	// Fetch products for new Arrivals
+	await productStore.fetch('?limit=10');
+
+	console.log(productStore.list);
+
+	// Check if there is any data on ecommer settings
+	// if no data invoke init to create object on ecommerce settings
+	//  please refer to stores/ecomm_setting.js
+	await ecommSettingsStore.fetch('?limit=1');
+	//
+	if (ecommSettingsStore.list.length <= 0) {
+		await ecommSettingsStore.init();
+		await ecommSettingsStore.fetch('?limit=1');
 	}
 
-	store.item = store.list[0];
-	activeHero.value = store.item.heros.find((hero) => hero.isActive === true);
-	console.log('activeHero.value', store.item.heros[0]);
+	ecommSettingsStore.item = ecommSettingsStore.list[0];
+
+	// get the active hero iamge
+	activeHero.value = ecommSettingsStore.item.heros.find(
+		(hero) => hero.isActive === true,
+	);
+	// if no active hero image use the first one
 	if (!activeHero.value) {
-		activeHero.value = store.item.heros[0];
+		activeHero.value = ecommSettingsStore.item.heros[0];
 	}
-	console.log(activeHero.value);
 });
 
 function openModal() {
 	isOpen.value = true;
-	console.log(store.value);
 }
 
 function closeModal() {
