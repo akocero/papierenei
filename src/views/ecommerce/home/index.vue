@@ -77,6 +77,7 @@
 					<Product
 						:key="product"
 						@openModal="openModal"
+						@addToCart="addToCart($event)"
 						:product="product"
 					/>
 				</div>
@@ -93,13 +94,18 @@ import { onMounted, onBeforeMount, ref } from 'vue';
 import QuickView from '@/components/ecommerce/QuickView.vue';
 import ProductQuantity from '../../../components/ecommerce/ProductQuantity.vue';
 import { useEcommSettingStore } from '@/stores/ecomm_setting';
+import { useCartStore } from '@/stores/cart';
 import { useProductStore } from '@/stores/product';
 import logoImg from '@/assets/logos.png';
 import digitalArtImg from '@/assets/digital-arts.png';
 import bearlyArtImg from '@/assets/bearly-art.png';
+import useCart from '@/composables/useCart';
+
+const { addToCart } = useCart();
 
 const ecommSettingsStore = useEcommSettingStore();
 const productStore = useProductStore();
+const cartStore = useCartStore();
 const activeHero = ref(null);
 const isOpen = ref(false);
 

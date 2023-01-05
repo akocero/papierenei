@@ -16,23 +16,20 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="border-b py-1">
+					<tr class="border-b py-1" v-for="product in cartStore.list">
 						<td class="py-2">
-							<div>All Around Town Sticker Book $13.95</div>
+							<div>{{ product.name }}</div>
 						</td>
 						<td class="py-2">
-							<ProductQuantity />
+							<ProductQuantity :product="product" />
 						</td>
-						<td class="py-2 text-right">$13.95</td>
-					</tr>
-					<tr class="border-b py-1">
-						<td class="py-2">
-							<div>All Around Town Sticker Book $13.95</div>
+						<td class="py-2 text-right font-mono">
+							₱{{
+								numberFormat(
+									product.unitCost * product.cartQuantity,
+								)
+							}}
 						</td>
-						<td class="py-2">
-							<ProductQuantity />
-						</td>
-						<td class="py-2 text-right">$13.95</td>
 					</tr>
 				</tbody>
 			</table>
@@ -51,7 +48,10 @@
 			<div class="max-w-xl">
 				<div>
 					<h4 class="text-right">
-						<span class="font-bold">Subtotal</span> $13.95 USD
+						<span class="font-bold">Subtotal</span>
+						<span class="font-mono text-xl">
+							₱{{ numberFormat(cartStore.subTotal) }}</span
+						>
 					</h4>
 					<p>Taxes and shipping calculated at checkout</p>
 				</div>
@@ -67,7 +67,12 @@
 </template>
 
 <script setup>
-import ProductQuantity from '../../components/ecommerce/ProductQuantity.vue';
+import ProductQuantity from '@/components/ecommerce/ProductQuantity.vue';
+import { useCartStore } from '@/stores/cart';
+import useUtils from '@/composables/useUtils';
+
+const cartStore = useCartStore();
+const { numberFormat } = useUtils();
 </script>
 
 <style></style>

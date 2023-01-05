@@ -79,6 +79,8 @@
 
 			<button
 				class="w-full rounded-lg bg-darkBlue px-6 py-2 font-bold text-white"
+				@click="$emit('addToCart', product)"
+				v-if="product.quantity"
 			>
 				Add to Cart
 			</button>

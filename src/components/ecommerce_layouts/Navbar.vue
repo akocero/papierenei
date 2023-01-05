@@ -122,7 +122,7 @@
 							<div
 								class="absolute -top-2 -right-3 flex h-5 w-5 items-center justify-center rounded-full bg-darkYellow font-mono text-gray-900"
 							>
-								0
+								{{ cartStore.list.length }}
 							</div>
 
 							<vue-feather
@@ -180,6 +180,10 @@
 
 <script setup>
 import { ref } from 'vue';
+
+import { useCartStore } from '@/stores/cart';
+
+const cartStore = useCartStore();
 
 const openSidebar = ref(false);
 
