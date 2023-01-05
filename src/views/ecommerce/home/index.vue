@@ -87,16 +87,19 @@ import { onMounted, onBeforeMount, ref } from 'vue';
 import QuickView from '@/components/ecommerce/QuickView.vue';
 import ProductQuantity from '../../../components/ecommerce/ProductQuantity.vue';
 import { useEcommSettingStore } from '@/stores/ecomm_setting';
+import logoImg from '@/assets/logos.png';
+import digitalArtImg from '@/assets/digital-arts.png';
+import bearlyArtImg from '@/assets/bearly-art.png';
 
 const store = useEcommSettingStore();
 const activeHero = ref(null);
 const isOpen = ref(false);
 
 const ourProducts = ref([
-	{ url: 'src/assets/logos.png', text: 'Createables' },
-	{ url: 'src/assets/logos.png', text: 'Custom Logos' },
-	{ url: 'src/assets/digital-arts.png', text: 'Digital Arts' },
-	{ url: 'src/assets/bearly-art.png', text: 'Bearly Art' },
+	{ url: logoImg, text: 'Createables' },
+	{ url: logoImg, text: 'Custom Logos' },
+	{ url: digitalArtImg, text: 'Digital Arts' },
+	{ url: bearlyArtImg, text: 'Bearly Art' },
 ]);
 
 onBeforeMount(async () => {

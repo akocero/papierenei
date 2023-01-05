@@ -22,6 +22,8 @@
 </template>
 
 <script setup>
+import { computed } from '@vue/reactivity';
+
 const props = defineProps({
 	ourProduct: Object,
 });
