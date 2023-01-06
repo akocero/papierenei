@@ -1,7 +1,7 @@
 <template>
-	<div class="flex text-darkBlue">
+	<div class="flex">
 		<button
-			class="h-10 w-8 rounded-l-lg border border-gray-300"
+			class="h-10 w-8 rounded-l-lg border"
 			@click="decQty(product._id, 1)"
 		>
 			<vue-feather type="minus" size="14"></vue-feather>
@@ -12,7 +12,7 @@
 			v-model="product.cartQuantity"
 		/>
 		<button
-			class="h-10 w-8 rounded-r-lg border border-gray-300"
+			class="h-10 w-8 rounded-r-lg border"
 			@click="incQty(product._id, 1)"
 		>
 			<vue-feather type="plus" size="14"></vue-feather>
@@ -21,10 +21,11 @@
 </template>
 
 <script setup>
-import useCart from '@/composables/useCart';
+import { useCartStore } from '@/stores/cart';
+
 const props = defineProps({
 	product: Object,
 });
 
-const { decQty, incQty } = useCart();
+const { incQty, decQty } = useCartStore();
 </script>
