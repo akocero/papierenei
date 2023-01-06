@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.6.7",
+    "@vueuse/core": "^9.10.0",
     "axios": "^0.27.2",
     "feather-icons": "4",
     "js-cookie": "^3.0.1",
