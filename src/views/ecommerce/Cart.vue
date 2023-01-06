@@ -10,25 +10,54 @@
 			<table class="mb-5 w-full">
 				<thead class="border-b">
 					<tr class="text-left">
+						<th class="w-16 py-2"></th>
 						<th class="py-2">Product</th>
 						<th class="py-2">Quantity</th>
 						<th class="py-2 text-right">Total</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="border-b py-1" v-for="product in cartStore.list">
-						<td class="py-2">
+					<tr
+						class="border-b py-1"
+						v-for="product in list"
+						v-if="!isLoading"
+					>
+						<td class="py-4">
+							<button
+								class="h-8 w-8"
+								@click="removeToCart(product._id)"
+							>
+								<vue-feather
+									type="x"
+									size="20"
+									class=""
+								></vue-feather>
+							</button>
+						</td>
+						<td class="py-4">
 							<div>{{ product.name }}</div>
 						</td>
-						<td class="py-2">
+						<td class="py-4">
 							<ProductQuantity :product="product" />
 						</td>
-						<td class="py-2 text-right font-mono">
-							₱{{
-								numberFormat(
-									product.unitCost * product.cartQuantity,
-								)
-							}}
+						<td class="py-4 text-right font-mono">
+							<span v-if="!product.salePrice">
+								₱
+								{{
+									numberFormat(
+										product.unitCost * product.cartQuantity,
+									)
+								}}
+							</span>
+							<span v-else>
+								₱
+								{{
+									numberFormat(
+										product.salePrice *
+											product.cartQuantity,
+									)
+								}}
+							</span>
 						</td>
 					</tr>
 				</tbody>
@@ -37,21 +66,15 @@
 		<div class="flex justify-between">
 			<div class="flex flex-col">
 				<label for="">Order special instructions</label>
-				<textarea
-					name=""
-					id=""
-					cols="30"
-					rows="3"
-					class="border-darkBlue"
-				></textarea>
+				<textarea name="" id="" cols="30" rows="3" class=""></textarea>
 			</div>
 			<div class="max-w-xl">
 				<div>
 					<h4 class="text-right">
 						<span class="font-bold">Subtotal</span>
 						<span class="font-mono text-xl">
-							₱{{ numberFormat(cartStore.subTotal) }}</span
-						>
+							₱ {{ numberFormat(subTotal) }}
+						</span>
 					</h4>
 					<p>Taxes and shipping calculated at checkout</p>
 				</div>
@@ -70,9 +93,19 @@
 import ProductQuantity from '@/components/ecommerce/ProductQuantity.vue';
 import { useCartStore } from '@/stores/cart';
 import useUtils from '@/composables/useUtils';
+import { storeToRefs } from 'pinia';
+import { onBeforeMount } from 'vue';
+import { useLocalStorage } from '@vueuse/core';
 
 const cartStore = useCartStore();
+const { list, subTotal, _computeSubTotal, isLoading } = storeToRefs(cartStore);
+const { removeToCart } = cartStore;
+
 const { numberFormat } = useUtils();
+
+onBeforeMount(async () => {
+	await cartStore.updateCartListDetails();
+});
 </script>
 
 <style></style>

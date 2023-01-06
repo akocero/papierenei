@@ -26,7 +26,7 @@ export const useProductStore = defineStore({
 			await storeHelpers.fetch(this, query);
 		},
 		async find(id) {
-			await storeHelpers.find(this, id);
+			return await storeHelpers.find(this, id);
 		},
 		async deleteImage(payload) {
 			await storeHelpers.deleteImage(this, payload);

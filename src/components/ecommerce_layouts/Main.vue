@@ -1,7 +1,8 @@
 <template>
-	<div class="relative font-quicksand text-[rgb(5,160,181)]">
+	<div class="relative font-quicksand text-gray-800">
 		<Banner :text="activeBanner.text" v-if="store.item" />
 		<Navbar />
+		<AlertList :alerts="alerts" />
 		<main class="">
 			<RouterView />
 		</main>
@@ -15,7 +16,10 @@ import Footer from './Footer.vue';
 import Banner from '../ecommerce/Banner.vue';
 import { useEcommSettingStore } from '@/stores/ecomm_setting';
 import { onBeforeMount, ref } from 'vue';
+import useAlert from '@/composables/useAlert.js';
+import AlertList from '@/components/AlertList.vue';
 
+const { alerts } = useAlert();
 const store = useEcommSettingStore();
 const activeBanner = ref('');
 onBeforeMount(async () => {

@@ -99,13 +99,10 @@ import { useProductStore } from '@/stores/product';
 import logoImg from '@/assets/logos.png';
 import digitalArtImg from '@/assets/digital-arts.png';
 import bearlyArtImg from '@/assets/bearly-art.png';
-import useCart from '@/composables/useCart';
-
-const { addToCart } = useCart();
 
 const ecommSettingsStore = useEcommSettingStore();
 const productStore = useProductStore();
-const cartStore = useCartStore();
+const { addToCart } = useCartStore();
 const activeHero = ref(null);
 const isOpen = ref(false);
 
