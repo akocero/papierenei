@@ -1,5 +1,5 @@
 <template>
-	<div class="mx-auto my-8 max-w-7xl">
+	<div class="mx-auto my-8 max-w-screen-2xl">
 		<div class="flex items-baseline justify-between">
 			<h2 class="text-4xl font-semibold">Your Cart</h2>
 			<router-link to="shop" class="font-semibold underline"
@@ -95,7 +95,6 @@ import { useCartStore } from '@/stores/cart';
 import useUtils from '@/composables/useUtils';
 import { storeToRefs } from 'pinia';
 import { onBeforeMount } from 'vue';
-import { useLocalStorage } from '@vueuse/core';
 
 const cartStore = useCartStore();
 const { list, subTotal, _computeSubTotal, isLoading } = storeToRefs(cartStore);
