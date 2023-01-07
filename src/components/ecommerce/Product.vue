@@ -1,13 +1,13 @@
 <template>
 	<div class="relative rounded-lg text-left text-gray-800" v-if="product">
 		<span
-			class="absolute left-0 top-0 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-red-400 px-2 py-1 text-sm font-bold text-white"
+			class="absolute -left-5 -top-5 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-red-400 px-2 py-1 text-sm font-bold text-white"
 			v-if="product.salePrice"
 			>SALE!</span
 		>
 
 		<span
-			class="absolute right-0 top-0 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-darkYellow px-2 py-1 text-sm font-bold text-white"
+			class="absolute -right-5 -top-5 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-darkYellow px-2 py-1 text-sm font-bold text-white"
 			>NEW!</span
 		>
 		<div class="group relative">
