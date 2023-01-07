@@ -32,10 +32,9 @@
 	</QuickView>
 	<header
 		class="relative mx-auto mt-8 flex h-screen w-full max-w-screen-2xl items-center justify-center overflow-hidden bg-cover bg-center"
-		v-if="ecommSettingsStore.item && activeHero"
+		v-if="!ecommSettingsStore.isLoading && activeHero"
 		:style="{ 'background-image': 'url(' + activeHero.secure_url + ')' }"
 	>
-		<!-- <img src="../../../assets/hero.jpg" alt="" class="object-cover" /> -->
 		<div class="">
 			<button
 				class="mx-auto flex items-center space-x-3 rounded-lg bg-darkYellow py-3 pr-3 pl-5 text-xl font-bold text-white shadow-lg"
@@ -49,6 +48,7 @@
 			</button>
 		</div>
 	</header>
+	<Spinner v-else />
 	<!-- Our Product Section  -->
 	<section class="bg-lightBlue flex items-center px-6 py-16 text-center">
 		<div class="mx-auto w-full max-w-screen-2xl">
@@ -66,12 +66,14 @@
 
 	<section class="bg-lightBlue flex items-center px-6 py-16 text-center">
 		<div class="mx-auto w-full max-w-screen-2xl">
-			<h2 class="mb-16 rounded-lg py-3 text-5xl font-bold uppercase">
+			<h2
+				class="mb-16 rounded-lg py-3 text-5xl font-bold uppercase text-darkBlue"
+			>
 				New Arrivals
 			</h2>
 			<div
-				class="grid w-full grid-cols-1 gap-8 px-4 md:grid-cols-5 md:px-0"
-				v-if="productStore.list.length > 0"
+				class="grid w-full grid-cols-1 gap-16 px-4 md:grid-cols-5 md:px-0"
+				v-if="!productStore.isLoading"
 			>
 				<div v-for="product in productStore.list">
 					<Product
@@ -81,8 +83,8 @@
 						:product="product"
 					/>
 				</div>
-				<!-- <Product /> -->
 			</div>
+			<Spinner v-else />
 		</div>
 	</section>
 </template>
@@ -99,6 +101,7 @@ import { useProductStore } from '@/stores/product';
 import logoImg from '@/assets/logos.png';
 import digitalArtImg from '@/assets/digital-arts.png';
 import bearlyArtImg from '@/assets/bearly-art.png';
+import Spinner from '@/components/Spinner.vue';
 
 const ecommSettingsStore = useEcommSettingStore();
 const productStore = useProductStore();
@@ -115,16 +118,13 @@ const ourProducts = ref([
 ]);
 
 onBeforeMount(async () => {
-	// Fetch products for new Arrivals
+	// Fetch products for new Arrivals section
 	await productStore.fetch('?limit=10');
 
-	console.log(productStore.list);
-
 	// Check if there is any data on ecommer settings
-	// if no data invoke init to create object on ecommerce settings
+	// if there is no data invoke init to create object on ecommerce settings
 	//  please refer to stores/ecomm_setting.js
 	await ecommSettingsStore.fetch('?limit=1');
-	//
 	if (ecommSettingsStore.list.length <= 0) {
 		await ecommSettingsStore.init();
 		await ecommSettingsStore.fetch('?limit=1');

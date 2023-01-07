@@ -1,3 +1,8 @@
+/**
+ * * This is a Setup Type of Store
+ *
+ */
+
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import useAlert from '@/composables/useAlert';
@@ -9,14 +14,18 @@ export const useCartStore = defineStore('cart', () => {
 	const productStore = useProductStore();
 
 	const list = ref(useLocalStorage('cart_list', []));
+	// TODO: use isLoading on all the async function
 	const isLoading = ref(false);
 	const item = ref(null);
 	const page = ref(1);
 	const response = ref(null);
 	const error = ref(null);
 
+	//* This func will update the cart item
+	//* Use this function inside onBeforeMounted
 	const updateCartListDetails = async () => {
 		isLoading.value = true;
+
 		const _tempList = [];
 		if (list.value.length > 0) {
 			await Promise.all(
@@ -32,16 +41,19 @@ export const useCartStore = defineStore('cart', () => {
 		isLoading.value = false;
 	};
 
+	//* Get Specific Product By ID
 	const getProductDetails = async (_id) => {
 		const { data } = await productStore.find(_id);
 		return data;
 	};
 
 	const addToCart = (payload) => {
+		//* check if the product is existed
 		const existingProduct = list.value.find(
 			(cartItem) => cartItem._id == payload._id,
 		);
 
+		//* if product is on cart, just increase qty by 1
 		if (existingProduct) {
 			console.log('existing', existingProduct.name);
 			incQty(existingProduct._id, 1);
@@ -50,10 +62,14 @@ export const useCartStore = defineStore('cart', () => {
 
 		pushAlert('success', 'Succesfully added to cart!');
 
+		//* add existing cart qty if product is new
+		//! dont use the product quantity itself
 		payload.cartQuantity = 1;
+
 		list.value.push(payload);
 	};
 
+	// remove cart
 	const removeToCart = (_id) => {
 		if (confirm('This item will be removed!')) {
 			list.value = list.value.filter((cartItem) => cartItem._id != _id);
@@ -82,15 +98,16 @@ export const useCartStore = defineStore('cart', () => {
 		cartItem.cartQuantity -= value;
 	};
 
+	//* this computed function will fire everytime 'list' variable changed
 	const subTotal = computed(() => {
 		let subTotal = 0;
 		list.value.forEach((cartItem) => {
+			//* check if the product is on sale
 			if (cartItem.salePrice) {
 				return (subTotal += cartItem.salePrice * cartItem.cartQuantity);
 			}
 			return (subTotal += cartItem.unitCost * cartItem.cartQuantity);
 		});
-		console.log('asdasdasd', subTotal);
 
 		return subTotal;
 	});
@@ -106,87 +123,3 @@ export const useCartStore = defineStore('cart', () => {
 		updateCartListDetails,
 	};
 });
-
-// export const useCartStore = defineStore({
-// 	id: 'cart',
-// 	state: () => ({
-// 		list: [],
-// 		isLoading: false,
-// 		item: null,
-// 		page: 1,
-// 		url: `items`,
-// 		response: null,
-// 		error: null,
-// 		subTotal: 0,
-// 	}),
-// 	getters: {
-// 		doubleCount: (state) => state.counter * 2,
-// 	},
-// 	actions: {
-// 		async create(payload) {
-// 			return await storeHelpers.create(this, payload);
-// 		},
-// 		async update(payload) {
-// 			return await storeHelpers.update(this, payload);
-// 		},
-// 		async fetch(query) {
-// 			await storeHelpers.fetch(this, query);
-// 		},
-// 		async find(id) {
-// 			await storeHelpers.find(this, id);
-// 		},
-// 		async deleteImage(payload) {
-// 			await storeHelpers.deleteImage(this, payload);
-// 		},
-
-// 		add(payload) {
-// 			console.log('store cart: add', payload);
-
-// 			const existingProduct = this.list.find(
-// 				(cartItem) => cartItem._id == payload._id,
-// 			);
-
-// 			if (existingProduct) {
-// 				console.log('existing', existingProduct.name);
-// 				this.incQty(existingProduct._id, 1);
-// 				return;
-// 			}
-
-// 			payload.cartQuantity = 1;
-// 			this.list.push(payload);
-// 			this.computeSubTotal();
-// 		},
-// 		incQty(id, value) {
-// 			const cartItem = this.list.find((cartItem) => cartItem._id == id);
-
-// 			if (cartItem.quantity > cartItem.cartQuantity) {
-// 				cartItem.cartQuantity += value;
-// 				console.log('nag add');
-// 			} else {
-// 				console.log('sobra na boy');
-// 			}
-
-// 			this.computeSubTotal();
-// 		},
-// 		decQty(id, value) {
-// 			const cartItem = this.list.find((cartItem) => cartItem._id == id);
-
-// 			if (cartItem.cartQuantity > 1) {
-// 				cartItem.cartQuantity -= value;
-// 				console.log('nag bawas');
-// 			} else {
-// 				console.log('zero na boy');
-// 			}
-
-// 			this.computeSubTotal();
-// 		},
-// 		computeSubTotal() {
-// 			this.subTotal = 0;
-// 			this.list.forEach((cartItem) => {
-// 				this.subTotal += cartItem.unitCost * cartItem.cartQuantity;
-// 			});
-
-// 			console.log(this.subTotal);
-// 		},
-// 	},
-// });

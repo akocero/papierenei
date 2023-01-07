@@ -1,5 +1,5 @@
 <template>
-	<div class="relative rounded-lg p-5 text-left text-gray-800" v-if="product">
+	<div class="relative rounded-lg text-left text-gray-800" v-if="product">
 		<span
 			class="absolute left-0 top-0 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-red-400 px-2 py-1 text-sm font-bold text-white"
 			v-if="product.salePrice"
@@ -61,15 +61,15 @@
 			<h4 class="capitalize">{{ product.name }}</h4>
 
 			<h5 class="font-mono" v-if="!product.salePrice">
-				₱{{ numberFormat(product.unitCost) }}
+				₱ {{ numberFormat(product.unitCost) }}
 			</h5>
 
 			<h5 class="font-mono text-2xl" v-if="product.salePrice">
 				<span class="text-lg text-gray-400 line-through"
-					>₱{{ numberFormat(product.unitCost) }}</span
+					>₱ {{ numberFormat(product.unitCost) }}</span
 				>
 				<span class="text-red-400">
-					₱{{ numberFormat(product.salePrice) }}
+					₱ {{ numberFormat(product.salePrice) }}
 				</span>
 			</h5>
 

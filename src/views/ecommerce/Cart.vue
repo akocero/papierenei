@@ -20,7 +20,7 @@
 					<tr
 						class="border-b py-1"
 						v-for="product in list"
-						v-if="!isLoading"
+						v-if="!cartStore.isLoading"
 					>
 						<td class="py-4">
 							<button
@@ -60,6 +60,9 @@
 							</span>
 						</td>
 					</tr>
+					<tr v-else>
+						<Spinner />
+					</tr>
 				</tbody>
 			</table>
 		</div>
@@ -95,9 +98,10 @@ import { useCartStore } from '@/stores/cart';
 import useUtils from '@/composables/useUtils';
 import { storeToRefs } from 'pinia';
 import { onBeforeMount } from 'vue';
+import Spinner from '@/components/Spinner.vue';
 
 const cartStore = useCartStore();
-const { list, subTotal, _computeSubTotal, isLoading } = storeToRefs(cartStore);
+const { list, subTotal } = storeToRefs(cartStore);
 const { removeToCart } = cartStore;
 
 const { numberFormat } = useUtils();

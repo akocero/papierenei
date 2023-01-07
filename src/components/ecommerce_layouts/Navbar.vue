@@ -58,7 +58,7 @@
 				</button>
 			</div>
 		</div>
-		<nav class="relative hidden bg-primary-2 md:block">
+		<nav class="relative hidden bg-lightBlue-3 md:block">
 			<ul
 				class="mx-auto flex h-14 max-w-screen-2xl items-center text-lg font-bold uppercase text-primary-0"
 			>
