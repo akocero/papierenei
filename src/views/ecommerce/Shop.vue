@@ -96,7 +96,8 @@
 					<div class="w-1/2">
 						<input
 							type="number"
-							v-model="priceFrom"
+							v-model="priceRange.from"
+							@change="sortByPriceRange"
 							placeholder="$ From"
 							class="w-full"
 						/>
@@ -104,12 +105,12 @@
 					<div class="w-1/2">
 						<input
 							type="number"
-							v-model="priceTo"
+							v-model="priceRange.to"
+							@change="sortByPriceRange"
 							placeholder="$ To"
 							class="w-full"
 						/>
 					</div>
-					<button @click="sortByPriceRange">Fire</button>
 				</div>
 			</div>
 		</div>
@@ -186,8 +187,10 @@ const sortedByOptions = ref([
 ]);
 
 // price range filter
-const priceFrom = ref(0);
-const priceTo = ref(0);
+const priceRange = ref({
+	from: 0,
+	to: 0,
+});
 
 // initial query new to old filter: latest first
 const query = ref('?sort=-createdAt');
@@ -234,21 +237,26 @@ const filterProducts = async () => {
 	query.value = '?';
 };
 
+// TODO: make it one object
+// make it filter on change of value
 const sortByPriceRange = () => {
 	let _query = '';
-	if (!priceFrom.value && !priceTo.value) {
+
+	if (!priceRange.value.from && !priceRange.value.to) {
 		return;
 	}
-	if (priceFrom.value) {
-		_query += `unitCost[gte]=${priceFrom.value}&`;
+
+	if (priceRange.value.from) {
+		_query += `unitCost[gte]=${priceRange.value.from}&`;
 	}
 
-	if (priceTo.value) {
-		_query += `unitCost[lt]=${priceTo.value}`;
+	if (priceRange.value.to) {
+		_query += `unitCost[lt]=${priceRange.value.to}`;
 	}
 	query.value += _query;
 
 	filterProducts();
+	console.log('fired');
 };
 
 function openModal() {
