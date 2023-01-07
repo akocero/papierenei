@@ -13,7 +13,9 @@ export const useProductStore = defineStore({
 		error: null,
 	}),
 	getters: {
-		doubleCount: (state) => state.counter * 2,
+		highestPrice: (state) => {
+			return Math.max(...state.list.map((o) => o.unitCost));
+		},
 	},
 	actions: {
 		async create(payload) {
