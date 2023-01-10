@@ -53,7 +53,7 @@
 	<section class="bg-lightBlue flex items-center px-6 py-16 text-center">
 		<div class="mx-auto w-full max-w-screen-2xl">
 			<div
-				class="grid w-full grid-cols-1 gap-10 px-4 md:grid-cols-4 md:px-0"
+				class="grid w-full grid-cols-1 gap-10 px-4 uppercase md:grid-cols-4 md:px-0"
 			>
 				<OurProduct
 					v-for="ourProduct in ourProducts"
@@ -75,12 +75,13 @@
 				class="grid w-full grid-cols-1 gap-16 px-4 md:grid-cols-5 md:px-0"
 				v-if="!productStore.isLoading"
 			>
-				<div v-for="product in productStore.list">
+				<div v-for="(product, key) in productStore.list">
 					<Product
 						:key="product"
 						@openModal="openModal"
 						@addToCart="addToCart($event)"
 						:product="product"
+						:index="key"
 					/>
 				</div>
 			</div>
@@ -111,10 +112,10 @@ const isOpen = ref(false);
 
 // our product data
 const ourProducts = ref([
-	{ img: logoImg, text: 'Createables' },
-	{ img: logoImg, text: 'Custom Logos' },
 	{ img: digitalArtImg, text: 'Digital Arts' },
-	{ img: bearlyArtImg, text: 'Bearly Art' },
+	{ img: logoImg, text: 'Stickers' },
+	{ img: bearlyArtImg, text: 'Stationery' },
+	{ img: logoImg, text: 'Createables' },
 ]);
 
 onBeforeMount(async () => {

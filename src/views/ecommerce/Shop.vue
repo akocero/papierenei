@@ -65,7 +65,7 @@
 						type="checkbox"
 						class=""
 						v-model="selectedCategories"
-						:value="category.name"
+						:value="category._id"
 					/>
 					<label for="" class="ml-3 inline-block translate-y-1">{{
 						category.name
@@ -97,8 +97,7 @@
 						<input
 							type="number"
 							v-model="priceRange.from"
-							@change="sortByPriceRange"
-							placeholder="$ From"
+							placeholder="₱ Min"
 							class="w-full"
 						/>
 					</div>
@@ -106,11 +105,11 @@
 						<input
 							type="number"
 							v-model="priceRange.to"
-							@change="sortByPriceRange"
-							placeholder="$ To"
+							placeholder="₱ Max"
 							class="w-full"
 						/>
 					</div>
+					<button @click="sortByPriceRange">GO</button>
 				</div>
 			</div>
 		</div>
@@ -193,17 +192,34 @@ const priceRange = ref({
 });
 
 // initial query new to old filter: latest first
-const query = ref('?sort=-createdAt');
+const query = ref('?<><category><>');
+const queryFilterCategories = ref('');
+const queryFilterPriceRange = ref('');
+const querySortedBy = ref('');
+// db.tags.find({ tags: { $all: ["cheap", "blue"] } } )
 
-//* query fo price
+//* query for price
 //* '?unitCost[gte]=1&unitCost[lt]=50'
+
+//* query for categories
+//* '?categories[in][0]=6342b48cd84510d5a0e35265&categories[in][1]=6342b445d84510d5a0e3525a',
+
+//* query for latest products
+//* ?sort=-createdAt'
 
 onBeforeMount(async () => {
 	// fetch products no filter
 	await filterProducts();
 	// fetch catories
+	console.log(productStore.list);
 	await categoryStore.fetch('');
 });
+
+// to filter products
+const filterProducts = async () => {
+	await productStore.fetch(query.value);
+	query.value = '?';
+};
 
 // if selectedSortedBy is change, filter products accordingly
 watch(
@@ -231,10 +247,24 @@ watch(
 	},
 );
 
-// to filter products
-const filterProducts = async () => {
-	await productStore.fetch(query.value);
-	query.value = '?';
+watch(
+	() => selectedCategories.value,
+	(newVal, oldVal) => {
+		console.log('selectedCategories', newVal, oldVal);
+
+		filterByCategories(newVal);
+	},
+);
+
+const filterByCategories = (categories) => {
+	//* '?categories[in][0]=6342b48cd84510d5a0e35265&categories[in][1]=6342b445d84510d5a0e3525a',
+
+	let query = '?';
+	categories.forEach((ctry, index) => {
+		query += `categories[in][${index}]=${ctry}&`;
+	});
+
+	console.log(query);
 };
 
 // TODO: make it one object

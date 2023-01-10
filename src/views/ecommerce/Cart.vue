@@ -35,7 +35,63 @@
 							</button>
 						</td>
 						<td class="py-4">
-							<div>{{ product.name }}</div>
+							<div class="flex items-center gap-10">
+								<div
+									v-if="
+										product.images.length ||
+										product.coverPhoto
+									"
+									class="relative h-24 w-24"
+								>
+									<img
+										class="h-full w-full object-cover"
+										:src="product.coverPhoto.secure_url"
+										alt=""
+										v-if="product.coverPhoto"
+									/>
+									<img
+										class="h-full w-full object-cover"
+										:src="product.images[0].secure_url"
+										alt=""
+										v-else
+									/>
+								</div>
+								<div v-else class="h-64 w-full">
+									<img
+										class="h-full w-full object-cover"
+										src="https://via.placeholder.com/400?text=Image+N/A"
+										alt=""
+									/>
+								</div>
+								<div>
+									<h5>{{ product.name }}</h5>
+									<div class="font-mono">
+										<div class="" v-if="product.salePrice">
+											<span
+												class="text-gray-400 line-through"
+											>
+												₱
+												{{
+													numberFormat(
+														product.unitCost,
+													)
+												}}
+											</span>
+											₱
+											{{
+												numberFormat(product.salePrice)
+											}}
+										</div>
+										<span
+											class=""
+											v-if="!product.salePrice"
+										>
+											₱
+											{{ numberFormat(product.unitCost) }}
+										</span>
+									</div>
+								</div>
+							</div>
 						</td>
 						<td class="py-4">
 							<ProductQuantity :product="product" />
@@ -49,7 +105,7 @@
 									)
 								}}
 							</span>
-							<span v-else>
+							<div v-else>
 								₱
 								{{
 									numberFormat(
@@ -57,7 +113,7 @@
 											product.cartQuantity,
 									)
 								}}
-							</span>
+							</div>
 						</td>
 					</tr>
 					<tr v-else>

@@ -1,15 +1,17 @@
 <template>
 	<div class="top-0 z-30 bg-lightBlue-1" style="position: sticky">
-		<div class="justity-end mx-auto flex max-w-screen-2xl space-x-10 px-4">
-			<!-- <a href="#">
+		<div
+			class="relative mx-auto flex max-w-screen-2xl items-center justify-center"
+		>
+			<a href="#">
 				<router-link to="/"
 					><img
 						src="../../assets/logo-t.png"
 						alt=""
-						class="w-20 md:w-32"
+						class="w-20 md:w-56"
 				/></router-link>
-			</a> -->
-			<form class="hidden h-40 grow md:block">
+			</a>
+			<form class="absolute right-0 mt-10 hidden h-40 md:block">
 				<div class="flex h-full items-center justify-end">
 					<!-- <vue-feather
 						type="search"
@@ -32,8 +34,8 @@
 					</div>
 				</div>
 			</form>
-			<div class="flex space-x-4">
-				<!-- <router-link to="cart" class="flex items-center space-x-4">
+			<!-- <div class="flex space-x-4">
+				<router-link to="cart" class="flex items-center space-x-4">
 					<div class="relative">
 						<div
 							class="absolute -top-2 -right-3 flex h-5 w-5 items-center justify-center rounded-full bg-darkYellow font-mono text-gray-900"
@@ -48,7 +50,7 @@
 					</div>
 
 					<span class="hidden font-bold md:inline-block">Cart</span>
-				</router-link> -->
+				</router-link>
 
 				<button
 					class="relative flex items-center md:hidden"
@@ -56,17 +58,31 @@
 				>
 					<vue-feather type="menu" size="28"></vue-feather>
 				</button>
-			</div>
+			</div> -->
 		</div>
 		<nav class="relative hidden bg-lightBlue-3 md:block">
 			<ul
-				class="mx-auto flex h-14 max-w-screen-2xl items-center text-lg font-bold uppercase text-primary-0"
+				class="mx-auto flex h-14 max-w-screen-2xl items-center justify-between text-lg font-bold uppercase text-primary-0"
 			>
 				<li class="group">
 					<router-link
 						to="shop"
+						class="flex h-12 items-center px-6 hover:bg-mediumBlue"
+						>HOME</router-link
+					>
+				</li>
+				<li class="group">
+					<router-link
+						to="shop"
+						class="flex h-12 items-center px-6 hover:bg-mediumBlue"
+						>NEW</router-link
+					>
+				</li>
+				<li class="group">
+					<router-link
+						to="shop"
 						class="peer flex h-14 items-center px-6 hover:bg-mediumBlue"
-						>Shop</router-link
+						>SHOP</router-link
 					>
 					<div
 						class="invisible absolute left-0 top-20 flex w-full gap-20 border-t border-mediumBlue bg-primary-2 px-10 py-5 opacity-0 transition-all duration-700 ease-in-out group-hover:visible group-hover:top-14 group-hover:opacity-100"
@@ -92,28 +108,36 @@
 						</div>
 					</div>
 				</li>
-				<li class="group">
-					<router-link
-						to="shop"
-						class="flex h-12 items-center px-6 hover:bg-mediumBlue"
-						>Sale</router-link
-					>
-				</li>
+
 				<li class="group">
 					<router-link
 						to="about"
 						class="flex h-12 items-center px-6 hover:bg-mediumBlue"
-						>About</router-link
+						>STATIONERY</router-link
 					>
 				</li>
 				<li class="group">
 					<router-link
 						to="terms"
 						class="flex h-12 items-center px-6 hover:bg-mediumBlue"
-						>FAQs</router-link
+						>STICKERS</router-link
 					>
 				</li>
-				<li class="group ml-auto">
+				<li class="group">
+					<router-link
+						to="terms"
+						class="flex h-12 items-center px-6 hover:bg-mediumBlue"
+						>SALES</router-link
+					>
+				</li>
+				<li class="group">
+					<router-link
+						to="terms"
+						class="flex h-12 items-center px-6 hover:bg-mediumBlue"
+						>FREEBIES</router-link
+					>
+				</li>
+				<li class="group">
 					<router-link
 						to="cart"
 						class="flex h-12 items-center px-6 hover:bg-mediumBlue"

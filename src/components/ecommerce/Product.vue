@@ -8,6 +8,7 @@
 
 		<span
 			class="absolute -right-5 -top-5 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-darkYellow px-2 py-1 text-sm font-bold text-white"
+			v-if="index <= 4 && !product.salePrice"
 			>NEW!</span
 		>
 		<div class="group relative">
@@ -97,5 +98,6 @@ const { numberFormat } = useUtils();
 
 const props = defineProps({
 	product: Object,
+	index: Number,
 });
 </script>
