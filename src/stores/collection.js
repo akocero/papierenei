@@ -1,14 +1,14 @@
 import { defineStore } from 'pinia';
 import storeHelpers from '../helpers/storeHelpers';
 
-export const useCategoryStore = defineStore({
-	id: 'category',
+export const useCollectionStore = defineStore({
+	id: 'collection',
 	state: () => ({
 		list: [],
 		isLoading: false,
 		item: null,
 		page: 1,
-		url: `categories`,
+		url: `collections`,
 		response: null,
 		error: null,
 		print: null,

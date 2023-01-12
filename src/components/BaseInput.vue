@@ -3,8 +3,9 @@
 		<span
 			class="text-gray-700"
 			:class="[error && errorField && 'text-red-500']"
-			>{{ label }}</span
 		>
+			{{ label }}
+		</span>
 		<span v-if="required" class="font-black text-red-600"> *</span>
 		<input
 			:type="type"

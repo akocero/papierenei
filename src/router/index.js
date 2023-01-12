@@ -47,7 +47,7 @@ const router = createRouter({
 					component: () => import('../views/ecommerce/Terms.vue'),
 				},
 				{
-					path: '/shop',
+					path: '/shop/:id',
 					name: 'shop',
 					component: () => import('../views/ecommerce/Shop.vue'),
 				},
@@ -149,6 +149,26 @@ const router = createRouter({
 					path: 'warehouse/products/view/:id',
 					name: 'warehouse.products.view',
 					component: () => import('../views/product/view.vue'),
+				},
+				{
+					path: 'warehouse/collections',
+					name: 'warehouse.collections',
+					component: () => import('../views/collection/index.vue'),
+				},
+				{
+					path: 'warehouse/collections/create',
+					name: 'warehouse.collections.create',
+					component: () => import('../views/collection/create.vue'),
+				},
+				{
+					path: 'warehouse/collections/edit/:id',
+					name: 'warehouse.collections.edit',
+					component: () => import('../views/collection/edit.vue'),
+				},
+				{
+					path: 'warehouse/collections/view/:id',
+					name: 'warehouse.collections.view',
+					component: () => import('../views/collection/view.vue'),
 				},
 				{
 					path: 'sales/discounts',

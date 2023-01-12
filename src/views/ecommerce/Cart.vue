@@ -64,7 +64,9 @@
 									/>
 								</div>
 								<div>
-									<h5>{{ product.name }}</h5>
+									<h5 class="capitalize">
+										{{ product.name }}
+									</h5>
 									<div class="font-mono">
 										<div class="" v-if="product.salePrice">
 											<span

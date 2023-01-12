@@ -30,13 +30,21 @@
 			</div>
 		</div>
 	</QuickView>
-	<div class="mx-auto my-12 flex max-w-screen-2xl gap-10">
-		<div class="w-1/4">
-			<h3 class="font-semibold">SORTED BY</h3>
-			<!-- <hr class="" /> -->
-			<div class="my-4">
+	<div class="mx-auto my-12 flex max-w-screen-2xl gap-10 px-4 2xl:px-0">
+		<div class="flex w-1/4 flex-col space-y-8">
+			<div class="">
+				<div class="mb-4 flex justify-between">
+					<h3 class="font-semibold">SORTED BY</h3>
+					<button
+						type="button "
+						class="text-sm font-bold underline"
+						@click="reset('sortedBy')"
+					>
+						Reset
+					</button>
+				</div>
 				<select
-					class="w-full focus:border-0"
+					class="w-full border-gray-300"
 					v-model="selectedSortedBy"
 				>
 					<option
@@ -49,28 +57,35 @@
 				</select>
 			</div>
 
-			<h3 class="font-semibold">CATEGORIES</h3>
+			<div>
+				<div class="mb-4 flex justify-between">
+					<h3 class="font-semibold">FILTERS</h3>
+					<button
+						type="button "
+						class="text-sm font-bold underline"
+						@click="reset('filter')"
+					>
+						Reset
+					</button>
+				</div>
+				<ul>
+					<li
+						v-for="category in productTags"
+						:key="category.name"
+						class="py-1"
+					>
+						<label for="" class="flex translate-y-1 items-center">
+							<input
+								type="radio"
+								class="mb-1"
+								v-model="selectedTag"
+								:value="category._id"
+							/>
+							<span class="ml-2">{{ category.name }}</span>
+						</label>
+					</li>
+				</ul>
 
-			<div class="my-3 font-sans">
-				<div class="flex justify-between">
-					<h5>0 Selected</h5>
-					<a href="#">Reset</a>
-				</div>
-				<div
-					class="border-b py-2"
-					v-for="category in categoryStore.list"
-					:key="category.name"
-				>
-					<input
-						type="checkbox"
-						class=""
-						v-model="selectedCategories"
-						:value="category._id"
-					/>
-					<label for="" class="ml-3 inline-block translate-y-1">{{
-						category.name
-					}}</label>
-				</div>
 				<!-- <div class="border-b py-2">
 					<input type="checkbox" class="" />
 					<label for="" class="ml-3 inline-block translate-y-1"
@@ -79,53 +94,82 @@
 				</div> -->
 			</div>
 
-			<h3 class="font-semibold">PRICE</h3>
-
-			<div class="my-3 w-full font-sans">
+			<div>
+				<div class="mb-4 flex justify-between">
+					<h3 class="font-semibold">PRICE</h3>
+					<button
+						type="button "
+						class="text-sm font-bold underline"
+						@click="reset('priceRange')"
+					>
+						Reset
+					</button>
+				</div>
 				<div class="flex justify-between">
 					<h5>
 						The highest price is
-						<span class="font-bold"
-							>₱
-							{{ numberFormat(productStore.highestPrice) }}</span
-						>
+						<span class="font-mono font-bold"
+							>₱{{ numberFormat(productStore.highestPrice) }}
+						</span>
 					</h5>
-					<a href="#">Reset</a>
 				</div>
-				<div class="mt-4 flex items-center justify-between">
-					<div class="w-1/2">
+				<div
+					class="mt-2 grid grid-cols-12 items-center justify-between gap-1"
+				>
+					<div class="col-span-5">
 						<input
 							type="number"
 							v-model="priceRange.from"
 							placeholder="₱ Min"
-							class="w-full"
+							class="w-full border-gray-300 font-mono"
 						/>
 					</div>
-					<div class="w-1/2">
+					<div class="col-span-5">
 						<input
 							type="number"
 							v-model="priceRange.to"
 							placeholder="₱ Max"
-							class="w-full"
+							class="w-full border-gray-300 font-mono"
 						/>
 					</div>
-					<button @click="sortByPriceRange">GO</button>
+					<button
+						@click="sortByPriceRange"
+						class="col-span-2 h-full border border-gray-300 font-semibold"
+					>
+						Go
+					</button>
 				</div>
 			</div>
 		</div>
 		<div class="bg-lightBlue flex items-center px-6">
 			<div class="mx-auto w-full max-w-7xl">
-				<div class="mb-8">
-					<h2 class="text-3xl font-bold uppercase">Bearly Art</h2>
+				<div
+					class="mb-8"
+					v-if="!collectionStore.isLoading && collectionStore.item"
+				>
+					<h2 class="text-3xl font-bold uppercase">
+						{{ collectionStore.item.name }}
+					</h2>
 					<div class="pt-2 pb-4">
 						<hr />
 					</div>
 
 					<p>
-						Lorem ipsum dolor sit amet consectetur, adipisicing
-						elit. Laborum officiis, nulla optio aliquam error
-						repellat aspernatur repudiandae accusamus suscipit
-						architecto.
+						{{ collectionStore.item.description }}
+					</p>
+
+					<div class="mt-4 h-52 bg-gray-200"></div>
+				</div>
+				<div class="mb-8" v-else>
+					<h2 class="text-3xl font-bold uppercase">ALL PRODUCTS</h2>
+					<div class="pt-2 pb-4">
+						<hr />
+					</div>
+
+					<p>
+						Lorem, ipsum dolor sit amet consectetur adipisicing
+						elit. Eligendi mollitia praesentium magnam quia dolorum
+						odio deserunt debitis illo repudiandae fuga?
 					</p>
 
 					<div class="mt-4 h-52 bg-gray-200"></div>
@@ -135,9 +179,10 @@
 					class="grid w-full grid-cols-1 gap-10 px-4 md:grid-cols-4 md:px-0"
 					v-if="!productStore.isLoading"
 				>
-					<div v-for="product in productStore.list">
+					<div v-for="(product, key) in productStore.list">
 						<Product
 							:key="product._id"
+							:index="key"
 							:product="product"
 							@openModal="openModal"
 							@addToCart="addToCart($event)"
@@ -158,21 +203,26 @@ import ProductQuantity from '@/components/ecommerce/ProductQuantity.vue';
 import Spinner from '@/components/Spinner.vue';
 import useUtils from '@/composables/useUtils';
 import { useProductStore } from '@/stores/product';
-import { useCategoryStore } from '@/stores/category';
+import { useTagStore } from '@/stores/tag';
+import { useCollectionStore } from '@/stores/collection';
 import { useCartStore } from '@/stores/cart';
+import { useRoute } from 'vue-router';
+import { computed } from '@vue/reactivity';
 
 const productStore = useProductStore();
-const categoryStore = useCategoryStore();
+const collectionStore = useCollectionStore();
 const cartStore = useCartStore();
+const tagStore = useTagStore();
 
-const { numberFormat } = useUtils();
+const { numberFormat, sort } = useUtils();
 const { addToCart } = cartStore;
+const route = useRoute();
 // initial state of modal
 const isOpen = ref(false);
 
 // TODO: filter products base on categories
 // this is to get all selected categories
-const selectedCategories = ref([]);
+const selectedTag = ref(null);
 
 // this is to get selected sortedBy
 // select option filter
@@ -187,15 +237,18 @@ const sortedByOptions = ref([
 
 // price range filter
 const priceRange = ref({
-	from: 0,
-	to: 0,
+	from: '',
+	to: '',
 });
 
 // initial query new to old filter: latest first
-const query = ref('?<><category><>');
+const query = ref('<COLLECTION><TAG><PRICE><SORTED>');
 const queryFilterCategories = ref('');
 const queryFilterPriceRange = ref('');
+const queryCollection = ref('');
+const queryFilterByTag = ref('');
 const querySortedBy = ref('');
+const activeCollection = ref(null);
 // db.tags.find({ tags: { $all: ["cheap", "blue"] } } )
 
 //* query for price
@@ -208,18 +261,93 @@ const querySortedBy = ref('');
 //* ?sort=-createdAt'
 
 onBeforeMount(async () => {
+	await tagStore.fetch('');
+	await collectionStore.find(route.params.id);
+
+	if (!collectionStore.error) {
+		queryCollection.value = `collections[in][0]=${collectionStore.item._id}`;
+	}
+
 	// fetch products no filter
 	await filterProducts();
+
 	// fetch catories
-	console.log(productStore.list);
-	await categoryStore.fetch('');
+	await collectionStore.fetch('');
+	// console.log('product list', collectionStore.list);
 });
 
 // to filter products
 const filterProducts = async () => {
+	if (!queryFilterByTag.value) {
+		query.value = query.value.replace('<TAG>', '');
+	}
+
+	if (!querySortedBy.value) {
+		query.value = query.value.replace('<SORTED>', '');
+	}
+
+	if (!queryFilterPriceRange.value) {
+		query.value = query.value.replace('<PRICE>', '');
+	}
+
+	if (!queryCollection.value) {
+		query.value = query.value.replace('<COLLECTION>', '');
+	}
+
+	console.log('COLLECTION', queryCollection.value);
+	console.log('TAG', queryFilterByTag.value);
+	console.log('PRICE', queryFilterPriceRange.value);
+	console.log('SORTED', querySortedBy.value);
+
+	query.value = `${queryCollection.value}${queryFilterByTag.value}${queryFilterPriceRange.value}${querySortedBy.value}`;
+
+	if (!queryCollection.value) {
+		query.value = '?' + query.value.slice(1);
+	}
+
+	console.log('QUERY', query.value);
 	await productStore.fetch(query.value);
-	query.value = '?';
+
+	// query.value = '?';
 };
+
+const reset = (str) => {
+	if ('filters') {
+		selectedTag.value = null;
+		queryFilterByTag.value = '';
+	}
+
+	if ('sortedBy') {
+		selectedSortedBy.value = 'new_to_old';
+		querySortedBy.value = '';
+	}
+
+	if ('priceRange') {
+		queryFilterPriceRange.value = '';
+		priceRange.value.from = '';
+		priceRange.value.to = '';
+	}
+
+	filterProducts();
+};
+
+const productTags = computed(() => {
+	let tags = [];
+	productStore.list.forEach((p) => {
+		if (!p.tags) return;
+		p.tags.forEach((t) => {
+			tags.push(t);
+		});
+	});
+	const uniqueTags = [...new Set(tags)];
+
+	tags = tagStore.list.filter((t) => {
+		if (uniqueTags.includes(t._id)) return t;
+		return;
+	});
+
+	return sort(tags, 'name');
+});
 
 // if selectedSortedBy is change, filter products accordingly
 watch(
@@ -227,19 +355,19 @@ watch(
 	(newVal, oldVal) => {
 		switch (newVal) {
 			case 'best_selling':
-				query.value = '?sort=-soldCount';
+				querySortedBy.value = '&sort=-soldCount';
 				break;
 			case 'low_to_high':
-				query.value = '?sort=unitCost';
+				querySortedBy.value = '&sort=unitCost';
 				break;
 			case 'high_to_low':
-				query.value = '?sort=-unitCost';
+				querySortedBy.value = '&sort=-unitCost';
 				break;
 			case 'old_to_new':
-				query.value = '?sort=createdAt';
+				querySortedBy.value = '&sort=createdAt';
 				break;
 			case 'new_to_old':
-				query.value = '?sort=-createdAt';
+				querySortedBy.value = '&sort=-createdAt';
 				break;
 			default:
 		}
@@ -248,11 +376,13 @@ watch(
 );
 
 watch(
-	() => selectedCategories.value,
+	() => selectedTag.value,
 	(newVal, oldVal) => {
-		console.log('selectedCategories', newVal, oldVal);
-
-		filterByCategories(newVal);
+		// filterByCategories(newVal);
+		if (newVal) {
+			queryFilterByTag.value = `&tags[in][0]=${newVal}`;
+			filterProducts();
+		}
 	},
 );
 
@@ -263,30 +393,30 @@ const filterByCategories = (categories) => {
 	categories.forEach((ctry, index) => {
 		query += `categories[in][${index}]=${ctry}&`;
 	});
-
-	console.log(query);
 };
 
 // TODO: make it one object
 // make it filter on change of value
 const sortByPriceRange = () => {
-	let _query = '';
+	let _queryFrom = '';
+	let _queryTo = '';
+	queryFilterPriceRange.value = '';
 
 	if (!priceRange.value.from && !priceRange.value.to) {
 		return;
 	}
 
 	if (priceRange.value.from) {
-		_query += `unitCost[gte]=${priceRange.value.from}&`;
+		_queryFrom = `&unitCost[gte]=${priceRange.value.from}`;
 	}
 
 	if (priceRange.value.to) {
-		_query += `unitCost[lt]=${priceRange.value.to}`;
+		_queryTo = `&unitCost[lt]=${priceRange.value.to}`;
 	}
-	query.value += _query;
+
+	queryFilterPriceRange.value = _queryFrom + _queryTo;
 
 	filterProducts();
-	console.log('fired');
 };
 
 function openModal() {

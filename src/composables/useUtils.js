@@ -13,5 +13,19 @@ export default function useUtils() {
 		});
 	};
 
-	return { capitalize, numberFormat };
+	const sort = (arrayObjects, propertyName) => {
+		arrayObjects.sort(function compare(a, b) {
+			if (a[propertyName] < b[propertyName]) {
+				return -1;
+			}
+			if (a[propertyName] > b[propertyName]) {
+				return 1;
+			}
+			return 0;
+		});
+
+		return arrayObjects;
+	};
+
+	return { capitalize, numberFormat, sort };
 }

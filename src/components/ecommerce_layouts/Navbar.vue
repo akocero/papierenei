@@ -66,24 +66,28 @@
 			>
 				<li class="group">
 					<router-link
-						to="shop"
+						to="/"
 						class="flex h-12 items-center px-6 hover:bg-mediumBlue"
 						>HOME</router-link
 					>
 				</li>
 				<li class="group">
 					<router-link
-						to="shop"
+						to=""
 						class="flex h-12 items-center px-6 hover:bg-mediumBlue"
 						>NEW</router-link
 					>
 				</li>
 				<li class="group">
 					<router-link
-						to="shop"
+						:to="{
+							name: 'shop',
+							params: { id: 0 },
+						}"
 						class="peer flex h-14 items-center px-6 hover:bg-mediumBlue"
-						>SHOP</router-link
 					>
+						SHOP
+					</router-link>
 					<div
 						class="invisible absolute left-0 top-20 flex w-full gap-20 border-t border-mediumBlue bg-primary-2 px-10 py-5 opacity-0 transition-all duration-700 ease-in-out group-hover:visible group-hover:top-14 group-hover:opacity-100"
 					>

@@ -142,14 +142,21 @@
 			<Spinner v-else />
 		</div>
 		<div class="w-full md:w-1/3">
-			<Category
-				v-model="store.item.categories"
+			<BaseSearchSelectCard
+				v-model="store.item.collections"
 				v-if="store.item && !store.isLoading"
+				:store="collectionStore"
+				label="Collections"
 			/>
-			<InputMultipleValue
+
+			<BaseSearchSelectCard
 				v-model="store.item.tags"
 				v-if="store.item && !store.isLoading"
+				:store="tagStore"
+				:canCreateItem="true"
+				label="Tags"
 			/>
+
 			<UploadImage
 				:store="store"
 				v-if="store.item && !store.isLoading"
@@ -176,27 +183,26 @@ import BaseSelect from '@/components/BaseSelect.vue';
 import BaseTextArea from '@/components/BaseTextArea.vue';
 
 import { onBeforeMount, ref, watch } from 'vue';
-import SelectSearch from '@/components/SelectSearch.vue';
 import { useProductStore } from '@/stores/product';
 import useAlert from '../../composables/useAlert';
 import { useRoute, useRouter } from 'vue-router';
 import Spinner from '@/components/Spinner.vue';
-import Category from '@/components/Category.vue';
-import InputMultipleValue from '@/components/InputMultipleValue.vue';
+import BaseSearchSelectCard from '@/components/BaseSearchSelectCard.vue';
+import { useTagStore } from '@/stores/tag';
+import { useCollectionStore } from '@/stores/collection';
 
 const router = useRouter();
 const route = useRoute();
 const { pushAlert } = useAlert();
 const store = useProductStore();
+const tagStore = useTagStore();
+const collectionStore = useCollectionStore();
 
 onBeforeMount(async () => {
 	await store.find(route.params.id);
-
-	console.log(store.item);
 });
 
 const handleSubmit = async () => {
-	// console.log(store.item);
 	store.error = null;
 	const res = await store.update(store.item);
 
@@ -204,7 +210,6 @@ const handleSubmit = async () => {
 		pushAlert('error', store.error.message);
 		return;
 	}
-	console.log({ res });
 	pushAlert('info', `Product <${res.name}> is updated!`);
 	router.push({
 		name: 'warehouse.products',
