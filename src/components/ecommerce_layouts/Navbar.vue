@@ -1,23 +1,18 @@
 <template>
-	<div class="top-0 z-30 bg-lightBlue-1" style="position: sticky">
+	<div class="w-full bg-white">
 		<div
-			class="relative mx-auto flex max-w-screen-2xl items-center justify-center"
+			class="relative flex h-24 items-center justify-center md:mx-auto md:h-48 md:max-w-screen-2xl"
 		>
 			<a href="#">
 				<router-link to="/"
 					><img
 						src="../../assets/logo-t.png"
 						alt=""
-						class="w-20 md:w-56"
+						class="h-24 md:h-56"
 				/></router-link>
 			</a>
 			<form class="absolute right-0 mt-10 hidden h-40 md:block">
 				<div class="flex h-full items-center justify-end">
-					<!-- <vue-feather
-						type="search"
-						size="20"
-						class="absolute left-3 top-[10px]"
-					></vue-feather> -->
 					<div class="relative">
 						<button class="absolute left-3 top-1 text-darkBlue">
 							<vue-feather
@@ -34,13 +29,29 @@
 					</div>
 				</div>
 			</form>
-			<!-- <div class="flex space-x-4">
-				<router-link to="cart" class="flex items-center space-x-4">
-					<div class="relative">
+		</div>
+	</div>
+	<nav class="sticky top-0 z-20 h-14 bg-lightBlue-3 text-white">
+		<ul
+			class="right-0 flex h-full w-full items-center justify-between px-4 md:hidden"
+		>
+			<li>
+				<button @click="openMenu = !openMenu">
+					<vue-feather type="menu" size="28" class=""></vue-feather>
+				</button>
+			</li>
+			<li class="">
+				<router-link
+					:to="{
+						name: 'cart',
+					}"
+					class=""
+				>
+					<div class="relative mt-3">
 						<div
 							class="absolute -top-2 -right-3 flex h-5 w-5 items-center justify-center rounded-full bg-darkYellow font-mono text-gray-900"
 						>
-							0
+							{{ cartStore.list.length }}
 						</div>
 
 						<vue-feather
@@ -48,25 +59,145 @@
 							size="28"
 						></vue-feather>
 					</div>
-
-					<span class="hidden font-bold md:inline-block">Cart</span>
 				</router-link>
+			</li>
+		</ul>
 
-				<button
-					class="relative flex items-center md:hidden"
-					@click="disableBodyScroll(true)"
+		<ul
+			class="absolute top-14 w-full flex-col bg-lightBlue-3 font-bold md:relative md:top-0 md:mx-auto md:flex md:h-full md:max-w-screen-2xl md:flex-row md:items-center md:justify-between md:space-y-0 md:pb-0"
+			:class="{ flex: openMenu, hidden: !openMenu }"
+		>
+			<li
+				class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
+			>
+				<router-link
+					:to="{
+						name: 'home',
+					}"
+					class=""
 				>
-					<vue-feather type="menu" size="28"></vue-feather>
-				</button>
-			</div> -->
+					HOME
+				</router-link>
+			</li>
+			<li
+				class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
+			>
+				<router-link to="" class="">NEW</router-link>
+			</li>
+			<li
+				class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
+			>
+				<router-link
+					:to="{
+						name: 'shop',
+					}"
+					class=""
+					>SHOP</router-link
+				>
+			</li>
+			<li
+				class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
+			>
+				<router-link
+					:to="{
+						name: 'shop',
+						query: { collection: '63be87f5266ce353db61dafb' },
+					}"
+					class=""
+					>STATIONERY</router-link
+				>
+			</li>
+			<li
+				class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
+			>
+				<router-link
+					:to="{
+						name: 'shop',
+						query: { collection: '63bd7ebcab01444f92149c92' },
+					}"
+					class=""
+					>STICKERS</router-link
+				>
+			</li>
+			<li
+				class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
+			>
+				<router-link to="terms" class="">SALE</router-link>
+			</li>
+			<li
+				class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
+			>
+				<router-link to="terms" class="">COLLECTIONS</router-link>
+			</li>
+			<li
+				class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
+			>
+				<router-link to="terms" class="">FREEBIES</router-link>
+			</li>
+			<li class="hidden md:block">
+				<router-link
+					:to="{
+						name: 'cart',
+					}"
+					class=""
+				>
+					<div class="relative mt-3">
+						<div
+							class="absolute -top-2 -right-3 flex h-5 w-5 items-center justify-center rounded-full bg-darkYellow font-mono text-gray-900"
+						>
+							{{ cartStore.list.length }}
+						</div>
+
+						<vue-feather
+							type="shopping-cart"
+							size="28"
+						></vue-feather>
+					</div>
+				</router-link>
+			</li>
+		</ul>
+	</nav>
+
+	<!-- <div class="top-0 z-30 bg-lightBlue-1">
+		<div
+			class="relative mx-auto flex max-w-screen-2xl items-center justify-center"
+		>
+			<a href="#">
+				<router-link to="/"
+					><img
+						src="../../assets/logo-t.png"
+						alt=""
+						class="w-20 md:w-56"
+				/></router-link>
+			</a>
+			<form class="absolute right-0 mt-10 hidden h-40 md:block">
+				<div class="flex h-full items-center justify-end">
+					<div class="relative">
+						<button class="absolute left-3 top-1 text-darkBlue">
+							<vue-feather
+								type="search"
+								size="24"
+								class="mt-2"
+							></vue-feather>
+						</button>
+						<input
+							type="text"
+							class="w-80 rounded-full border-2 border-darkBlue bg-lightBlue-1 text-lg placeholder:text-darkBlue"
+							placeholder=""
+						/>
+					</div>
+				</div>
+			</form>
 		</div>
-		<nav class="relative hidden bg-lightBlue-3 md:block">
+		<nav class="sticky top-0 hidden bg-lightBlue-3 md:block">
 			<ul
 				class="mx-auto flex h-14 max-w-screen-2xl items-center justify-between text-lg font-bold uppercase text-primary-0"
 			>
 				<li class="group">
 					<router-link
-						to="/"
+						:to="{
+							name: 'home',
+						}"
 						class="flex h-12 items-center px-6 hover:bg-mediumBlue"
 						>HOME</router-link
 					>
@@ -82,7 +213,6 @@
 					<router-link
 						:to="{
 							name: 'shop',
-							params: { id: 0 },
 						}"
 						class="peer flex h-14 items-center px-6 hover:bg-mediumBlue"
 					>
@@ -115,14 +245,20 @@
 
 				<li class="group">
 					<router-link
-						to="about"
+						:to="{
+							name: 'shop',
+							query: { collection: '63be87f5266ce353db61dafb' },
+						}"
 						class="flex h-12 items-center px-6 hover:bg-mediumBlue"
 						>STATIONERY</router-link
 					>
 				</li>
 				<li class="group">
 					<router-link
-						to="terms"
+						:to="{
+							name: 'shop',
+							query: { collection: '63bd7ebcab01444f92149c92' },
+						}"
 						class="flex h-12 items-center px-6 hover:bg-mediumBlue"
 						>STICKERS</router-link
 					>
@@ -131,7 +267,14 @@
 					<router-link
 						to="terms"
 						class="flex h-12 items-center px-6 hover:bg-mediumBlue"
-						>SALES</router-link
+						>SALE</router-link
+					>
+				</li>
+				<li class="group">
+					<router-link
+						to="terms"
+						class="flex h-12 items-center px-6 hover:bg-mediumBlue"
+						>COLLECTIONS</router-link
 					>
 				</li>
 				<li class="group">
@@ -143,7 +286,9 @@
 				</li>
 				<li class="group">
 					<router-link
-						to="cart"
+						:to="{
+							name: 'cart',
+						}"
 						class="flex h-12 items-center px-6 hover:bg-mediumBlue"
 					>
 						<div class="relative mt-3">
@@ -203,7 +348,7 @@
 				</li>
 			</ul>
 		</div>
-	</div>
+	</div> -->
 </template>
 
 <script setup>
@@ -214,6 +359,7 @@ import { useCartStore } from '@/stores/cart';
 const cartStore = useCartStore();
 
 const openSidebar = ref(false);
+const openMenu = ref(false);
 
 const disableBodyScroll = (isOpenSidebar) => {
 	if (isOpenSidebar) {
@@ -221,7 +367,7 @@ const disableBodyScroll = (isOpenSidebar) => {
 		document.body.style.overflow = 'hidden';
 	} else {
 		openSidebar.value = false;
-		document.body.style.overflow = 'auto';
+		document.body.style.overflow = 'unset';
 	}
 };
 

@@ -1,58 +1,60 @@
 <template>
 	<div class="relative rounded-lg text-left text-gray-800" v-if="product">
 		<span
-			class="absolute -left-5 -top-5 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-red-400 px-2 py-1 text-sm font-bold text-white"
+			class="absolute left-0 top-0 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-red-400 px-2 py-1 text-sm font-bold text-white md:-left-5 md:-top-5"
 			v-if="product.salePrice"
 			>SALE!</span
 		>
 
 		<span
-			class="absolute -right-5 -top-5 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-darkYellow px-2 py-1 text-sm font-bold text-white"
+			class="absolute right-0 top-0 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-darkYellow px-2 py-1 text-sm font-bold text-white md:-right-5 md:-top-5"
 			v-if="index <= 4 && !product.salePrice"
 			>NEW!</span
 		>
 		<div class="group relative">
-			<div
-				v-if="product.images.length || product.coverPhoto"
-				class="relative h-64 w-full"
-			>
+			<RouterLink :to="{ name: 'product', params: { id: product._id } }">
 				<div
-					v-if="!product.quantity"
-					class="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-2/4 -translate-y-2/4 transform items-center justify-center rounded-full bg-gray-900/50 text-sm font-bold text-white"
+					v-if="product.images.length || product.coverPhoto"
+					class="relative h-44 w-full md:h-64"
 				>
-					<span>sold out</span>
+					<div
+						v-if="!product.quantity"
+						class="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-2/4 -translate-y-2/4 transform items-center justify-center rounded-full bg-gray-900/50 text-sm font-bold text-white"
+					>
+						<span>sold out</span>
+					</div>
+					<img
+						class="h-full w-full object-cover"
+						:src="product.coverPhoto.secure_url"
+						alt=""
+						v-if="product.coverPhoto"
+					/>
+					<img
+						class="h-full w-full object-cover"
+						:src="product.images[0].secure_url"
+						alt=""
+						v-else
+					/>
 				</div>
-				<img
-					class="h-full w-full object-cover"
-					:src="product.coverPhoto.secure_url"
-					alt=""
-					v-if="product.coverPhoto"
-				/>
-				<img
-					class="h-full w-full object-cover"
-					:src="product.images[0].secure_url"
-					alt=""
-					v-else
-				/>
-			</div>
-
-			<div v-else class="h-64 w-full">
-				<div
-					v-if="!product.quantity"
-					class="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-2/4 -translate-y-2/4 transform items-center justify-center rounded-full bg-gray-900/50 text-sm font-bold text-white"
-				>
-					<span>sold out</span>
+				<div v-else class="h-44 w-full md:h-64">
+					<div
+						v-if="!product.quantity"
+						class="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-2/4 -translate-y-2/4 transform items-center justify-center rounded-full bg-gray-900/50 text-sm font-bold text-white"
+					>
+						<span>sold out</span>
+					</div>
+					<img
+						class="h-full w-full object-cover"
+						src="https://via.placeholder.com/400?text=Image+N/A"
+						alt=""
+					/>
 				</div>
-				<img
-					class="h-full w-full object-cover"
-					src="https://via.placeholder.com/400?text=Image+N/A"
-					alt=""
-				/>
-			</div>
+			</RouterLink>
 
 			<button
 				class="absolute bottom-0 hidden w-full bg-black/75 py-1 text-sm font-bold uppercase text-white group-hover:block"
-				@click="$emit('openModal')"
+				@click="$emit('openModal', product)"
+				v-if="product.quantity"
 			>
 				Quick View
 			</button>
@@ -61,11 +63,11 @@
 		<div class="mt-2 text-center text-xl font-bold">
 			<h4 class="capitalize">{{ product.name }}</h4>
 
-			<h5 class="font-mono" v-if="!product.salePrice">
+			<h5 class="font-sans" v-if="!product.salePrice">
 				₱ {{ numberFormat(product.unitCost) }}
 			</h5>
 
-			<h5 class="font-mono text-2xl" v-if="product.salePrice">
+			<h5 class="font-sans text-2xl" v-if="product.salePrice">
 				<span class="text-lg text-gray-400 line-through"
 					>₱ {{ numberFormat(product.unitCost) }}</span
 				>

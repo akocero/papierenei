@@ -67,20 +67,18 @@
 									<h5 class="capitalize">
 										{{ product.name }}
 									</h5>
-									<div class="font-mono">
+									<div class="font-sans">
 										<div class="" v-if="product.salePrice">
 											<span
 												class="text-gray-400 line-through"
 											>
-												₱
-												{{
+												₱{{
 													numberFormat(
 														product.unitCost,
 													)
 												}}
 											</span>
-											₱
-											{{
+											₱{{
 												numberFormat(product.salePrice)
 											}}
 										</div>
@@ -88,8 +86,9 @@
 											class=""
 											v-if="!product.salePrice"
 										>
-											₱
-											{{ numberFormat(product.unitCost) }}
+											₱{{
+												numberFormat(product.unitCost)
+											}}
 										</span>
 									</div>
 								</div>
@@ -98,23 +97,16 @@
 						<td class="py-4">
 							<ProductQuantity :product="product" />
 						</td>
-						<td class="py-4 text-right font-mono">
+						<td class="py-4 text-right font-sans">
 							<span v-if="!product.salePrice">
-								₱
-								{{
+								₱{{
 									numberFormat(
 										product.unitCost * product.cartQuantity,
 									)
 								}}
 							</span>
 							<div v-else>
-								₱
-								{{
-									numberFormat(
-										product.salePrice *
-											product.cartQuantity,
-									)
-								}}
+								₱{{ numberFormat(product.cartTotal) }}
 							</div>
 						</td>
 					</tr>
@@ -133,8 +125,8 @@
 				<div>
 					<h4 class="text-right">
 						<span class="font-bold">Subtotal</span>
-						<span class="font-mono text-xl">
-							₱ {{ numberFormat(subTotal) }}
+						<span class="font-sans text-xl">
+							₱{{ numberFormat(subTotal) }}
 						</span>
 					</h4>
 					<p>Taxes and shipping calculated at checkout</p>

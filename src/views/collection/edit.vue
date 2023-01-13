@@ -13,7 +13,7 @@
 			v-if="store.item && !store.isLoading"
 		>
 			<div class="grid grid-cols-6 gap-4">
-				<div class="col-span-full md:col-span-2">
+				<div class="col-span-full md:col-span-6">
 					<BaseInput
 						id="input_name"
 						label="Collection Name"
@@ -24,8 +24,8 @@
 						:required="true"
 					/>
 				</div>
-				<div class="col-span-full md:col-span-2">
-					<BaseInput
+				<div class="col-span-full md:col-span-6">
+					<BaseTextArea
 						id="input_description"
 						label="Description"
 						v-model="store.item.description"

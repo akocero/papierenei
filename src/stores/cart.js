@@ -21,23 +21,45 @@ export const useCartStore = defineStore('cart', () => {
 	const response = ref(null);
 	const error = ref(null);
 
-	//* This func will update the cart item
-	//* Use this function inside onBeforeMounted
+	//* This func will update the cart items
+	// !Note: Use this function inside onBeforeMounted
 	const updateCartListDetails = async () => {
 		isLoading.value = true;
 
-		const _tempList = [];
+		const newCartList = [];
 		if (list.value.length > 0) {
 			await Promise.all(
-				list.value.map(async (cartItem) => {
-					const _cartItem = await getProductDetails(cartItem._id);
-					_cartItem.cartQuantity = cartItem.cartQuantity;
-					console.log(_cartItem);
-					_tempList.push(_cartItem);
+				list.value.map(async (prevCartItem) => {
+					// get the latest prodct value
+					const newCartItem = await getProductDetails(
+						prevCartItem._id,
+					);
+					// check if the previous cart item qty greater than the new cart item qty
+					if (prevCartItem.cartQuantity > newCartItem.quantity) {
+						// if true get the latest quantity
+						newCartItem.cartQuantity = newCartItem.quantity;
+					} else {
+						// else get the previous and attached it to the updated cart item
+						newCartItem.cartQuantity = prevCartItem.cartQuantity;
+					}
+
+					// check if the product is on sale then get the sale price if not get the unit cost
+					newCartItem.cartPrice = newCartItem.salePrice
+						? newCartItem.salePrice
+						: newCartItem.unitCost;
+
+					// just multyiply the qty and the price to get the total
+					newCartItem.cartTotal =
+						newCartItem.cartPrice * prevCartItem.cartQuantity;
+
+					// push to new cart list
+					newCartList.push(newCartItem);
 				}),
 			);
 		}
-		list.value = _tempList;
+		// udpate the previous cart to latest
+		list.value = newCartList;
+
 		isLoading.value = false;
 	};
 
@@ -53,7 +75,7 @@ export const useCartStore = defineStore('cart', () => {
 			(cartItem) => cartItem._id == payload._id,
 		);
 
-		//* if product is on cart, just increase qty by 1
+		//* if product is already in cart, just increase qty by 1
 		if (existingProduct) {
 			console.log('existing', existingProduct.name);
 			incQty(existingProduct._id, 1);
@@ -62,9 +84,19 @@ export const useCartStore = defineStore('cart', () => {
 
 		pushAlert('success', 'Succesfully added to cart!');
 
-		//* add existing cart qty if product is new
-		//! dont use the product quantity itself
+		//* add cartQuantity, cartPrice, cartTotal properties to the product itself before pushing to cart
+		//* this will use for cart system and checkout
+
+		//! dont use the product quantity, price itself
 		payload.cartQuantity = 1;
+
+		//* check if the product is in sale then get the sale price if not get the unit cost
+		payload.cartPrice = payload.salePrice
+			? payload.salePrice
+			: payload.unitCost;
+
+		// just multyiply the qty and the price to get the total
+		payload.cartTotal = payload.cartPrice * payload.cartQuantity;
 
 		list.value.push(payload);
 	};
@@ -83,8 +115,10 @@ export const useCartStore = defineStore('cart', () => {
 			pushAlert('warning', 'Product quantity exceeded!');
 			return false;
 		}
-
+		// increase cartQty base on the value given
 		cartItem.cartQuantity += value;
+		// Update cartTotal
+		cartItem.cartTotal = cartItem.cartPrice * cartItem.cartQuantity;
 	};
 
 	const decQty = (id, value) => {
@@ -96,6 +130,7 @@ export const useCartStore = defineStore('cart', () => {
 		}
 
 		cartItem.cartQuantity -= value;
+		cartItem.cartTotal = cartItem.cartPrice * cartItem.cartQuantity;
 	};
 
 	//* this computed function will fire everytime 'list' variable changed

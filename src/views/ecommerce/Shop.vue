@@ -4,31 +4,7 @@
 		:show="isOpen"
 		modalTitle="Default Modal"
 	>
-		<div class="mt-2 grid grid-cols-2 gap-8 text-darkBlue">
-			<div><img src="../../assets/sample_product.webp" alt="" /></div>
-			<div class="flex flex-col">
-				<div>
-					<h4 class="text-3xl font-bold">
-						USB Electric Heated Hand Pillow
-					</h4>
-					<h5 class="font-mono text-2xl">₱45.00</h5>
-
-					<p>
-						Keep your pages marked with this motivational
-						papemelroti bookmark. You never have to worry about it
-						slipping out, t...
-					</p>
-				</div>
-				<div class="mt-10">
-					<ProductQuantity />
-					<button
-						class="mt-4 w-full rounded-lg bg-darkBlue px-6 py-2 text-xl font-bold text-white"
-					>
-						Add to Cart
-					</button>
-				</div>
-			</div>
-		</div>
+		<ProductHero :product="productModal" v-if="productModal" />
 	</QuickView>
 	<div class="mx-auto my-12 flex max-w-screen-2xl gap-10 px-4 2xl:px-0">
 		<div class="flex w-1/4 flex-col space-y-8">
@@ -73,6 +49,7 @@
 						v-for="category in productTags"
 						:key="category.name"
 						class="py-1"
+						v-if="productTags.length > 0"
 					>
 						<label for="" class="flex translate-y-1 items-center">
 							<input
@@ -84,14 +61,8 @@
 							<span class="ml-2">{{ category.name }}</span>
 						</label>
 					</li>
+					<li v-else>No Filters Found!</li>
 				</ul>
-
-				<!-- <div class="border-b py-2">
-					<input type="checkbox" class="" />
-					<label for="" class="ml-3 inline-block translate-y-1"
-						>For Girl</label
-					>
-				</div> -->
 			</div>
 
 			<div>
@@ -143,10 +114,7 @@
 		</div>
 		<div class="bg-lightBlue flex items-center px-6">
 			<div class="mx-auto w-full max-w-7xl">
-				<div
-					class="mb-8"
-					v-if="!collectionStore.isLoading && collectionStore.item"
-				>
+				<div class="mb-8" v-if="collectionStore.item">
 					<h2 class="text-3xl font-bold uppercase">
 						{{ collectionStore.item.name }}
 					</h2>
@@ -206,8 +174,9 @@ import { useProductStore } from '@/stores/product';
 import { useTagStore } from '@/stores/tag';
 import { useCollectionStore } from '@/stores/collection';
 import { useCartStore } from '@/stores/cart';
-import { useRoute } from 'vue-router';
+import { onBeforeRouteUpdate, useRoute } from 'vue-router';
 import { computed } from '@vue/reactivity';
+import ProductHero from '@/components/ecommerce/ProductHero.vue';
 
 const productStore = useProductStore();
 const collectionStore = useCollectionStore();
@@ -249,6 +218,7 @@ const queryCollection = ref('');
 const queryFilterByTag = ref('');
 const querySortedBy = ref('');
 const activeCollection = ref(null);
+const productModal = ref(null);
 // db.tags.find({ tags: { $all: ["cheap", "blue"] } } )
 
 //* query for price
@@ -262,10 +232,14 @@ const activeCollection = ref(null);
 
 onBeforeMount(async () => {
 	await tagStore.fetch('');
-	await collectionStore.find(route.params.id);
 
-	if (!collectionStore.error) {
-		queryCollection.value = `collections[in][0]=${collectionStore.item._id}`;
+	if (route.query.collection) {
+		await collectionStore.find(route.query.collection);
+
+		if (!collectionStore.error) {
+			console.log('ssss');
+			queryCollection.value = `?collections[in][0]=${collectionStore.item._id}`;
+		}
 	}
 
 	// fetch products no filter
@@ -273,7 +247,25 @@ onBeforeMount(async () => {
 
 	// fetch catories
 	await collectionStore.fetch('');
+	console.log(collectionStore.list);
 	// console.log('product list', collectionStore.list);
+});
+
+onBeforeRouteUpdate(async (to, from, next) => {
+	console.log('NAG UPDATE BA ?');
+	await collectionStore.find(to.query.collection);
+
+	if (!collectionStore.error) {
+		console.log('ssss');
+		queryCollection.value = `?collections[in][0]=${collectionStore.item._id}`;
+	}
+
+	// fetch products no filter
+	await filterProducts();
+
+	// fetch catories
+	await collectionStore.fetch('');
+	next();
 });
 
 // to filter products
@@ -419,12 +411,14 @@ const sortByPriceRange = () => {
 	filterProducts();
 };
 
-function openModal() {
+function openModal(product) {
 	isOpen.value = true;
+	productModal.value = product;
 }
 
 function closeModal() {
 	isOpen.value = false;
+	productModal.value = null;
 }
 </script>
 

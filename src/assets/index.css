@@ -72,4 +72,8 @@
 	.table thead {
 		@apply border-b;
 	}
+
+	.wrapper {
+		@apply mx-auto max-w-screen-2xl;
+	}
 }

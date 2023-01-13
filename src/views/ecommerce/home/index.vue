@@ -4,34 +4,10 @@
 		:show="isOpen"
 		modalTitle="Default Modal"
 	>
-		<div class="mt-2 grid grid-cols-2 gap-8 text-darkBlue">
-			<div><img src="../../../assets/sample_product.webp" alt="" /></div>
-			<div class="flex flex-col">
-				<div>
-					<h4 class="text-3xl font-bold">
-						USB Electric Heated Hand Pillow
-					</h4>
-					<h5 class="font-mono text-2xl">₱45.00</h5>
-
-					<p>
-						Keep your pages marked with this motivational
-						papemelroti bookmark. You never have to worry about it
-						slipping out, t...
-					</p>
-				</div>
-				<div class="mt-10">
-					<ProductQuantity />
-					<button
-						class="mt-4 w-full rounded-lg bg-darkBlue px-6 py-2 text-xl font-bold text-white"
-					>
-						Add to Cart
-					</button>
-				</div>
-			</div>
-		</div>
+		<ProductHero :product="productModal" v-if="productModal" />
 	</QuickView>
 	<header
-		class="relative mx-auto mt-8 flex h-screen w-full max-w-screen-2xl items-center justify-center overflow-hidden bg-cover bg-center"
+		class="relative mx-auto flex h-72 w-full max-w-screen-2xl items-center justify-center overflow-hidden bg-cover bg-center md:mt-8 md:h-screen"
 		v-if="!ecommSettingsStore.isLoading && activeHero"
 		:style="{ 'background-image': 'url(' + activeHero.secure_url + ')' }"
 	>
@@ -50,10 +26,12 @@
 	</header>
 	<Spinner v-else />
 	<!-- Our Product Section  -->
-	<section class="bg-lightBlue flex items-center px-6 py-16 text-center">
+	<section
+		class="bg-lightBlue flex items-center py-4 px-4 text-center md:px-6 md:py-16"
+	>
 		<div class="mx-auto w-full max-w-screen-2xl">
 			<div
-				class="grid w-full grid-cols-1 gap-10 px-4 uppercase md:grid-cols-4 md:px-0"
+				class="grid w-full grid-cols-2 gap-2 uppercase md:grid-cols-4 md:gap-10 md:px-0"
 			>
 				<OurProduct
 					v-for="ourProduct in ourProducts"
@@ -64,15 +42,17 @@
 		</div>
 	</section>
 
-	<section class="bg-lightBlue flex items-center px-6 py-16 text-center">
+	<section
+		class="bg-lightBlue flex items-center px-4 text-center md:px-6 md:py-16"
+	>
 		<div class="mx-auto w-full max-w-screen-2xl">
 			<h2
-				class="mb-16 rounded-lg py-3 text-5xl font-bold uppercase text-darkBlue"
+				class="mb-4 rounded-lg py-3 text-2xl font-bold uppercase text-darkBlue md:mb-16 md:text-5xl"
 			>
 				New Arrivals
 			</h2>
 			<div
-				class="grid w-full grid-cols-1 gap-16 px-4 md:grid-cols-5 md:px-0"
+				class="grid w-full grid-cols-2 gap-2 md:grid-cols-5 md:gap-16 md:px-4 md:px-0"
 				v-if="!productStore.isLoading"
 			>
 				<div v-for="(product, key) in productStore.list">
@@ -103,12 +83,14 @@ import logoImg from '@/assets/logos.png';
 import digitalArtImg from '@/assets/digital-arts.png';
 import bearlyArtImg from '@/assets/bearly-art.png';
 import Spinner from '@/components/Spinner.vue';
+import ProductHero from '@/components/ecommerce/ProductHero.vue';
 
 const ecommSettingsStore = useEcommSettingStore();
 const productStore = useProductStore();
 const { addToCart } = useCartStore();
 const activeHero = ref(null);
 const isOpen = ref(false);
+const productModal = ref(null);
 
 // our product data
 const ourProducts = ref([
@@ -143,12 +125,14 @@ onBeforeMount(async () => {
 	}
 });
 
-function openModal() {
+function openModal(product) {
 	isOpen.value = true;
+	productModal.value = product;
 }
 
 function closeModal() {
 	isOpen.value = false;
+	productModal.value = null;
 }
 </script>
 

@@ -18,14 +18,12 @@
 				<thead>
 					<tr>
 						<th>Name</th>
-						<th>Description</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody class="">
 					<tr v-for="item in store.list" v-if="!store.isLoading">
 						<td>{{ item.name }}</td>
-						<td>{{ item.description }}</td>
 						<td class="flex space-x-2">
 							<BaseTableActionButton
 								icon="edit"

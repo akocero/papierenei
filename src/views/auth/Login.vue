@@ -101,7 +101,6 @@ const handleSubmit = async () => {
 
 	if (store.error) {
 		pushAlert('error', store.error.message);
-		console.log('errprs:', store.error);
 	} else {
 		window.location.reload();
 	}

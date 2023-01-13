@@ -10,7 +10,7 @@
 		</div>
 		<form @submit.prevent="handleSubmit">
 			<div class="grid grid-cols-6 gap-4">
-				<div class="col-span-full md:col-span-3">
+				<div class="col-span-full md:col-span-6">
 					<BaseInput
 						id="input_name"
 						label="Collection Name"
@@ -21,7 +21,7 @@
 						:required="true"
 					/>
 				</div>
-				<div class="col-span-full md:col-span-3">
+				<div class="col-span-full md:col-span-6">
 					<BaseTextArea
 						id="input_description"
 						label="Description"
