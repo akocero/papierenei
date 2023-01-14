@@ -326,7 +326,7 @@ const filterProducts = async () => {
 	console.log('SORTED', querySortedBy.value);
 	console.log('SEARCH', querySearch.value);
 
-	query.value = `${queryCollection.value}${queryFilterByTag.value}${queryFilterPriceRange.value}${querySortedBy.value}${querySearch.value}&isPublished=0`;
+	query.value = `${queryCollection.value}${queryFilterByTag.value}${queryFilterPriceRange.value}${querySortedBy.value}${querySearch.value}&isPublished=1`;
 
 	if (!queryCollection.value) {
 		query.value = '?' + query.value.slice(1);

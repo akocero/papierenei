@@ -102,7 +102,7 @@ const ourProducts = ref([
 
 onBeforeMount(async () => {
 	// Fetch products for new Arrivals section
-	await productStore.fetch('?isPublished=0&limit=10');
+	await productStore.fetch('?isPublished=1&limit=10');
 
 	console.log(productStore.list);
 
