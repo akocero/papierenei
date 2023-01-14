@@ -33,7 +33,26 @@
 				name="form_edit_product"
 			>
 				<div class="grid grid-cols-6 gap-4">
-					<div class="col-span-full font-semibold">Basic Info.</div>
+					<div
+						class="col-span-full flex items-center justify-between font-semibold"
+					>
+						<div>Basic Info.</div>
+						<button
+							class="rounded-lg bg-green-500 px-4 py-2 text-white"
+							v-if="store.item.isPublished"
+							@click="store.item.isPublished = 0"
+						>
+							Published
+						</button>
+						<button
+							class="rounded-lg bg-gray-300 px-4 py-2"
+							v-if="!store.item.isPublished"
+							@click="store.item.isPublished = 1"
+						>
+							Unpublished
+						</button>
+					</div>
+
 					<div class="col-span-full md:col-span-2">
 						<BaseInput
 							id="input_name"

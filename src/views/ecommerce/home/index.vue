@@ -102,7 +102,9 @@ const ourProducts = ref([
 
 onBeforeMount(async () => {
 	// Fetch products for new Arrivals section
-	await productStore.fetch('?limit=10');
+	await productStore.fetch('?isPublished=0&limit=10');
+
+	console.log(productStore.list);
 
 	// Check if there is any data on ecommer settings
 	// if there is no data invoke init to create object on ecommerce settings
