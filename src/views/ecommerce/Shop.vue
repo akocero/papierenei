@@ -8,6 +8,25 @@
 	</QuickView>
 	<div class="mx-auto my-12 flex max-w-screen-2xl gap-10 px-4 2xl:px-0">
 		<div class="flex w-1/4 flex-col space-y-8">
+			<form
+				class="relative bg-red-200"
+				@submit.prevent="filterBySearch()"
+			>
+				<input
+					type="text"
+					class="w-full border-gray-300 pr-8 font-sans"
+					v-model="searchText"
+					placeholder="Search..."
+				/>
+				<button>
+					<vue-feather
+						type="search"
+						size="18"
+						class="absolute top-3 right-3 text-gray-500"
+					></vue-feather>
+				</button>
+			</form>
+
 			<div class="">
 				<div class="mb-4 flex justify-between">
 					<h3 class="font-semibold">SORTED BY</h3>
@@ -79,7 +98,7 @@
 				<div class="flex justify-between">
 					<h5>
 						The highest price is
-						<span class="font-mono font-bold"
+						<span class="font-sans font-bold"
 							>₱{{ numberFormat(productStore.highestPrice) }}
 						</span>
 					</h5>
@@ -92,7 +111,7 @@
 							type="number"
 							v-model="priceRange.from"
 							placeholder="₱ Min"
-							class="w-full border-gray-300 font-mono"
+							class="w-full border-gray-300 font-sans"
 						/>
 					</div>
 					<div class="col-span-5">
@@ -100,14 +119,18 @@
 							type="number"
 							v-model="priceRange.to"
 							placeholder="₱ Max"
-							class="w-full border-gray-300 font-mono"
+							class="w-full border-gray-300 font-sans"
 						/>
 					</div>
 					<button
 						@click="sortByPriceRange"
-						class="col-span-2 h-full border border-gray-300 font-semibold"
+						class="col-span-2 flex h-full items-center justify-center border border-gray-300 font-semibold"
 					>
-						Go
+						<vue-feather
+							type="arrow-right"
+							size="18"
+							class="text-gray-500"
+						></vue-feather>
 					</button>
 				</div>
 			</div>
@@ -211,14 +234,16 @@ const priceRange = ref({
 });
 
 // initial query new to old filter: latest first
-const query = ref('<COLLECTION><TAG><PRICE><SORTED>');
+const query = ref('<COLLECTION><TAG><PRICE><SORTED><SEARCH>');
 const queryFilterCategories = ref('');
 const queryFilterPriceRange = ref('');
 const queryCollection = ref('');
 const queryFilterByTag = ref('');
 const querySortedBy = ref('');
+const querySearch = ref('');
 const activeCollection = ref(null);
 const productModal = ref(null);
+const searchText = ref('');
 // db.tags.find({ tags: { $all: ["cheap", "blue"] } } )
 
 //* query for price
@@ -249,6 +274,11 @@ onBeforeMount(async () => {
 	await collectionStore.fetch('');
 	console.log(collectionStore.list);
 	// console.log('product list', collectionStore.list);
+
+	if (route.query.search) {
+		searchText.value = route.query.search;
+		filterBySearch();
+	}
 });
 
 onBeforeRouteUpdate(async (to, from, next) => {
@@ -282,6 +312,10 @@ const filterProducts = async () => {
 		query.value = query.value.replace('<PRICE>', '');
 	}
 
+	if (!querySearch.value) {
+		query.value = query.value.replace('<SEARCH>', '');
+	}
+
 	if (!queryCollection.value) {
 		query.value = query.value.replace('<COLLECTION>', '');
 	}
@@ -290,8 +324,9 @@ const filterProducts = async () => {
 	console.log('TAG', queryFilterByTag.value);
 	console.log('PRICE', queryFilterPriceRange.value);
 	console.log('SORTED', querySortedBy.value);
+	console.log('SEARCH', querySearch.value);
 
-	query.value = `${queryCollection.value}${queryFilterByTag.value}${queryFilterPriceRange.value}${querySortedBy.value}`;
+	query.value = `${queryCollection.value}${queryFilterByTag.value}${queryFilterPriceRange.value}${querySortedBy.value}${querySearch.value}&isPublished=0`;
 
 	if (!queryCollection.value) {
 		query.value = '?' + query.value.slice(1);
@@ -301,6 +336,12 @@ const filterProducts = async () => {
 	await productStore.fetch(query.value);
 
 	// query.value = '?';
+};
+
+const filterBySearch = () => {
+	querySearch.value = `&name[regex]=${searchText.value}`;
+
+	filterProducts();
 };
 
 const reset = (str) => {
