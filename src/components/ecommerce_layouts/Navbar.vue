@@ -11,7 +11,11 @@
 						class="h-24 md:h-56"
 				/></router-link>
 			</a>
-			<form class="absolute right-0 mt-10 hidden h-40 md:block">
+			<form
+				class="absolute right-0 mt-10 hidden h-40 md:block"
+				@submit.prevent="navigateToShop"
+				v-if="isShowSearch"
+			>
 				<div class="flex h-full items-center justify-end">
 					<div class="relative">
 						<button class="absolute left-3 top-1 text-darkBlue">
@@ -23,7 +27,8 @@
 						</button>
 						<input
 							type="text"
-							class="w-80 rounded-full border-2 border-darkBlue bg-lightBlue-1 text-lg placeholder:text-darkBlue"
+							v-model="searchText"
+							class="w-80 rounded-full border-2 border-darkBlue bg-lightBlue-1 pl-10 text-lg placeholder:text-darkBlue"
 							placeholder=""
 						/>
 					</div>
@@ -355,11 +360,15 @@
 import { ref } from 'vue';
 
 import { useCartStore } from '@/stores/cart';
+import { onBeforeRouteUpdate, useRouter } from 'vue-router';
 
 const cartStore = useCartStore();
 
 const openSidebar = ref(false);
 const openMenu = ref(false);
+const searchText = ref('');
+const router = useRouter();
+const isShowSearch = ref(true);
 
 const disableBodyScroll = (isOpenSidebar) => {
 	if (isOpenSidebar) {
@@ -371,8 +380,22 @@ const disableBodyScroll = (isOpenSidebar) => {
 	}
 };
 
+onBeforeRouteUpdate((to, from) => {
+	if (to.name === 'shop') {
+		isShowSearch.value = false;
+		return;
+	}
+
+	isShowSearch.value = true;
+});
+
 const hoverTest = () => {
 	console.log('test');
+};
+
+const navigateToShop = () => {
+	searchText.value = '';
+	router.push({ name: 'shop', query: { search: searchText.value } });
 };
 </script>
 
