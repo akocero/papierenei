@@ -24,6 +24,9 @@ export const useProductStore = defineStore({
 		async update(payload) {
 			return await storeHelpers.update(this, payload);
 		},
+		async updateQty(payload) {
+			return await storeHelpers.customUpdate(this, 'update_qty', payload);
+		},
 		async fetch(query) {
 			await storeHelpers.fetch(this, query);
 		},

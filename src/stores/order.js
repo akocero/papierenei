@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import storeHelpers from '../helpers/storeHelpers';
+import axios from '../config/axios-config';
 
 export const useOrderStore = defineStore({
 	id: 'order',
@@ -25,6 +26,9 @@ export const useOrderStore = defineStore({
 		},
 		async find(id) {
 			await storeHelpers.find(this, id);
+		},
+		async sendEmailOrderDetails(id) {
+			await storeHelpers.sendEmail(this, 'send_email_order_details', id);
 		},
 	},
 });

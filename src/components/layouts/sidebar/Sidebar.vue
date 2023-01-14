@@ -49,6 +49,11 @@ const sidebarRoutes = ref([
 				active: false,
 			},
 			{
+				text: 'Orders',
+				routeObject: { name: 'sales.orders' },
+				active: false,
+			},
+			{
 				text: 'Discounts',
 				routeObject: { name: 'sales.discounts' },
 				active: false,

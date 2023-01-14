@@ -45,6 +45,26 @@ const find = async (store, id) => {
 	}
 };
 
+// sending email
+const sendEmail = async (store, emailUrl, id) => {
+	store.item = null;
+	store.isLoading = true;
+
+	try {
+		const res = await axios.get(`${store.url}/${emailUrl}/${id}`);
+		store.item = res.data.data;
+		console.log(res.data);
+		store.error = null;
+		store.isLoading = false;
+		store.response = res.data;
+		return res.data;
+	} catch (err) {
+		store.isLoading = false;
+		console.log(err.response);
+		store.error = err.response.data;
+	}
+};
+
 const create = async (store, payload) => {
 	store.isLoading = true;
 	store.error = null;
@@ -77,6 +97,25 @@ const update = async (store, payload) => {
 	}
 };
 
+const customUpdate = async (store, customURL, payload) => {
+	store.isLoading = true;
+	store.error = null;
+	try {
+		const res = await axios.patch(
+			`${store.url}/${customURL}/${payload.item_id}`,
+			payload,
+		);
+		store.error = null;
+		store.isLoading = false;
+		// console.log('storeHelper', res.data);
+		return res.data;
+	} catch (err) {
+		store.isLoading = false;
+		console.log(err.response.data.message);
+		store.error = err.response.data;
+	}
+};
+
 const deleteImage = async (store, payload) => {
 	store.isLoading = true;
 	store.error = null;
@@ -96,4 +135,12 @@ const deleteImage = async (store, payload) => {
 	}
 };
 
-export default { fetch, create, find, update, deleteImage };
+export default {
+	fetch,
+	create,
+	find,
+	update,
+	deleteImage,
+	sendEmail,
+	customUpdate,
+};

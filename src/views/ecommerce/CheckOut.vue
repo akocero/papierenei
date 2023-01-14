@@ -172,7 +172,7 @@
 								{{ ct.cartQuantity }}
 							</span>
 						</div>
-						<div v-else class="h-24 w-24">
+						<div v-else class="relative h-24 w-24">
 							<img
 								class="h-full w-full object-cover"
 								src="https://via.placeholder.com/400?text=Image+N/A"
@@ -202,7 +202,7 @@
 					<div class="flex justify-between">
 						<label>Shipping</label>
 						<span class="font-sans font-semibold"
-							>₱{{ numberFormat(shipping.fee) }}</span
+							>₱{{ numberFormat(shippingDetails.fee) }}</span
 						>
 					</div>
 				</li>
@@ -235,8 +235,8 @@ const cartStore = useCartStore();
 const router = useRouter();
 const { pushAlert } = useAlert();
 const { numberFormat } = useUtils();
-const shipping = ref({
-	fee: 149.99,
+const shippingDetails = ref({
+	fee: 149,
 });
 const firstName = ref('');
 const lastName = ref('');
@@ -249,15 +249,42 @@ const address = ref({
 	zipCode: '',
 	country: '',
 });
+const items = ref([]);
 
 onBeforeMount(() => {
 	console.log('cart', cartStore.list);
+
+	if (cartStore.list.length > 0) {
+		items.value = cartStore.list.map((cartItem) => {
+			return {
+				item_id: cartItem._id,
+				name: cartItem.name,
+				qty: cartItem.cartQuantity,
+				price: cartItem.cartPrice,
+				total: cartItem.cartTotal,
+			};
+		});
+	}
 });
 
+// const items = computed(() => {
+// 	return cartStore.list.map((cartItem) => {
+// 		return {
+// 			item_id: cartItem._id,
+// 			name: cartItem.name,
+// 			qty: cartItem.cartQuantity,
+// 			price: cartItem.cartPrice,
+// 			total: cartItem.cartTotal,
+// 		};
+// 	});
+// });
+
 const total = computed(() => {
-	return cartStore.subTotal + shipping.value.fee;
+	return cartStore.subTotal + shippingDetails.value.fee;
 });
 const handleSumbit = async () => {
+	// await store.sendEmailOrderDetails(232323);
+	// return
 	store.error = null;
 
 	const data = {
@@ -270,20 +297,23 @@ const handleSumbit = async () => {
 		city: address.value.city,
 		state: address.value.state,
 		zipCode: address.value.zipCode,
-		items: [
-			// {
-			// 	name,
-			// 	qty,
-			// 	price,
-			// },
-		],
-		shippingDetails: '',
+		items: items.value,
+		shippingDetails: shippingDetails.value,
+		subtotal: cartStore.subTotal,
+		total: cartStore.subTotal + shippingDetails.value.fee,
 		notes: '',
 	};
 
 	const res = await store.create(data);
 
-	console.log(res);
+	if (store.error) {
+		pushAlert('error', store.error.message);
+		return;
+	}
+
+	cartStore.clearCart(items.value);
+
+	const emailRes = await store.sendEmailOrderDetails(res.data._id);
 
 	if (store.error) {
 		pushAlert('error', store.error.message);

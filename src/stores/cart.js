@@ -147,6 +147,18 @@ export const useCartStore = defineStore('cart', () => {
 		return subTotal;
 	});
 
+	const clearCart = async (items) => {
+		console.log(items);
+		await Promise.all(
+			items.map(async (item) => {
+				const updatedProduct = await productStore.updateQty(item);
+				console.log('updatedProduct', updatedProduct);
+			}),
+		);
+
+		list.value = [];
+	};
+
 	return {
 		list,
 		subTotal,
@@ -156,5 +168,6 @@ export const useCartStore = defineStore('cart', () => {
 		incQty,
 		decQty,
 		updateCartListDetails,
+		clearCart,
 	};
 });

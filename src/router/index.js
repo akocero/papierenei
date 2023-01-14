@@ -197,6 +197,26 @@ const router = createRouter({
 					component: () => import('../views/discount/view.vue'),
 				},
 				{
+					path: 'sales/orders',
+					name: 'sales.orders',
+					component: () => import('../views/order/index.vue'),
+				},
+				{
+					path: 'sales/orders/create',
+					name: 'sales.orders.create',
+					component: () => import('../views/order/create.vue'),
+				},
+				{
+					path: 'sales/orders/edit/:id',
+					name: 'sales.orders.edit',
+					component: () => import('../views/order/edit.vue'),
+				},
+				{
+					path: 'sales/orders/view/:id',
+					name: 'sales.orders.view',
+					component: () => import('../views/order/view.vue'),
+				},
+				{
 					path: 'sales/invoices',
 					name: 'sales.invoices',
 					component: () => import('../views/invoice/index.vue'),
