@@ -172,7 +172,7 @@
 								{{ ct.cartQuantity }}
 							</span>
 						</div>
-						<div v-else class="h-64 w-full">
+						<div v-else class="h-24 w-24">
 							<img
 								class="h-full w-full object-cover"
 								src="https://via.placeholder.com/400?text=Image+N/A"
