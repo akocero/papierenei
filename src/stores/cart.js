@@ -148,13 +148,11 @@ export const useCartStore = defineStore('cart', () => {
 	});
 
 	const clearCart = async (items) => {
-		console.log(items);
-		await Promise.all(
-			items.map(async (item) => {
-				const updatedProduct = await productStore.updateQty(item);
-				console.log('updatedProduct', updatedProduct);
-			}),
-		);
+		// await Promise.all(
+		// 	items.map(async (item) => {
+		// 		await productStore.updateQty(item);
+		// 	}),
+		// );
 
 		list.value = [];
 	};

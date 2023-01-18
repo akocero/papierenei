@@ -251,20 +251,24 @@ const address = ref({
 });
 const items = ref([]);
 
-onBeforeMount(() => {
-	console.log('cart', cartStore.list);
-
-	if (cartStore.list.length > 0) {
-		items.value = cartStore.list.map((cartItem) => {
-			return {
-				item_id: cartItem._id,
-				name: cartItem.name,
-				qty: cartItem.cartQuantity,
-				price: cartItem.cartPrice,
-				total: cartItem.cartTotal,
-			};
+onBeforeMount(async () => {
+	if (cartStore.list.length < 1) {
+		router.push({
+			name: 'shop',
 		});
+
+		return;
 	}
+
+	items.value = cartStore.list.map((cartItem) => {
+		return {
+			item_id: cartItem._id,
+			name: cartItem.name,
+			qty: cartItem.cartQuantity,
+			price: cartItem.cartPrice,
+			total: cartItem.cartTotal,
+		};
+	});
 });
 
 // const items = computed(() => {
@@ -311,8 +315,6 @@ const handleSumbit = async () => {
 		return;
 	}
 
-	cartStore.clearCart(items.value);
-
 	const emailRes = await store.sendEmailOrderDetails(res.data._id);
 
 	if (store.error) {
@@ -320,10 +322,12 @@ const handleSumbit = async () => {
 		return;
 	}
 
-	pushAlert('success', 'Order succesfully!');
-	// router.push({
-	// 	name: 'warehouse.products.edit',
-	// 	params: { id: res.data._id },
-	// });
+	cartStore.clearCart(items.value);
+
+	// pushAlert('success', 'Order succesfully!');
+	router.push({
+		name: 'order-summary',
+		params: { id: res.data._id },
+	});
 };
 </script>

@@ -67,6 +67,18 @@ const router = createRouter({
 					name: 'check_out',
 					component: () => import('../views/ecommerce/CheckOut.vue'),
 				},
+				{
+					path: '/order-summary/:id',
+					name: 'order-summary',
+					component: () =>
+						import('../views/ecommerce/OrderSummary.vue'),
+				},
+				{
+					path: '/collections',
+					name: 'collections',
+					component: () =>
+						import('../views/ecommerce/Collection.vue'),
+				},
 			],
 		},
 		{

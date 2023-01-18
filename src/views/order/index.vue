@@ -18,28 +18,45 @@
 				<thead>
 					<tr>
 						<th>Order ID</th>
-						<th>Customer Name</th>
-						<th>Customer Email</th>
-						<th>Payment Status</th>
+						<th>Date</th>
+						<th>Customer</th>
 						<th>Total</th>
+						<th>Payment Status</th>
+						<th>Fulfillment</th>
+						<th>Items</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody class="">
 					<tr v-for="item in store.list" v-if="!store.isLoading">
 						<td>{{ item._id }}</td>
+						<td>{{ Date.now() }}</td>
 						<td class="capitalize">
 							{{ item.firstName }}, {{ item.lastName }}
 						</td>
-						<td>{{ item.email }}</td>
+						<td>₱{{ numberFormat(item.total) }}</td>
 						<td>
-							<button
-								class="min-w-7 flex h-7 items-center justify-center rounded-sm border border-gray-200 p-1 hover:border-gray-700 hover:bg-gray-700 hover:text-white"
-							>
-								Confirm payment
-							</button>
+							<Badge
+								:text="item.paymentStatus"
+								v-if="item.status === 'pending'"
+								color="warning"
+							/>
+							<Badge
+								:text="item.paymentStatus"
+								v-else
+								color="success"
+							/>
 						</td>
-						<td>0</td>
+						<td>
+							<Badge
+								:text="item.status"
+								v-if="item.status === 'pending'"
+								color="warning"
+							/>
+							<Badge :text="item.status" v-else color="success" />
+						</td>
+						<td>{{ item.items.length }} Item/s</td>
+
 						<td class="flex space-x-2">
 							<BaseTableActionButton
 								icon="edit"
@@ -56,17 +73,6 @@
 									params: { id: item._id },
 								}"
 							/> -->
-
-							<button
-								class="min-w-7 flex h-7 items-center justify-center rounded-sm border border-gray-200 p-1 hover:border-gray-700 hover:bg-gray-700 hover:text-white"
-							>
-								<VueFeather
-									type="send"
-									size="16"
-									class="mr-1"
-								/>
-								Resend email
-							</button>
 						</td>
 					</tr>
 					<tr v-if="store.isLoading">
@@ -95,6 +101,7 @@ import { useOrderStore } from '@/stores/order';
 import useAlert from '@/composables/useAlert';
 import useUtils from '@/composables/useUtils';
 import TableSearch from '@/components/TableSearch.vue';
+import Badge from '@/components/Badge.vue';
 import moment from 'moment';
 
 const store = useOrderStore();

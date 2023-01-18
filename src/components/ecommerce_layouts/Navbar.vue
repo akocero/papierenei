@@ -132,7 +132,13 @@
 			<li
 				class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
 			>
-				<router-link to="terms" class="">COLLECTIONS</router-link>
+				<router-link
+					:to="{
+						name: 'collections',
+					}"
+					class=""
+					>COLLECTIONS</router-link
+				>
 			</li>
 			<li
 				class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
