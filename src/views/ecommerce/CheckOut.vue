@@ -260,6 +260,7 @@ onBeforeMount(async () => {
 		return;
 	}
 
+	// this is for handleSumbit function so you dont need to change the property field name
 	items.value = cartStore.list.map((cartItem) => {
 		return {
 			item_id: cartItem._id,
@@ -287,8 +288,6 @@ const total = computed(() => {
 	return cartStore.subTotal + shippingDetails.value.fee;
 });
 const handleSumbit = async () => {
-	// await store.sendEmailOrderDetails(232323);
-	// return
 	store.error = null;
 
 	const data = {
@@ -315,6 +314,8 @@ const handleSumbit = async () => {
 		return;
 	}
 
+	// sending email
+	// @params order id for the email details
 	const emailRes = await store.sendEmailOrderDetails(res.data._id);
 
 	if (store.error) {
@@ -322,9 +323,12 @@ const handleSumbit = async () => {
 		return;
 	}
 
+	// clear the cart after successfully ordered
 	cartStore.clearCart(items.value);
 
 	// pushAlert('success', 'Order succesfully!');
+
+	// redirect to order summary
 	router.push({
 		name: 'order-summary',
 		params: { id: res.data._id },

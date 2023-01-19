@@ -1,7 +1,7 @@
 <template>
 	<QuickView
 		@closeModal="closeModal"
-		:show="isOpen"
+		:show="isModalOpen"
 		modalTitle="Default Modal"
 	>
 		<ProductHero :product="productModal" v-if="productModal" />
@@ -210,7 +210,7 @@ const { numberFormat, sort } = useUtils();
 const { addToCart } = cartStore;
 const route = useRoute();
 // initial state of modal
-const isOpen = ref(false);
+const isModalOpen = ref(false);
 
 // TODO: filter products base on categories
 // this is to get all selected categories
@@ -232,18 +232,18 @@ const priceRange = ref({
 	from: '',
 	to: '',
 });
-
-// initial query new to old filter: latest first
+// Main Query
 const query = ref('<COLLECTION><TAG><PRICE><SORTED><SEARCH>');
-const queryFilterCategories = ref('');
-const queryFilterPriceRange = ref('');
-const queryCollection = ref('');
-const queryFilterByTag = ref('');
-const querySortedBy = ref('');
-const querySearch = ref('');
-const activeCollection = ref(null);
-const productModal = ref(null);
-const searchText = ref('');
+// Filters Query
+const qrySelectedPriceRange = ref('');
+const qrySelectedTag = ref('');
+const qrySelectedSortedBy = ref('');
+
+// Filter Products
+const qryCollection = ref('');
+const qrySearch = ref('');
+
+// API SAMPLE QUERY
 // db.tags.find({ tags: { $all: ["cheap", "blue"] } } )
 
 //* query for price
@@ -255,91 +255,84 @@ const searchText = ref('');
 //* query for latest products
 //* ?sort=-createdAt'
 
+// for modal product details
+const productModal = ref(null);
+// search input value
+const searchText = ref('');
+
 onBeforeMount(async () => {
 	await tagStore.fetch('');
 
+	// check if there is a route query collection
 	if (route.query.collection) {
+		// find and filter the product base on the product collection
 		await collectionStore.find(route.query.collection);
 
+		// if the collection id is valid filter the products base on collection id
 		if (!collectionStore.error) {
-			console.log('ssss');
-			queryCollection.value = `?collections[in][0]=${collectionStore.item._id}`;
+			qryCollection.value = `?collections[in][0]=${collectionStore.item._id}`;
 		}
 	}
 
-	// fetch products no filter
+	// if no collection route query or not valid id
+	// fetch all products
 	await filterProducts();
 
-	// fetch catories
-	await collectionStore.fetch('');
-	console.log(collectionStore.list);
-	// console.log('product list', collectionStore.list);
-
+	// to check if there is route query search
+	// if true filter products base on search value
 	if (route.query.search) {
 		searchText.value = route.query.search;
 		filterBySearch();
 	}
 });
 
+// this function will refetch the shop page if the route collection query change
+// I did this because if you change the value of collection query the page won't refetch
 onBeforeRouteUpdate(async (to, from, next) => {
-	console.log('NAG UPDATE BA ?');
 	await collectionStore.find(to.query.collection);
 
 	if (!collectionStore.error) {
-		console.log('ssss');
-		queryCollection.value = `?collections[in][0]=${collectionStore.item._id}`;
+		qryCollection.value = `?collections[in][0]=${collectionStore.item._id}`;
 	}
 
 	// fetch products no filter
 	await filterProducts();
-
-	// fetch catories
-	await collectionStore.fetch('');
 	next();
 });
 
 // to filter products
 const filterProducts = async () => {
-	if (!queryFilterByTag.value) {
+	if (!qrySelectedTag.value) {
 		query.value = query.value.replace('<TAG>', '');
 	}
 
-	if (!querySortedBy.value) {
+	if (!qrySelectedSortedBy.value) {
 		query.value = query.value.replace('<SORTED>', '');
 	}
 
-	if (!queryFilterPriceRange.value) {
+	if (!qrySelectedPriceRange.value) {
 		query.value = query.value.replace('<PRICE>', '');
 	}
 
-	if (!querySearch.value) {
+	if (!qrySearch.value) {
 		query.value = query.value.replace('<SEARCH>', '');
 	}
 
-	if (!queryCollection.value) {
+	if (!qryCollection.value) {
 		query.value = query.value.replace('<COLLECTION>', '');
 	}
 
-	console.log('COLLECTION', queryCollection.value);
-	console.log('TAG', queryFilterByTag.value);
-	console.log('PRICE', queryFilterPriceRange.value);
-	console.log('SORTED', querySortedBy.value);
-	console.log('SEARCH', querySearch.value);
+	query.value = `${qryCollection.value}${qrySelectedTag.value}${qrySelectedPriceRange.value}${qrySelectedSortedBy.value}${qrySearch.value}&isPublished=1`;
 
-	query.value = `${queryCollection.value}${queryFilterByTag.value}${queryFilterPriceRange.value}${querySortedBy.value}${querySearch.value}&isPublished=1`;
-
-	if (!queryCollection.value) {
+	if (!qryCollection.value) {
 		query.value = '?' + query.value.slice(1);
 	}
 
-	console.log('QUERY', query.value);
 	await productStore.fetch(query.value);
-
-	// query.value = '?';
 };
 
 const filterBySearch = () => {
-	querySearch.value = `&name[regex]=${searchText.value}`;
+	qrySearch.value = `&name[regex]=${searchText.value}`;
 
 	filterProducts();
 };
@@ -347,16 +340,16 @@ const filterBySearch = () => {
 const reset = (str) => {
 	if ('filters') {
 		selectedTag.value = null;
-		queryFilterByTag.value = '';
+		qrySelectedTag.value = '';
 	}
 
 	if ('sortedBy') {
 		selectedSortedBy.value = 'new_to_old';
-		querySortedBy.value = '';
+		qrySelectedSortedBy.value = '';
 	}
 
 	if ('priceRange') {
-		queryFilterPriceRange.value = '';
+		qrySelectedPriceRange.value = '';
 		priceRange.value.from = '';
 		priceRange.value.to = '';
 	}
@@ -388,19 +381,19 @@ watch(
 	(newVal, oldVal) => {
 		switch (newVal) {
 			case 'best_selling':
-				querySortedBy.value = '&sort=-soldCount';
+				qrySelectedSortedBy.value = '&sort=-soldCount';
 				break;
 			case 'low_to_high':
-				querySortedBy.value = '&sort=unitCost';
+				qrySelectedSortedBy.value = '&sort=unitCost';
 				break;
 			case 'high_to_low':
-				querySortedBy.value = '&sort=-unitCost';
+				qrySelectedSortedBy.value = '&sort=-unitCost';
 				break;
 			case 'old_to_new':
-				querySortedBy.value = '&sort=createdAt';
+				qrySelectedSortedBy.value = '&sort=createdAt';
 				break;
 			case 'new_to_old':
-				querySortedBy.value = '&sort=-createdAt';
+				qrySelectedSortedBy.value = '&sort=-createdAt';
 				break;
 			default:
 		}
@@ -413,27 +406,16 @@ watch(
 	(newVal, oldVal) => {
 		// filterByCategories(newVal);
 		if (newVal) {
-			queryFilterByTag.value = `&tags[in][0]=${newVal}`;
+			qrySelectedTag.value = `&tags[in][0]=${newVal}`;
 			filterProducts();
 		}
 	},
 );
 
-const filterByCategories = (categories) => {
-	//* '?categories[in][0]=6342b48cd84510d5a0e35265&categories[in][1]=6342b445d84510d5a0e3525a',
-
-	let query = '?';
-	categories.forEach((ctry, index) => {
-		query += `categories[in][${index}]=${ctry}&`;
-	});
-};
-
-// TODO: make it one object
-// make it filter on change of value
 const sortByPriceRange = () => {
 	let _queryFrom = '';
 	let _queryTo = '';
-	queryFilterPriceRange.value = '';
+	qrySelectedPriceRange.value = '';
 
 	if (!priceRange.value.from && !priceRange.value.to) {
 		return;
@@ -447,18 +429,19 @@ const sortByPriceRange = () => {
 		_queryTo = `&unitCost[lt]=${priceRange.value.to}`;
 	}
 
-	queryFilterPriceRange.value = _queryFrom + _queryTo;
+	qrySelectedPriceRange.value = _queryFrom + _queryTo;
 
 	filterProducts();
 };
 
+// modal functions
 function openModal(product) {
-	isOpen.value = true;
+	isModalOpen.value = true;
 	productModal.value = product;
 }
 
 function closeModal() {
-	isOpen.value = false;
+	isModalOpen.value = false;
 	productModal.value = null;
 }
 </script>

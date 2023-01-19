@@ -105,6 +105,4 @@ const handleSubmit = async () => {
 		window.location.reload();
 	}
 };
-
-console.log('base', import.meta.env.VITE_BASE_URL);
 </script>

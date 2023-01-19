@@ -114,7 +114,14 @@ export const useAuthStore = defineStore({
 			console.log('updateMe');
 		},
 		async me() {
-			console.log('getMe');
+			try {
+				const res = await axios.get('/auth/me');
+			} catch (error) {
+				if (error.response?.data?.message === 'Expired Token') {
+					this.logout();
+					window.location.reload();
+				}
+			}
 		},
 	},
 });

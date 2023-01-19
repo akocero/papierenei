@@ -27,7 +27,5 @@ const collectionStore = useCollectionStore();
 
 onBeforeMount(async () => {
 	await collectionStore.fetch('');
-
-	console.log(collectionStore.list);
 });
 </script>

@@ -21,22 +21,28 @@
 </template>
 
 <script setup>
+import axios from '../../config/axios-config';
 import Navbar from './Navbar.vue';
 import AlertList from '../AlertList.vue';
 import Sidebar from './sidebar/Sidebar.vue';
 import useAlert from '@/composables/useAlert.js';
 import { useInvoiceStore } from '@/stores/invoice';
-
-import { ref } from 'vue';
+import { useAuthStore } from '@/stores/auth';
+import { onBeforeMount, ref } from 'vue';
 import PrintInvoice from '../print_templates/PrintInvoice.vue';
+
 const { alerts } = useAlert();
 const isSidebarOpen = ref(true);
 
 const toggleSidebar = () => {
 	isSidebarOpen.value = !isSidebarOpen.value;
 };
-
 const invoiceStore = useInvoiceStore();
+const authStore = useAuthStore();
+
+onBeforeMount(async () => {
+	await authStore.me();
+});
 </script>
 
 <style></style>
