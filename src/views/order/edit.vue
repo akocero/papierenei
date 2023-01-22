@@ -174,7 +174,7 @@
 							:error="store.error"
 							:errorField="
 								store.error?.errors?.payments
-									.transactionNumber || null
+									?.transactionNumber || null
 							"
 							placeholder="Ex. ABC"
 							:required="true"
@@ -187,7 +187,7 @@
 							v-model="payment.amount"
 							:error="store.error"
 							:errorField="
-								store.error?.errors?.payments.amount || null
+								store.error?.errors?.payments?.amount || null
 							"
 							placeholder="Ex. ABC"
 							:required="true"
@@ -200,7 +200,7 @@
 							v-model="payment.paymentType"
 							:error="store.error"
 							:errorField="
-								store.error?.errors?.payments.paymentType ||
+								store.error?.errors?.payments?.paymentType ||
 								null
 							"
 							placeholder="Ex. (Credit Card, GCash, PayMaya, etc...)"
@@ -214,7 +214,7 @@
 							v-model="payment.status"
 							:error="store.error"
 							:errorField="
-								store.error?.errors?.payments.status || null
+								store.error?.errors?.payments?.status || null
 							"
 							:options="[
 								{
@@ -231,7 +231,7 @@
 							class="flex h-10 w-full items-center justify-center rounded-lg bg-primary-600 text-white"
 							@click="addPayment"
 						>
-							<vueFeather type="arrow-right" size="16" />
+							<vueFeather type="corner-right-down" size="16" />
 						</button>
 					</div>
 					<div class="col-span-full">
@@ -585,6 +585,15 @@ const deleteAddedItem = (name) => {
 };
 
 const addPayment = () => {
+	if (
+		!payment.value.transactionNumber ||
+		!payment.value.status ||
+		!payment.value.amount ||
+		!payment.value.paymentType
+	) {
+		pushAlert('error', 'Please fill out required fields!');
+		return;
+	}
 	payment.value._id = 'custom-payment-' + uuidv4();
 	addedPayments.value.push(payment.value);
 

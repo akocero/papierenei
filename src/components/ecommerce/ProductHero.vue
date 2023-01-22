@@ -63,6 +63,7 @@
 			<Quantity v-model="quantity" :currentQty="product.quantity" />
 
 			<button
+				v-if="product.quantity"
 				class="mt-4 w-full bg-lightBlue-3 py-4 px-8 font-bold text-white"
 				@click="cartStore.addToCart(product)"
 			>

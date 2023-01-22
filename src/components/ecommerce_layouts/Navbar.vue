@@ -74,31 +74,25 @@
 				class="flex-col md:mx-auto md:flex md:h-full md:max-w-screen-2xl md:flex-row md:items-center md:justify-between md:space-y-0 md:pb-0"
 				:class="{ flex: openMenu, hidden: !openMenu }"
 			>
-				<li
-					class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
-				>
+			<li class="nav__item md:flex md:h-full md:items-center">
 					<router-link
 						:to="{
 							name: 'home',
 						}"
-						class=""
+						class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue"
 					>
 						HOME
 					</router-link>
 				</li>
-				<li
-					class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
-				>
-					<router-link to="" class="">NEW</router-link>
+				<li class="nav__item md:flex md:h-full md:items-center">
+					<router-link to="" class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue">NEW</router-link>
 				</li>
-				<li
-					class="nav__item px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
-				>
+				<li class="nav__item md:flex md:h-full md:items-center">
 					<router-link
 						:to="{
 							name: 'shop',
 						}"
-						class=""
+						class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue"
 						>SHOP</router-link
 					>
 					<div
@@ -129,51 +123,50 @@
 						</div>
 					</div>
 				</li>
-				<li
-					class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
-				>
+				<li class="md:flex md:h-full md:items-center">
 					<router-link
 						:to="{
 							name: 'shop',
 							query: { collection: '63be87f5266ce353db61dafb' },
 						}"
-						class=""
-						>STATIONERY</router-link
+						class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue"
+					>
+						STATIONERY</router-link
 					>
 					<ul></ul>
 				</li>
-				<li
-					class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
-				>
+				<li class="md:flex md:h-full md:items-center">
 					<router-link
 						:to="{
 							name: 'shop',
 							query: { collection: '63bd7ebcab01444f92149c92' },
 						}"
-						class=""
+						class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue"
 						>STICKERS</router-link
 					>
 				</li>
-				<li
-					class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
-				>
-					<router-link to="terms" class="">SALE</router-link>
+				<li class="md:flex md:h-full md:items-center">
+					<router-link
+						to="terms"
+						class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue"
+						>SALE</router-link
+					>
 				</li>
-				<li
-					class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
-				>
+				<li class="md:flex md:h-full md:items-center">
 					<router-link
 						:to="{
 							name: 'collections',
 						}"
-						class=""
+						class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue"
 						>COLLECTIONS</router-link
 					>
 				</li>
-				<li
-					class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
-				>
-					<router-link to="terms" class="">FREEBIES</router-link>
+				<li class="md:flex md:h-full md:items-center">
+					<router-link
+						to="terms"
+						class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue"
+						>FREEBIES</router-link
+					>
 				</li>
 				<li class="hidden md:block">
 					<router-link

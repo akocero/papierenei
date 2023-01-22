@@ -2,7 +2,7 @@
 	<router-link
 		v-if="_type === 'link'"
 		:to="routeObject"
-		class="inline-block rounded-md py-2 px-3 disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none"
+		class="inline-block rounded-sm py-2 px-3 disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none"
 		:disabled="disabled"
 		:class="[
 			{
@@ -21,7 +21,7 @@
 	<button
 		v-else
 		:type="_type"
-		class="inline-block rounded-md py-2 px-3 disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none"
+		class="inline-block rounded-sm py-2 px-3 disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none"
 		:disabled="disabled"
 		:class="[
 			{
