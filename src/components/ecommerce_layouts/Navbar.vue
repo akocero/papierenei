@@ -67,106 +67,137 @@
 				</router-link>
 			</li>
 		</ul>
-
-		<ul
-			class="absolute top-14 w-full flex-col bg-lightBlue-3 font-bold md:relative md:top-0 md:mx-auto md:flex md:h-full md:max-w-screen-2xl md:flex-row md:items-center md:justify-between md:space-y-0 md:pb-0"
-			:class="{ flex: openMenu, hidden: !openMenu }"
+		<div
+			class="absolute top-14 w-full bg-lightBlue-3 font-bold md:relative md:top-0 md:h-full"
 		>
-			<li
-				class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
+			<ul
+				class="flex-col md:mx-auto md:flex md:h-full md:max-w-screen-2xl md:flex-row md:items-center md:justify-between md:space-y-0 md:pb-0"
+				:class="{ flex: openMenu, hidden: !openMenu }"
 			>
-				<router-link
-					:to="{
-						name: 'home',
-					}"
-					class=""
+				<li
+					class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
 				>
-					HOME
-				</router-link>
-			</li>
-			<li
-				class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
-			>
-				<router-link to="" class="">NEW</router-link>
-			</li>
-			<li
-				class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
-			>
-				<router-link
-					:to="{
-						name: 'shop',
-					}"
-					class=""
-					>SHOP</router-link
+					<router-link
+						:to="{
+							name: 'home',
+						}"
+						class=""
+					>
+						HOME
+					</router-link>
+				</li>
+				<li
+					class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
 				>
-			</li>
-			<li
-				class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
-			>
-				<router-link
-					:to="{
-						name: 'shop',
-						query: { collection: '63be87f5266ce353db61dafb' },
-					}"
-					class=""
-					>STATIONERY</router-link
+					<router-link to="" class="">NEW</router-link>
+				</li>
+				<li
+					class="nav__item px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
 				>
-			</li>
-			<li
-				class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
-			>
-				<router-link
-					:to="{
-						name: 'shop',
-						query: { collection: '63bd7ebcab01444f92149c92' },
-					}"
-					class=""
-					>STICKERS</router-link
-				>
-			</li>
-			<li
-				class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
-			>
-				<router-link to="terms" class="">SALE</router-link>
-			</li>
-			<li
-				class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
-			>
-				<router-link
-					:to="{
-						name: 'collections',
-					}"
-					class=""
-					>COLLECTIONS</router-link
-				>
-			</li>
-			<li
-				class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
-			>
-				<router-link to="terms" class="">FREEBIES</router-link>
-			</li>
-			<li class="hidden md:block">
-				<router-link
-					:to="{
-						name: 'cart',
-					}"
-					class=""
-				>
-					<div class="relative mt-3">
-						<div
-							class="absolute -top-2 -right-3 flex h-5 w-5 items-center justify-center rounded-full bg-darkYellow font-mono text-gray-900"
-						>
-							{{ cartStore.list.length }}
+					<router-link
+						:to="{
+							name: 'shop',
+						}"
+						class=""
+						>SHOP</router-link
+					>
+					<div
+						class="nav__item--sub absolute left-0 top-14 hidden w-screen border-t border-lightBlue-3 bg-lightBlue-3 py-10 text-2xl text-white"
+					>
+						<div class="mx-auto grid max-w-screen-2xl grid-cols-12">
+							<div class="col-span-2">
+								<h5 class="font-bold underline">
+									Shop by Kind
+								</h5>
+								<ul class="mt-2 text-[1rem] font-semibold">
+									<li>Bearly Art</li>
+									<li>Digital Files</li>
+									<li>Custom Digital Files</li>
+								</ul>
+							</div>
+							<div class="col-span-3">
+								<h5 class="font-bold underline">
+									Shop by Collection
+								</h5>
+								<ul class="mt-2 text-[1rem] font-semibold">
+									<li>Spring</li>
+									<li>Summer</li>
+									<li>Fall</li>
+									<li>Winter</li>
+								</ul>
+							</div>
 						</div>
-
-						<vue-feather
-							type="shopping-cart"
-							size="28"
-						></vue-feather>
 					</div>
-				</router-link>
-			</li>
-		</ul>
+				</li>
+				<li
+					class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
+				>
+					<router-link
+						:to="{
+							name: 'shop',
+							query: { collection: '63be87f5266ce353db61dafb' },
+						}"
+						class=""
+						>STATIONERY</router-link
+					>
+					<ul></ul>
+				</li>
+				<li
+					class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
+				>
+					<router-link
+						:to="{
+							name: 'shop',
+							query: { collection: '63bd7ebcab01444f92149c92' },
+						}"
+						class=""
+						>STICKERS</router-link
+					>
+				</li>
+				<li
+					class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
+				>
+					<router-link to="terms" class="">SALE</router-link>
+				</li>
+				<li
+					class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
+				>
+					<router-link
+						:to="{
+							name: 'collections',
+						}"
+						class=""
+						>COLLECTIONS</router-link
+					>
+				</li>
+				<li
+					class="px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue md:flex md:h-full md:items-center"
+				>
+					<router-link to="terms" class="">FREEBIES</router-link>
+				</li>
+				<li class="hidden md:block">
+					<router-link
+						:to="{
+							name: 'cart',
+						}"
+						class=""
+					>
+						<div class="relative mt-3">
+							<div
+								class="absolute -top-2 -right-3 flex h-5 w-5 items-center justify-center rounded-full bg-darkYellow font-mono text-gray-900"
+							>
+								{{ cartStore.list.length }}
+							</div>
+
+							<vue-feather
+								type="shopping-cart"
+								size="28"
+							></vue-feather>
+						</div>
+					</router-link>
+				</li>
+			</ul>
+		</div>
 	</nav>
 
 	<!-- <div class="top-0 z-30 bg-lightBlue-1">
@@ -369,24 +400,26 @@ import { useCartStore } from '@/stores/cart';
 import { onBeforeRouteUpdate, useRouter } from 'vue-router';
 
 const cartStore = useCartStore();
+const router = useRouter();
 
-const openSidebar = ref(false);
 const openMenu = ref(false);
 const searchText = ref('');
-const router = useRouter();
 const isShowSearch = ref(true);
 
-const disableBodyScroll = (isOpenSidebar) => {
-	if (isOpenSidebar) {
-		openSidebar.value = true;
-		document.body.style.overflow = 'hidden';
-	} else {
-		openSidebar.value = false;
-		document.body.style.overflow = 'unset';
-	}
-};
+// not being used, but can be used in the future
+// const openSidebar = ref(false);
+// const disableBodyScroll = (isOpenSidebar) => {
+// 	if (isOpenSidebar) {
+// 		openSidebar.value = true;
+// 		document.body.style.overflow = 'hidden';
+// 	} else {
+// 		openSidebar.value = false;
+// 		document.body.style.overflow = 'unset';
+// 	}
+// };
 
 onBeforeRouteUpdate((to, from) => {
+	// if the current page is shop hide the search form
 	if (to.name === 'shop') {
 		isShowSearch.value = false;
 		return;
@@ -395,13 +428,9 @@ onBeforeRouteUpdate((to, from) => {
 	isShowSearch.value = true;
 });
 
-const hoverTest = () => {
-	console.log('test');
-};
-
 const navigateToShop = () => {
-	searchText.value = '';
 	router.push({ name: 'shop', query: { search: searchText.value } });
+	searchText.value = '';
 };
 </script>
 

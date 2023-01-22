@@ -447,23 +447,25 @@
 </template>
 
 <script setup>
+import InputMultiple from '@/components/InputMultiple.vue';
+import DisplayFieldArray from '@/components/DisplayFieldArray.vue';
+import useInputMultiple from '@/composables/useInputMultiple';
+import SelectSearch from '@/components/SelectSearch.vue';
+
 import { v4 as uuidv4 } from 'uuid';
+import { onBeforeMount, onMounted, ref, watch, computed } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { useProductStore } from '@/stores/product';
+import { useOrderStore } from '@/stores/order';
 
 import BaseButton from '@/components/BaseButton.vue';
 import BaseInput from '@/components/BaseInput.vue';
-import InputMultiple from '@/components/InputMultiple.vue';
 import BaseSelect from '@/components/BaseSelect.vue';
 import BaseTextArea from '@/components/BaseTextArea.vue';
-import DisplayFieldArray from '@/components/DisplayFieldArray.vue';
-import useInputMultiple from '@/composables/useInputMultiple';
 import Spinner from '@/components/Spinner.vue';
-import { onBeforeMount, onMounted, ref, watch, computed } from 'vue';
-import SelectSearch from '@/components/SelectSearch.vue';
-import { useOrderStore } from '@/stores/order';
-import useAlert from '../../composables/useAlert';
-import { useRoute, useRouter } from 'vue-router';
-import { useProductStore } from '@/stores/product';
+
 import useUtils from '@/composables/useUtils';
+import useAlert from '@/composables/useAlert';
 
 const router = useRouter();
 const route = useRoute();
@@ -583,9 +585,8 @@ const deleteAddedItem = (name) => {
 };
 
 const addPayment = () => {
-	payment.value._id = uuidv4();
+	payment.value._id = 'custom-payment-' + uuidv4();
 	addedPayments.value.push(payment.value);
-	console.log(addedPayments.value);
 
 	payment.value = {};
 };
@@ -596,12 +597,10 @@ const deletePayment = (id) => {
 
 const removeTempPaymentsID = () => {
 	addedPayments.value = addedPayments.value.map((pm) => {
-		if (pm._id && pm._id.includes('-')) {
+		if (pm._id && pm._id.includes('custom-payment')) {
 			delete pm._id;
 		}
 		return pm;
 	});
 };
 </script>
-
-<style></style>

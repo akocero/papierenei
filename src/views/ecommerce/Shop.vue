@@ -6,8 +6,10 @@
 	>
 		<ProductHero :product="productModal" v-if="productModal" />
 	</QuickView>
-	<div class="mx-auto my-12 flex max-w-screen-2xl gap-10 px-4 2xl:px-0">
-		<div class="flex w-1/4 flex-col space-y-8">
+	<div
+		class="mx-auto my-12 flex max-w-screen-2xl flex-col gap-10 px-4 md:flex-row 2xl:px-0"
+	>
+		<div class="flex flex-col space-y-8 md:w-1/4">
 			<form
 				class="relative bg-red-200"
 				@submit.prevent="filterBySearch()"
@@ -135,7 +137,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="bg-lightBlue flex items-center px-6">
+		<div class="bg-lightBlue flex items-center md:px-6">
 			<div class="mx-auto w-full max-w-7xl">
 				<div class="mb-8" v-if="collectionStore.item">
 					<h2 class="text-3xl font-bold uppercase">
@@ -167,7 +169,7 @@
 				</div>
 
 				<div
-					class="grid w-full grid-cols-1 gap-10 px-4 md:grid-cols-4 md:px-0"
+					class="grid w-full grid-cols-2 gap-4 px-0 md:grid-cols-4 md:gap-10 md:px-0"
 					v-if="!productStore.isLoading"
 				>
 					<div v-for="(product, key) in productStore.list">

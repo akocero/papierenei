@@ -13,6 +13,10 @@
 	}
 }
 
+.nav__item:hover .nav__item--sub {
+	display: block;
+}
+
 @layer components {
 	.nav-item {
 		@apply flex items-center overflow-hidden px-[13.5px] py-2 hover:bg-white/10 hover:text-gray-50;
