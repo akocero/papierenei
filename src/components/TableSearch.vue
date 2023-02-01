@@ -38,15 +38,13 @@
 import { ref } from 'vue';
 
 const props = defineProps({
-	options: Array,
-	/* 
-	this props value of the selectOption of your choice, not the label the value
-	{ 
-		label: 'Invoice For', 
-		value: 'invoiceFor.name'  <--- this one
-	}
-	*/
+	options: {
+		type: Array,
+		requried: true,
+	},
 	selectedOption: {
+		// use this if you want to select specific options
+		// by default it select first index in options props
 		type: String,
 	},
 });
@@ -54,7 +52,9 @@ const props = defineProps({
 const emit = defineEmits(['search']);
 
 const searchText = ref('');
-const searchType = ref(props.selectedOption);
+const searchType = ref(
+	props.selectedOption ? props.selectedOption : props.options[0].value,
+);
 
 const search = () => {
 	if (searchText.value) {
