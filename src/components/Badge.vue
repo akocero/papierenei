@@ -1,6 +1,6 @@
 <template>
 	<span
-		class="rounded-full border px-2 font-semibold text-white"
+		class="rounded-md border px-2 font-semibold uppercase text-white"
 		:class="[
 			{
 				'border-yellow-300 bg-yellow-300/40 text-yellow-700':
@@ -19,7 +19,10 @@
 
 <script setup>
 const props = defineProps({
-	text: String,
+	text: {
+		type: String,
+		required: true,
+	},
 	color: {
 		type: String,
 		default: '',
