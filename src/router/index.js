@@ -169,6 +169,26 @@ const router = createRouter({
 					component: () => import('../views/product/view.vue'),
 				},
 				{
+					path: 'warehouse/test_products',
+					name: 'warehouse.test_products',
+					component: () => import('../views/test_product/index.vue'),
+				},
+				{
+					path: 'warehouse/test_products/create',
+					name: 'warehouse.test_products.create',
+					component: () => import('../views/test_product/create.vue'),
+				},
+				{
+					path: 'warehouse/test_products/edit/:id',
+					name: 'warehouse.test_products.edit',
+					component: () => import('../views/test_product/edit.vue'),
+				},
+				{
+					path: 'warehouse/test_products/view/:id',
+					name: 'warehouse.test_products.view',
+					component: () => import('../views/test_product/view.vue'),
+				},
+				{
 					path: 'warehouse/collections',
 					name: 'warehouse.collections',
 					component: () => import('../views/collection/index.vue'),
