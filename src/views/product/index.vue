@@ -14,77 +14,41 @@
 		/>
 
 		<div class="table-responsive">
-			<table class="table">
-				<thead>
-					<tr>
-						<th
-							class="group flex items-center space-x-3 border-0 hover:border-r"
-						>
-							<span>SKU</span>
-							<VueFeather
-								type="chevron-down"
-								size="16"
-								class="mr-4 hidden group-hover:inline-block"
-							/>
-						</th>
-						<th>Name</th>
-						<th>Description</th>
-						<th>Unit Cost</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody class="">
-					<tr v-for="item in store.list" v-if="!store.isLoading">
-						<td>{{ item.sku ? item.sku : 'N/A' }}</td>
-						<td>{{ item.name }}</td>
-						<td>{{ item.description }}</td>
-						<td style="width: 10%">
-							₱{{ numberFormat(item.unitCost) }}
-						</td>
+			<TableData :data="store.list" :headers="tableHeaders">
+				<template #header-sku="header"> {{ header.text }} </template>
+				<template #item-sku="item">
+					{{ item.sku ? item.sku : 'N/A' }}
+				</template>
+				<template #item-isPublished="item">
+					<Badge
+						color="success"
+						text="published"
+						v-if="item.isPublished"
+					/>
+					<Badge text="unpublished" v-else />
+				</template>
+				<template #item-unitCost="item">
+					₱{{ numberFormat(item.unitCost) }}
+				</template>
 
-						<td class="flex space-x-2">
-							<BaseTableActionButton
-								icon="edit"
-								:route-object="{
-									name: 'warehouse.products.edit',
-									params: { id: item._id },
-								}"
-							/>
+				<template #item-actions="item">
+					<BaseTableActionButton
+						icon="edit"
+						:route-object="{
+							name: 'warehouse.products.edit',
+							params: { id: item._id },
+						}"
+					/>
 
-							<BaseTableActionButton
-								icon="eye"
-								:route-object="{
-									name: 'warehouse.products.view',
-									params: { id: item._id },
-								}"
-							/>
-
-							<!-- <BaseTableActionButton
-								icon="trash"
-								:route-object="{ name: 'sales.invoices' }"
-							/>
-
-							<BaseTableActionButton
-								icon="printer"
-								:route-object="{ name: 'sales.invoices' }"
-							/>
-
-							<BaseTableActionButton
-								icon="mail"
-								:route-object="{ name: 'sales.invoices' }"
-							/> -->
-						</td>
-					</tr>
-					<tr v-if="store.isLoading">
-						<td colspan="10" class="text-center">Loading...</td>
-					</tr>
-					<tr v-if="store.list.length <= 0 && !store.isLoading">
-						<td colspan="10" class="text-center">
-							No results found!
-						</td>
-					</tr>
-				</tbody>
-			</table>
+					<BaseTableActionButton
+						icon="eye"
+						:route-object="{
+							name: 'warehouse.products.view',
+							params: { id: item._id },
+						}"
+					/>
+				</template>
+			</TableData>
 		</div>
 		<TablePagination :store="store" @paginate="paginate" />
 	</div>
@@ -93,14 +57,15 @@
 <script setup>
 import { onBeforeMount, ref, watch } from 'vue';
 import BaseButton from '@/components/BaseButton.vue';
-import BaseSelect from '@/components/BaseSelect.vue';
-import TablePagination from '@/components/TablePagination.vue';
+import Badge from '@/components/Badge.vue';
 
 import BaseTableActionButton from '@/components/BaseTableActionButton.vue';
 import { useProductStore } from '@/stores/product';
 import useAlert from '@/composables/useAlert';
 import useUtils from '@/composables/useUtils';
 import TableSearch from '@/components/TableSearch.vue';
+import TableData from '@/components/TableData.vue';
+import TablePagination from '@/components/TablePagination.vue';
 import moment from 'moment';
 
 const store = useProductStore();
@@ -108,6 +73,35 @@ const { pushAlert } = useAlert();
 const { numberFormat } = useUtils();
 const searchString = ref('');
 const searchOptions = [{ label: 'SKU', value: 'sku' }];
+const tableHeaders = [
+	{
+		text: 'SKU',
+		value: 'sku',
+		headerClass: 'w-[15%]',
+	},
+	{
+		text: 'Name',
+		value: 'name',
+		cellClass: 'capitalize',
+	},
+	{
+		text: 'Unit Cost',
+		value: 'unitCost',
+		headerClass: ' text-right',
+		cellClass: 'text-right',
+	},
+	{
+		text: 'Status',
+		value: 'isPublished',
+		headerClass: 'w-[5%]',
+		cellClass: 'capitalize',
+	},
+	{
+		text: 'Actions',
+		value: 'actions',
+		cellClass: 'flex space-x-2',
+	},
+];
 
 onBeforeMount(async () => {
 	// if (store.list.length <= 0) {
@@ -118,6 +112,8 @@ onBeforeMount(async () => {
 		pushAlert('error', store.error.message);
 		return;
 	}
+
+	console.log(store.list);
 });
 
 const search = async (_searchString) => {
