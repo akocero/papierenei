@@ -1,8 +1,5 @@
 <template>
-	<div class="card">
-		<div class="mb-4 flex items-baseline justify-between">
-			<h4 class="text-xl">{{ title }}</h4>
-		</div>
+	<DrawerCard :title="title">
 		<form class="" v-if="!store.item[db_column]">
 			<div class="mb-2 border-2 border-dotted p-3">
 				<input type="file" @change="onFileSelected" class="w-full" />
@@ -40,13 +37,14 @@
 				/>
 			</div>
 		</div>
-	</div>
+	</DrawerCard>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import BaseButton from './BaseButton.vue';
 import useAlert from '@/composables/useAlert';
+import DrawerCard from './DrawerCard.vue';
 
 const { pushAlert } = useAlert();
 const props = defineProps({
@@ -60,7 +58,7 @@ const props = defineProps({
 		default: 'Photos',
 	},
 });
-
+const isCardOpen = ref(false);
 const selectedFile = ref('');
 const isLoading = ref(false);
 

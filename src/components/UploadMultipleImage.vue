@@ -1,8 +1,5 @@
 <template>
-	<div class="card">
-		<div class="mb-4 flex items-baseline justify-between">
-			<h4 class="text-xl">{{ title }}</h4>
-		</div>
+	<DrawerCard :title="title">
 		<form class="">
 			<div class="mb-2 border-2 border-dotted p-3">
 				<input
@@ -56,17 +53,18 @@
 				<img
 					:src="image.secure_url"
 					alt=""
-					class="h-full w-full object-cover"
+					class="h-full w-full object-contain"
 				/>
 			</div>
 		</div>
-	</div>
+	</DrawerCard>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import BaseButton from './BaseButton.vue';
 import useAlert from '@/composables/useAlert';
+import DrawerCard from './DrawerCard.vue';
 
 const { pushAlert } = useAlert();
 const props = defineProps({
@@ -85,6 +83,8 @@ const props = defineProps({
 		default: false,
 	},
 });
+
+const isCardOpen = ref(false);
 
 const selectedFile = ref('');
 const isLoading = ref(false);

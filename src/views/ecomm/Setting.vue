@@ -121,8 +121,8 @@
 import { onBeforeMount, ref } from 'vue';
 import UploadMultipleImage from '@/components/UploadMultipleImage.vue';
 import { useEcommSettingStore } from '@/stores/ecomm_setting';
-import BaseInput from '../../components/BaseInput.vue';
-import BaseButton from '../../components/BaseButton.vue';
+import BaseInput from '@/components/BaseInput.vue';
+import BaseButton from '@/components/BaseButton.vue';
 import useAlert from '@/composables/useAlert';
 
 const { pushAlert } = useAlert();

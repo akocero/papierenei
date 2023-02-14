@@ -13,43 +13,45 @@
 			@search="search"
 		/>
 
-		<div class="table-responsive">
-			<TableData :data="store.list" :headers="tableHeaders">
-				<template #header-sku="header"> {{ header.text }} </template>
-				<template #item-sku="item">
-					{{ item.sku ? item.sku : 'N/A' }}
-				</template>
-				<template #item-isPublished="item">
-					<Badge
-						color="success"
-						text="published"
-						v-if="item.isPublished"
-					/>
-					<Badge text="unpublished" v-else />
-				</template>
-				<template #item-unitCost="item">
-					₱{{ numberFormat(item.unitCost) }}
-				</template>
+		<TableData
+			:data="store.list"
+			:headers="tableHeaders"
+			:isLoading="store.isLoading"
+		>
+			<template #header-sku="header"> {{ header.text }} </template>
+			<template #item-sku="item">
+				{{ item.sku ? item.sku : 'N/A' }}
+			</template>
+			<template #item-isPublished="item">
+				<Badge
+					color="success"
+					text="published"
+					v-if="item.isPublished"
+				/>
+				<Badge text="unpublished" v-else />
+			</template>
+			<template #item-unitCost="item">
+				₱{{ numberFormat(item.unitCost) }}
+			</template>
 
-				<template #item-actions="item">
-					<BaseTableActionButton
-						icon="edit"
-						:route-object="{
-							name: 'warehouse.products.edit',
-							params: { id: item._id },
-						}"
-					/>
+			<template #item-actions="item">
+				<BaseTableActionButton
+					icon="edit"
+					:route-object="{
+						name: 'warehouse.products.edit',
+						params: { id: item._id },
+					}"
+				/>
 
-					<BaseTableActionButton
-						icon="eye"
-						:route-object="{
-							name: 'warehouse.products.view',
-							params: { id: item._id },
-						}"
-					/>
-				</template>
-			</TableData>
-		</div>
+				<BaseTableActionButton
+					icon="eye"
+					:route-object="{
+						name: 'warehouse.products.view',
+						params: { id: item._id },
+					}"
+				/>
+			</template>
+		</TableData>
 		<TablePagination :store="store" @paginate="paginate" />
 	</div>
 </template>
@@ -112,8 +114,6 @@ onBeforeMount(async () => {
 		pushAlert('error', store.error.message);
 		return;
 	}
-
-	console.log(store.list);
 });
 
 const search = async (_searchString) => {

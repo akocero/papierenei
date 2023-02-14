@@ -79,30 +79,47 @@ if you use the item slot it returns the item object itself same with header
 </TableData>
 */
 const props = defineProps({
-	data: Array,
-	headers: Array,
+	data: {
+		type: Array,
+		required: true,
+	},
+	headers: {
+		type: Array,
+		required: true,
+	},
+	isLoading: {
+		type: Boolean,
+	},
 });
 </script>
 
 <template>
-	<table class="table" v-if="data">
-		<thead>
-			<tr>
-				<th v-for="header in headers" :class="header.headerClass">
-					<slot :name="`header-${header.value}`" v-bind="header">
-						{{ header.text }}
-					</slot>
-				</th>
-			</tr>
-		</thead>
-		<tbody class="">
-			<tr v-for="item in data" v-if="data.length">
-				<td v-for="td in headers" :class="td.cellClass">
-					<slot :name="`item-${td.value}`" v-bind="item">
-						{{ item[td.value] }}
-					</slot>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="table-responsive">
+		<table class="table" v-if="data">
+			<thead>
+				<tr>
+					<th v-for="header in headers" :class="header.headerClass">
+						<slot :name="`header-${header.value}`" v-bind="header">
+							{{ header.text }}
+						</slot>
+					</th>
+				</tr>
+			</thead>
+			<tbody class="">
+				<tr v-for="item in data" v-if="data.length">
+					<td v-for="td in headers" :class="td.cellClass">
+						<slot :name="`item-${td.value}`" v-bind="item">
+							{{ item[td.value] }}
+						</slot>
+					</td>
+				</tr>
+				<tr v-if="isLoading">
+					<td colspan="10" class="text-center">Loading...</td>
+				</tr>
+				<tr v-if="data.length <= 0 && !isLoading">
+					<td colspan="10" class="text-center">No results found!</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </template>

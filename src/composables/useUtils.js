@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export default function useUtils() {
 	// converting first letter to uppercase
 
@@ -11,6 +13,11 @@ export default function useUtils() {
 		return Number(parseFloat(value).toFixed(2)).toLocaleString('en', {
 			minimumFractionDigits: 2,
 		});
+	};
+
+	const convertToRelativeTime = (value) => {
+		const date = new Date(value);
+		return moment(date, 'YYYYMMDD').fromNow();
 	};
 
 	const sort = (arrayObjects, propertyName) => {
@@ -27,5 +34,5 @@ export default function useUtils() {
 		return arrayObjects;
 	};
 
-	return { capitalize, numberFormat, sort };
+	return { capitalize, numberFormat, sort, convertToRelativeTime };
 }
