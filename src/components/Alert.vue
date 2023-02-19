@@ -1,14 +1,25 @@
 <template>
 	<div
-		class="relative mb-2 rounded-md p-4 text-white"
-		:class="alertType"
+		class="relative mb-2 flex items-start rounded-md px-4 py-3 text-white shadow-lg"
+		:class="toastColor"
 		style="min-width: 14rem"
 	>
-		<strong v-if="!customStatus" class="block uppercase"
-			>{{ status }}!
-		</strong>
-		<strong v-else class="">{{ customStatus }}! </strong>
-		{{ message }}
+		<div>
+			<VueFeather
+				:type="toastIcon"
+				size="20"
+				stroke-width="2"
+				class="mt-1"
+			/>
+		</div>
+
+		<div class="ml-3 pr-5">
+			<h4 class="block font-semibold capitalize">
+				{{ title ? title : status }}
+			</h4>
+			<p>{{ message }}</p>
+		</div>
+
 		<button
 			type="button"
 			@click="popAlert(id)"
@@ -23,10 +34,14 @@
 import { onBeforeUnmount, ref } from 'vue';
 import useAlert from '@/composables/useAlert';
 const { popAlert } = useAlert();
-const alertType = ref('');
+const toastColor = ref('');
+const toastIcon = ref('');
 let timeOut = null;
 const props = defineProps({
 	status: {
+		type: String,
+	},
+	title: {
 		type: String,
 	},
 	message: {
@@ -39,21 +54,29 @@ const props = defineProps({
 		type: String,
 		default: null,
 	},
+	position: {
+		type: String,
+		default: 'right',
+	},
 });
 
 if (props.status === 'error') {
-	alertType.value = 'bg-red-400/90';
+	toastColor.value = 'bg-red-400';
+	toastIcon.value = 'x-circle';
 } else if (props.status === 'success') {
-	alertType.value = 'bg-green-400/90';
+	toastColor.value = 'bg-green-400';
+	toastIcon.value = 'check-circle';
 } else if (props.status === 'warning') {
-	alertType.value = 'bg-yellow-300/90 text-gray-700';
+	toastColor.value = 'bg-yellow-300 text-gray-700';
+	toastIcon.value = 'info';
 } else {
-	alertType.value = 'bg-blue-400/90';
+	toastColor.value = 'bg-blue-400';
+	toastIcon.value = 'info';
 }
 
 timeOut = setTimeout(() => {
 	popAlert(props.id);
-}, 5000);
+}, 500000);
 
 onBeforeUnmount(() => {
 	clearTimeout(timeOut);

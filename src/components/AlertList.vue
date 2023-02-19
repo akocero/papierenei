@@ -1,5 +1,5 @@
 <template>
-	<div class="fixed top-4 right-4 z-40 max-w-md">
+	<div class="fixed top-6 right-6 z-40 max-w-md">
 		<!-- <transition-group name="list" tag="div" class="alert-list" appear> -->
 		<Alert
 			v-for="alert in alerts"
@@ -7,6 +7,7 @@
 			:status="alert.status"
 			:message="alert.message"
 			:customStatus="alert.customStatus"
+			:title="alert.title"
 			:id="alert.id"
 		/>
 		<!-- </transition-group> -->

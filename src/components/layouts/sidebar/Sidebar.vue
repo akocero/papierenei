@@ -37,9 +37,17 @@ const sidebarRoutes = ref([
 		items: [],
 	},
 	{
+		text: 'View Online Store',
+		routeObject: { name: 'home' },
+		isRoute: true,
+		icon: 'shopping-cart',
+		active: false,
+		items: [],
+	},
+	{
 		text: 'Sales',
 		routeObject: {},
-		icon: 'shopping-bag',
+		icon: 'dollar-sign',
 		isRoute: false,
 		active: false,
 		items: [

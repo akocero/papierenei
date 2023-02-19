@@ -212,7 +212,7 @@ import { useCollectionStore } from '@/stores/collection';
 
 const router = useRouter();
 const route = useRoute();
-const { pushAlert } = useAlert();
+const { pushAlert, pushToast } = useAlert();
 const store = useProductStore();
 const tagStore = useTagStore();
 const collectionStore = useCollectionStore();
@@ -229,7 +229,12 @@ const handleSubmit = async () => {
 		pushAlert('error', store.error.message);
 		return;
 	}
-	pushAlert('info', `Product <${res.name}> is updated!`);
+
+	pushToast({
+		status: 'success',
+		message: 'Updated succesfully!',
+		title: 'Product Updated',
+	});
 	router.push({
 		name: 'warehouse.products',
 	});

@@ -22,7 +22,7 @@
 		</div>
 	</BaseModal>
 	<div class="card">
-		<button @click="openModal">Open</button>
+		<!-- <button @click="showAlert">Open</button> uncomment this to test the toast or modals -->
 		<div class="flex items-baseline justify-between">
 			<h4 class="text-xl">Welcome, Dashboard</h4>
 		</div>
@@ -32,7 +32,34 @@
 <script setup>
 import { ref } from 'vue';
 import BaseModal from '../components/BaseModal.vue';
+import useAlert from '../composables/useAlert';
+
+const { pushToast } = useAlert();
 const isOpen = ref(false);
+
+const showAlert = () => {
+	pushToast({
+		status: 'success',
+		title: 'Testing napaka angas',
+		message: 'test message',
+	});
+	pushToast({
+		status: 'error',
+		title: 'Testing napaka angas',
+		message: 'test message',
+	});
+	pushToast({
+		status: 'warning',
+		title: 'Testing napaka angas',
+		message: 'test message',
+	});
+	pushToast({
+		status: 'info',
+		title: 'Testing napaka angas',
+		message: 'test message',
+	});
+	return;
+};
 
 function openModal() {
 	isOpen.value = true;
