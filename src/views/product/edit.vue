@@ -180,7 +180,7 @@
 				:store="store"
 				title="Cover Photo"
 				db_column="coverPhoto"
-				v-if="store.item && !store.isLoading"
+				v-if="store.item"
 				uploadType="single"
 			/>
 
@@ -188,7 +188,7 @@
 				:store="store"
 				title="Images"
 				db_column="images"
-				v-if="store.item && !store.isLoading"
+				v-if="store.item"
 				uploadType="multiple"
 			/>
 

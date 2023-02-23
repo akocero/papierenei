@@ -180,6 +180,8 @@ const handleUploadImages = async (selectedFiles) => {
 		message: 'Updated succesfully!',
 	});
 
+	closeUploadImage();
+
 	isUploading.value = false;
 };
 
