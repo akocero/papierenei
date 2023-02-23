@@ -37,12 +37,6 @@
 						: 'border-gray-200'
 				"
 			>
-				<button
-					class="invisible absolute top-2 right-2 h-5 w-5 bg-red-500 text-white group-hover:visible"
-					@click="handleRemoveImage(image._id)"
-				>
-					<VueFeather type="x" size="18" class="" />
-				</button>
 				<img
 					:src="image.secure_url"
 					alt=""
