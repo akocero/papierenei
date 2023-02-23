@@ -23,24 +23,35 @@
 			</button>
 		</div>
 		<div
-			class="mt-4 grid max-h-[70vh] w-full grid-cols-4 gap-4 overflow-auto"
+			class="mt-4 grid max-h-[70vh] w-full grid-cols-5 gap-4 overflow-auto"
 			v-if="imageStore.list && !imageStore.isLoading"
 		>
 			<label
 				v-for="image in imageList"
 				:key="image.public_id"
 				:for="image._id"
-				class="group relative h-40 rounded-md border p-1"
+				class="group relative h-36 cursor-pointer"
 				:class="
 					isSelected(image._id)
-						? 'border-2 border-blue-400'
-						: 'border-gray-200'
+						? 'border border-gray-200 shadow-xl'
+						: 'opacity-90 transition-all'
 				"
 			>
+				<div
+					class="absolute top-2 left-2 z-30 flex h-6 w-6 items-center justify-center rounded-md bg-green-400 text-white shadow-lg"
+					v-if="isSelected(image._id)"
+				>
+					<VueFeather
+						type="check"
+						size="18"
+						class=""
+						stroke-width="4"
+					/>
+				</div>
 				<img
 					:src="image.secure_url"
 					alt=""
-					class="h-full w-full rounded-md object-cover"
+					class="h-full w-full object-cover"
 				/>
 				<input
 					type="checkbox"
@@ -52,7 +63,13 @@
 			</label>
 		</div>
 
-		<div class="mt-4 flex justify-end">
+		<div class="mt-4 flex justify-end space-x-2">
+			<BaseButton
+				@click.prevent="$emit('closeModal')"
+				text="Cancel"
+				color="default"
+				_class="mt-2"
+			/>
 			<BaseButton
 				v-if="selectedImages.length"
 				:text="buttonText"

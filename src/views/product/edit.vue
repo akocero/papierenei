@@ -148,12 +148,11 @@
 						text="Save Changes"
 						color="primary"
 						v-if="!store.isLoading"
-					/>
+					></BaseButton>
 					<BaseButton
 						v-if="store.isLoading"
 						_type="submit"
 						text="Updating..."
-						color="primary"
 						:disabled="true"
 					/>
 				</div>

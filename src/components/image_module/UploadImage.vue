@@ -66,14 +66,15 @@
 				color="primary"
 				_class="mt-2"
 				v-if="!isUploading && selectedFiles.length"
-			/>
+			>
+			</BaseButton>
 			<BaseButton
 				v-if="isUploading"
 				text="Uploading..."
-				color="primary"
 				_class="mt-2"
 				:disabled="true"
-			/>
+			>
+			</BaseButton>
 		</div>
 	</BaseModal>
 </template>

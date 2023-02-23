@@ -6,14 +6,19 @@
 			:db_column="db_column"
 			:uploadType="uploadType"
 		/>
-		<div class="grid w-full grid-cols-2 gap-4" v-if="store.item">
+		<div class="grid w-full grid-cols-12 gap-2" v-if="store.item">
 			<div
 				v-for="image in store.item[db_column]"
 				:key="image.public_id"
-				class="group relative h-40 border"
+				:class="[
+					'group relative  ',
+					store.item[db_column].length === 1
+						? 'col-span-6  h-40'
+						: 'col-span-3 h-20',
+				]"
 			>
 				<button
-					class="invisible absolute top-2 right-2 h-5 w-5 bg-red-500 text-white group-hover:visible"
+					class="invisible absolute top-1 right-1 h-5 w-5 bg-red-500 text-white group-hover:visible"
 					@click="handleRemoveInMultipleImage(image._id)"
 				>
 					<VueFeather type="x" size="18" class="" />
@@ -35,7 +40,7 @@
 				<img
 					:src="image.secure_url"
 					alt=""
-					class="h-full w-full object-contain"
+					class="h-full w-full object-cover"
 				/>
 			</div>
 		</div>
