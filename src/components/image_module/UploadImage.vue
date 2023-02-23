@@ -123,6 +123,14 @@ const handleSelectFiles = (e) => {
 };
 
 const handleDropFiles = (e) => {
+	if (props.uploadType === 'single' && e.dataTransfer.files.length > 1) {
+		pushToast({
+			status: 'error',
+			title: 'Drop Failed',
+			message: 'Please drop only 1 image!',
+		});
+		return;
+	}
 	if (e.dataTransfer.files.length) {
 		onFileSelected(e.dataTransfer.files);
 		return;
