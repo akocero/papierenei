@@ -150,14 +150,14 @@
 				<li class="border-b py-4" v-for="ct in cartStore.list">
 					<div class="flex items-center">
 						<div
-							v-if="ct.images.length || ct.coverPhoto"
+							v-if="ct.images.length || ct.coverPhoto.length"
 							class="relative h-24 w-24"
 						>
 							<img
 								class="h-full w-full object-cover"
-								:src="ct.coverPhoto.secure_url"
+								:src="ct.coverPhoto[0].secure_url"
 								alt=""
-								v-if="ct.coverPhoto"
+								v-if="ct.coverPhoto.length"
 							/>
 							<img
 								class="h-full w-full object-cover"

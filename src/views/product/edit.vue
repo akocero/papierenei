@@ -176,15 +176,20 @@
 				label="Tags"
 			/>
 
-			<UploadImage
+			<ImageManager
 				:store="store"
-				v-if="store.item && !store.isLoading"
 				title="Cover Photo"
 				db_column="coverPhoto"
-			/>
-			<UploadMultipleImage
-				:store="store"
 				v-if="store.item && !store.isLoading"
+				uploadType="single"
+			/>
+
+			<ImageManager
+				:store="store"
+				title="Images"
+				db_column="images"
+				v-if="store.item && !store.isLoading"
+				uploadType="multiple"
 			/>
 
 			<Spinner v-else />
@@ -193,12 +198,10 @@
 </template>
 
 <script setup>
-import UploadMultipleImage from '@/components/UploadMultipleImage.vue';
-import UploadImage from '@/components/UploadImage.vue';
+import ImageManager from '@/components/image_module/ImageManager.vue';
 import BaseButton from '@/components/BaseButton.vue';
 import BaseInput from '@/components/BaseInput.vue';
 
-import BaseSelect from '@/components/BaseSelect.vue';
 import BaseTextArea from '@/components/BaseTextArea.vue';
 
 import { onBeforeMount, ref, watch } from 'vue';
@@ -219,6 +222,8 @@ const collectionStore = useCollectionStore();
 
 onBeforeMount(async () => {
 	await store.find(route.params.id);
+
+	console.log(store.item);
 });
 
 const handleSubmit = async () => {

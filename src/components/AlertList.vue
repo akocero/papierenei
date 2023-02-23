@@ -1,15 +1,18 @@
 <template>
-	<div class="fixed top-6 right-6 z-40 max-w-md">
+	<div class="fixed z-40 flex h-0 w-full justify-center bg-blue-300">
 		<!-- <transition-group name="list" tag="div" class="alert-list" appear> -->
-		<Alert
-			v-for="alert in alerts"
-			:key="alert.id"
-			:status="alert.status"
-			:message="alert.message"
-			:customStatus="alert.customStatus"
-			:title="alert.title"
-			:id="alert.id"
-		/>
+		<div class="mt-10 max-w-md">
+			<Alert
+				v-for="alert in alerts"
+				:key="alert.id"
+				:status="alert.status"
+				:message="alert.message"
+				:customStatus="alert.customStatus"
+				:title="alert.title"
+				:id="alert.id"
+			/>
+		</div>
+
 		<!-- </transition-group> -->
 	</div>
 </template>

@@ -2,7 +2,7 @@
 	<div v-if="product" class="grid grid-cols-12 gap-10">
 		<div class="col-span-7">
 			<div
-				v-if="product.images.length || product.coverPhoto"
+				v-if="product.images.length || product.coverPhoto?.length"
 				class="relative h-44 w-full md:h-[32rem]"
 			>
 				<div
@@ -13,9 +13,9 @@
 				</div>
 				<img
 					class="h-full w-full object-cover"
-					:src="product.coverPhoto.secure_url"
+					:src="product.coverPhoto[0].secure_url"
 					alt=""
-					v-if="product.coverPhoto"
+					v-if="product.coverPhoto.length"
 				/>
 				<img
 					class="h-full w-full object-cover"

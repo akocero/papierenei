@@ -78,6 +78,13 @@ const create = async (store, payload) => {
 		store.isLoading = false;
 		console.log(err.response.data.message);
 		store.error = err.response.data;
+		console.log('yarks', err.response?.data?.message);
+		if (err.response?.data?.message === 'Expired Token') {
+			Cookies.remove('user');
+			Cookies.remove('token');
+			window.location.reload();
+			return;
+		}
 	}
 };
 
@@ -88,7 +95,8 @@ const update = async (store, payload) => {
 		const res = await axios.patch(`${store.url}/${payload._id}`, payload);
 		store.error = null;
 		store.isLoading = false;
-		// console.log('storeHelper', res.data);
+		console.log('storeHelper', res.data);
+		store.item = res.data;
 		return res.data;
 	} catch (err) {
 		store.isLoading = false;

@@ -39,15 +39,15 @@
 								<div
 									v-if="
 										product.images.length ||
-										product.coverPhoto
+										product.coverPhoto.length
 									"
 									class="relative h-24 w-24"
 								>
 									<img
 										class="h-full w-full object-cover"
-										:src="product.coverPhoto.secure_url"
+										:src="product.coverPhoto[0].secure_url"
 										alt=""
-										v-if="product.coverPhoto"
+										v-if="product.coverPhoto.length"
 									/>
 									<img
 										class="h-full w-full object-cover"

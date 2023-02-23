@@ -36,5 +36,5 @@ const props = defineProps({
 	},
 });
 
-const isCardOpen = ref(false);
+const isCardOpen = ref(true);
 </script>

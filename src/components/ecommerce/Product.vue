@@ -14,7 +14,7 @@
 		<div class="group relative">
 			<RouterLink :to="{ name: 'product', params: { id: product._id } }">
 				<div
-					v-if="product.images.length || product.coverPhoto"
+					v-if="product?.images?.length || product?.coverPhoto?.length"
 					class="relative h-44 w-full md:h-64"
 				>
 					<div
@@ -25,9 +25,9 @@
 					</div>
 					<img
 						class="h-full w-full object-cover"
-						:src="product.coverPhoto.secure_url"
+						:src="product.coverPhoto[0].secure_url"
 						alt=""
-						v-if="product.coverPhoto"
+						v-if="product.coverPhoto.length"
 					/>
 					<img
 						class="h-full w-full object-cover"
@@ -102,4 +102,6 @@ const props = defineProps({
 	product: Object,
 	index: Number,
 });
+
+console.log('test', props.product);
 </script>

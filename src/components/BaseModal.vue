@@ -1,6 +1,6 @@
 <template>
 	<TransitionRoot appear as="template">
-		<Dialog as="div" @click="$emit('closeModal')" class="relative z-30">
+		<Dialog as="div" @click="handleCloseModal" class="relative z-30">
 			<TransitionChild
 				as="template"
 				enter="duration-300 ease-out"
@@ -15,7 +15,7 @@
 
 			<div class="fixed inset-0 overflow-y-auto">
 				<div
-					class="flex min-h-full items-start justify-center p-4 pt-28 text-center"
+					class="flex min-h-full items-start justify-center p-4 pt-10 text-center"
 				>
 					<TransitionChild
 						as="template"
@@ -27,7 +27,8 @@
 						leave-to="opacity-0 scale-95"
 					>
 						<DialogPanel
-							class="w-full max-w-2xl transform overflow-hidden rounded-sm bg-white p-6 text-left align-middle shadow-xl transition-all"
+							class="w-full transform overflow-hidden rounded-sm bg-white p-6 text-left align-middle shadow-xl transition-all"
+							:class="modalSize[size]"
 						>
 							<DialogTitle
 								v-if="modalTitle"
@@ -36,6 +37,13 @@
 							>
 								{{ modalTitle }}
 							</DialogTitle>
+
+							<button
+								class="absolute right-3 top-3"
+								@click="$emit('closeModal')"
+							>
+								<vueFeather type="x" size="18" class="" />
+							</button>
 							<slot></slot>
 							<!-- <div class="mt-2">
 								<p class="text-sm text-gray-500">
@@ -63,6 +71,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import {
 	TransitionRoot,
 	TransitionChild,
@@ -73,7 +82,36 @@ import {
 
 const props = defineProps({
 	modalTitle: String,
+	backdropClose: {
+		type: Boolean,
+		default: true,
+	},
+	size: {
+		type: String,
+		default: 'xl',
+		validator(value) {
+			// note: modify this validator base on modalSize value
+			return ['sm', 'md', 'lg', 'xl', 'xxl'].includes(value);
+		},
+	},
 });
+
+const modalSize = ref({
+	sm: 'max-w-xl',
+	md: 'max-w-2xl',
+	lg: 'max-w-3xl',
+	xl: 'max-w-4xl',
+	xxl: 'max-w-5xl',
+});
+
+const emit = defineEmits(['closeModal']);
+
+const handleCloseModal = () => {
+	if (props.backdropClose) {
+		emit('closeModal');
+	}
+	return;
+};
 </script>
 
 <style></style>

@@ -37,6 +37,7 @@ const { popAlert } = useAlert();
 const toastColor = ref('');
 const toastIcon = ref('');
 let timeOut = null;
+const toastShowTime = 5000;
 const props = defineProps({
 	status: {
 		type: String,
@@ -76,7 +77,7 @@ if (props.status === 'error') {
 
 timeOut = setTimeout(() => {
 	popAlert(props.id);
-}, 500000);
+}, toastShowTime);
 
 onBeforeUnmount(() => {
 	clearTimeout(timeOut);

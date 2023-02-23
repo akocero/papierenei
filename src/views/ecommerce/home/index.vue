@@ -104,6 +104,8 @@ onBeforeMount(async () => {
 	// Fetch products for new Arrivals section
 	await productStore.fetch('?isPublished=1&limit=10');
 
+	console.log(productStore.list);
+
 	// Check if there is any data on ecommer settings
 	// if there is no data invoke init to create object on ecommerce settings
 	//  please refer to stores/ecomm_setting.js
@@ -117,7 +119,7 @@ onBeforeMount(async () => {
 
 	// get the active hero image
 	activeHero.value = ecommSettingsStore.item.heros.find(
-		(hero) => hero.isActive === true,
+		(hero) => hero._id === ecommSettingsStore.item.activeHero,
 	);
 	// if no active hero image use the first one
 	if (!activeHero.value) {

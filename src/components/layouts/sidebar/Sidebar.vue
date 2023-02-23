@@ -40,14 +40,15 @@ const sidebarRoutes = ref([
 		text: 'View Online Store',
 		routeObject: { name: 'home' },
 		isRoute: true,
-		icon: 'shopping-cart',
+		icon: 'eye',
 		active: false,
 		items: [],
+		newTab: true,
 	},
 	{
 		text: 'Sales',
 		routeObject: {},
-		icon: 'dollar-sign',
+		icon: 'credit-card',
 		isRoute: false,
 		active: false,
 		items: [
@@ -93,7 +94,7 @@ const sidebarRoutes = ref([
 		],
 	},
 	{
-		text: 'Ecomm',
+		text: 'Store',
 		routeObject: {},
 		icon: 'shopping-bag',
 		isRoute: false,

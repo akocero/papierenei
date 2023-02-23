@@ -1,5 +1,6 @@
 <template>
-	<BaseModal
+	<!-- <ManageImage :isOpen="isOpen" @closeModal="closeModal" /> -->
+	<!-- <BaseModal
 		@closeModal="closeModal"
 		:show="isOpen"
 		modalTitle="Default Modal"
@@ -20,9 +21,10 @@
 				Got it, thanks!
 			</button>
 		</div>
-	</BaseModal>
+	</BaseModal> -->
 	<div class="card">
-		<!-- <button @click="showAlert">Open</button> uncomment this to test the toast or modals -->
+		<!-- uncomment this to test the toast or modals -->
+		<button @click="showAlert">Open</button>
 		<div class="flex items-baseline justify-between">
 			<h4 class="text-xl">Welcome, Dashboard</h4>
 		</div>
@@ -32,6 +34,7 @@
 <script setup>
 import { ref } from 'vue';
 import BaseModal from '../components/BaseModal.vue';
+// import ManageImage from '@/components/ManageImage.vue';
 import useAlert from '../composables/useAlert';
 
 const { pushToast } = useAlert();
@@ -45,12 +48,12 @@ const showAlert = () => {
 	});
 	pushToast({
 		status: 'error',
-		title: 'Testing napaka angas',
+		title: 'Testing napaka angas Testing napaka angas',
 		message: 'test message',
 	});
 	pushToast({
 		status: 'warning',
-		title: 'Testing napaka angas',
+		title: 'Testing napaka angas  Testing napaka angas Testing napaka angas',
 		message: 'test message',
 	});
 	pushToast({
@@ -63,6 +66,8 @@ const showAlert = () => {
 
 function openModal() {
 	isOpen.value = true;
+
+	console.log('openModal');
 }
 
 function closeModal() {

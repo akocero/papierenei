@@ -3,12 +3,6 @@
 		<h4 class="text-xl">Ecommerce Settings</h4>
 		<div>
 			<BaseButton
-				_type="link"
-				text="Back"
-				:routeObject="{ name: 'warehouse.products' }"
-				_class="mr-2"
-			/>
-			<BaseButton
 				_type="button"
 				@click="handleSubmit"
 				text="Save Changes"
@@ -109,17 +103,33 @@
 			<div v-else>No banner found!</div>
 		</div>
 	</div>
-	<UploadMultipleImage
+	<ImageManager
 		:store="store"
 		v-if="store.item"
 		title="Heros"
 		db_column="heros"
 		:setActiveFunc="true"
+		uploadType="multiple"
+		@setActive="setActive"
+		@setInactive="setInactive"
+		:activeImage="store.item.activeHero"
+	/>
+
+	<ImageManager
+		:store="store"
+		v-if="store.item"
+		title="Navbar Backgrounds"
+		db_column="navbarBGs"
+		:setActiveFunc="true"
+		uploadType="multiple"
+		@setActive="setActive"
+		@setInactive="setInactive"
+		:activeImage="store.item.activeNavbarBG"
 	/>
 </template>
 <script setup>
 import { onBeforeMount, ref } from 'vue';
-import UploadMultipleImage from '@/components/UploadMultipleImage.vue';
+import ImageManager from '@/components/image_module/ImageManager.vue';
 import { useEcommSettingStore } from '@/stores/ecomm_setting';
 import BaseInput from '@/components/BaseInput.vue';
 import BaseButton from '@/components/BaseButton.vue';
@@ -169,7 +179,7 @@ onBeforeMount(async () => {
 
 	store.item = store.list[0];
 
-	console.log(store.item);
+	console.log('item', store.item);
 });
 
 const handleSubmit = async () => {
@@ -214,5 +224,32 @@ const removeBanner = (banner_name) => {
 	);
 
 	pushAlert('info', `Banner <${banner_name}> is removed!`);
+};
+
+const setActive = (item_id) => {
+	// props.store.item[props.db_column] = props.store.item[props.db_column].map(
+	// 	(item) => {
+	// 		item.isActive = false;
+	// 		if (item.public_id === item_id) {
+	// 			if (item.isActive) item.isActive = false;
+	// 			else item.isActive = true;
+	// 		}
+	// 		return item;
+	// 	},
+	// );
+
+	store.item.activeHero = item_id;
+	console.log(item_id);
+};
+
+const setInactive = (item_id) => {
+	// props.store.item[props.db_column] = props.store.item[props.db_column].map(
+	// 	(item) => {
+	// 		item.isActive = false;
+	// 		return item;
+	// 	},
+	// );
+	store.item.activeHero = '';
+	console.log(item_id);
 };
 </script>

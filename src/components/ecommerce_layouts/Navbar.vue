@@ -4,12 +4,13 @@
 			class="relative flex h-24 items-center justify-center md:mx-auto md:h-48 md:max-w-screen-2xl"
 		>
 			<a href="#">
-				<router-link to="/"
-					><img
+				<router-link to="/">
+					<img
 						src="../../assets/logo-t.png"
 						alt=""
 						class="h-24 md:h-56"
-				/></router-link>
+					/>
+				</router-link>
 			</a>
 			<form
 				class="absolute right-0 mt-10 hidden h-40 md:block"
@@ -19,11 +20,7 @@
 				<div class="flex h-full items-center justify-end">
 					<div class="relative">
 						<button class="absolute left-3 top-1 text-darkBlue">
-							<vue-feather
-								type="search"
-								size="24"
-								class="mt-2"
-							></vue-feather>
+							<vue-feather type="search" size="24" class="mt-2" />
 						</button>
 						<input
 							type="text"
@@ -74,7 +71,7 @@
 				class="flex-col md:mx-auto md:flex md:h-full md:max-w-screen-2xl md:flex-row md:items-center md:justify-between md:space-y-0 md:pb-0"
 				:class="{ flex: openMenu, hidden: !openMenu }"
 			>
-			<li class="nav__item md:flex md:h-full md:items-center">
+				<li class="nav__item md:flex md:h-full md:items-center">
 					<router-link
 						:to="{
 							name: 'home',
@@ -85,7 +82,11 @@
 					</router-link>
 				</li>
 				<li class="nav__item md:flex md:h-full md:items-center">
-					<router-link to="" class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue">NEW</router-link>
+					<router-link
+						to=""
+						class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue"
+						>NEW
+					</router-link>
 				</li>
 				<li class="nav__item md:flex md:h-full md:items-center">
 					<router-link
@@ -142,15 +143,15 @@
 							query: { collection: '63bd7ebcab01444f92149c92' },
 						}"
 						class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue"
-						>STICKERS</router-link
-					>
+						>STICKERS
+					</router-link>
 				</li>
 				<li class="md:flex md:h-full md:items-center">
 					<router-link
 						to="terms"
 						class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue"
-						>SALE</router-link
-					>
+						>SALE
+					</router-link>
 				</li>
 				<li class="md:flex md:h-full md:items-center">
 					<router-link
@@ -158,15 +159,15 @@
 							name: 'collections',
 						}"
 						class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue"
-						>COLLECTIONS</router-link
-					>
+						>COLLECTIONS
+					</router-link>
 				</li>
 				<li class="md:flex md:h-full md:items-center">
 					<router-link
 						to="terms"
 						class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue"
-						>FREEBIES</router-link
-					>
+						>FREEBIES
+					</router-link>
 				</li>
 				<li class="hidden md:block">
 					<router-link
