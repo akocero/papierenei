@@ -38,8 +38,8 @@
 							<div class="flex items-center gap-10">
 								<div
 									v-if="
-										product.images.length ||
-										product.coverPhoto.length
+										product?.images?.length ||
+										product?.coverPhoto?.length
 									"
 									class="relative h-24 w-24"
 								>

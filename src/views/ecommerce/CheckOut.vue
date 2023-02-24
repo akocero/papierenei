@@ -150,7 +150,7 @@
 				<li class="border-b py-4" v-for="ct in cartStore.list">
 					<div class="flex items-center">
 						<div
-							v-if="ct.images.length || ct.coverPhoto.length"
+							v-if="ct?.images?.length || ct?.coverPhoto?.length"
 							class="relative h-24 w-24"
 						>
 							<img
