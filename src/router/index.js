@@ -273,6 +273,26 @@ const router = createRouter({
 					name: 'ecomm.settings',
 					component: () => import('../views/ecomm/Setting.vue'),
 				},
+				{
+					path: 'ecomm/media',
+					name: 'ecomm.media',
+					component: () => import('../views/media/index.vue'),
+				},
+				{
+					path: 'ecomm/media/create',
+					name: 'ecomm.media.create',
+					component: () => import('../views/media/create.vue'),
+				},
+				{
+					path: 'ecomm/media/edit/:id',
+					name: 'ecomm.media.edit',
+					component: () => import('../views/media/edit.vue'),
+				},
+				{
+					path: 'ecomm/media/view/:id',
+					name: 'ecomm.media.view',
+					component: () => import('../views/media/view.vue'),
+				},
 			],
 		},
 	],

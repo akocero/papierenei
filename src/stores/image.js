@@ -29,5 +29,8 @@ export const useImageStore = defineStore({
 		async find(id) {
 			await storeHelpers.find(this, id);
 		},
+		async destroy(id) {
+			await storeHelpers.destroy(this, id);
+		},
 	},
 });

@@ -105,6 +105,11 @@ const sidebarRoutes = ref([
 				routeObject: { name: 'ecomm.settings' },
 				active: false,
 			},
+			{
+				text: 'Media',
+				routeObject: { name: 'ecomm.media' },
+				active: false,
+			},
 		],
 	},
 ]);

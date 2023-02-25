@@ -76,15 +76,28 @@ const create = async (store, payload) => {
 		return res.data;
 	} catch (err) {
 		store.isLoading = false;
-		console.log(err.response.data.message);
 		store.error = err.response.data;
-		console.log('yarks', err.response?.data?.message);
 		if (err.response?.data?.message === 'Expired Token') {
 			Cookies.remove('user');
 			Cookies.remove('token');
 			window.location.reload();
 			return;
 		}
+	}
+};
+
+const destroy = async (store, id) => {
+	store.isLoading = true;
+	store.error = null;
+	try {
+		const res = await axios.delete(`${store.url}/${id}`);
+		store.error = null;
+		store.isLoading = false;
+		return true;
+	} catch (err) {
+		store.isLoading = false;
+		console.log(err.response.data.message);
+		store.error = err.response.data;
 	}
 };
 
@@ -124,31 +137,12 @@ const customUpdate = async (store, customURL, payload) => {
 	}
 };
 
-const deleteImage = async (store, payload) => {
-	store.isLoading = true;
-	store.error = null;
-	try {
-		const res = await axios.post(
-			`${store.url}/deleteImage/${payload._id}`,
-			payload,
-		);
-		store.error = null;
-		store.isLoading = false;
-		console.log(res.data);
-		return res.data;
-	} catch (err) {
-		store.isLoading = false;
-		console.log(err.response.data.message);
-		store.error = err.response.data;
-	}
-};
-
 export default {
 	fetch,
 	create,
 	find,
 	update,
-	deleteImage,
 	sendEmail,
 	customUpdate,
+	destroy,
 };
