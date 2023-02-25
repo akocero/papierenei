@@ -1,11 +1,11 @@
 <template>
 	<div class="">
 		<div class="mb-4 flex items-baseline justify-between">
-			<h4 class="text-xl">Update Collection Info.</h4>
+			<h4 class="text-xl">Update Category Info.</h4>
 			<BaseButton
 				_type="link"
 				text="Back"
-				:routeObject="{ name: 'warehouse.collections' }"
+				:routeObject="{ name: 'warehouse.categories' }"
 			/>
 		</div>
 		<div class="flex flex-col items-start gap-6 md:flex-row">
@@ -14,11 +14,11 @@
 					@submit.prevent="handleSubmit"
 					v-if="store.item && !store.isLoading"
 				>
-					<div class="grid grid-cols-6 gap-4">
-						<div class="col-span-full md:col-span-6">
+					<div class="grid grid-cols-12 gap-4">
+						<div class="col-span-6 md:col-span-6">
 							<BaseInput
 								id="input_name"
-								label="Collection Name"
+								label="Category Name"
 								v-model="store.item.name"
 								:error="store.error"
 								:errorField="store.error?.errors?.name || null"
@@ -26,7 +26,7 @@
 								:required="true"
 							/>
 						</div>
-						<div class="col-span-full md:col-span-6">
+						<div class="col-span-6 md:col-span-6">
 							<BaseTextArea
 								id="input_description"
 								label="Description"
@@ -82,7 +82,7 @@ import useInputMultiple from '@/composables/useInputMultiple';
 import Spinner from '@/components/Spinner.vue';
 import { onBeforeMount, ref, watch } from 'vue';
 import SelectSearch from '@/components/SelectSearch.vue';
-import { useCollectionStore } from '@/stores/collection';
+import { useCategoryStore } from '@/stores/category';
 import useAlert from '../../composables/useAlert';
 import { useRoute, useRouter } from 'vue-router';
 import ImageManager from '@/components/image_module/ImageManager.vue';
@@ -90,7 +90,7 @@ import ImageManager from '@/components/image_module/ImageManager.vue';
 const router = useRouter();
 const route = useRoute();
 const { pushAlert } = useAlert();
-const store = useCollectionStore();
+const store = useCategoryStore();
 
 onBeforeMount(async () => {
 	await store.find(route.params.id);
@@ -105,9 +105,9 @@ const handleSubmit = async () => {
 		return;
 	}
 	console.log({ res });
-	pushAlert('info', `Collection <${res.name}> is updated!`);
+	pushAlert('info', `Category <${res.name}> is updated!`);
 	router.push({
-		name: 'warehouse.collections',
+		name: 'warehouse.categories',
 	});
 };
 </script>

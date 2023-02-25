@@ -91,6 +91,11 @@ const sidebarRoutes = ref([
 				routeObject: { name: 'warehouse.collections' },
 				active: false,
 			},
+			{
+				text: 'Categories',
+				routeObject: { name: 'warehouse.categories' },
+				active: false,
+			},
 		],
 	},
 	{

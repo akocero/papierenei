@@ -161,6 +161,13 @@
 		</div>
 		<div class="w-full md:w-1/3">
 			<BaseSearchSelectCard
+				v-model="store.item.categories"
+				v-if="store.item && !store.isLoading"
+				:store="categoryStore"
+				label="Categories"
+			/>
+
+			<BaseSearchSelectCard
 				v-model="store.item.collections"
 				v-if="store.item && !store.isLoading"
 				:store="collectionStore"
@@ -211,6 +218,7 @@ import Spinner from '@/components/Spinner.vue';
 import BaseSearchSelectCard from '@/components/BaseSearchSelectCard.vue';
 import { useTagStore } from '@/stores/tag';
 import { useCollectionStore } from '@/stores/collection';
+import { useCategoryStore } from '@/stores/category';
 
 const router = useRouter();
 const route = useRoute();
@@ -218,6 +226,7 @@ const { pushAlert, pushToast } = useAlert();
 const store = useProductStore();
 const tagStore = useTagStore();
 const collectionStore = useCollectionStore();
+const categoryStore = useCategoryStore();
 
 onBeforeMount(async () => {
 	await store.find(route.params.id);

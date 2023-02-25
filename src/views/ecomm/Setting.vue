@@ -110,9 +110,7 @@
 		db_column="heros"
 		:setActiveFunc="true"
 		uploadType="multiple"
-		@setActive="setActive"
-		@setInactive="setInactive"
-		:activeImage="store.item.activeHero"
+		activeImage="activeHero"
 	/>
 
 	<ImageManager
@@ -122,9 +120,7 @@
 		db_column="navbarBGs"
 		:setActiveFunc="true"
 		uploadType="multiple"
-		@setActive="setActive"
-		@setInactive="setInactive"
-		:activeImage="store.item.activeNavbarBG"
+		activeImage="activeNavbarBG"
 	/>
 </template>
 <script setup>
@@ -226,30 +222,5 @@ const removeBanner = (banner_name) => {
 	pushAlert('info', `Banner <${banner_name}> is removed!`);
 };
 
-const setActive = (item_id) => {
-	// props.store.item[props.db_column] = props.store.item[props.db_column].map(
-	// 	(item) => {
-	// 		item.isActive = false;
-	// 		if (item.public_id === item_id) {
-	// 			if (item.isActive) item.isActive = false;
-	// 			else item.isActive = true;
-	// 		}
-	// 		return item;
-	// 	},
-	// );
 
-	store.item.activeHero = item_id;
-	console.log(item_id);
-};
-
-const setInactive = (item_id) => {
-	// props.store.item[props.db_column] = props.store.item[props.db_column].map(
-	// 	(item) => {
-	// 		item.isActive = false;
-	// 		return item;
-	// 	},
-	// );
-	store.item.activeHero = '';
-	console.log(item_id);
-};
 </script>

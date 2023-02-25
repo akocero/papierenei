@@ -174,7 +174,7 @@ const handleUploadImages = async (selectedFiles) => {
 const deleteImage = async (id) => {
 	if (
 		confirm(
-			'Are you sure you want to delete this image? \nThis action is irreversible!',
+			'Are you sure you want to delete this image? \nThis action will update all the data related to this image!',
 		) == true
 	) {
 		await store.destroy(id);

@@ -25,15 +25,19 @@
 				</button>
 				<button
 					class="invisible absolute top-2 left-2 border bg-gray-100 py-1 px-4 text-gray-900 shadow group-hover:visible"
-					@click="$emit('setActive', image._id)"
-					v-if="activeImage !== image._id && setActiveFunc"
+					@click="setActive(image._id)"
+					v-if="
+						store.item[activeImage] !== image._id && setActiveFunc
+					"
 				>
 					Set as active
 				</button>
 				<button
 					class="absolute top-2 left-2 bg-yellow-500 py-1 px-4 text-white shadow"
-					@click="$emit('setInactive', image._id)"
-					v-if="activeImage === image._id && setActiveFunc"
+					@click="setInactive"
+					v-if="
+						store.item[activeImage] === image._id && setActiveFunc
+					"
 				>
 					Set as inactive
 				</button>
@@ -99,5 +103,13 @@ const handleRemoveInMultipleImage = async (image_id) => {
 		title: 'Image Removed',
 		message: 'Image removed please save changes!',
 	});
+};
+
+const setActive = (id) => {
+	props.store.item[props.activeImage] = id;
+};
+
+const setInactive = () => {
+	props.store.item[props.activeImage] = '';
 };
 </script>
