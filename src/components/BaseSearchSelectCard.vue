@@ -11,7 +11,7 @@
 						v-model="name"
 						:error="store.error"
 						:errorField="store.error?.errors?.name || null"
-						placeholder="Ex. ABC"
+						:placeholder="placeholder"
 						:required="false"
 					/>
 
@@ -51,25 +51,24 @@
 							<!-- Checkbox of all document base on search value (name)  -->
 
 							<li v-for="item in filteredItems">
-								<div
-									class="cursor-pointer border border-white py-2 px-3 hover:border-gray-200 hover:bg-gray-100"
+								<label
+									:for="item._id"
+									class="block cursor-pointer border border-white py-2 px-3 hover:border-gray-200 hover:bg-gray-100"
 								>
-									<label for="">
-										<input
-											type="checkbox"
-											v-model="checked"
-											class="mr-2 text-primary-600"
-											@change="
-												$emit(
-													'update:modelValue',
-													checked,
-												)
-											"
-											:value="item._id"
-										/>
-										{{ item.name }}
-									</label>
-								</div>
+									<input
+										type="checkbox"
+										v-model="checked"
+										class="mr-2 text-primary-600"
+										@change="
+											$emit('update:modelValue', checked)
+										"
+										:value="item._id"
+										:id="item._id"
+									/>
+									<span class="select-none">{{
+										item.name
+									}}</span>
+								</label>
 							</li>
 						</ul>
 					</div>
@@ -80,7 +79,7 @@
 				<div v-if="checkedItems.length > 0" class="mt-3">
 					<span
 						v-for="item in checkedItems"
-						class="relative mr-2 mb-2 inline-block rounded-xl border px-3 pr-7 transition-all"
+						class="relative mr-2 mb-2 inline-block rounded-lg border px-3 pr-7 transition-all"
 						>{{ item.name }}
 						<button
 							class="absolute top-[2px] right-[2px] h-5 w-5 rounded-full text-gray-400 hover:text-red-500"
@@ -139,6 +138,10 @@ const props = defineProps({
 	canCreateItem: {
 		type: Boolean,
 		default: false,
+	},
+	placeholder: {
+		type: String,
+		default: 'Type...',
 	},
 });
 

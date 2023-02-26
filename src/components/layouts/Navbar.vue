@@ -23,7 +23,7 @@
 					class="mt-[8px]"
 				></vue-feather>
 			</a>
-			<div class="hidden sm:flex">
+			<div class="hidden">
 				<vue-feather type="search" size="16" class="mr-4"></vue-feather>
 				<vue-feather type="refresh-cw" size="16" class=""></vue-feather>
 			</div>

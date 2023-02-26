@@ -1,5 +1,5 @@
 <template>
-	<div class="">
+	<div class="main-container">
 		<div class="mb-4 flex items-baseline justify-between">
 			<h4 class="text-xl">Update Collection Info.</h4>
 			<BaseButton
@@ -58,7 +58,7 @@
 				</form>
 				<Spinner v-else />
 			</div>
-			<div class="w-full md:w-1/3">
+			<div class="w-full md:w-[36%]">
 				<ImageManager
 					:store="store"
 					title="Cover Photo"

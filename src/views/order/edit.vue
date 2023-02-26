@@ -1,170 +1,264 @@
 <template>
-	<div class="flex w-full flex-col items-start gap-x-5 sm:flex-row">
-		<div class="card w-full sm:w-7/12">
-			<div class="mb-4 flex items-baseline justify-between">
-				<h4 class="text-xl">Update Order Info.</h4>
-				<div class="space-x-2">
-					<button
-						class="rounded-lg bg-green-500 px-4 py-2 text-white"
-						v-if="store.item && store.item.status === 'fulfilled'"
-						@click="store.item.status = 'pending'"
-					>
-						Fulfilled
-					</button>
-
-					<button
-						class="rounded-lg bg-gray-500 px-4 py-2 text-white"
-						v-if="store.item && store.item.status === 'pending'"
-						@click="store.item.status = 'fulfilled'"
-					>
-						Unsettled
-					</button>
-					<button
-						class="rounded-lg bg-green-500 px-4 py-2 text-white"
-						v-if="store.item && store.item.paymentStatus === 'paid'"
-						@click="store.item.paymentStatus = 'pending'"
-					>
-						Paid
-					</button>
-
-					<button
-						class="rounded-lg bg-gray-500 px-4 py-2 text-white"
-						v-if="
-							store.item && store.item.paymentStatus === 'pending'
-						"
-						@click="store.item.paymentStatus = 'paid'"
-					>
-						Pending payment
-					</button>
-					<BaseButton
-						_type="link"
-						text="Back"
-						:routeObject="{ name: 'sales.orders' }"
-					/>
-				</div>
-			</div>
+	<div class="main-container mb-3 flex items-center">
+		<router-link
+			:to="{ name: 'sales.orders' }"
+			class="mr-4 flex items-center justify-center rounded-sm border py-2 px-4 hover:bg-gray-200"
+		>
+			<VueFeather type="arrow-left" size="20" class="" />
+		</router-link>
+		<h4 class="text-xl">Update Order Info.</h4>
+		<div class="ml-auto">
+			<BaseButton
+				v-if="!store.isLoading"
+				@click="handleSubmit"
+				text="Save Changes"
+				color="green"
+			/>
+			<BaseButton
+				v-if="store.isLoading"
+				_type="submit"
+				text="Updating..."
+				:disabled="true"
+			/>
+		</div>
+	</div>
+	<div
+		class="main-container mb-4 flex w-full flex-col items-start gap-x-5 sm:flex-row"
+	>
+		<div class="w-full sm:w-[64%]">
 			<form
 				@submit.prevent="handleSubmit"
 				v-if="store.item && !store.isLoading"
 			>
-				<div class="grid grid-cols-12 gap-4">
-					<div class="col-span-full md:col-span-6">
-						<BaseInput
-							id="input_name"
-							label="Customer First Name"
-							v-model="store.item.firstName"
-							:error="store.error"
-							:errorField="store.error?.errors?.firstName || null"
-							placeholder="Ex. ABC"
-							:required="true"
-						/>
-					</div>
-					<div class="col-span-full md:col-span-6">
-						<BaseInput
-							id="input_name"
-							label="Customer Last Name"
-							v-model="store.item.lastName"
-							:error="store.error"
-							:errorField="store.error?.errors?.lastName || null"
-							placeholder="Ex. ABC"
-							:required="true"
-						/>
-					</div>
-					<div class="col-span-full md:col-span-6">
-						<BaseInput
-							id="input_name"
-							label="Customer Email"
-							v-model="store.item.email"
-							:error="store.error"
-							:errorField="store.error?.errors?.email || null"
-							placeholder="Ex. ABC"
-							:required="true"
-						/>
-					</div>
-					<div class="col-span-full md:col-span-6">
-						<BaseInput
-							id="input_name"
-							label="Customer Contact Number"
-							v-model="store.item.contactNumber"
-							:error="store.error"
-							:errorField="
-								store.error?.errors?.contactNumber || null
-							"
-							placeholder="Ex. ABC"
-							:required="true"
-						/>
-					</div>
-					<div class="col-span-full md:col-span-4">
-						<BaseInput
-							id="input_name"
-							label="Street Address"
-							v-model="store.item.streetAddress"
-							:error="store.error"
-							:errorField="
-								store.error?.errors?.streetAddress || null
-							"
-							placeholder="Ex. ABC"
-							:required="true"
-						/>
-					</div>
-					<div class="col-span-full md:col-span-2">
-						<BaseInput
-							id="input_name"
-							label="Country"
-							v-model="store.item.country"
-							:error="store.error"
-							:errorField="store.error?.errors?.country || null"
-							placeholder="Ex. ABC"
-							:required="true"
-						/>
-					</div>
-					<div class="col-span-full md:col-span-2">
-						<BaseInput
-							id="input_name"
-							label="State"
-							v-model="store.item.state"
-							:error="store.error"
-							:errorField="store.error?.errors?.state || null"
-							placeholder="Ex. ABC"
-							:required="true"
-						/>
-					</div>
-					<div class="col-span-full md:col-span-2">
-						<BaseInput
-							id="input_name"
-							label="City"
-							v-model="store.item.city"
-							:error="store.error"
-							:errorField="store.error?.errors?.city || null"
-							placeholder="Ex. ABC"
-							:required="true"
-						/>
-					</div>
-					<div class="col-span-full md:col-span-2">
-						<BaseInput
-							id="input_name"
-							label="Zip Code"
-							v-model="store.item.zipCode"
-							:error="store.error"
-							:errorField="store.error?.errors?.zipCode || null"
-							placeholder="Ex. ABC"
-							:required="true"
-						/>
-					</div>
+				<div class="card">
+					<form @submit.prevent="addItem" v-if="!isLoading">
+						<div class="grid grid-cols-12 gap-4">
+							<div
+								class="justify col-span-full flex items-center justify-between"
+							>
+								<h4 class="text-xl">Items</h4>
+								<BaseButton
+									:text="
+										isCustomItem
+											? 'Select Item'
+											: 'Custom Item'
+									"
+									color="default"
+									@click="isCustomItem = !isCustomItem"
+								/>
+							</div>
+							<div class="col-span-full" v-if="isCustomItem">
+								<BaseInput
+									id="custom_item_name"
+									label="Item Name"
+									v-model="customItemName"
+									:error="error"
+									:errorField="
+										error?.errors?.customItemName || null
+									"
+									placeholder="Ex. Item 1"
+									:required="true"
+									type="text"
+								/>
+							</div>
+							<div
+								class="col-span-full md:col-span-6"
+								v-if="isCustomItem"
+							>
+								<BaseInput
+									id="custom_item_cost"
+									label="Item Cost"
+									v-model="customItemCost"
+									:error="error"
+									:errorField="
+										error?.errors?.customItemCost || null
+									"
+									placeholder="Ex. 2"
+									:required="true"
+									type="number"
+									:step="0.01"
+								/>
+							</div>
+							<div
+								class="col-span-full md:col-span-6"
+								v-if="isCustomItem"
+							>
+								<BaseInput
+									id="qty"
+									label="Qty"
+									v-model="selectedQty"
+									:error="error"
+									:errorField="error?.errors?.qty || null"
+									placeholder="Ex. 2"
+									:required="true"
+									type="number"
+								/>
+							</div>
+							<div
+								class="col-span-full md:col-span-7"
+								v-if="!isCustomItem"
+							>
+								<BaseSelect
+									id="invoiceFor"
+									label="Select Item"
+									v-model="selectedItem"
+									:error="error"
+									:errorField="error?.errors?.items || null"
+									:options="productStore.list"
+									optionLabel="name"
+									optionValue="_id"
+									:required="true"
+								/>
+							</div>
+							<div
+								class="col-span-full md:col-span-3"
+								v-if="!isCustomItem"
+							>
+								<BaseInput
+									id="qty"
+									label="Qty"
+									v-model="selectedQty"
+									:error="error"
+									:errorField="error?.errors?.qty || null"
+									placeholder="Ex. 2"
+									:required="true"
+									type="number"
+								/>
+							</div>
+							<div class="col-span-2 flex items-end">
+								<BaseButton
+									_type="submit"
+									text="Add Item"
+									color="primary"
+									_class="w-full"
+								/>
+							</div>
+							<!-- <div v-if="addedItems.length" class="col-span-full">
+								<h3>
+									Total:
+									<span class="font-semibold text-green-400">
+										₱{{ numberFormat(_addedItemsTotal) }}
+									</span>
+								</h3>
+							</div> -->
+							<div class="col-span-full -mx-6 -mb-4 space-y-4">
+								<table class="w-full">
+									<thead>
+										<tr
+											class="border border-x-0 border-t-0 text-left"
+										>
+											<th class="py-3 pl-6 font-semibold">
+												Product
+											</th>
+											<th class="py-3 font-semibold">
+												Quantity
+											</th>
+											<th
+												class="py-3 text-right font-semibold"
+											>
+												Total
+											</th>
+											<th
+												class="w-[10%] py-3 text-right font-semibold"
+											></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr
+											class=""
+											:class="[
+												index + 1 === addedItems.length
+													? 'border-0'
+													: 'border-b',
+											]"
+											v-for="(i, index) in addedItems"
+											:key="i.id"
+										>
+											<td class="p-3 px-6 capitalize">
+												{{ i.name }}
+											</td>
+											<td>{{ i.qty }}</td>
+											<td class="text-right">
+												₱{{ numberFormat(i.price) }}
+											</td>
+											<td class="pr-6 text-right">
+												<a
+													@click.prevent="
+														deleteAddedItem(i.name)
+													"
+													class="cursor-pointer"
+												>
+													<VueFeather
+														type="x"
+														size="18"
+														class="hover:text-red-500"
+													/>
+												</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
 
-					<div class="col-span-full md:col-span-6">
-						<BaseTextArea
-							id="input_description"
-							label="Order Notes"
-							v-model="store.item.notes"
-							:error="store.error"
-							:errorField="store.error?.errors?.notes || null"
-							placeholder="Ex. ABC"
-							:required="true"
-						/>
-					</div>
-					<div class="col-span-full">
-						<h2 class="text-xl">Payments</h2>
+								<!-- <div
+									class="relative flex items-start overflow-x-auto rounded-sm pb-2"
+									:class="[
+										index + 1 === addedItems.length
+											? 'border-0'
+											: 'border-b',
+									]"
+									v-for="(i, index) in addedItems"
+									:key="i.id"
+								>
+									<div class="flex-1">
+										<label class="text-sm text-gray-500"
+											>Item</label
+										>
+										<h5>{{ i.name }}</h5>
+									</div>
+									<div class="flex">
+										<div class="w-10 flex-none">
+											<label class="text-sm text-gray-500"
+												>Qty</label
+											>
+											<h5>{{ i.qty }}</h5>
+										</div>
+
+										<div class="w-20">
+											<label class="text-sm text-gray-500"
+												>Price</label
+											>
+											<h5>
+												₱{{ numberFormat(i.price) }}
+											</h5>
+										</div>
+
+										<div class="w-[5.5rem]">
+											<label class="text-sm text-gray-500"
+												>Total</label
+											>
+											<h5>
+												₱{{ numberFormat(i.total) }}
+											</h5>
+										</div>
+									</div>
+									<button class="absolute top-0 right-0">
+										<VueFeather
+											type="x"
+											size="16"
+											class="hover:text-red-500"
+											@click="deleteAddedItem(i.name)"
+										/>
+									</button>
+								</div> -->
+							</div>
+						</div>
+					</form>
+					<Spinner v-else />
+				</div>
+
+				<div class="card grid grid-cols-12 gap-4">
+					<div class="col-span-full -mt-3 font-semibold">
+						Payments
 					</div>
 					<div class="col-span-full md:col-span-4">
 						<BaseInput
@@ -210,7 +304,7 @@
 					<div class="col-span-full md:col-span-2">
 						<BaseSelect
 							id="input_payment_status"
-							label="Payment Status"
+							label="Status"
 							v-model="payment.status"
 							:error="store.error"
 							:errorField="
@@ -271,18 +365,30 @@
 						</ul>
 					</div>
 				</div>
+				<div class="card grid grid-cols-12 gap-4">
+					<div class="col-span-full md:col-span-6">
+						<BaseTextArea
+							id="input_description"
+							label="Order Notes"
+							v-model="store.item.notes"
+							:error="store.error"
+							:errorField="store.error?.errors?.notes || null"
+							placeholder="Ex. ABC"
+							:required="true"
+						/>
+					</div>
+				</div>
 				<div class="mt-6">
 					<BaseButton
 						v-if="!store.isLoading"
 						_type="submit"
 						text="Save Changes"
-						color="primary"
+						color="green"
 					/>
 					<BaseButton
 						v-if="store.isLoading"
 						_type="submit"
 						text="Updating..."
-						color="primary"
 						:disabled="true"
 					/>
 				</div>
@@ -290,156 +396,150 @@
 			<Spinner v-else />
 		</div>
 		<div class="w-full flex-1">
-			<div class="card">
-				<form @submit.prevent="addItem" v-if="!isLoading">
-					<div class="grid grid-cols-6 gap-4">
-						<div
-							class="justify col-span-full flex items-center justify-between"
-						>
-							<h4 class="text-xl">Items</h4>
-							<BaseButton
-								:text="
-									isCustomItem ? 'Select Item' : 'Custom Item'
-								"
-								color="default"
-								@click="isCustomItem = !isCustomItem"
-							/>
-						</div>
-						<div
-							class="col-span-full md:col-span-3"
-							v-if="isCustomItem"
-						>
-							<BaseInput
-								id="custom_item_name"
-								label="Item Name"
-								v-model="customItemName"
-								:error="error"
-								:errorField="
-									error?.errors?.customItemName || null
-								"
-								placeholder="Ex. Item 1"
-								:required="true"
-								type="text"
-							/>
-						</div>
-						<div
-							class="col-span-full md:col-span-2"
-							v-if="isCustomItem"
-						>
-							<BaseInput
-								id="custom_item_cost"
-								label="Item Cost"
-								v-model="customItemCost"
-								:error="error"
-								:errorField="
-									error?.errors?.customItemCost || null
-								"
-								placeholder="Ex. 2"
-								:required="true"
-								type="number"
-								:step="0.01"
-							/>
-						</div>
-						<div
-							class="col-span-full md:col-span-1"
-							v-if="isCustomItem"
-						>
-							<BaseInput
-								id="qty"
-								label="Qty"
-								v-model="selectedQty"
-								:error="error"
-								:errorField="error?.errors?.qty || null"
-								placeholder="Ex. 2"
-								:required="true"
-								type="number"
-							/>
-						</div>
-						<div
-							class="col-span-full md:col-span-4"
-							v-if="!isCustomItem"
-						>
-							<BaseSelect
-								id="invoiceFor"
-								label="Select Item"
-								v-model="selectedItem"
-								:error="error"
-								:errorField="error?.errors?.items || null"
-								:options="productStore.list"
-								optionLabel="name"
-								optionValue="_id"
-								:required="true"
-							/>
-						</div>
-						<div
-							class="col-span-full md:col-span-2"
-							v-if="!isCustomItem"
-						>
-							<BaseInput
-								id="qty"
-								label="Qty"
-								v-model="selectedQty"
-								:error="error"
-								:errorField="error?.errors?.qty || null"
-								placeholder="Ex. 2"
-								:required="true"
-								type="number"
-							/>
-						</div>
-						<div class="col-span-full">
-							<BaseButton
-								_type="submit"
-								text="Add Item"
-								color="primary"
-								_class="w-full"
-							/>
-						</div>
-					</div>
-				</form>
-				<Spinner v-else />
-			</div>
-			<div class="flex flex-col space-y-4">
-				<div v-if="addedItems.length" class="">
-					<h3>
-						Total:
-						<span class="font-semibold text-green-400">
-							₱{{ numberFormat(_addedItemsTotal) }}
-						</span>
-					</h3>
+			<DrawerCard title="Order Status" v-if="store.item">
+				<BaseSelect
+					id="input_order-status"
+					v-model="store.item.status"
+					:error="store.error"
+					:errorField="store.error?.errors?.status || null"
+					:options="[
+						{
+							value: 'pending',
+							label: 'Pending',
+						},
+						{
+							value: 'fulfilled',
+							label: 'Fulfilled',
+						},
+					]"
+				/>
+			</DrawerCard>
+			<DrawerCard title="Payment Status" v-if="store.item">
+				<BaseSelect
+					id="input_order-status"
+					v-model="store.item.paymentStatus"
+					:error="store.error"
+					:errorField="store.error?.errors?.paymentStatus || null"
+					:options="[
+						{
+							value: 'pending',
+							label: 'Pending',
+						},
+						{
+							value: 'paid',
+							label: 'Paid',
+						},
+					]"
+				/>
+			</DrawerCard>
+			<div class="card grid grid-cols-12 gap-4" v-if="store.item">
+				<div class="col-span-full -mt-3 font-semibold">
+					Customer Info.
 				</div>
-				<div
-					class="relative flex items-start space-x-3 overflow-x-auto rounded-sm bg-white px-4 py-2 shadow-sm"
-					v-for="i in addedItems"
-					:key="i.id"
-				>
-					<div class="flex-1">
-						<label class="text-sm text-gray-500">Item</label>
-						<h5>{{ i.name }}</h5>
-					</div>
-					<div class="flex">
-						<div class="w-10 flex-none">
-							<label class="text-sm text-gray-500">Qty</label>
-							<h5>{{ i.qty }}</h5>
-						</div>
+				<div class="col-span-full md:col-span-6">
+					<BaseInput
+						id="input_name"
+						label="First Name"
+						v-model="store.item.firstName"
+						:error="store.error"
+						:errorField="store.error?.errors?.firstName || null"
+						placeholder="Ex. ABC"
+						:required="true"
+					/>
+				</div>
+				<div class="col-span-full md:col-span-6">
+					<BaseInput
+						id="input_name"
+						label="Last Name"
+						v-model="store.item.lastName"
+						:error="store.error"
+						:errorField="store.error?.errors?.lastName || null"
+						placeholder="Ex. ABC"
+						:required="true"
+					/>
+				</div>
+				<div class="col-span-full md:col-span-6">
+					<BaseInput
+						id="input_name"
+						label="Email"
+						v-model="store.item.email"
+						:error="store.error"
+						:errorField="store.error?.errors?.email || null"
+						placeholder="Ex. ABC"
+						:required="true"
+					/>
+				</div>
+				<div class="col-span-full md:col-span-6">
+					<BaseInput
+						id="input_name"
+						label="Contact Number"
+						v-model="store.item.contactNumber"
+						:error="store.error"
+						:errorField="store.error?.errors?.contactNumber || null"
+						placeholder="Ex. ABC"
+						:required="true"
+					/>
+				</div>
+			</div>
+			<div class="card grid grid-cols-12 gap-4" v-if="store.item">
+				<div class="col-span-full -mt-3 font-semibold">Address</div>
+				<div class="col-span-6">
+					<BaseInput
+						id="input_name"
+						label="Country"
+						v-model="store.item.country"
+						:error="store.error"
+						:errorField="store.error?.errors?.country || null"
+						placeholder="Ex. ABC"
+						:required="true"
+					/>
+				</div>
 
-						<div class="w-20">
-							<label class="text-sm text-gray-500">Price</label>
-							<h5>₱{{ numberFormat(i.price) }}</h5>
-						</div>
+				<div class="col-span-6">
+					<BaseInput
+						id="input_name"
+						label="State"
+						v-model="store.item.state"
+						:error="store.error"
+						:errorField="store.error?.errors?.state || null"
+						placeholder="Ex. ABC"
+						:required="true"
+					/>
+				</div>
 
-						<div class="w-[5.5rem]">
-							<label class="text-sm text-gray-500">Total</label>
-							<h5>₱{{ numberFormat(i.total) }}</h5>
-						</div>
-					</div>
-					<button class="absolute top-2 right-2">
-						<VueFeather
-							type="x"
-							size="16"
-							class="hover:text-red-500"
-							@click="deleteAddedItem(i.name)"
-						/>
-					</button>
+				<div class="col-span-full">
+					<BaseInput
+						id="input_name"
+						label="Street Address"
+						v-model="store.item.streetAddress"
+						:error="store.error"
+						:errorField="store.error?.errors?.streetAddress || null"
+						placeholder="Ex. ABC"
+						:required="true"
+					/>
+				</div>
+
+				<div class="col-span-6">
+					<BaseInput
+						id="input_name"
+						label="City"
+						v-model="store.item.city"
+						:error="store.error"
+						:errorField="store.error?.errors?.city || null"
+						placeholder="Ex. ABC"
+						:required="true"
+					/>
+				</div>
+				<div class="col-span-6">
+					<BaseInput
+						id="input_name"
+						label="Zip Code"
+						v-model="store.item.zipCode"
+						:error="store.error"
+						:errorField="store.error?.errors?.zipCode || null"
+						placeholder="Ex. ABC"
+						:required="true"
+					/>
 				</div>
 			</div>
 		</div>

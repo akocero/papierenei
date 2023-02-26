@@ -3,7 +3,7 @@
 		<div
 			class="flex items-center justify-between border-b border-gray-100 px-6 py-2"
 		>
-			<h4 class="text-xl">{{ title }}</h4>
+			<h4 class="font-semibold">{{ title }}</h4>
 			<button
 				type="button"
 				v-if="!isCardOpen"

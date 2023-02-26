@@ -1,62 +1,46 @@
 <template>
-	<div class="-mt-4 mb-2 flex items-baseline justify-between">
-		<h4 class="text-xl">Update Product Info.</h4>
-		<div>
-			<BaseButton
-				_type="link"
-				text="Back"
-				:routeObject="{ name: 'warehouse.products' }"
-				_class="mr-2"
-			/>
-			<BaseButton
-				_type="submit"
-				@click="handleSubmit"
-				text="Save Changes"
-				color="primary"
-				v-if="!store.isLoading"
-			/>
-			<BaseButton
-				v-if="store.isLoading"
-				_type="submit"
-				text="Updating..."
-				color="primary"
-				:disabled="true"
-			/>
+	<div class="main-container mb-2 flex items-baseline justify-between">
+		<div class="flex w-full items-center">
+			<router-link
+				:to="{ name: 'warehouse.products' }"
+				class="mr-4 flex items-center justify-center rounded-sm border py-2 px-4 hover:bg-gray-200"
+			>
+				<VueFeather type="arrow-left" size="20" class="" />
+			</router-link>
+			<h4 class="text-xl">Update Product Info.</h4>
+			<div class="ml-auto">
+				<BaseButton
+					_type="submit"
+					@click="handleSubmit"
+					text="Save Changes"
+					color="green"
+					v-if="!store.isLoading"
+				/>
+				<BaseButton
+					v-if="store.isLoading"
+					_type="submit"
+					text="Updating..."
+					color="green"
+					:disabled="true"
+				/>
+			</div>
 		</div>
 	</div>
-	<div class="flex flex-col items-start gap-6 md:flex-row">
-		<div class="card grow">
+	<div
+		class="main-container mb-4 flex flex-col items-start gap-6 md:flex-row"
+	>
+		<div class="grow">
 			<form
 				@submit.prevent="handleSubmit"
 				v-if="store.item && !store.isLoading"
 				id="form_edit_product"
 				name="form_edit_product"
 			>
-				<div class="grid grid-cols-6 gap-4">
-					<div
-						class="col-span-full flex items-center justify-between font-semibold"
-					>
-						<div>Basic Info.</div>
-						<button
-							class="rounded-lg bg-green-500 px-4 py-2 text-white"
-							v-if="store.item.isPublished"
-							@click="store.item.isPublished = 0"
-						>
-							Published
-						</button>
-						<button
-							class="rounded-lg bg-gray-300 px-4 py-2"
-							v-if="!store.item.isPublished"
-							@click="store.item.isPublished = 1"
-						>
-							Unpublished
-						</button>
-					</div>
-
-					<div class="col-span-full md:col-span-2">
+				<div class="card">
+					<div class="mb-4">
 						<BaseInput
 							id="input_name"
-							label="Product Name"
+							label="Title"
 							v-model="store.item.name"
 							:error="store.error"
 							:errorField="store.error?.errors?.name || null"
@@ -64,31 +48,7 @@
 							:required="true"
 						/>
 					</div>
-					<div class="col-span-full md:col-span-2">
-						<BaseInput
-							id="input_sku"
-							label="SKU"
-							v-model="store.item.sku"
-							:error="store.error"
-							:errorField="store.error?.errors?.sku || null"
-							placeholder="Ex. ABC"
-							:required="false"
-						/>
-					</div>
-					<div class="col-span-full md:col-span-2">
-						<BaseInput
-							id="input_unitCost"
-							type="number"
-							label="Unit Cost"
-							v-model="store.item.unitCost"
-							:error="store.error"
-							:errorField="store.error?.errors?.unitCost || null"
-							placeholder="Ex. ABC"
-							:required="true"
-							:step="0.01"
-						/>
-					</div>
-					<div class="col-span-full md:col-span-2">
+					<div class="">
 						<BaseTextArea
 							id="input_description"
 							label="Description"
@@ -101,22 +61,25 @@
 							:required="false"
 						/>
 					</div>
-					<div class="col-span-full font-semibold">
-						Advance / Inventory
+				</div>
+				<div class="card grid grid-cols-12 gap-4">
+					<div class="col-span-full">
+						<h3 class="font-semibold">Pricing</h3>
 					</div>
-					<div class="col-span-full md:col-span-2">
+					<div class="col-span-4">
 						<BaseInput
-							id="input_quantity"
+							id="input_unitCost"
 							type="number"
-							label="Quantity"
-							v-model="store.item.quantity"
+							label="Price"
+							v-model="store.item.unitCost"
 							:error="store.error"
-							:errorField="store.error?.errors?.quantity || null"
+							:errorField="store.error?.errors?.unitCost || null"
 							placeholder="Ex. ABC"
 							:required="true"
+							:step="0.01"
 						/>
 					</div>
-					<div class="col-span-full md:col-span-2">
+					<div class="col-span-4">
 						<BaseInput
 							id="input_salePrice"
 							type="number"
@@ -128,7 +91,84 @@
 							:step="0.01"
 						/>
 					</div>
-					<div class="col-span-full md:col-span-2">
+					<div class="col-span-4"></div>
+					<div class="col-span-4">
+						<BaseInput
+							id="input_salePrice"
+							type="number"
+							label="Cost per item"
+							v-model="store.item.salePrice"
+							:error="store.error"
+							:errorField="store.error?.errors?.salePrice || null"
+							placeholder="Comming Soon!"
+							:step="0.01"
+							:disabled="true"
+						/>
+					</div>
+					<div class="col-span-4">
+						<BaseInput
+							id="input_salePrice"
+							type="number"
+							label="Profit"
+							v-model="store.item.salePrice"
+							:error="store.error"
+							:errorField="store.error?.errors?.salePrice || null"
+							placeholder="Comming Soon!"
+							:step="0.01"
+							:disabled="true"
+						/>
+					</div>
+					<div class="col-span-4">
+						<BaseInput
+							id="input_salePrice"
+							type="number"
+							label="Margin"
+							v-model="store.item.salePrice"
+							:error="store.error"
+							:errorField="store.error?.errors?.salePrice || null"
+							placeholder="Comming Soon!"
+							:step="0.01"
+							:disabled="true"
+						/>
+					</div>
+				</div>
+				<ImageManager
+					:store="store"
+					title="Cover Photo"
+					db_column="coverPhoto"
+					v-if="store.item"
+					uploadType="single"
+				/>
+
+				<div class="card grid grid-cols-12 gap-4">
+					<div class="col-span-full font-semibold">
+						Advance / Inventory
+					</div>
+					<div class="col-span-4">
+						<BaseInput
+							id="input_quantity"
+							type="number"
+							label="Quantity"
+							v-model="store.item.quantity"
+							:error="store.error"
+							:errorField="store.error?.errors?.quantity || null"
+							placeholder="Ex. ABC"
+							:required="true"
+						/>
+					</div>
+					<div class="col-span-4">
+						<BaseInput
+							id="input_sku"
+							label="SKU"
+							v-model="store.item.sku"
+							:error="store.error"
+							:errorField="store.error?.errors?.sku || null"
+							placeholder="Ex. ABC"
+							:required="false"
+						/>
+					</div>
+
+					<div class="col-span-4">
 						<BaseInput
 							id="input_fileDownloadLink"
 							type="text"
@@ -146,7 +186,7 @@
 					<BaseButton
 						_type="submit"
 						text="Save Changes"
-						color="primary"
+						color="green"
 						v-if="!store.isLoading"
 					></BaseButton>
 					<BaseButton
@@ -159,12 +199,38 @@
 			</form>
 			<Spinner v-else />
 		</div>
-		<div class="w-full md:w-1/3">
+		<div class="w-full md:w-[36%]">
+			<DrawerCard title="Product Status" v-if="store.item">
+				<BaseSelect
+					id="input_status"
+					v-model="store.item.isPublished"
+					:error="store.error"
+					:errorField="store.error?.errors?.isPublished || null"
+					:options="[
+						{
+							value: '1',
+							label: 'Published',
+						},
+						{
+							value: '0',
+							label: 'Unpublished',
+						},
+					]"
+				/>
+			</DrawerCard>
+			<ImageManager
+				:store="store"
+				title="Images"
+				db_column="images"
+				v-if="store.item"
+				uploadType="multiple"
+			/>
 			<BaseSearchSelectCard
 				v-model="store.item.categories"
 				v-if="store.item && !store.isLoading"
 				:store="categoryStore"
 				label="Categories"
+				placeholder="Find categories"
 			/>
 
 			<BaseSearchSelectCard
@@ -172,6 +238,7 @@
 				v-if="store.item && !store.isLoading"
 				:store="collectionStore"
 				label="Collections"
+				placeholder="Find collections"
 			/>
 
 			<BaseSearchSelectCard
@@ -180,22 +247,7 @@
 				:store="tagStore"
 				:canCreateItem="true"
 				label="Tags"
-			/>
-
-			<ImageManager
-				:store="store"
-				title="Cover Photo"
-				db_column="coverPhoto"
-				v-if="store.item"
-				uploadType="single"
-			/>
-
-			<ImageManager
-				:store="store"
-				title="Images"
-				db_column="images"
-				v-if="store.item"
-				uploadType="multiple"
+				placeholder="Find or create tags"
 			/>
 
 			<Spinner v-else />
@@ -207,6 +259,7 @@
 import ImageManager from '@/components/image_module/ImageManager.vue';
 import BaseButton from '@/components/BaseButton.vue';
 import BaseInput from '@/components/BaseInput.vue';
+import BaseSelect from '@/components/BaseSelect.vue';
 
 import BaseTextArea from '@/components/BaseTextArea.vue';
 
@@ -219,6 +272,7 @@ import BaseSearchSelectCard from '@/components/BaseSearchSelectCard.vue';
 import { useTagStore } from '@/stores/tag';
 import { useCollectionStore } from '@/stores/collection';
 import { useCategoryStore } from '@/stores/category';
+import DrawerCard from '../../components/DrawerCard.vue';
 
 const router = useRouter();
 const route = useRoute();
@@ -236,6 +290,9 @@ onBeforeMount(async () => {
 
 const handleSubmit = async () => {
 	store.error = null;
+
+	console.log(store.item);
+	// return;
 	const res = await store.update(store.item);
 
 	if (store.error) {
