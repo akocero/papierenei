@@ -97,22 +97,21 @@
 							id="input_salePrice"
 							type="number"
 							label="Cost per item"
-							v-model="store.item.salePrice"
+							v-model="store.item.actualCost"
 							:error="store.error"
 							:errorField="store.error?.errors?.salePrice || null"
-							placeholder="Comming Soon!"
+							placeholder="0.00"
 							:step="0.01"
-							:disabled="true"
 						/>
 					</div>
 					<div class="col-span-4">
 						<BaseInput
 							id="input_salePrice"
-							type="number"
+							type="text"
 							label="Profit"
-							v-model="store.item.salePrice"
+							v-model="profit"
 							:error="store.error"
-							:errorField="store.error?.errors?.salePrice || null"
+							:errorField="null"
 							placeholder="Comming Soon!"
 							:step="0.01"
 							:disabled="true"
@@ -121,11 +120,11 @@
 					<div class="col-span-4">
 						<BaseInput
 							id="input_salePrice"
-							type="number"
+							type="text"
 							label="Margin"
-							v-model="store.item.salePrice"
+							v-model="margin"
 							:error="store.error"
-							:errorField="store.error?.errors?.salePrice || null"
+							:errorField="null"
 							placeholder="Comming Soon!"
 							:step="0.01"
 							:disabled="true"
@@ -263,7 +262,7 @@ import BaseSelect from '@/components/BaseSelect.vue';
 
 import BaseTextArea from '@/components/BaseTextArea.vue';
 
-import { onBeforeMount, ref, watch } from 'vue';
+import { onBeforeMount, ref, watch, computed } from 'vue';
 import { useProductStore } from '@/stores/product';
 import useAlert from '../../composables/useAlert';
 import { useRoute, useRouter } from 'vue-router';
@@ -273,19 +272,47 @@ import { useTagStore } from '@/stores/tag';
 import { useCollectionStore } from '@/stores/collection';
 import { useCategoryStore } from '@/stores/category';
 import DrawerCard from '../../components/DrawerCard.vue';
+import useUtils from '@/composables/useUtils';
 
 const router = useRouter();
 const route = useRoute();
 const { pushAlert, pushToast } = useAlert();
+const { currencyFormat } = useUtils();
 const store = useProductStore();
 const tagStore = useTagStore();
 const collectionStore = useCollectionStore();
 const categoryStore = useCategoryStore();
 
+const pricing = ref({
+	profit: 0,
+	margin: 0,
+});
+
 onBeforeMount(async () => {
 	await store.find(route.params.id);
 
 	console.log(store.item);
+});
+const margin = computed(() => {
+	const unitCost = store.item.salePrice
+		? store.item.salePrice
+		: store.item.unitCost;
+	const actualCost = store.item.actualCost;
+	if (store.item.actualCost && store.item.unitCost) {
+		const margin = 100 - (actualCost / unitCost) * 100;
+		return margin.toFixed(1) + '%';
+	}
+});
+
+const profit = computed(() => {
+	const unitCost = store.item.salePrice
+		? store.item.salePrice
+		: store.item.unitCost;
+	const actualCost = store.item.actualCost;
+	if (store.item.actualCost && store.item.unitCost) {
+		const profit = unitCost - actualCost;
+		return '₱' + currencyFormat(profit.toFixed(1));
+	}
 });
 
 const handleSubmit = async () => {

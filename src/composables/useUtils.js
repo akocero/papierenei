@@ -15,6 +15,12 @@ export default function useUtils() {
 		});
 	};
 
+	const currencyFormat = (value) => {
+		return Number(parseFloat(value).toFixed(2)).toLocaleString('en', {
+			minimumFractionDigits: 2,
+		});
+	};
+
 	const convertToRelativeTime = (value) => {
 		const date = new Date(value);
 		return moment(date, 'YYYYMMDD').fromNow();
@@ -34,5 +40,11 @@ export default function useUtils() {
 		return arrayObjects;
 	};
 
-	return { capitalize, numberFormat, sort, convertToRelativeTime };
+	return {
+		capitalize,
+		numberFormat,
+		sort,
+		convertToRelativeTime,
+		currencyFormat,
+	};
 }

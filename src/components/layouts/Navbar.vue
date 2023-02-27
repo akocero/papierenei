@@ -1,20 +1,20 @@
 <template>
 	<header class="fixed z-20 flex h-14 w-full print:hidden">
 		<div
-			class="hidden w-60 items-center bg-primary-600 px-3 text-white shadow-md sm:flex 2xl:w-64"
+			class="hidden w-60 items-center border-gray-200 bg-main px-3 text-white shadow-md sm:flex 2xl:w-64"
 		>
 			<vue-feather type="box" size="20" class="mr-2"></vue-feather>
-			<span>Papierenei</span>
+			<span class="font-comfortaa font-bold">Papierenei</span>
 			<a href="#" class="ml-auto" @click="$emit('toggleSidebar')">
 				<vue-feather
 					:type="isSidebarOpen ? `toggle-right` : `toggle-left`"
 					size="20"
-					class="mt-[8px]"
+					class="mt-[6px]"
 				></vue-feather>
 			</a>
 		</div>
 		<nav
-			class="flex grow items-center bg-indigo-600 px-6 text-white shadow-sm sm:bg-white sm:text-gray-900"
+			class="flex grow items-center bg-main px-6 text-white shadow-sm sm:bg-white sm:text-gray-900"
 		>
 			<a href="#" class="sm:hidden" @click="$emit('toggleSidebar')">
 				<vue-feather
