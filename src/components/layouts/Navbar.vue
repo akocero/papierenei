@@ -3,7 +3,11 @@
 		<div
 			class="hidden w-60 items-center border-gray-200 bg-main px-3 text-white shadow-md sm:flex 2xl:w-64"
 		>
-			<vue-feather type="box" size="20" class="mr-2"></vue-feather>
+			<vue-feather
+				type="shopping-bag"
+				size="22"
+				class="mr-2"
+			></vue-feather>
 			<span class="font-comfortaa font-bold">Papierenei</span>
 			<a href="#" class="ml-auto" @click="appStore.toggleSidebar">
 				<vue-feather

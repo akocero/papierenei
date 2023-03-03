@@ -9,7 +9,11 @@
 			class="fixed top-0 left-0 hidden h-14 w-60 bg-main px-3 text-white sm:block 2xl:w-64"
 		>
 			<div class="flex h-full items-center">
-				<vue-feather type="box" size="20" class="mr-2"></vue-feather>
+				<vue-feather
+					type="shopping-bag"
+					size="22"
+					class="mr-2"
+				></vue-feather>
 				<span class="font-comfortaa font-bold">Papierenei</span>
 				<a href="#" class="ml-auto" @click="appStore.toggleSidebar">
 					<vue-feather
