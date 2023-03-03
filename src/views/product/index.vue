@@ -8,7 +8,7 @@
 			/>
 		</template>
 	</TitleBar>
-	<div class="bg-white p-4">
+	<div class="card">
 		<TableSearch
 			:options="searchOptions"
 			selected-option="sku"

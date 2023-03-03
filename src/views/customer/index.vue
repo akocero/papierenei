@@ -1,12 +1,14 @@
 <template>
-	<div class="card">
-		<div class="mb-4 flex items-baseline justify-between">
-			<h4 class="text-2xl">Customers</h4>
+	<TitleBar title="Customers">
+		<template #actions>
 			<BaseButton
 				text="Add Customer"
 				:routeObject="{ name: 'sales.customers.create' }"
+				color="primary"
 			/>
-		</div>
+		</template>
+	</TitleBar>
+	<div class="card">
 		<TableSearch
 			:options="searchOptions"
 			selected-option="firstName"

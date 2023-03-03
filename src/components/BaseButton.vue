@@ -2,38 +2,24 @@
 	<router-link
 		v-if="_type === 'link'"
 		:to="routeObject"
-		class="inline-block rounded-sm py-2 px-3 disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none"
 		:disabled="disabled"
 		:class="[
-			{
-				'bg-primary-600 text-white ': color === 'primary',
-				'border bg-yellow-500 text-yellow-50 ': color === 'yellow',
-				'border bg-green-500 text-green-50 ': color === 'green',
-				'border border-gray-200 bg-gray-100 text-gray-900':
-					color === 'default',
-				'bg-red-600 text-red-50 ': color === 'red',
-				'bg-gray-800 text-gray-50 ': color === 'dark',
-			},
+			colorClass[color],
+			'inline-block rounded-sm py-2 px-3 shadow disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none',
 			_class,
 		]"
-		>{{ text }}</router-link
 	>
+		{{ text }}
+	</router-link>
 
 	<button
 		v-else
 		:type="_type"
-		class="inline-block rounded-sm py-2 px-3 disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none"
+		class=""
 		:disabled="disabled"
 		:class="[
-			{
-				'bg-primary-600 text-white ': color === 'primary',
-				'border border-gray-300 bg-gray-200 text-gray-900':
-					color === 'default',
-				'border bg-yellow-500 text-yellow-50 ': color === 'yellow',
-				'border bg-green-500 text-green-50 ': color === 'green',
-				'bg-red-600 text-red-50 ': color === 'red',
-				'bg-gray-800 text-gray-50 ': color === 'dark',
-			},
+			colorClass[color],
+			'inline-block rounded-sm py-2 px-3 shadow disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none',
 			_class,
 		]"
 	>
@@ -43,7 +29,10 @@
 
 <script setup>
 const props = defineProps({
-	text: String,
+	text: {
+		type: String,
+		default: 'Sample button',
+	},
 	_type: {
 		type: String,
 		default: 'link',
@@ -65,6 +54,15 @@ const props = defineProps({
 		default: false,
 	},
 });
+
+const colorClass = {
+	primary: 'bg-gray-700 text-white',
+	default: 'border  bg-gray-100 text-gray-700 shadow-none',
+	yellow: 'bg-yellow-500 text-yellow-50 ',
+	green: 'bg-green-500 text-white  hover:bg-green-400',
+	red: 'bg-red-600 text-red-50',
+	dark: 'bg-gray-800 text-white hover:bg-gray-700',
+};
 </script>
 
 <style></style>

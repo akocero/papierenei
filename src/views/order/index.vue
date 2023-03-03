@@ -1,14 +1,14 @@
 <template>
-	<div class="card">
-		<TitleBar title="Orders">
-			<template #actions>
-				<!-- <BaseButton
+	<TitleBar title="Orders">
+		<template #actions>
+			<!-- <BaseButton
 					text="Add order"
 					:routeObject="{ name: 'sales.orders.create' }"
 					color="primary"
 				/> -->
-			</template>
-		</TitleBar>
+		</template>
+	</TitleBar>
+	<div class="card">
 		<TableSearch :options="searchOptions" @search="search" />
 		<TableData
 			:data="store.list"

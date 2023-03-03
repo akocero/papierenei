@@ -1,12 +1,14 @@
 <template>
-	<div class="card">
-		<div class="mb-4 flex items-baseline justify-between">
-			<h4 class="text-2xl">Categories</h4>
+	<TitleBar title="Categories">
+		<template #actions>
 			<BaseButton
 				text="Add Category"
 				:routeObject="{ name: 'warehouse.categories.create' }"
+				color="primary"
 			/>
-		</div>
+		</template>
+	</TitleBar>
+	<div class="card">
 		<TableSearch
 			:options="searchOptions"
 			selected-option="sku"

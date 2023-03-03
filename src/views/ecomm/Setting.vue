@@ -6,7 +6,7 @@
 				_type="button"
 				@click="handleSubmit"
 				text="Save Changes"
-				color="primary"
+				color="green"
 				v-if="!store.isLoading"
 			/>
 			<BaseButton
@@ -51,7 +51,7 @@
 					<BaseButton
 						_type="button"
 						text="Add"
-						color="primary"
+						color="green"
 						_class="mt-2 w-full text-center"
 						@click="addBanner"
 					/>
@@ -221,6 +221,4 @@ const removeBanner = (banner_name) => {
 
 	pushAlert('info', `Banner <${banner_name}> is removed!`);
 };
-
-
 </script>

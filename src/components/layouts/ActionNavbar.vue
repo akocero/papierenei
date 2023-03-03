@@ -63,7 +63,6 @@
 				/>
 				<BaseButton
 					v-if="isLoading"
-					_type="submit"
 					text="Saving..."
 					color="green"
 					:disabled="true"

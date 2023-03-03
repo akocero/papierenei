@@ -1,12 +1,14 @@
 <template>
-	<div class="card">
-		<div class="mb-4 flex items-baseline justify-between">
-			<h4 class="text-2xl">Invoices</h4>
+	<TitleBar title="Invoices">
+		<template #actions>
 			<BaseButton
 				text="Add Invoice"
 				:routeObject="{ name: 'sales.invoices.create' }"
+				color="primary"
 			/>
-		</div>
+		</template>
+	</TitleBar>
+	<div class="card">
 		<TableSearch
 			:options="searchOptions"
 			selected-option="invoiceFor.name"

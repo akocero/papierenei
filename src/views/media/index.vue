@@ -7,16 +7,16 @@
 		@handleUploadImages="handleUploadImages"
 		upload-type="multiple"
 	/>
+	<TitleBar title="Media">
+		<template #actions>
+			<BaseButton
+				text="Add Image"
+				@click="showUploadImage = true"
+				color="primary"
+			/>
+		</template>
+	</TitleBar>
 	<div class="card">
-		<TitleBar title="Media">
-			<template #actions>
-				<BaseButton
-					text="Add Image"
-					@click="showUploadImage = true"
-					color="primary"
-				/>
-			</template>
-		</TitleBar>
 		<TableSearch
 			:options="searchOptions"
 			selected-option="sku"
