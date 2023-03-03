@@ -9,7 +9,7 @@
 		<div class="grid w-full grid-cols-12 gap-2" v-if="store.item">
 			<div
 				v-for="image in store.item[db_column]"
-				:key="image.public_id"
+				:key="image._id"
 				:class="[
 					'group relative  ',
 					store.item[db_column].length === 1
@@ -55,6 +55,7 @@
 import DrawerCard from '../DrawerCard.vue';
 import AddMedia from './AddMedia.vue';
 import useAlert from '@/composables/useAlert';
+import { useImageStore } from '@/stores/image';
 
 const props = defineProps({
 	// store of the given model ex: product, customer
@@ -111,5 +112,19 @@ const setActive = (id) => {
 
 const setInactive = () => {
 	props.store.item[props.activeImage] = '';
+};
+
+// const imageList = computed(() => {
+// 	if(props.store?.item[props.db_column].length) {
+// 		props.store?.item[props.db_column].map()
+// 	}
+// })
+
+const getImageDetails = async (id) => {
+	const image = await useImageStore.find(id);
+
+	console.log(image);
+
+	return image;
 };
 </script>

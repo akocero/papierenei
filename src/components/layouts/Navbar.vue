@@ -5,9 +5,11 @@
 		>
 			<vue-feather type="box" size="20" class="mr-2"></vue-feather>
 			<span class="font-comfortaa font-bold">Papierenei</span>
-			<a href="#" class="ml-auto" @click="$emit('toggleSidebar')">
+			<a href="#" class="ml-auto" @click="appStore.toggleSidebar">
 				<vue-feather
-					:type="isSidebarOpen ? `toggle-right` : `toggle-left`"
+					:type="
+						appStore.isSidebarOpen ? `toggle-right` : `toggle-left`
+					"
 					size="20"
 					class="mt-[6px]"
 				></vue-feather>
@@ -16,9 +18,11 @@
 		<nav
 			class="flex grow items-center bg-main px-6 text-white shadow-sm sm:bg-white sm:text-gray-900"
 		>
-			<a href="#" class="sm:hidden" @click="$emit('toggleSidebar')">
+			<a href="#" class="sm:hidden" @click="appStore.toggleSidebar">
 				<vue-feather
-					:type="isSidebarOpen ? `toggle-right` : `toggle-left`"
+					:type="
+						appStore.isSidebarOpen ? `toggle-right` : `toggle-left`
+					"
 					size="20"
 					class="mt-[8px]"
 				></vue-feather>
@@ -137,10 +141,13 @@
 <script setup>
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
 import { useAuthStore } from '@/stores/auth';
+import { useAppStore } from '@/stores/app';
+
 const props = defineProps({
 	isSidebarOpen: Boolean,
 });
 
+const appStore = useAppStore();
 const store = useAuthStore();
 
 const handleLogout = () => {

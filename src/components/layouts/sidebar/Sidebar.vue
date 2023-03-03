@@ -1,7 +1,9 @@
 <template>
 	<div
 		class="sidebar text-md fixed z-10 h-screen w-56 bg-gray-800 pt-16 text-gray-400 duration-300 print:hidden sm:w-60 2xl:w-64"
-		:class="isSidebarOpen ? 'visible left-0' : 'invisible -left-64'"
+		:class="
+			appStore.isSidebarOpen ? 'visible left-0' : 'invisible -left-64'
+		"
 	>
 		<ul class="relative flex flex-col">
 			<SidebarItem
@@ -18,10 +20,13 @@ import { ref } from '@vue/reactivity';
 import { onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import SidebarItem from './SidebarItem.vue';
+import { useAppStore } from '@/stores/app';
 
 const props = defineProps({
 	isSidebarOpen: Boolean,
 });
+
+const appStore = useAppStore();
 
 const expanded = ref(true);
 

@@ -1,10 +1,11 @@
 <script setup>
+import { useRoute, useRouter } from 'vue-router';
 /*
     DEVELOPER NOTE: on further modification please add comment on how to use it and when to use it
 
 	headers = array[] of objects
 	if the field has a question mark it is optional and if not it's required
-	NOTE: if the column is actions this class is a needed for styling purposes 'flex space-x-2' 
+	NOTE: if the column is actions this class is a needed for styling purposes 'flex space-x-2'
 	{
 		text: string, // this will be the text/label of the header
 		value: string, // this will get the value of the object you want to display in cell
@@ -13,7 +14,7 @@
 	}
 
 */
-/* 
+/*
 Sample headers data
 const headers = [
 	{
@@ -47,7 +48,7 @@ const headers = [
 ];
 */
 
-/* 
+/*
 EXAMPLE USAGE
 
 if you use the item slot it returns the item object itself same with header
@@ -90,7 +91,21 @@ const props = defineProps({
 	isLoading: {
 		type: Boolean,
 	},
+	editRoute: {
+		type: String,
+	},
 });
+
+const router = useRouter();
+
+const moveToEdit = (id) => {
+	if (props.editRoute) {
+		router.push({
+			name: props.editRoute,
+			params: { id: id },
+		});
+	}
+};
 </script>
 
 <template>
@@ -106,7 +121,14 @@ const props = defineProps({
 				</tr>
 			</thead>
 			<tbody class="">
-				<tr v-for="item in data" v-if="data.length">
+				<tr
+					v-for="item in data"
+					v-if="data.length"
+					:class="[
+						editRoute ? 'cursor-pointer hover:bg-gray-100' : '',
+					]"
+					@click="moveToEdit(item._id)"
+				>
 					<td v-for="td in headers" :class="td.cellClass">
 						<slot :name="`item-${td.value}`" v-bind="item">
 							{{ item[td.value] }}

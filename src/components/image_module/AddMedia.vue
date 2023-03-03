@@ -53,7 +53,7 @@
 							<button
 								:class="[
 									active
-										? 'bg-indigo-500 text-white'
+										? 'bg-gray-500 text-white'
 										: 'text-gray-900',
 									'group flex w-full items-center space-x-3 whitespace-nowrap px-4 py-2',
 								]"
@@ -66,7 +66,7 @@
 							<button
 								:class="[
 									active
-										? 'bg-indigo-500 text-white'
+										? 'bg-gray-500 text-white'
 										: 'text-gray-900',
 									'group flex w-full items-center space-x-3 whitespace-nowrap px-4 py-2',
 								]"
@@ -154,16 +154,20 @@ const handleUploadImages = async (selectedFiles) => {
 	isUploading.value = true;
 	props.store.error = null;
 
+	if (props.store?.item[props.db_column] === undefined) {
+		props.store.item[props.db_column] = [];
+	}
+
 	// get all uploaded images
 	const images = await uploadImages(selectedFiles);
 
 	// push the image id to the model/store.item base on the given property name (db_column)
 	images.forEach((image) => {
-		props.store.item[props.db_column].push(image._id);
+		props.store.item[props.db_column].push(image);
 	});
 
 	// update request
-	await props.store.update(props.store.item);
+	// await props.store.update(props.store.item);
 
 	if (props.store.error) {
 		pushToast({
@@ -203,7 +207,7 @@ const validateSingleUpload = computed(() => {
 	}
 
 	if (props.uploadType === 'single') {
-		if (props.store.item[props.db_column].length) {
+		if (props.store?.item[props.db_column]?.length) {
 			return false;
 		}
 
@@ -212,19 +216,23 @@ const validateSingleUpload = computed(() => {
 });
 
 const handleUpdateModelImages = async (image_ids) => {
+	if (props.store.item[props.db_column] === undefined) {
+		props.store.item[props.db_column] = [];
+	}
+
+	// get all existing images
 	const existingImages = props.store.item[props.db_column].map((image) => {
 		return image._id;
 	});
 
+	// validate if the image is already added
 	image_ids.forEach((id) => {
 		if (!existingImages.includes(id)) {
 			props.store.item[props.db_column].push(id);
 		}
 	});
 
-	await props.store.update(props.store.item);
-
-	console.log(props.store.item);
+	// await props.store.update(props.store.item);
 
 	closeSelectImage();
 

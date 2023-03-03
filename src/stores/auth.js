@@ -12,9 +12,6 @@ export const useAuthStore = defineStore({
 		response: null,
 		error: null,
 	}),
-	getters: {
-		doubleCount: (state) => state.counter * 2,
-	},
 	actions: {
 		setUser(payload) {
 			this.user = payload.user;

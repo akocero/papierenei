@@ -98,27 +98,6 @@
 								icon="printer"
 								@click="print(item)"
 							/>
-
-							<!-- <button
-								@click="print(item)"
-								v-if="!isPrinting"
-								class="btn btn-sm btn-default"
-								style="margin-left: 4px"
-							>
-								<i v-html="iconPrinter"></i>
-							</button> -->
-
-							<!-- <BaseTableActionButton
-								icon="trash"
-								:route-object="{ name: 'sales.invoices' }"
-							/>
-
-							
-
-							<BaseTableActionButton
-								icon="mail"
-								:route-object="{ name: 'sales.invoices' }"
-							/> -->
 						</td>
 					</tr>
 					<tr v-if="store.isLoading">
@@ -251,33 +230,3 @@ const computeAll = (item) => {
 	return numberFormat(total.value);
 };
 </script>
-
-<style>
-@media print {
-	/* .invoice-table {
-		display: none;
-	}
-	body * {
-		visibility: hidden;
-	}
-	main {
-		padding-left: 0 !important;
-	}
-	#print-table,
-	#print-table * {
-		visibility: visible;
-	}
-	#print-table {
-		position: absolute;
-		left: 0;
-		top: 0;
-	} */
-}
-
-/* #print-table {
-	visibility: hidden;
-	position: absolute;
-	left: 0;
-	top: 0;
-} */
-</style>

@@ -1,12 +1,14 @@
 <template>
-	<div class="card">
-		<div class="mb-4 flex items-baseline justify-between">
-			<h4 class="text-2xl">Products</h4>
+	<TitleBar title="Products">
+		<template #actions>
 			<BaseButton
-				text="Add Product"
+				text="Add product"
 				:routeObject="{ name: 'warehouse.products.create' }"
+				color="primary"
 			/>
-		</div>
+		</template>
+	</TitleBar>
+	<div class="bg-white p-4">
 		<TableSearch
 			:options="searchOptions"
 			selected-option="sku"
@@ -17,6 +19,7 @@
 			:data="store.list"
 			:headers="tableHeaders"
 			:isLoading="store.isLoading"
+			editRoute="warehouse.products.edit"
 		>
 			<template #header-sku="header"> {{ header.text }} </template>
 			<template #item-sku="item">
@@ -39,14 +42,6 @@
 					icon="edit"
 					:route-object="{
 						name: 'warehouse.products.edit',
-						params: { id: item._id },
-					}"
-				/>
-
-				<BaseTableActionButton
-					icon="eye"
-					:route-object="{
-						name: 'warehouse.products.view',
 						params: { id: item._id },
 					}"
 				/>

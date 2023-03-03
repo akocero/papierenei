@@ -8,92 +8,86 @@
 		upload-type="multiple"
 	/>
 	<div class="card">
-		<div class="mb-4 flex items-baseline justify-between">
-			<h4 class="text-2xl">Media</h4>
-			<BaseButton text="Add Image" @click="showUploadImage = true" />
-		</div>
+		<TitleBar title="Media">
+			<template #actions>
+				<BaseButton
+					text="Add Image"
+					@click="showUploadImage = true"
+					color="primary"
+				/>
+			</template>
+		</TitleBar>
 		<TableSearch
 			:options="searchOptions"
 			selected-option="sku"
 			@search="search"
 		/>
+		<TableData
+			:data="store.list"
+			:headers="tableHeaders"
+			:isLoading="store.isLoading"
+		>
+			<template #item-secure_url="item">
+				<div class="relative h-8">
+					<img
+						:src="item.secure_url"
+						alt=""
+						class="h-full object-contain"
+					/>
+				</div>
+			</template>
 
-		<div class="table-responsive">
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Preview</th>
-						<th>Dimensions</th>
-						<th>Uploaded At</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody class="">
-					<tr v-for="item in store.list" v-if="!store.isLoading">
-						<td>
-							<div class="relative h-8">
-								<img
-									:src="item.secure_url"
-									alt=""
-									class="h-full object-contain"
-								/>
-							</div>
-						</td>
-						<td>{{ item.width }} x {{ item.height }} px</td>
-						<td>
-							{{ moment(item.createdAt).format('MM/DD/YYYY') }}
-						</td>
-						<td class="flex space-x-2">
-							<BaseTableActionButton
-								_type="button"
-								icon="trash"
-								@click="deleteImage(item._id)"
-							/>
-						</td>
-					</tr>
-					<tr v-if="store.isLoading">
-						<td colspan="10" class="text-center">Loading...</td>
-					</tr>
-					<tr v-if="store.list.length <= 0 && !store.isLoading">
-						<td colspan="10" class="text-center">
-							No results found!
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+			<template #item-width="item">
+				{{ item.width }} x {{ item.height }} px
+			</template>
+
+			<template #item-createdAt="item">
+				{{ moment(item.createdAt).format('MM/DD/YYYY') }}
+			</template>
+
+			<template #item-actions="item">
+				<BaseTableActionButton
+					_type="button"
+					icon="trash"
+					@click="deleteImage(item._id)"
+				/>
+			</template>
+		</TableData>
 		<TablePagination :store="store" @paginate="paginate" />
 	</div>
 </template>
 
 <script setup>
 import { onBeforeMount, ref, watch } from 'vue';
-import BaseButton from '@/components/BaseButton.vue';
-import BaseSelect from '@/components/BaseSelect.vue';
 import TablePagination from '@/components/TablePagination.vue';
-
-import BaseTableActionButton from '@/components/BaseTableActionButton.vue';
 import { useImageStore } from '@/stores/image';
 import useAlert from '@/composables/useAlert';
-import useUtils from '@/composables/useUtils';
 import TableSearch from '@/components/TableSearch.vue';
 import moment from 'moment';
 import UploadImage from '@/components/image_module/UploadImage.vue';
 
 const store = useImageStore();
 const { pushAlert, pushToast } = useAlert();
-const { numberFormat } = useUtils();
 const searchString = ref('');
 
 const searchOptions = [{ label: 'SKU', value: 'sku' }];
+const tableHeaders = [
+	{ text: 'Preview', value: 'secure_url' },
+	{ text: 'Dimensions', value: 'width' },
+	{ text: 'Uploaded at', value: 'createdAt' },
+	{
+		text: 'Actions',
+		value: 'actions',
+		cellClass: 'flex space-x-2',
+	},
+];
 
 const showUploadImage = ref(false);
 const isUploading = ref(false);
 
 onBeforeMount(async () => {
-	// if (store.list.length <= 0) {
 	await fetchData();
-	// }
+
 	if (store.error) {
 		console.log('index', store.error);
 		pushAlert('error', store.error.message);
@@ -151,7 +145,7 @@ const uploadImages = async (selectedFiles) => {
 	return images;
 };
 
-// update db base on image uploaded
+// populate to store.item the selected images
 const handleUploadImages = async (selectedFiles) => {
 	isUploading.value = true;
 	store.error = null;

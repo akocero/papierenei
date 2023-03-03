@@ -1,17 +1,20 @@
 <template>
 	<div class="card">
-		<div class="mb-4 flex items-baseline justify-between">
-			<h4 class="text-2xl">Orders</h4>
-			<!-- <BaseButton
-				text="Add Order"
-				:routeObject="{ name: 'sales.orders.create' }"
-			/> -->
-		</div>
+		<TitleBar title="Orders">
+			<template #actions>
+				<!-- <BaseButton
+					text="Add order"
+					:routeObject="{ name: 'sales.orders.create' }"
+					color="primary"
+				/> -->
+			</template>
+		</TitleBar>
 		<TableSearch :options="searchOptions" @search="search" />
 		<TableData
 			:data="store.list"
 			:headers="tableHeaders"
 			:isLoading="store.isLoading"
+			editRoute="sales.orders.edit"
 		>
 			<template #item-createdAt="item">
 				{{ convertToRelativeTime(item.createdAt) }}
@@ -62,8 +65,6 @@
 
 <script setup>
 import { onBeforeMount, ref, watch } from 'vue';
-import BaseButton from '@/components/BaseButton.vue';
-import BaseSelect from '@/components/BaseSelect.vue';
 import TablePagination from '@/components/TablePagination.vue';
 
 import BaseTableActionButton from '@/components/BaseTableActionButton.vue';

@@ -139,11 +139,6 @@ const router = createRouter({
 					component: () => import('../views/customer/edit.vue'),
 				},
 				{
-					path: 'sales/customers/view/:id',
-					name: 'sales.customers.view',
-					component: () => import('../views/customer/view.vue'),
-				},
-				{
 					path: 'warehouse/inventory',
 					name: 'warehouse.inventory',
 					component: () => import('../views/Inventory.vue'),
@@ -164,11 +159,6 @@ const router = createRouter({
 					component: () => import('../views/product/edit.vue'),
 				},
 				{
-					path: 'warehouse/products/view/:id',
-					name: 'warehouse.products.view',
-					component: () => import('../views/product/view.vue'),
-				},
-				{
 					path: 'warehouse/collections',
 					name: 'warehouse.collections',
 					component: () => import('../views/collection/index.vue'),
@@ -182,11 +172,6 @@ const router = createRouter({
 					path: 'warehouse/collections/edit/:id',
 					name: 'warehouse.collections.edit',
 					component: () => import('../views/collection/edit.vue'),
-				},
-				{
-					path: 'warehouse/collections/view/:id',
-					name: 'warehouse.collections.view',
-					component: () => import('../views/collection/view.vue'),
 				},
 				{
 					path: 'sales/discounts',
@@ -204,11 +189,6 @@ const router = createRouter({
 					component: () => import('../views/discount/edit.vue'),
 				},
 				{
-					path: 'sales/discounts/view/:id',
-					name: 'sales.discounts.view',
-					component: () => import('../views/discount/view.vue'),
-				},
-				{
 					path: 'sales/orders',
 					name: 'sales.orders',
 					component: () => import('../views/order/index.vue'),
@@ -222,11 +202,6 @@ const router = createRouter({
 					path: 'sales/orders/edit/:id',
 					name: 'sales.orders.edit',
 					component: () => import('../views/order/edit.vue'),
-				},
-				{
-					path: 'sales/orders/view/:id',
-					name: 'sales.orders.view',
-					component: () => import('../views/order/view.vue'),
 				},
 				{
 					path: 'sales/invoices',
@@ -272,11 +247,6 @@ const router = createRouter({
 					path: 'warehouse/categories/edit/:id',
 					name: 'warehouse.categories.edit',
 					component: () => import('../views/category/edit.vue'),
-				},
-				{
-					path: 'warehouse/categories/view/:id',
-					name: 'warehouse.categories.view',
-					component: () => import('../views/category/view.vue'),
 				},
 			],
 		},

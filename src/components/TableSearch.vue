@@ -5,7 +5,7 @@
 				<input
 					type="text"
 					v-model="searchText"
-					class="w-full rounded-l-md border-gray-300 py-2 pl-10 focus:border-indigo-300 focus:ring-0"
+					class="w-full rounded-l-sm border-gray-300 py-2 pl-10 focus:border-indigo-300 focus:ring-0"
 				/>
 				<button class="absolute top-3 left-3">
 					<VueFeather
@@ -18,7 +18,7 @@
 			<select
 				id="search_options"
 				v-model="searchType"
-				class="rounded-r-md border-gray-300 py-1 focus:border-indigo-300 focus:ring-0"
+				class="rounded-r-sm border-gray-300 py-1 focus:border-indigo-300 focus:ring-0"
 			>
 				<option
 					v-for="option in options"
@@ -58,7 +58,10 @@ const searchType = ref(
 
 const search = () => {
 	if (searchText.value) {
-		emit('search', `${searchType.value}[regex]=${searchText.value}&`);
+		emit(
+			'search',
+			`${searchType.value}[regex]=${searchText.value.toLowerCase()}&`,
+		);
 	} else {
 		emit('search');
 	}

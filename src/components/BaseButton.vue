@@ -12,6 +12,7 @@
 				'border border-gray-200 bg-gray-100 text-gray-900':
 					color === 'default',
 				'bg-red-600 text-red-50 ': color === 'red',
+				'bg-gray-800 text-gray-50 ': color === 'dark',
 			},
 			_class,
 		]"
@@ -31,6 +32,7 @@
 				'border bg-yellow-500 text-yellow-50 ': color === 'yellow',
 				'border bg-green-500 text-green-50 ': color === 'green',
 				'bg-red-600 text-red-50 ': color === 'red',
+				'bg-gray-800 text-gray-50 ': color === 'dark',
 			},
 			_class,
 		]"

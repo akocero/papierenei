@@ -53,7 +53,6 @@ const sendEmail = async (store, emailUrl, id) => {
 	try {
 		const res = await axios.get(`${store.url}/${emailUrl}/${id}`);
 		store.item = res.data.data;
-		console.log(res.data);
 		store.error = null;
 		store.isLoading = false;
 		store.response = res.data;
@@ -68,6 +67,7 @@ const sendEmail = async (store, emailUrl, id) => {
 const create = async (store, payload) => {
 	store.isLoading = true;
 	store.error = null;
+
 	try {
 		const res = await axios.post(store.url, payload);
 		store.error = null;

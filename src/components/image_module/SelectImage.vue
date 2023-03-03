@@ -82,7 +82,7 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount, onUnmounted, computed } from 'vue';
+import { ref, onBeforeMount, onUnmounted, computed, watch } from 'vue';
 import BaseModal from '@/components/BaseModal.vue';
 import { useImageStore } from '@/stores/image';
 import useAlert from '@/composables/useAlert';
@@ -137,9 +137,14 @@ const showOnlySelectedImage = () => {
 	showSelectedImages.value = true;
 };
 
+const addValues = (array) => {
+	const images = imageList.value.filter((img) => array.includes(img._id));
+	return images;
+};
+
 const handleEmitSelectedImages = () => {
 	if (props.uploadType !== 'single') {
-		emit('updateModelImages', selectedImages.value);
+		emit('updateModelImages', addValues(selectedImages.value));
 		return;
 	}
 
@@ -152,7 +157,7 @@ const handleEmitSelectedImages = () => {
 		return;
 	}
 
-	emit('updateModelImages', selectedImages.value);
+	emit('updateModelImages', addValues(selectedImages.value));
 	return;
 };
 </script>

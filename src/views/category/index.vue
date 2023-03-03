@@ -13,68 +13,51 @@
 			@search="search"
 		/>
 
-		<div class="table-responsive">
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody class="">
-					<tr v-for="item in store.list" v-if="!store.isLoading">
-						<td>{{ item.name }}</td>
-						<td class="flex space-x-2">
-							<BaseTableActionButton
-								icon="edit"
-								:route-object="{
-									name: 'warehouse.categories.edit',
-									params: { id: item._id },
-								}"
-							/>
+		<TableData
+			:data="store.list"
+			:headers="tableHeaders"
+			:isLoading="store.isLoading"
+			editRoute="warehouse.categories.edit"
+		>
+			<template #item-createdAt="item">
+				{{ moment(item.createdAt).format('MM/DD/YYYY') }}
+			</template>
 
-							<BaseTableActionButton
-								icon="eye"
-								:route-object="{
-									name: 'warehouse.categories.view',
-									params: { id: item._id },
-								}"
-							/>
-						</td>
-					</tr>
-					<tr v-if="store.isLoading">
-						<td colspan="10" class="text-center">Loading...</td>
-					</tr>
-					<tr v-if="store.list.length <= 0 && !store.isLoading">
-						<td colspan="10" class="text-center">
-							No results found!
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+			<template #item-actions="item">
+				<BaseTableActionButton
+					icon="edit"
+					:route-object="{
+						name: 'warehouse.collections.edit',
+						params: { id: item._id },
+					}"
+				/>
+			</template>
+		</TableData>
+
 		<TablePagination :store="store" @paginate="paginate" />
 	</div>
 </template>
 
 <script setup>
 import { onBeforeMount, ref, watch } from 'vue';
-import BaseButton from '@/components/BaseButton.vue';
-import BaseSelect from '@/components/BaseSelect.vue';
-import TablePagination from '@/components/TablePagination.vue';
-
-import BaseTableActionButton from '@/components/BaseTableActionButton.vue';
 import { useCategoryStore } from '@/stores/category';
 import useAlert from '@/composables/useAlert';
 import useUtils from '@/composables/useUtils';
-import TableSearch from '@/components/TableSearch.vue';
 import moment from 'moment';
 
 const store = useCategoryStore();
 const { pushAlert } = useAlert();
-const { numberFormat } = useUtils();
 const searchString = ref('');
 const searchOptions = [{ label: 'SKU', value: 'sku' }];
+const tableHeaders = [
+	{ text: 'Name', value: 'name' },
+	{ text: 'Created at', value: 'createdAt' },
+	{
+		text: 'Actions',
+		value: 'actions',
+		cellClass: 'flex space-x-2',
+	},
+];
 
 onBeforeMount(async () => {
 	// if (store.list.length <= 0) {
