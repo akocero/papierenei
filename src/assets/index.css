@@ -15,7 +15,7 @@
 
 @layer components {
 	.nav-item {
-		@apply flex items-center overflow-hidden px-[13.5px] py-2 text-gray-300 hover:bg-white/10 hover:text-gray-50;
+		@apply flex items-center overflow-hidden border-l-2 border-transparent px-[13.5px] py-2 text-gray-300 hover:bg-white/10 hover:text-gray-50;
 	}
 
 	.nav__item:hover .nav__item--sub {
@@ -23,14 +23,14 @@
 	}
 
 	.active.nav-item {
-		@apply border-l-2 bg-gray-900 text-gray-50;
+		@apply border-l-2 border-white bg-gray-900 text-gray-50;
 	}
 	.nav-subitem {
-		@apply flex items-center whitespace-nowrap py-2 px-[15px] text-gray-500 hover:bg-white/10 hover:text-gray-50;
+		@apply flex items-center whitespace-nowrap border-l-2 border-transparent py-2 px-[15px] text-gray-500 hover:bg-white/10 hover:text-gray-50;
 	}
 
 	.active.nav-subitem {
-		@apply border-l-2 bg-gray-700 text-white;
+		@apply border-l-2 border-white bg-gray-700 text-white;
 	}
 
 	.card {

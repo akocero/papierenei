@@ -6,7 +6,7 @@
 		]"
 	>
 		<div
-			class="fixed top-0 left-0 hidden h-14 w-60 bg-main px-3 text-white sm:block 2xl:w-64"
+			class="fixed top-0 left-0 hidden h-14 w-60 bg-main px-4 text-white sm:block 2xl:w-64"
 		>
 			<div class="flex h-full items-center">
 				<vue-feather
