@@ -56,12 +56,12 @@ const props = defineProps({
 });
 
 const colorClass = {
-	primary: 'bg-gray-800 text-white hover:bg-gray-600',
+	primary: 'bg-gray-700 text-white hover:bg-gray-800',
 	default: 'border  bg-gray-100 text-gray-700 shadow-none',
 	yellow: 'bg-yellow-500 text-yellow-50 ',
 	green: 'bg-green-500 text-white  hover:bg-green-400',
 	red: 'bg-red-600 text-red-50',
-	dark: 'bg-gray-800 text-white hover:bg-gray-700',
+	dark: 'bg-gray-800 text-white hover:bg-gray-900',
 };
 </script>
 

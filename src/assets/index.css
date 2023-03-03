@@ -30,7 +30,7 @@
 	}
 
 	.active.nav-subitem {
-		@apply border-l-2 border-white bg-gray-700 text-white;
+		@apply border-l-2 border-white bg-white/10 text-white;
 	}
 
 	.card {
