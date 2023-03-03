@@ -89,7 +89,7 @@
 							v-model="profit"
 							:error="store.error"
 							:errorField="null"
-							placeholder="Comming Soon!"
+							placeholder=""
 							:step="0.01"
 							:disabled="true"
 						/>
@@ -102,7 +102,7 @@
 							v-model="margin"
 							:error="store.error"
 							:errorField="null"
-							placeholder="Comming Soon!"
+							placeholder=""
 							:step="0.01"
 							:disabled="true"
 						/>
