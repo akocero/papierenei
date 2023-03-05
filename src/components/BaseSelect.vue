@@ -8,7 +8,7 @@
 		<span v-if="required" class="font-black text-red-600"> *</span>
 		<select
 			:id="id"
-			class="mt-1 w-full rounded-sm shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 disabled:bg-gray-100 disabled:text-gray-500 disabled:shadow-none"
+			class="mt-1 w-full rounded shadow-sm focus:border-gray-400 focus:ring focus:ring-gray-400 focus:ring-opacity-50 disabled:bg-gray-100 disabled:text-gray-500 disabled:shadow-none"
 			:class="[
 				error && errorField
 					? 'border-2 border-red-300'

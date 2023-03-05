@@ -1,9 +1,9 @@
 <template>
-	<div class="mb-3 flex w-full items-center">
+	<div class="mb-4 flex w-full items-center">
 		<router-link
 			v-if="back_route_name"
 			:to="{ name: back_route_name }"
-			class="mr-4 flex items-center justify-center rounded-sm border border-gray-300 py-2 px-2 text-gray-600 hover:bg-gray-200"
+			class="mr-4 flex items-center justify-center rounded border border-gray-300 py-2 px-2 text-gray-600 hover:bg-gray-200"
 		>
 			<VueFeather type="arrow-left" size="22" class="" />
 		</router-link>

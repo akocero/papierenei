@@ -6,7 +6,7 @@
 		</h5>
 		<div class="ml-auto space-x-2">
 			<button
-				class="disabled:border-slate-200 hidden rounded-sm border py-1 px-3 hover:border-primary-500 hover:bg-primary-500 hover:text-white disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none sm:inline-block"
+				class="disabled:border-slate-200 hidden rounded border py-1 px-3 hover:border-gray-700 hover:bg-gray-700 hover:text-white disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none sm:inline-block"
 				@click="$emit('paginate', 1)"
 				:disabled="store.response._paginate.current_page === 1"
 			>
@@ -17,7 +17,7 @@
 					!store.response._paginate.previous_page ||
 					store.list.length <= 0
 				"
-				class="disabled:border-slate-200 rounded-sm border py-1 px-3 hover:border-primary-500 hover:bg-primary-500 hover:text-white disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none"
+				class="disabled:border-slate-200 rounded border py-1 px-3 hover:border-gray-700 hover:bg-gray-700 hover:text-white disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none"
 				@click="
 					$emit('paginate', store.response._paginate.previous_page)
 				"
@@ -26,13 +26,13 @@
 			</button>
 			<button
 				:disabled="!store.response._paginate.next_page"
-				class="disabled:border-slate-200 rounded-sm border py-1 px-3 hover:border-primary-500 hover:bg-primary-500 hover:text-white disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none"
+				class="disabled:border-slate-200 rounded border py-1 px-3 hover:border-gray-700 hover:bg-gray-700 hover:text-white disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none"
 				@click="$emit('paginate', store.response._paginate.next_page)"
 			>
 				Next
 			</button>
 			<button
-				class="disabled:border-slate-200 hidden rounded-sm border py-1 px-3 hover:border-primary-500 hover:bg-primary-500 hover:text-white disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none sm:inline-block"
+				class="disabled:border-slate-200 hidden rounded border py-1 px-3 hover:border-gray-700 hover:bg-gray-700 hover:text-white disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none sm:inline-block"
 				@click="$emit('paginate', store.response._paginate.last_page)"
 				:disabled="
 					store.response._paginate.current_page ===

@@ -5,7 +5,7 @@
 		:disabled="disabled"
 		:class="[
 			colorClass[color],
-			'inline-block rounded-sm py-2 px-3 shadow disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none',
+			'inline-block  rounded py-2 px-3 shadow disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none',
 			_class,
 		]"
 	>
@@ -19,7 +19,7 @@
 		:disabled="disabled"
 		:class="[
 			colorClass[color],
-			'inline-block rounded-sm py-2 px-3 shadow disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none',
+			'inline-block  rounded py-2 px-3 shadow disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none',
 			_class,
 		]"
 	>

@@ -109,7 +109,7 @@ const moveToEdit = (id) => {
 </script>
 
 <template>
-	<div class="table-responsive">
+	<div class="table-responsive rounded">
 		<table class="table" v-if="data">
 			<thead>
 				<tr>
@@ -125,7 +125,7 @@ const moveToEdit = (id) => {
 					v-for="item in data"
 					v-if="data.length"
 					:class="[
-						editRoute ? 'cursor-pointer hover:bg-gray-100' : '',
+						editRoute ? 'cursor-pointer hover:bg-gray-50' : '',
 					]"
 					@click="moveToEdit(item._id)"
 				>

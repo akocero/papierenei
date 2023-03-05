@@ -19,7 +19,7 @@
 	<div class="flex justify-center" v-if="validateSingleUpload">
 		<Menu
 			as="div"
-			class="relative mb-3 inline-block rounded-sm border bg-white py-1 px-3"
+			class="relative mb-3 inline-block rounded border bg-white py-1 px-3"
 		>
 			<div>
 				<MenuButton class="justify-cente flex w-full items-center">
@@ -46,7 +46,7 @@
 				leave-to-class="transform scale-95 opacity-0"
 			>
 				<MenuItems
-					class="absolute left-0 z-20 mt-3 origin-top-right divide-y divide-gray-200 overflow-hidden rounded-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+					class="absolute left-0 z-20 mt-3 origin-top-right divide-y divide-gray-200 overflow-hidden rounded bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
 				>
 					<div class="">
 						<MenuItem v-slot="{ active }">

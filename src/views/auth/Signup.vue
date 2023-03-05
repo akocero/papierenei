@@ -1,8 +1,10 @@
 <template>
-	<div class="grid h-screen grid-cols-1 bg-white sm:grid-cols-2">
-		<div>
-			<div class="mx-auto w-full overflow-hidden md:w-8/12">
-				<div class="mt-12 p-8">
+	<div class="grid h-screen grid-cols-1 bg-white sm:grid-cols-12">
+		<div class="col-span-5">
+			<div
+				class="mx-auto flex h-full w-full items-center justify-center overflow-hidden px-16 md:w-8/12"
+			>
+				<div class="w-full">
 					<div class="mb-7">
 						<h2 class="mb-4 text-4xl">Create new account</h2>
 						<h3 class="text-gray-600">
@@ -88,7 +90,16 @@
 				</div>
 			</div>
 		</div>
-		<div class="hidden bg-primary-600 sm:block"></div>
+		<div class="col-span-7 hidden bg-white py-4 pr-4 sm:block">
+			<div
+				class="h-full rounded-lg"
+				:style="{
+					'background-image': `url('../../src/assets/login-bg-2.jpg')`,
+					backgroundSize: 'cover',
+					backgroundPosition: 'right',
+				}"
+			></div>
+		</div>
 	</div>
 </template>
 <script setup>

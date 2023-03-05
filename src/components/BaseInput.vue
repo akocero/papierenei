@@ -9,7 +9,7 @@
 		<span v-if="required" class="font-black text-red-600"> *</span>
 		<input
 			:type="type"
-			class="mt-1 w-full rounded-sm placeholder-gray-400 focus:border-primary-400 focus:ring focus:ring-primary-400 focus:ring-opacity-50 disabled:border-gray-50 disabled:bg-gray-50 disabled:text-gray-500 disabled:shadow-none"
+			class="mt-1 w-full rounded placeholder-gray-400 focus:border-gray-400 focus:ring focus:ring-gray-400 focus:ring-opacity-50 disabled:border-gray-50 disabled:bg-gray-50 disabled:text-gray-500 disabled:shadow-none"
 			:class="[
 				error && errorField
 					? 'border-2 border-red-300'

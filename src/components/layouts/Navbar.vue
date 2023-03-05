@@ -1,7 +1,7 @@
 <template>
 	<header class="fixed z-20 flex h-14 w-full print:hidden">
 		<div
-			class="hidden w-60 items-center border-gray-200 bg-main px-4 text-white shadow-md sm:flex 2xl:w-64"
+			class="hidden w-60 items-center border-gray-200 bg-main px-4 text-white shadow-sm sm:flex 2xl:w-64"
 		>
 			<vue-feather
 				type="shopping-bag"
