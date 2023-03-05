@@ -105,12 +105,12 @@
 import { ref } from '@vue/reactivity';
 import { useAuthStore } from '@/stores/auth';
 import useAlert from '@/composables/useAlert';
+import bgUrl from '@/assets/login-bg-2.jpg';
 
 const { pushAlert } = useAlert();
 const email = ref('');
 const password = ref('');
 const store = useAuthStore();
-const bgUrl = new URL('/src/assets/login-bg-2.jpg', import.meta.url).href;
 
 const handleSubmit = async () => {
 	await store.login(email.value, password.value);

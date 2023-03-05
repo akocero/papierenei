@@ -108,6 +108,7 @@ import BaseButton from '@/components/BaseButton.vue';
 import { useAuthStore } from '@/stores/auth';
 import useAlert from '@/composables/useAlert';
 import { ref } from 'vue';
+import bgUrl from '@/assets/login-bg-2.jpg';
 
 const { pushAlert } = useAlert();
 const store = useAuthStore();
@@ -116,7 +117,6 @@ const email = ref('');
 const password = ref('');
 const passwordConfirm = ref('');
 const error = ref(null);
-const bgUrl = new URL('/src/assets/login-bg-2.jpg', import.meta.url).href;
 
 const handleSubmit = async () => {
 	error.value = null;

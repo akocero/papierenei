@@ -74,13 +74,13 @@ import { useAuthStore } from '@/stores/auth';
 import useAlert from '@/composables/useAlert';
 import BaseButton from '@/components/BaseButton.vue';
 import { useRouter, useRoute } from 'vue-router';
+import bgUrl from '@/assets/login-bg-2.jpg';
 
 const { pushAlert } = useAlert();
 const email = ref('');
 const password = ref('');
 const store = useAuthStore();
 const router = useRouter();
-const bgUrl = new URL('/src/assets/login-bg-2.jpg', import.meta.url).href;
 
 const handleSubmit = async () => {
 	await store.forgotPassword(email.value);
