@@ -92,7 +92,7 @@
 			<div
 				class="h-full rounded-lg"
 				:style="{
-					'background-image': `url('../../src/assets/login-bg-2.jpg')`,
+					'background-image': `url(${bgUrl})`,
 					backgroundSize: 'cover',
 					backgroundPosition: 'right',
 				}"
@@ -110,6 +110,7 @@ const { pushAlert } = useAlert();
 const email = ref('');
 const password = ref('');
 const store = useAuthStore();
+const bgUrl = new URL('/src/assets/login-bg-2.jpg', import.meta.url).href;
 
 const handleSubmit = async () => {
 	await store.login(email.value, password.value);

@@ -94,7 +94,7 @@
 			<div
 				class="h-full rounded-lg"
 				:style="{
-					'background-image': `url('../../src/assets/login-bg-2.jpg')`,
+					'background-image': `url(${bgUrl})`,
 					backgroundSize: 'cover',
 					backgroundPosition: 'right',
 				}"
@@ -116,6 +116,7 @@ const email = ref('');
 const password = ref('');
 const passwordConfirm = ref('');
 const error = ref(null);
+const bgUrl = new URL('/src/assets/login-bg-2.jpg', import.meta.url).href;
 
 const handleSubmit = async () => {
 	error.value = null;
