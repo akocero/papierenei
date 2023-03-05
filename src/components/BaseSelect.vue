@@ -11,7 +11,7 @@
 			class="mt-1 w-full rounded shadow-sm focus:border-gray-400 focus:ring focus:ring-gray-400 focus:ring-opacity-50 disabled:bg-gray-100 disabled:text-gray-500 disabled:shadow-none"
 			:class="[
 				error && errorField
-					? 'border-2 border-red-300'
+					? 'border-2 border-red-400'
 					: 'border-gray-300',
 			]"
 			:value="modelValue"

@@ -33,7 +33,7 @@
 				class="group relative h-36 cursor-pointer"
 				:class="
 					isSelected(image._id)
-						? 'border border-gray-200 shadow-xl'
+						? ' shadow-xl'
 						: 'opacity-90 transition-all'
 				"
 			>
@@ -51,7 +51,7 @@
 				<img
 					:src="image.secure_url"
 					alt=""
-					class="h-full w-full object-cover"
+					class="h-full w-full rounded-md object-cover"
 				/>
 				<input
 					type="checkbox"

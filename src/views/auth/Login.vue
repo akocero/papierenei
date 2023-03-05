@@ -72,7 +72,7 @@
 						<input
 							v-if="store.isLoading"
 							type="submit"
-							class="block w-full rounded bg-gray-500 px-2 py-2 text-white hover:bg-gray-600 focus:outline-none focus:ring focus:ring-gray-300 active:bg-gray-700 disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none"
+							class="block w-full rounded bg-gray-500 px-2 py-2 text-white hover:bg-gray-400 focus:outline-none focus:ring focus:ring-gray-400 active:bg-gray-700 disabled:border-0 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none"
 							value="Logging-in..."
 							disabled
 						/>

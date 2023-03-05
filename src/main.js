@@ -9,6 +9,7 @@ import './assets/index.css';
 /* Layouts Components */
 import DrawerCard from './components/DrawerCard.vue';
 import TitleBar from './components/layouts/TitleBar.vue';
+import ErrorBar from './components/ErrorBar.vue';
 import ActionNavbar from './components/layouts/ActionNavbar.vue';
 import Spinner from './components/Spinner.vue';
 
@@ -32,6 +33,7 @@ app.component(VueFeather.name, VueFeather);
 app.component('DrawerCard', DrawerCard);
 app.component('ActionNavbar', ActionNavbar);
 app.component('TitleBar', TitleBar);
+app.component('ErrorBar', ErrorBar);
 app.component('Spinner', Spinner);
 app.component('ImageManager', ImageManager);
 app.component('BaseSelect', BaseSelect);
