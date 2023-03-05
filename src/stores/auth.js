@@ -23,6 +23,12 @@ export const useAuthStore = defineStore({
 				expires: 7,
 			});
 		},
+		setUserDetails(user) {
+			this.user = user;
+			Cookies.set('user', JSON.stringify(user), {
+				expires: 7,
+			});
+		},
 		async login(email, password) {
 			this.isLoading = true;
 			this.error = null;
@@ -108,7 +114,30 @@ export const useAuthStore = defineStore({
 			this.token = null;
 		},
 		async updateMe() {
-			console.log('updateMe');
+			this.isLoading = true;
+			this.error = null;
+			try {
+				const res = await axios.patch(
+					`${this.url}/updateMe`,
+					this.user,
+				);
+				this.error = null;
+				this.isLoading = false;
+				const { _id, name, email } = res.data.data;
+				this.setUserDetails({
+					_id,
+					name,
+					email,
+				});
+				return res.data.data;
+			} catch (err) {
+				this.isLoading = false;
+				console.log(err);
+				this.error = err.response.data;
+			}
+		},
+		async changePassword() {
+			console.log('changePassword');
 		},
 		async me() {
 			try {

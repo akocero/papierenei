@@ -124,6 +124,12 @@ const router = createRouter({
 					component: () => import('../views/Dashboard.vue'),
 				},
 				{
+					path: 'settings/manage-account',
+					name: 'settings.manage-account',
+					component: () =>
+						import('../views/settings/ManageAccount.vue'),
+				},
+				{
 					path: 'sales/customers',
 					name: 'sales.customers',
 					component: () => import('../views/customer/index.vue'),
