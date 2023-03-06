@@ -1,12 +1,14 @@
 <template>
 	<div
-		class="relative mb-2 flex items-start rounded-md px-4 py-3 text-white shadow-lg"
-		:class="toastColor"
+		:class="[
+			'relative mb-2 flex items-start rounded-md  px-4 py-3 text-white shadow-sm',
+			colorClasses[status],
+		]"
 		style="min-width: 14rem"
 	>
 		<div>
 			<VueFeather
-				:type="toastIcon"
+				:type="iconTypes[status]"
 				size="20"
 				stroke-width="2"
 				class="mt-1"
@@ -34,13 +36,12 @@
 import { onBeforeUnmount, ref } from 'vue';
 import useAlert from '@/composables/useAlert';
 const { popAlert } = useAlert();
-const toastColor = ref('');
-const toastIcon = ref('');
 let timeOut = null;
-const toastShowTime = 5000;
+const toastShowTime = 3000;
 const props = defineProps({
 	status: {
 		type: String,
+		default: 'info',
 	},
 	title: {
 		type: String,
@@ -61,19 +62,19 @@ const props = defineProps({
 	},
 });
 
-if (props.status === 'error') {
-	toastColor.value = 'bg-red-400';
-	toastIcon.value = 'x-circle';
-} else if (props.status === 'success') {
-	toastColor.value = 'bg-green-400';
-	toastIcon.value = 'check-circle';
-} else if (props.status === 'warning') {
-	toastColor.value = 'bg-yellow-300 text-gray-700';
-	toastIcon.value = 'info';
-} else {
-	toastColor.value = 'bg-blue-400';
-	toastIcon.value = 'info';
-}
+const colorClasses = {
+	error: 'bg-red-400/80 border-red-400 border-2',
+	success: 'bg-green-400/80 border-green-400 border-2',
+	warning: 'bg-yellow-400/80 text-gray-800 border-yellow-400 border-2',
+	info: 'bg-blue-400/80 border-blue-400 border-2',
+};
+
+const iconTypes = {
+	error: 'x-circle',
+	success: 'check-circle',
+	warning: 'info',
+	info: 'info',
+};
 
 timeOut = setTimeout(() => {
 	popAlert(props.id);

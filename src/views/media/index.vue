@@ -10,7 +10,7 @@
 	<TitleBar title="Media">
 		<template #actions>
 			<BaseButton
-				text="Add Image"
+				text="Upload Images"
 				@click="showUploadImage = true"
 				color="primary"
 			/>

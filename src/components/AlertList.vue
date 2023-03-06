@@ -1,7 +1,9 @@
 <template>
-	<div class="fixed right-6 top-6 z-40 justify-center">
+	<div
+		class="fixed left-0 top-6 z-40 flex h-0 w-full justify-center bg-blue-200"
+	>
 		<!-- <transition-group name="list" tag="div" class="alert-list" appear> -->
-		<div class="max-w-md">
+		<div class="flex flex-col items-center">
 			<Alert
 				v-for="alert in alerts"
 				:key="alert.id"

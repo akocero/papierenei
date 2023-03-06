@@ -179,9 +179,9 @@ const handleUploadImages = async (selectedFiles) => {
 	}
 
 	pushToast({
-		status: 'success',
-		title: 'Product Updated!',
-		message: 'Updated succesfully!',
+		status: 'info',
+		title: 'Image Uploaded',
+		message: 'Click save to apply changes',
 	});
 
 	closeUploadImage();
@@ -237,9 +237,9 @@ const handleUpdateModelImages = async (image_ids) => {
 	closeSelectImage();
 
 	pushToast({
-		status: 'success',
+		status: 'info',
 		title: 'Image Added',
-		message: 'Image succesfully saved!',
+		message: 'Click save to apply changes.',
 	});
 };
 </script>

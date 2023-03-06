@@ -102,7 +102,7 @@ const handleRemoveInMultipleImage = async (image_id) => {
 	pushToast({
 		status: 'info',
 		title: 'Image Removed',
-		message: 'Image removed please save changes!',
+		message: 'Click save to apply changes.',
 	});
 };
 
