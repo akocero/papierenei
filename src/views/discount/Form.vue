@@ -1,4 +1,5 @@
 <template>
+	<ErrorBar :error="store.error" v-if="store.error && store.error.errors" />
 	<div class="card">
 		<form v-if="store.item && !store.isLoading" @submit.prevent="">
 			<div class="grid grid-cols-12 gap-4">

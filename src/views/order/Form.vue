@@ -1,4 +1,5 @@
 <template>
+	<ErrorBar :error="store.error" v-if="store.error && store.error.errors" />
 	<div
 		class="main-container mb-4 flex w-full flex-col items-start gap-x-5 sm:flex-row"
 	>

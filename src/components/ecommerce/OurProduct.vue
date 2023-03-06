@@ -1,11 +1,11 @@
 <template>
 	<div
-		class="group relative flex h-40 items-center justify-center overflow-hidden bg-cover bg-center shadow-md md:h-80"
+		class="group relative flex h-40 items-center justify-center overflow-hidden shadow-md md:h-80"
 	>
 		<img
-			:src="ourProduct.img"
+			:src="ourProduct.coverPhoto[0].secure_url"
 			alt=""
-			class="transition-all duration-1000 group-hover:scale-125"
+			class="h-full w-full object-cover transition-all duration-1000 group-hover:scale-125"
 		/>
 		<a
 			href="#"
@@ -14,7 +14,7 @@
 			<div
 				class="mx-auto flex flex-col justify-center space-y-5 rounded-lg px-4 py-2 text-xl font-extrabold md:text-5xl"
 			>
-				<span class="">{{ ourProduct.text }}</span>
+				<span class="uppercase">{{ ourProduct.name }}</span>
 			</div>
 		</a>
 	</div>

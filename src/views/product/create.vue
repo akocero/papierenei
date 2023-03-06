@@ -44,7 +44,7 @@ const handleSubmit = async () => {
 	const res = await store.create(store.item);
 
 	if (store.error) {
-		// pushAlert('error', store.error.message);
+		pushAlert('error', store.error.message);
 		return;
 	}
 

@@ -136,8 +136,22 @@ export const useAuthStore = defineStore({
 				this.error = err.response.data;
 			}
 		},
-		async changePassword() {
-			console.log('changePassword');
+		async updatePassword(payload) {
+			this.isLoading = true;
+			this.error = null;
+			try {
+				const res = await axios.patch(
+					`${this.url}/updatePassword`,
+					payload,
+				);
+				this.error = null;
+				this.isLoading = false;
+				return res.data;
+			} catch (err) {
+				this.isLoading = false;
+				console.log(err);
+				this.error = err.response.data;
+			}
 		},
 		async me() {
 			try {

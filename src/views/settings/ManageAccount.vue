@@ -2,9 +2,10 @@
 	<div class="main-container">
 		<TitleBar title="Manage Account">
 			<template #actions>
-				<!-- <BaseButton text="Save" @click="handleSubmit" color="primary" /> -->
+				<!-- <BaseButton text="Save" @click="handleUpdateAaccount" color="primary" /> -->
 			</template>
 		</TitleBar>
+		<ErrorBar :error="error" v-if="error && error?.errors?.length > 0" />
 		<div class="mt-6 grid grid-cols-12 gap-y-10">
 			<div class="col-span-4 pr-16">
 				<h3 class="text-xl">Account Details</h3>
@@ -43,7 +44,7 @@
 				<div class="flex justify-end">
 					<BaseButton
 						text="Update Account"
-						@click="handleSubmit"
+						@click="handleUpdateAaccount"
 						color="primary"
 					/>
 				</div>
@@ -58,9 +59,10 @@
 					<div class="grid grid-cols-12 gap-4">
 						<div class="col-span-6">
 							<BaseInput
-								id="input_name"
+								type="password"
+								id="input_current_pass"
 								label="Current Password"
-								v-model="store.user.name"
+								v-model="account.password"
 								:error="store.error"
 								:errorField="store.error?.errors?.name || null"
 								placeholder="Ex. ABC"
@@ -70,9 +72,10 @@
 						<div class="col-span-6"></div>
 						<div class="col-span-6">
 							<BaseInput
-								id="input_email"
+								type="password"
+								id="input_new_pass"
 								label="New Password"
-								v-model="store.user.email"
+								v-model="account.newPassword"
 								:error="store.error"
 								:errorField="store.error?.errors?.email || null"
 								placeholder="Ex. ABC"
@@ -81,9 +84,10 @@
 						</div>
 						<div class="col-span-6">
 							<BaseInput
-								id="input_email"
+								type="password"
+								id="input_conf_pass"
 								label="Confirm Password"
-								v-model="store.user.email"
+								v-model="account.passwordConfirm"
 								:error="store.error"
 								:errorField="store.error?.errors?.email || null"
 								placeholder="Ex. ABC"
@@ -95,7 +99,7 @@
 				<div class="flex justify-end">
 					<BaseButton
 						text="Update Password"
-						@click="handleSubmit"
+						@click="handleUpdatePassword"
 						color="primary"
 					/>
 				</div>
@@ -108,14 +112,24 @@
 import { ref, onBeforeMount } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import useAlert from '../../composables/useAlert';
+import _ from 'lodash';
 
 const store = useAuthStore();
 const { pushAlert } = useAlert();
+
+const account = ref({
+	password: '',
+	newPassword: '',
+	passwordConfirm: '',
+});
+
+const error = ref({});
+
 onBeforeMount(() => {
 	console.log(store.user);
 });
 
-const handleSubmit = async () => {
+const handleUpdateAaccount = async () => {
 	const user = await store.updateMe();
 
 	if (store.error) {
@@ -124,5 +138,32 @@ const handleSubmit = async () => {
 	}
 
 	pushAlert('success', 'Account updated!');
+};
+
+const handleUpdatePassword = async () => {
+	error.value.errors = [];
+	for (const key in account.value) {
+		if (!account.value[key]) {
+			error.value.errors.push(`${_.startCase(key)} can't be blank!`);
+		}
+	}
+
+	if (error.value.errors.length > 0) {
+		return;
+	}
+
+	await store.updatePassword(account.value);
+
+	if (store.error && store.error.message.includes('password')) {
+		error.value.errors.push(store.error.message);
+		return;
+	}
+
+	if (store.error && store.error?.errors) {
+		error.value.errors.push(store.error.errors.passwordConfirm);
+		return;
+	}
+
+	pushAlert('success', 'Password updated!');
 };
 </script>

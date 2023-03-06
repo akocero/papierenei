@@ -31,10 +31,10 @@
 	>
 		<div class="mx-auto w-full max-w-screen-2xl">
 			<div
-				class="grid w-full grid-cols-2 gap-2 uppercase md:grid-cols-4 md:gap-10 md:px-0"
+				class="grid w-full grid-cols-2 gap-2 md:grid-cols-4 md:gap-10 md:px-0"
 			>
 				<OurProduct
-					v-for="ourProduct in ourProducts"
+					v-for="ourProduct in _ourProducts"
 					:key="ourProduct.text"
 					:ourProduct="ourProduct"
 				/>
@@ -72,21 +72,31 @@
 
 <script setup>
 import Product from '@/components/ecommerce/Product.vue';
-import OurProduct from '@/components/ecommerce/OurProduct.vue';
-import { onMounted, onBeforeMount, ref } from 'vue';
-import QuickView from '@/components/ecommerce/QuickView.vue';
-import ProductQuantity from '../../../components/ecommerce/ProductQuantity.vue';
+
+import { onBeforeMount, ref } from 'vue';
+/* Stores */
 import { useEcommSettingStore } from '@/stores/ecomm_setting';
-import { useCartStore } from '@/stores/cart';
+import { useCategoryStore } from '@/stores/category';
 import { useProductStore } from '@/stores/product';
+import { useCartStore } from '@/stores/cart';
+/* Components */
+import Spinner from '@/components/Spinner.vue';
+import OurProduct from '@/components/ecommerce/OurProduct.vue';
+import ProductHero from '@/components/ecommerce/ProductHero.vue';
+import QuickView from '@/components/ecommerce/QuickView.vue';
+/* Images */
 import logoImg from '@/assets/logos.png';
 import digitalArtImg from '@/assets/digital-arts.png';
 import bearlyArtImg from '@/assets/bearly-art.png';
-import Spinner from '@/components/Spinner.vue';
-import ProductHero from '@/components/ecommerce/ProductHero.vue';
+
+/* JSON */
+import ecomDevData from '../data/dev_ecommerce.json';
+import ecomProdData from '../data/ecommerce.json';
 
 const ecommSettingsStore = useEcommSettingStore();
 const productStore = useProductStore();
+const categoryStore = useCategoryStore();
+
 const { addToCart } = useCartStore();
 const activeHero = ref(null);
 const isOpen = ref(false);
@@ -100,11 +110,25 @@ const ourProducts = ref([
 	{ img: logoImg, text: 'Createables' },
 ]);
 
+const _ourProducts = ref([]);
+
 onBeforeMount(async () => {
+	console.log('JSON', ecomDevData.ourProducts);
+
 	// Fetch products for new Arrivals section
 	await productStore.fetch('?isPublished=1&limit=10');
 
-	console.log(productStore.list);
+	await categoryStore.fetch('');
+
+	_ourProducts.value = categoryStore.list.filter((ct) => {
+		if (import.meta.env.VITE_ENV === 'production') {
+			return ecomProdData.ourProducts.includes(ct._id);
+		}else{
+			return ecomDevData.ourProducts.includes(ct._id);
+		}
+	});
+
+	console.log('categoryStore.list', _ourProducts.value);
 
 	// Check if there is any data on ecommer settings
 	// if there is no data invoke init to create object on ecommerce settings
