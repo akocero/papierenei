@@ -1,5 +1,8 @@
 <template>
-	<div
+	<router-link
+		:to="{
+			name: 'comming-soon',
+		}"
 		class="group relative flex h-40 items-center justify-center overflow-hidden shadow-md md:h-80"
 	>
 		<img
@@ -17,7 +20,7 @@
 				<span class="uppercase">{{ ourProduct.name }}</span>
 			</div>
 		</a>
-	</div>
+	</router-link>
 </template>
 
 <script setup>

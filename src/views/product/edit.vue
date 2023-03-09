@@ -25,6 +25,10 @@ const store = useProductStore();
 
 onBeforeMount(async () => {
 	await store.find(route.params.id);
+
+	if (!store.item) {
+		router.push({ name: 'not-found' });
+	}
 });
 
 /* Subscribe: This code will run if there is a changes on the state */

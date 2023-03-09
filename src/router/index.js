@@ -5,6 +5,7 @@ import ForgotPassword from '@/views/auth/ForgotPassword.vue';
 import Auth from '@/components/layouts/Auth.vue';
 import Signup from '@/views/auth/Signup.vue';
 import ResetPassword from '@/views/auth/ResetPassword.vue';
+import NotFound from '@/views/NotFound.vue';
 import Main from '@/components/layouts/Main.vue';
 import EComm from '@/components/ecommerce_layouts/Main.vue';
 import Dashboard from '@/views/Dashboard.vue';
@@ -78,6 +79,12 @@ const router = createRouter({
 					name: 'collections',
 					component: () =>
 						import('../views/ecommerce/Collection.vue'),
+				},
+				{
+					path: '/comming-soon',
+					name: 'comming-soon',
+					component: () =>
+						import('../views/ecommerce/CommingSoon.vue'),
 				},
 			],
 		},
@@ -256,6 +263,7 @@ const router = createRouter({
 				},
 			],
 		},
+		{ path: '/:pathMatch(.*)*', name: 'not-found', component: NotFound },
 	],
 });
 
