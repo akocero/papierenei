@@ -76,6 +76,7 @@ const create = async (store, payload) => {
 		return res.data;
 	} catch (err) {
 		store.isLoading = false;
+		console.log(err);
 		store.error = err.response.data;
 		if (err.response?.data?.message === 'Expired Token') {
 			Cookies.remove('user');

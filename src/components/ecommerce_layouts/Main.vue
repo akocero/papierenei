@@ -1,10 +1,10 @@
 <template>
 	<div class="relative font-quicksand text-gray-800">
-		<Banner :text="activeBanner.text" v-if="store.item" />
+		<Banner :text="store.activeBanner.text" v-if="store.item" />
 		<Navbar />
 		<AlertList :alerts="alerts" />
 		<main class="">
-			<RouterView />
+			<RouterView :ecommSettingsStore="store" />
 		</main>
 		<Footer />
 	</div>
@@ -21,20 +21,8 @@ import AlertList from '@/components/AlertList.vue';
 
 const { alerts } = useAlert();
 const store = useEcommSettingStore();
-const activeBanner = ref('');
 onBeforeMount(async () => {
-	await store.fetch('?limit=1');
-	if (store.list.length <= 0) {
-		await store.init();
-		await store.fetch('?limit=1');
-	}
-	store.item = store.list[0];
-	activeBanner.value = store.item.banners.find(
-		(hero) => hero.isActive === true,
-	);
-	if (!activeBanner.value) {
-		activeBanner.value = store.item.banners[0];
-	}
+	await store.load();
 });
 </script>
 

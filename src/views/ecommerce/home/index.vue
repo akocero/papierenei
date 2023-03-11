@@ -8,8 +8,11 @@
 	</QuickView>
 	<header
 		class="relative mx-auto flex h-72 w-full max-w-screen-2xl items-center justify-center overflow-hidden bg-cover bg-center md:mt-8 md:h-screen"
-		v-if="!ecommSettingsStore.isLoading && activeHero"
-		:style="{ 'background-image': 'url(' + activeHero.secure_url + ')' }"
+		v-if="ecommSettingsStore.item"
+		:style="{
+			'background-image':
+				'url(' + ecommSettingsStore?.activeHero?.secure_url + ')',
+		}"
 	>
 		<div class="">
 			<button
@@ -93,14 +96,17 @@ import bearlyArtImg from '@/assets/bearly-art.png';
 import ecomDevData from '../data/dev_ecommerce.json';
 import ecomProdData from '../data/ecommerce.json';
 
-const ecommSettingsStore = useEcommSettingStore();
 const productStore = useProductStore();
 const categoryStore = useCategoryStore();
 
 const { addToCart } = useCartStore();
-const activeHero = ref(null);
+
 const isOpen = ref(false);
 const productModal = ref(null);
+
+const props = defineProps({
+	ecommSettingsStore: Object,
+});
 
 // our product data
 const ourProducts = ref([
@@ -113,42 +119,18 @@ const ourProducts = ref([
 const _ourProducts = ref([]);
 
 onBeforeMount(async () => {
-	console.log('JSON', ecomDevData.ourProducts);
-
 	// Fetch products for new Arrivals section
 	await productStore.fetch('?isPublished=1&limit=10');
-
+	// for our products
 	await categoryStore.fetch('');
 
 	_ourProducts.value = categoryStore.list.filter((ct) => {
 		if (import.meta.env.VITE_ENV === 'production') {
 			return ecomProdData.ourProducts.includes(ct._id);
-		}else{
+		} else {
 			return ecomDevData.ourProducts.includes(ct._id);
 		}
 	});
-
-	console.log('categoryStore.list', _ourProducts.value);
-
-	// Check if there is any data on ecommer settings
-	// if there is no data invoke init to create object on ecommerce settings
-	//  please refer to stores/ecomm_setting.js
-	await ecommSettingsStore.fetch('?limit=1');
-	if (ecommSettingsStore.list.length <= 0) {
-		await ecommSettingsStore.init();
-		await ecommSettingsStore.fetch('?limit=1');
-	}
-
-	ecommSettingsStore.item = ecommSettingsStore.list[0];
-
-	// get the active hero image
-	activeHero.value = ecommSettingsStore.item.heros.find(
-		(hero) => hero._id === ecommSettingsStore.item.activeHero,
-	);
-	// if no active hero image use the first one
-	if (!activeHero.value) {
-		activeHero.value = ecommSettingsStore.item.heros[0];
-	}
 });
 
 function openModal(product) {

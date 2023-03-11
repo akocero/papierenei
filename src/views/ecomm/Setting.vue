@@ -167,15 +167,7 @@ const addBanner = () => {
 };
 
 onBeforeMount(async () => {
-	await store.fetch('?limit=1');
-	if (store.list.length <= 0) {
-		await store.init();
-		await store.fetch('?limit=1');
-	}
-
-	store.item = store.list[0];
-
-	console.log('item', store.item);
+	await store.load();
 });
 
 const handleSubmit = async () => {

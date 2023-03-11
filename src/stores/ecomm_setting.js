@@ -13,30 +13,71 @@ export const useEcommSettingStore = defineStore({
 		error: null,
 	}),
 	getters: {
-		doubleCount: (state) => state.counter * 2,
+		activeBanner: (state) => {
+			const res = state.item.banners.find(
+				(hero) => hero.isActive === true,
+			);
+			if (!res) {
+				return state.item.banners[0];
+			}
+			return res;
+		},
+		activeNavbarBG(state) {
+			if (!state.item.activeNavbarBG) {
+				return state.item.navbarBGs[0];
+			}
+			return state.item.navbarBGs.find(
+				(bg) => bg._id === state.item.activeNavbarBG,
+			);
+		},
+		activeHero(state) {
+			console.log(state.item);
+			if (!state.item.activeHero) {
+				console.log('No activeHero');
+				return state.item.heros[0];
+			}
+			console.log('yes activeHero');
+			return state.item.heros.find(
+				(bg) => bg._id === state.item.activeHero,
+			);
+		},
 	},
 	actions: {
 		async init() {
-			this.create(this, {
+			/** !!! this part is important
+			 * 	if no data created, you need to add initially
+			 */
+			return this.create({
 				banners: [
 					{
-						text: '30 per',
-						name: '30',
+						text: 'Initial Banner',
+						name: 'init banner',
 					},
 				],
 			});
 		},
 		async create(payload) {
-			await storeHelpers.create(this, payload);
+			return await storeHelpers.create(this, payload);
 		},
 		async update(payload) {
 			return await storeHelpers.update(this, payload);
 		},
-		async fetch(query) {
-			await storeHelpers.fetch(this, query);
-		},
-		async find(id) {
-			await storeHelpers.find(this, id);
+		async load() {
+			const res = await storeHelpers.fetch(this, '?limit=1');
+
+			/** Check if no data found and no error occur */
+			if (!this.error && res.data.length <= 0) {
+				/** Initialized or create dummy data
+				 * and populated to item
+				 */
+				const initData = await this.init();
+				this.item = initData.data;
+				return;
+			}
+
+			// just copy the data into item
+			this.item = res.data[0];
+			return;
 		},
 	},
 });
