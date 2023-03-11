@@ -110,7 +110,7 @@ const props = defineProps({
 });
 
 const isNewProduct = (createdAt) => {
-	const createdAt = moment(new Date(createdAt), 'DD-MM-YYYY').add(15, 'days');
+	createdAt = moment(new Date(createdAt), 'DD-MM-YYYY').add(15, 'days');
 	const dateNow = new Date();
 	return moment(dateNow).isAfter(createdAt, 'year');
 };
