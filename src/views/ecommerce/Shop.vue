@@ -435,10 +435,6 @@ const sortByPriceRange = () => {
 	filterProducts();
 };
 
-const isNewProduct = (createdAt) => {
-	return true;
-};
-
 // modal functions
 function openModal(product) {
 	isModalOpen.value = true;

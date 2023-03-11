@@ -81,10 +81,10 @@ const router = createRouter({
 						import('../views/ecommerce/Collection.vue'),
 				},
 				{
-					path: '/comming-soon',
-					name: 'comming-soon',
+					path: '/coming-soon',
+					name: 'coming-soon',
 					component: () =>
-						import('../views/ecommerce/CommingSoon.vue'),
+						import('../views/ecommerce/ComingSoon.vue'),
 				},
 			],
 		},

@@ -1,7 +1,7 @@
 <template>
 	<router-link
 		:to="{
-			name: 'comming-soon',
+			name: 'coming-soon',
 		}"
 		class="group relative flex h-40 items-center justify-center overflow-hidden shadow-md md:h-80"
 	>
