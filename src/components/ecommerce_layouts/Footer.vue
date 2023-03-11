@@ -20,8 +20,6 @@
 					<h3 class="text-xl">INFORMATION</h3>
 					<ul class="mt-6 grow space-y-3">
 						<li>About</li>
-						<li>FAQs</li>
-						<li>Shipping and Returns</li>
 						<li>Order Tracking</li>
 					</ul>
 				</div>
@@ -37,26 +35,18 @@
 					<ul
 						class="mt-6 flex justify-center space-x-8 md:justify-start"
 					>
-						<li
-							class="flex h-12 w-12 items-center justify-center rounded-full bg-darkBlue text-white"
-						>
-							<vue-feather
-								type="facebook"
-								size="28"
-							></vue-feather>
-						</li>
-						<li
-							class="flex h-12 w-12 items-center justify-center rounded-full bg-darkBlue text-white"
-						>
-							<vue-feather type="youtube" size="28"></vue-feather>
-						</li>
-						<li
-							class="flex h-12 w-12 items-center justify-center rounded-full bg-darkBlue text-white"
-						>
-							<vue-feather
-								type="instagram"
-								size="28"
-							></vue-feather>
+						<li class="" v-for="link in links" :key="link.icon">
+							<a
+								:href="link.link"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="flex h-12 w-12 items-center justify-center rounded-full bg-darkBlue text-white"
+							>
+								<vue-feather
+									:type="link.icon"
+									size="28"
+								></vue-feather>
+							</a>
 						</li>
 					</ul>
 				</div>
@@ -82,6 +72,21 @@
 	</div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from 'vue';
 
-<style></style>
+const links = ref([
+	{
+		icon: 'facebook',
+		link: 'https://facebook.com/papierenei',
+	},
+	{
+		icon: 'youtube',
+		link: 'https://www.youtube.com/@papierenei',
+	},
+	{
+		icon: 'instagram',
+		link: 'https://instagram.com/papierenei',
+	},
+]);
+</script>

@@ -17,7 +17,7 @@
 			editRoute="sales.orders.edit"
 		>
 			<template #item-createdAt="item">
-				{{ convertToRelativeTime(item.createdAt) }}
+				{{ moment(item.createdAt).format('MM/DD/YYYY') }}
 			</template>
 			<template #item-fullName="item">
 				{{ item.lastName }}, {{ item.firstName }}

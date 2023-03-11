@@ -11,17 +11,18 @@
 </template>
 
 <script setup>
+import { onBeforeMount } from 'vue';
+import { useEcommSettingStore } from '@/stores/ecomm_setting';
 import Navbar from './Navbar.vue';
 import Footer from './Footer.vue';
 import Banner from '../ecommerce/Banner.vue';
-import { useEcommSettingStore } from '@/stores/ecomm_setting';
-import { onBeforeMount, ref } from 'vue';
 import useAlert from '@/composables/useAlert.js';
 import AlertList from '@/components/AlertList.vue';
 
 const { alerts } = useAlert();
 const store = useEcommSettingStore();
 onBeforeMount(async () => {
+	// Load Ecommerce Store Data e.g Banner, Hero, Bg's
 	await store.load();
 });
 </script>

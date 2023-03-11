@@ -10,7 +10,7 @@
 						<h2
 							class="mb-6 font-sans text-7xl font-bold text-yellow-400"
 						>
-							YOU SEEMS TO BE LOST!
+							YOU SEEM TO BE LOST!
 						</h2>
 
 						<p class="text-xl text-gray-700">

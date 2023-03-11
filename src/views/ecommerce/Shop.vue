@@ -192,7 +192,6 @@
 import { onBeforeMount, ref, watch } from 'vue';
 import Product from '@/components/ecommerce/Product.vue';
 import QuickView from '@/components/ecommerce/QuickView.vue';
-import ProductQuantity from '@/components/ecommerce/ProductQuantity.vue';
 import Spinner from '@/components/Spinner.vue';
 import useUtils from '@/composables/useUtils';
 import { useProductStore } from '@/stores/product';
@@ -434,6 +433,10 @@ const sortByPriceRange = () => {
 	qrySelectedPriceRange.value = _queryFrom + _queryTo;
 
 	filterProducts();
+};
+
+const isNewProduct = (createdAt) => {
+	return true;
 };
 
 // modal functions

@@ -7,7 +7,7 @@
 						<h2
 							class="mb-6 font-sans text-7xl font-bold uppercase text-yellow-400"
 						>
-							Comming soon!
+							Coming soon!
 						</h2>
 
 						<p class="text-xl text-gray-700">

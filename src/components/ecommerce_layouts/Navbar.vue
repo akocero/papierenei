@@ -88,13 +88,13 @@
 						HOME
 					</router-link>
 				</li>
-				<li class="nav__item md:flex md:h-full md:items-center">
+				<!-- <li class="nav__item md:flex md:h-full md:items-center">
 					<router-link
 						to=""
 						class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue"
 						>NEW
 					</router-link>
-				</li>
+				</li> -->
 				<li class="nav__item md:flex md:h-full md:items-center">
 					<router-link
 						:to="{

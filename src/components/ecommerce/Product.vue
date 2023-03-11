@@ -1,14 +1,17 @@
 <template>
 	<div class="relative rounded-lg text-left text-gray-800" v-if="product">
 		<span
-			class="absolute left-0 top-0 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-red-400 px-2 py-1 text-sm font-bold text-white md:-left-5 md:-top-5"
+			class="absolute -left-1 top-1 z-10 flex items-center justify-center bg-red-400 px-2 pt-1 text-sm font-bold text-white"
 			v-if="product.salePrice"
 			>SALE!</span
 		>
 
 		<span
-			class="absolute right-0 top-0 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-darkYellow px-2 py-1 text-sm font-bold text-white md:-right-5 md:-top-5"
-			v-if="index <= 4 && !product.salePrice"
+			:class="[
+				'absolute -left-1 z-10 flex items-center justify-center bg-darkYellow px-2 pt-1 text-sm font-bold text-white',
+				product.salePrice ? 'top-8' : 'top-2',
+			]"
+			v-if="isNewProduct(product.createdAt)"
 			>NEW!</span
 		>
 		<div class="group relative">
@@ -97,6 +100,7 @@
 
 <script setup>
 import useUtils from '@/composables/useUtils';
+import moment from 'moment';
 
 const { numberFormat } = useUtils();
 
@@ -104,4 +108,10 @@ const props = defineProps({
 	product: Object,
 	index: Number,
 });
+
+const isNewProduct = (createdAt) => {
+	const createdAt = moment(new Date(createdAt), 'DD-MM-YYYY').add(15, 'days');
+	const dateNow = new Date();
+	return moment(dateNow).isAfter(createdAt, 'year');
+};
 </script>

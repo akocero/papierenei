@@ -31,12 +31,9 @@ export const useEcommSettingStore = defineStore({
 			);
 		},
 		activeHero(state) {
-			console.log(state.item);
 			if (!state.item.activeHero) {
-				console.log('No activeHero');
 				return state.item.heros[0];
 			}
-			console.log('yes activeHero');
 			return state.item.heros.find(
 				(bg) => bg._id === state.item.activeHero,
 			);

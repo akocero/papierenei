@@ -24,7 +24,7 @@
 					v-else
 				/>
 			</div>
-			<div v-else class="h-44 w-full md:h-[32rem]">
+			<div v-else class="relative h-44 w-full md:h-[32rem]">
 				<div
 					v-if="!product.quantity"
 					class="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-2/4 -translate-y-2/4 transform items-center justify-center rounded-full bg-gray-900/50 text-sm font-bold text-white"
@@ -42,7 +42,7 @@
 			<label class="font-sans text-xs text-gray-400"
 				>PAPIER RENEI STORE</label
 			>
-			<h2 class="mb-4 mt-3 text-4xl">{{ product.name }}</h2>
+			<h2 class="mb-4 mt-3 text-4xl capitalize">{{ product.name }}</h2>
 			<!-- <p class="mb-4 font-sans text-xl">
 				₱{{ numberFormat(product.unitCost) }} PHP
 			</p> -->
@@ -69,6 +69,8 @@
 			>
 				Add to cart
 			</button>
+
+			<p class="mt-10">{{ product.description }}</p>
 		</div>
 	</div>
 </template>
