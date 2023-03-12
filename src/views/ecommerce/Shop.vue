@@ -159,11 +159,11 @@
 						<hr />
 					</div>
 
-					<p>
+					<!-- <p>
 						Lorem, ipsum dolor sit amet consectetur adipisicing
 						elit. Eligendi mollitia praesentium magnam quia dolorum
 						odio deserunt debitis illo repudiandae fuga?
-					</p>
+					</p> -->
 
 					<div class="mt-4 h-52 bg-gray-200"></div>
 				</div>

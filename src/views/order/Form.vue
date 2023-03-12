@@ -204,6 +204,7 @@
 					<div class="col-span-full md:col-span-6">
 						<BaseInput
 							id="input_name"
+							type="number"
 							label="Shipping Fee"
 							v-model="store.item.shippingDetails.fee"
 							:error="store.error"
