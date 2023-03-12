@@ -9,7 +9,7 @@
 		<span
 			:class="[
 				'absolute -left-1 z-10 flex items-center justify-center bg-darkYellow px-2 pt-1 text-sm font-bold text-white',
-				product.salePrice ? 'top-8' : 'top-2',
+				product.salePrice ? 'top-8' : 'top-1',
 			]"
 			v-if="isNewProduct(product.createdAt)"
 			>NEW!</span

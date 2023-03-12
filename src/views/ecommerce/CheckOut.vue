@@ -227,7 +227,6 @@ import { useCartStore } from '@/stores/cart';
 import useAlert from '../../composables/useAlert';
 import useUtils from '@/composables/useUtils';
 
-
 const store = useOrderStore();
 const cartStore = useCartStore();
 const router = useRouter();
@@ -314,7 +313,7 @@ const handleSumbit = async () => {
 
 	// sending email
 	// @params order id for the email details
-	const emailRes = await store.sendEmailOrderDetails(res.data._id);
+	//const emailRes = await store.sendEmailOrderDetails(res.data._id);
 
 	if (store.error) {
 		pushAlert('error', store.error.message);

@@ -47,12 +47,10 @@ const find = async (store, id) => {
 
 // sending email
 const sendEmail = async (store, emailUrl, id) => {
-	store.item = null;
 	store.isLoading = true;
 
 	try {
 		const res = await axios.get(`${store.url}/${emailUrl}/${id}`);
-		store.item = res.data.data;
 		store.error = null;
 		store.isLoading = false;
 		store.response = res.data;
