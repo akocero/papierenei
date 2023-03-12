@@ -37,16 +37,7 @@ const router = createRouter({
 					name: 'home',
 					component: Home,
 				},
-				{
-					path: '/about',
-					name: 'about',
-					component: () => import('../views/ecommerce/About.vue'),
-				},
-				{
-					path: '/terms',
-					name: 'terms',
-					component: () => import('../views/ecommerce/Terms.vue'),
-				},
+
 				{
 					path: '/shop',
 					name: 'shop',
@@ -91,6 +82,34 @@ const router = createRouter({
 					name: 'sale-products',
 					component: () =>
 						import('../views/ecommerce/SaleProduct.vue'),
+				},
+				{
+					path: '/sale-products',
+					name: 'sale-products',
+					component: () =>
+						import('../views/ecommerce/SaleProduct.vue'),
+				},
+				{
+					path: '/about',
+					name: 'about',
+					component: () => import('../views/ecommerce/About.vue'),
+				},
+				{
+					path: '/terms',
+					name: 'terms',
+					component: () => import('../views/ecommerce/Terms.vue'),
+				},
+				{
+					path: '/order-tracking',
+					name: 'order-tracking',
+					component: () =>
+						import('../views/ecommerce/OrderTracking.vue'),
+				},
+				{
+					path: '/return-refund',
+					name: 'return-refund',
+					component: () =>
+						import('../views/ecommerce/ReturnRefund.vue'),
 				},
 			],
 		},

@@ -19,15 +19,31 @@
 				<div class="col-span-2">
 					<h3 class="text-xl">INFORMATION</h3>
 					<ul class="mt-6 grow space-y-3">
-						<li>About</li>
-						<li>Order Tracking</li>
+						<li>
+							<router-link :to="{ name: 'about' }">
+								About
+							</router-link>
+						</li>
+						<li>
+							<router-link :to="{ name: 'order-tracking' }">
+								Order Tracking
+							</router-link>
+						</li>
 					</ul>
 				</div>
 				<div class="col-span-3">
 					<h3 class="text-xl">TERMS AND CONDITIONS</h3>
 					<ul class="mt-6 grow space-y-3">
-						<li>Terms of Service</li>
-						<li>Privacy Policy</li>
+						<li>
+							<router-link :to="{ name: 'terms' }">
+								Terms of Service
+							</router-link>
+						</li>
+						<li>
+							<router-link :to="{ name: 'return-refund' }">
+								Privacy Policy
+							</router-link>
+						</li>
 					</ul>
 				</div>
 				<div class="col-span-3">

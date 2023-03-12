@@ -137,8 +137,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="bg-lightBlue flex items-center md:px-6">
-			<div class="mx-auto w-full max-w-7xl">
+		<div class="flex items-center md:px-6">
+			<div class="mx-auto w-full max-w-7xl bg-red-200">
 				<div class="mb-8" v-if="collectionStore.item">
 					<h2 class="text-3xl font-bold uppercase">
 						{{ collectionStore.item.name }}
@@ -153,7 +153,7 @@
 
 					<div class="mt-4 h-52 bg-gray-200"></div>
 				</div>
-				<div class="mb-8" v-else>
+				<div class="mb-8 w-full bg-blue-200" v-else>
 					<h2 class="text-3xl font-bold uppercase">ALL PRODUCTS</h2>
 					<div class="pt-2 pb-4">
 						<hr />

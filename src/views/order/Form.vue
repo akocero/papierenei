@@ -69,7 +69,7 @@
 
 				<div>
 					<BaseInput
-						v-if="store.item.status === 'paid'"
+						v-if="store.item.paymentStatus === 'paid'"
 						type="date"
 						id="input_order-paid-date"
 						label="Order Paid Date"
