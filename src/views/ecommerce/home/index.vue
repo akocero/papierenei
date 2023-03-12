@@ -6,6 +6,7 @@
 	>
 		<ProductHero :product="productModal" v-if="productModal" />
 	</QuickView>
+	<Spinner v-if="ecommSettingsStore.isLoading || productStore.isLoading" />
 	<header
 		class="relative mx-auto flex h-72 w-full max-w-screen-2xl items-center justify-center overflow-hidden bg-cover bg-center md:mt-8 md:h-screen"
 		v-if="ecommSettingsStore.item"
@@ -27,7 +28,7 @@
 			</button>
 		</div>
 	</header>
-	<Spinner v-else />
+
 	<!-- Our Product Section  -->
 	<section
 		class="bg-lightBlue flex items-center py-4 px-4 text-center md:px-6 md:py-16"
@@ -68,7 +69,6 @@
 					/>
 				</div>
 			</div>
-			<Spinner v-else />
 		</div>
 	</section>
 </template>

@@ -1,4 +1,5 @@
 <template>
+	<Spinner v-if="isLoading" />
 	<div class="flex w-full flex-col items-start gap-x-5 sm:flex-row">
 		<div class="w-full sm:w-7/12">
 			<div class="card">
@@ -275,14 +276,15 @@
 						/>
 					</div>
 				</form>
-				<Spinner v-else />
 			</div>
 		</div>
 		<div class="w-full flex-1">
 			<div class="card">
 				<form @submit.prevent="addItem" v-if="!isLoading">
 					<div class="grid grid-cols-6 gap-4">
-						<div class="justify col-span-full flex items-center justify-between">
+						<div
+							class="justify col-span-full flex items-center justify-between"
+						>
 							<h4 class="text-xl">Items</h4>
 							<BaseButton
 								:text="
@@ -324,7 +326,7 @@
 								placeholder="Ex. 2"
 								:required="true"
 								type="number"
-								:step=".01"
+								:step="0.01"
 							/>
 						</div>
 						<div
@@ -385,7 +387,6 @@
 						</div>
 					</div>
 				</form>
-				<Spinner v-else />
 			</div>
 			<div class="flex flex-col space-y-4">
 				<div v-if="addedItems.length" class="">

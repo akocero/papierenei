@@ -1,4 +1,5 @@
 <template>
+	<Spinner v-if="isLoading" />
 	<div class="flex w-full flex-col items-start gap-x-5 sm:flex-row">
 		<div class="w-full sm:w-7/12">
 			<div class="card">
@@ -13,7 +14,7 @@
 						:routeObject="{ name: 'sales.invoices' }"
 					/>
 				</div>
-				<form @submit.prevent="handleSubmit" v-if="!isLoading && item">
+				<form @submit.prevent="handleSubmit" v-if="item">
 					<div class="grid grid-cols-6 gap-4">
 						<div class="col-span-full font-semibold">
 							Bill Status.
@@ -332,7 +333,6 @@
 						/>
 					</div>
 				</form>
-				<Spinner v-else />
 			</div>
 		</div>
 		<div class="w-full flex-1">
@@ -442,7 +442,6 @@
 						</div>
 					</div>
 				</form>
-				<Spinner v-else />
 			</div>
 			<div class="flex flex-col space-y-4">
 				<div v-if="addedItems.length" class="">
@@ -502,7 +501,6 @@ import BaseSelect from '@/components/BaseSelect.vue';
 import BaseTextArea from '@/components/BaseTextArea.vue';
 import DisplayFieldArray from '@/components/DisplayFieldArray.vue';
 import useInputMultiple from '@/composables/useInputMultiple';
-import Spinner from '@/components/Spinner.vue';
 import { onBeforeMount, onMounted, ref, watch } from 'vue';
 import SelectSearch from '@/components/SelectSearch.vue';
 import { useInvoiceStore } from '@/stores/invoice';

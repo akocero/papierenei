@@ -1,4 +1,5 @@
 <template>
+	<Spinner v-if="isLoading" />
 	<div class="card">
 		<form @submit.prevent="addItem" v-if="!isLoading">
 			<div class="grid grid-cols-12 gap-4">
@@ -192,7 +193,6 @@
 				</div>
 			</div>
 		</form>
-		<Spinner v-else />
 	</div>
 </template>
 
@@ -244,7 +244,9 @@ const addItem = () => {
 		);
 	}
 
-	const isItemExist = props.store.item.items.find((el) => _item._id === el.item_id);
+	const isItemExist = props.store.item.items.find(
+		(el) => _item._id === el.item_id,
+	);
 
 	if (isItemExist) {
 		pushAlert('warning', 'Item is already added!');
@@ -268,6 +270,8 @@ const addItem = () => {
 };
 
 const deleteAddedItem = (name) => {
-	props.store.item.items = props.store.item.items.filter((el) => el.name !== name);
+	props.store.item.items = props.store.item.items.filter(
+		(el) => el.name !== name,
+	);
 };
 </script>

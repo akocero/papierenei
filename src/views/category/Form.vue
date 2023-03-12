@@ -1,8 +1,9 @@
 <template>
 	<ErrorBar :error="store.error" v-if="store.error && store.error.errors" />
-	<div class="flex flex-col items-start gap-6 md:flex-row">
+	<Spinner v-if="store.isLoading" />
+	<div class="flex flex-col items-start gap-6 md:flex-row" v-if="store.item">
 		<div class="card grow">
-			<form @submit.prevent="" v-if="store.item && !store.isLoading">
+			<form @submit.prevent="">
 				<div class="grid grid-cols-12 gap-4">
 					<div class="col-span-full md:col-span-full">
 						<BaseInput
@@ -30,7 +31,6 @@
 					</div>
 				</div>
 			</form>
-			<Spinner v-else />
 		</div>
 		<div class="w-full md:w-1/3">
 			<ImageManager

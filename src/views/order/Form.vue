@@ -1,8 +1,9 @@
 <template>
 	<ErrorBar :error="store.error" v-if="store.error && store.error.errors" />
+	<Spinner v-if="store.isLoading" />
 	<div
 		class="main-container mb-4 flex w-full flex-col items-start gap-x-5 sm:flex-row"
-		v-if="store.item && !store.isLoading"
+		v-if="store.item"
 	>
 		<div class="w-full flex-1">
 			<DrawerCard title="Order Status" v-if="store.item">
@@ -233,7 +234,6 @@
 			</form>
 		</div>
 	</div>
-	<Spinner v-else />
 </template>
 
 <script setup>

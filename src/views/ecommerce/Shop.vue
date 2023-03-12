@@ -6,14 +6,9 @@
 	>
 		<ProductHero :product="productModal" v-if="productModal" />
 	</QuickView>
-	<div
-		class="mx-auto my-12 flex max-w-screen-2xl flex-col gap-10 px-4 md:flex-row 2xl:px-0"
-	>
-		<div class="flex flex-col space-y-8 md:w-1/4">
-			<form
-				class="relative bg-red-200"
-				@submit.prevent="filterBySearch()"
-			>
+	<div class="wrapper my-10 grid grid-cols-12 gap-10">
+		<div class="col-span-3 space-y-8">
+			<form class="relative" @submit.prevent="filterBySearch()">
 				<input
 					type="text"
 					class="w-full border-gray-300 pr-8 font-sans"
@@ -137,8 +132,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="flex items-center md:px-6">
-			<div class="mx-auto w-full max-w-7xl bg-red-200">
+		<div class="col-span-9">
+			<div class="">
 				<div class="mb-8" v-if="collectionStore.item">
 					<h2 class="text-3xl font-bold uppercase">
 						{{ collectionStore.item.name }}
@@ -153,7 +148,7 @@
 
 					<div class="mt-4 h-52 bg-gray-200"></div>
 				</div>
-				<div class="mb-8 w-full bg-blue-200" v-else>
+				<div class="mb-8 w-full" v-else>
 					<h2 class="text-3xl font-bold uppercase">ALL PRODUCTS</h2>
 					<div class="pt-2 pb-4">
 						<hr />
@@ -168,9 +163,11 @@
 					<div class="mt-4 h-52 bg-gray-200"></div>
 				</div>
 
+				<Spinner v-if="productStore.isLoading" />
+
 				<div
 					class="grid w-full grid-cols-2 gap-4 px-0 md:grid-cols-4 md:gap-10 md:px-0"
-					v-if="!productStore.isLoading"
+					v-if="productStore.list.length > 0"
 				>
 					<div v-for="(product, key) in productStore.list">
 						<Product
@@ -182,7 +179,6 @@
 						/>
 					</div>
 				</div>
-				<Spinner v-else />
 			</div>
 		</div>
 	</div>
@@ -192,7 +188,6 @@
 import { onBeforeMount, ref, watch } from 'vue';
 import Product from '@/components/ecommerce/Product.vue';
 import QuickView from '@/components/ecommerce/QuickView.vue';
-import Spinner from '@/components/Spinner.vue';
 import useUtils from '@/composables/useUtils';
 import { useProductStore } from '@/stores/product';
 import { useTagStore } from '@/stores/tag';

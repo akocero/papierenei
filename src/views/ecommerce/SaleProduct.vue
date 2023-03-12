@@ -1,10 +1,11 @@
 <template>
 	<div class="wrapper">
+		<Spinner v-if="productStore.isLoading" />
 		<div>
 			<h1 class="mb-5 py-10 text-5xl font-bold">On Sale</h1>
 			<div
 				class="grid w-full grid-cols-2 gap-4 px-0 md:grid-cols-4 md:gap-10 md:px-0"
-				v-if="!productStore.isLoading"
+				v-if="productStore.list.length > 0"
 			>
 				<div v-for="(product, key) in productStore.list">
 					<Product
@@ -16,8 +17,6 @@
 					/>
 				</div>
 			</div>
-			<Spinner v-else />
-			<ul></ul>
 		</div>
 	</div>
 </template>

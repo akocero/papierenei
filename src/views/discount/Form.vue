@@ -1,7 +1,8 @@
 <template>
 	<ErrorBar :error="store.error" v-if="store.error && store.error.errors" />
-	<div class="card">
-		<form v-if="store.item && !store.isLoading" @submit.prevent="">
+	<Spinner v-if="store.isLoading" />
+	<div class="card" v-if="store.item">
+		<form @submit.prevent="">
 			<div class="grid grid-cols-12 gap-4">
 				<div class="col-span-full">
 					<BaseInput
@@ -47,7 +48,6 @@
 				</div>
 			</div>
 		</form>
-		<Spinner v-else />
 	</div>
 </template>
 

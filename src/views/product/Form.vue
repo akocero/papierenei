@@ -2,10 +2,11 @@
 	<div
 		class="main-container mb-4 flex flex-col items-start gap-6 md:flex-row"
 	>
+		<Spinner v-if="store.isLoading" />
 		<div class="grow">
 			<form
 				@submit.prevent=""
-				v-if="store.item && !store.isLoading"
+				v-if="store.item"
 				id="form_edit_product"
 				name="form_edit_product"
 			>
@@ -159,7 +160,7 @@
 					</div>
 				</div>
 			</form>
-			<Spinner v-else />
+			
 		</div>
 		<div class="w-full md:w-[36%]">
 			<DrawerCard title="Product Status" v-if="store.item">
@@ -211,8 +212,6 @@
 				label="Tags"
 				placeholder="Find or create tags"
 			/>
-
-			<Spinner v-else />
 		</div>
 	</div>
 </template>
