@@ -34,6 +34,8 @@ export const useCartStore = defineStore('cart', () => {
 					const newCartItem = await getProductDetails(
 						prevCartItem._id,
 					);
+
+					console.log('ss', prevCartItem._id);
 					// check if the previous cart item qty greater than the new cart item qty
 					if (prevCartItem.cartQuantity > newCartItem.quantity) {
 						// if true get the latest quantity
@@ -65,8 +67,7 @@ export const useCartStore = defineStore('cart', () => {
 
 	//* Get Specific Product By ID
 	const getProductDetails = async (_id) => {
-		const { data } = await productStore.find(_id);
-		return data;
+		return await productStore.find(_id);
 	};
 
 	const addToCart = (payload) => {

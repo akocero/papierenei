@@ -1,5 +1,5 @@
 <template>
-	<div class="wrapper my-10">
+	<div class="wrapper sm:my-10">
 		<QuickView
 			@closeModal="closeModal"
 			:show="isModalOpen"
@@ -8,8 +8,24 @@
 			<ProductHero :product="productModal" v-if="productModal" />
 		</QuickView>
 		<Spinner v-if="isLoading" />
+		<button
+			class="mb-4 flex items-center px-1 hover:bg-gray-200 sm:hidden"
+			@click="isFilterOpen = !isFilterOpen"
+		>
+			<vue-feather
+				type="filter"
+				size="18"
+				class="mr-2 text-gray-800"
+			></vue-feather>
+			<span class="font-semibold">FILTER</span>
+		</button>
 		<div class="grid grid-cols-12 gap-y-10 sm:gap-10" v-if="!isLoading">
-			<div class="col-span-full space-y-8 sm:col-span-3">
+			<div
+				:class="[
+					'col-span-full space-y-8 sm:col-span-3',
+					isFilterOpen ? 'block' : 'hidden sm:block',
+				]"
+			>
 				<form class="relative" @submit.prevent="filterBySearch()">
 					<input
 						type="text"
@@ -17,7 +33,7 @@
 						v-model="searchText"
 						placeholder="Search..."
 					/>
-					<button>
+					<button @click="">
 						<vue-feather
 							type="search"
 							size="18"
@@ -249,6 +265,7 @@ const qryFilterBy = ref('');
 const qrySearch = ref('');
 
 const filterBy = ref(null);
+const isFilterOpen = ref(false);
 
 // API SAMPLE QUERY
 // db.tags.find({ tags: { $all: ["cheap", "blue"] } } )

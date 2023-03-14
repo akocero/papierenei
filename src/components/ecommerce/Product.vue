@@ -66,7 +66,9 @@
 		</div>
 
 		<div class="mt-2 text-center text-xl font-bold">
-			<h4 class="capitalize">{{ product.name }}</h4>
+			<h4 class="text-base capitalize sm:text-xl">
+				{{ product.name }}
+			</h4>
 
 			<h5 class="font-sans" v-if="!product.salePrice">
 				₱ {{ numberFormat(product.unitCost) }}

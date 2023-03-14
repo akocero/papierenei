@@ -1,12 +1,12 @@
 <template>
-	<div class="mx-auto my-8 max-w-screen-2xl">
+	<div class="wrapper my-4 sm:my-10">
 		<div class="flex items-baseline justify-between">
 			<h2 class="text-4xl font-semibold">Your Cart</h2>
 			<router-link to="shop" class="font-semibold underline"
 				>Continue Shopping</router-link
 			>
 		</div>
-		<div class="mt-4">
+		<div class="table-responsive mt-4 text-sm sm:border-0 sm:text-xl">
 			<table class="mb-5 w-full">
 				<thead class="border-b">
 					<tr class="text-left">
@@ -41,7 +41,7 @@
 										product?.images?.length ||
 										product?.coverPhoto?.length
 									"
-									class="relative h-24 w-24"
+									class="relative h-16 w-16 sm:h-24 sm:w-24"
 								>
 									<img
 										class="h-full w-full object-cover"
@@ -56,7 +56,7 @@
 										v-else
 									/>
 								</div>
-								<div v-else class="h-24 w-24">
+								<div v-else class="h-16 w-16 sm:h-24 sm:w-24">
 									<img
 										class="h-full w-full object-cover"
 										src="https://via.placeholder.com/400?text=Image+N/A"
@@ -116,14 +116,20 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="flex justify-between">
-			<div class="flex flex-col">
+		<div class="mt-10 flex flex-col sm:flex-row sm:justify-between">
+			<div class="">
 				<label for="">Order special instructions</label>
-				<textarea name="" id="" cols="30" rows="3" class=""></textarea>
+				<textarea
+					name=""
+					id=""
+					cols="30"
+					rows="1"
+					class="w-full"
+				></textarea>
 			</div>
-			<div class="max-w-xl">
-				<div>
-					<h4 class="text-right">
+			<div class="">
+				<div class="text-right">
+					<h4 class="">
 						<span class="font-bold">Subtotal</span>
 						<span class="font-sans text-xl">
 							₱{{ numberFormat(subTotal) }}
@@ -132,12 +138,16 @@
 					<p>Taxes and shipping calculated at checkout</p>
 				</div>
 
-				<router-link
-					to="check-out"
+				<BaseButton
+					_type="link"
 					v-if="list.length"
-					class="mt-4 block w-full rounded-lg bg-darkBlue px-6 py-2 text-center text-xl font-semibold text-white"
-					>Check Out</router-link
-				>
+					:routeObject="{
+						name: 'check_out',
+					}"
+					text="Check out"
+					color="primary"
+					_class="w-full  text-center mt-4"
+				/>
 			</div>
 		</div>
 	</div>
