@@ -190,6 +190,13 @@ onBeforeMount(() => {
 
 onBeforeRouteUpdate((to, from) => {
 	// if the current page is shop hide the search form
+	window.scrollTo(0, 0);
+	openMenu.value = false;
+
+	if (to.query) {
+		openMenu.value = false;
+	}
+
 	if (to.name === 'shop') {
 		isShowSearch.value = false;
 		return;
