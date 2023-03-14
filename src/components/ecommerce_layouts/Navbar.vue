@@ -165,7 +165,7 @@
 import { ref, onBeforeMount } from 'vue';
 
 import { useCartStore } from '@/stores/cart';
-import { onBeforeRouteUpdate, useRouter } from 'vue-router';
+import { onBeforeRouteLeave, onBeforeRouteUpdate, useRouter } from 'vue-router';
 import { useEcommSettingStore } from '@/stores/ecomm_setting';
 import ecomProdData from '@/views/ecommerce/data/ecommerce.json';
 import ecomDevData from '@/views/ecommerce/data/dev_ecommerce.json';
@@ -188,9 +188,13 @@ onBeforeMount(() => {
 	}
 });
 
+onBeforeRouteLeave(() => {
+	window.scrollTo(0, 0);
+});
+
 onBeforeRouteUpdate((to, from) => {
 	// if the current page is shop hide the search form
-	window.scrollTo(0, 0);
+
 	openMenu.value = false;
 
 	if (to.query) {

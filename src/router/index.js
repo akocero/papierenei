@@ -284,7 +284,7 @@ const router = createRouter({
 			],
 		},
 		{ path: '/:pathMatch(.*)*', name: 'not-found', component: NotFound },
-		{ path: '/link-tree', name: 'link-tree', component: LinkTree },
+		{ path: '/links', name: 'link-tree', component: LinkTree },
 	],
 });
 
