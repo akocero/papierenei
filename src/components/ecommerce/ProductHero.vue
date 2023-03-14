@@ -1,6 +1,6 @@
 <template>
 	<div class="">
-		<div v-if="product" class="grid grid-cols-12">
+		<div v-if="product" class="grid grid-cols-12 sm:gap-x-8">
 			<div class="col-span-full sm:col-span-7">
 				<div
 					v-if="
