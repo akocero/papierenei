@@ -1,6 +1,4 @@
 <template>
-	<div></div>
-
 	<div class="wrapper sm:py-20 sm:px-40">
 		<h1 class="my-5 text-3xl font-bold sm:text-5xl">
 			Return and Refund Policy

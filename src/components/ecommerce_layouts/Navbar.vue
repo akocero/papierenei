@@ -189,12 +189,14 @@ onBeforeMount(() => {
 });
 
 onBeforeRouteLeave(() => {
+	console.log('onBeforeRouteLeave');
 	window.scrollTo(0, 0);
 });
 
 onBeforeRouteUpdate((to, from) => {
 	// if the current page is shop hide the search form
-
+	console.log('onBeforeRouteUpdate');
+	window.scrollTo(0, 0);
 	openMenu.value = false;
 
 	if (to.query) {
