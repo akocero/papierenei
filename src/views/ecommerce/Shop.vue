@@ -7,7 +7,8 @@
 		>
 			<ProductHero :product="productModal" v-if="productModal" />
 		</QuickView>
-		<div class="grid grid-cols-12 gap-y-10 sm:gap-10">
+		<Spinner v-if="isLoading" />
+		<div class="grid grid-cols-12 gap-y-10 sm:gap-10" v-if="!isLoading">
 			<div class="col-span-full space-y-8 sm:col-span-3">
 				<form class="relative" @submit.prevent="filterBySearch()">
 					<input
@@ -169,8 +170,6 @@
 						<div class="mt-4 h-52 bg-gray-200"></div>
 					</div>
 
-					<Spinner v-if="productStore.isLoading" />
-
 					<div
 						class="grid w-full grid-cols-2 gap-4 px-0 md:grid-cols-4 md:gap-10 md:px-0"
 						v-if="productStore.list.length > 0"
@@ -192,7 +191,7 @@
 </template>
 
 <script setup>
-import { onBeforeMount, ref, watch } from 'vue';
+import { onBeforeMount, ref, watch, onUnmounted } from 'vue';
 import Product from '@/components/ecommerce/Product.vue';
 import QuickView from '@/components/ecommerce/QuickView.vue';
 import useUtils from '@/composables/useUtils';
@@ -210,6 +209,7 @@ const collectionStore = useCollectionStore();
 const categoryStore = useCategoryStore();
 const cartStore = useCartStore();
 const tagStore = useTagStore();
+const isLoading = ref(false);
 
 const { numberFormat, sort } = useUtils();
 const { addToCart } = cartStore;
@@ -268,6 +268,7 @@ const productModal = ref(null);
 const searchText = ref('');
 
 onBeforeMount(async () => {
+	isLoading.value = true;
 	await tagStore.fetch('');
 
 	// check if there is a route query collection
@@ -304,20 +305,43 @@ onBeforeMount(async () => {
 		searchText.value = route.query.search;
 		filterBySearch();
 	}
+
+	isLoading.value = false;
 });
 
 // this function will refetch the shop page if the route collection query change
 // I did this because if you change the value of collection query the page won't refetch
 onBeforeRouteUpdate(async (to, from, next) => {
-	await collectionStore.find(to.query.collection);
+	isLoading.value = true;
+	if (to.query.collection) {
+		filterBy.value = await collectionStore.find(to.query.collection);
 
-	if (!collectionStore.error) {
-		qryFilterBy.value = `?collections[in][0]=${collectionStore.item._id}`;
+		if (!collectionStore.error) {
+			qryFilterBy.value = `?collections[in][0]=${collectionStore.item._id}`;
+		}
+	}
+
+	if (to.query.category) {
+		filterBy.value = await categoryStore.find(route.query.category);
+
+		if (!categoryStore.error) {
+			qryFilterBy.value = `?categories[in][0]=${categoryStore.item._id}`;
+		}
+	}
+
+	if (!to.query.collection && !to.query.category) {
+		qryFilterBy.value = '';
+		filterBy.value = null;
 	}
 
 	// fetch products no filter
 	await filterProducts();
+	isLoading.value = false;
 	next();
+});
+
+onUnmounted(() => {
+	console.log('UNMOUNTED');
 });
 
 // to filter products
@@ -343,6 +367,8 @@ const filterProducts = async () => {
 	}
 
 	query.value = `${qryFilterBy.value}${qrySelectedTag.value}${qrySelectedPriceRange.value}${qrySelectedSortedBy.value}${qrySearch.value}&isPublished=1`;
+
+	console.log('Filter Products', query.value);
 
 	if (!qryFilterBy.value) {
 		query.value = '?' + query.value.slice(1);
