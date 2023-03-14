@@ -6,177 +6,184 @@
 	>
 		<ProductHero :product="productModal" v-if="productModal" />
 	</QuickView>
-	<div class="wrapper my-10 grid grid-cols-12 gap-10">
-		<div class="col-span-3 space-y-8">
-			<form class="relative" @submit.prevent="filterBySearch()">
-				<input
-					type="text"
-					class="w-full border-gray-300 pr-8 font-sans"
-					v-model="searchText"
-					placeholder="Search..."
-				/>
-				<button>
-					<vue-feather
-						type="search"
-						size="18"
-						class="absolute top-3 right-3 text-gray-500"
-					></vue-feather>
-				</button>
-			</form>
-
-			<div class="">
-				<div class="mb-4 flex justify-between">
-					<h3 class="font-semibold">SORTED BY</h3>
-					<button
-						type="button "
-						class="text-sm font-bold underline"
-						@click="reset('sortedBy')"
-					>
-						Reset
-					</button>
-				</div>
-				<select
-					class="w-full border-gray-300"
-					v-model="selectedSortedBy"
-				>
-					<option
-						v-for="so in sortedByOptions"
-						:key="so.sort_value"
-						:value="so.sort_value"
-					>
-						{{ so.text }}
-					</option>
-				</select>
-			</div>
-
-			<div>
-				<div class="mb-4 flex justify-between">
-					<h3 class="font-semibold">FILTERS</h3>
-					<button
-						type="button "
-						class="text-sm font-bold underline"
-						@click="reset('filter')"
-					>
-						Reset
-					</button>
-				</div>
-				<ul>
-					<li
-						v-for="category in productTags"
-						:key="category.name"
-						class="py-1"
-						v-if="productTags.length > 0"
-					>
-						<label for="" class="flex translate-y-1 items-center">
-							<input
-								type="radio"
-								class="mb-1"
-								v-model="selectedTag"
-								:value="category._id"
-							/>
-							<span class="ml-2">{{ category.name }}</span>
-						</label>
-					</li>
-					<li v-else>No Filters Found!</li>
-				</ul>
-			</div>
-
-			<div>
-				<div class="mb-4 flex justify-between">
-					<h3 class="font-semibold">PRICE</h3>
-					<button
-						type="button "
-						class="text-sm font-bold underline"
-						@click="reset('priceRange')"
-					>
-						Reset
-					</button>
-				</div>
-				<div class="flex justify-between">
-					<h5>
-						The highest price is
-						<span class="font-sans font-bold"
-							>₱{{ numberFormat(productStore.highestPrice) }}
-						</span>
-					</h5>
-				</div>
-				<div
-					class="mt-2 grid grid-cols-12 items-center justify-between gap-1"
-				>
-					<div class="col-span-5">
-						<input
-							type="number"
-							v-model="priceRange.from"
-							placeholder="₱ Min"
-							class="w-full border-gray-300 font-sans"
-						/>
-					</div>
-					<div class="col-span-5">
-						<input
-							type="number"
-							v-model="priceRange.to"
-							placeholder="₱ Max"
-							class="w-full border-gray-300 font-sans"
-						/>
-					</div>
-					<button
-						@click="sortByPriceRange"
-						class="col-span-2 flex h-full items-center justify-center border border-gray-300 font-semibold"
-					>
+	<div class="wrapper my-10">
+		<div class="grid grid-cols-12 gap-y-10 sm:gap-10">
+			<div class="col-span-full space-y-8 sm:col-span-3">
+				<form class="relative" @submit.prevent="filterBySearch()">
+					<input
+						type="text"
+						class="w-full border-gray-300 pr-8 font-sans"
+						v-model="searchText"
+						placeholder="Search..."
+					/>
+					<button>
 						<vue-feather
-							type="arrow-right"
+							type="search"
 							size="18"
-							class="text-gray-500"
+							class="absolute top-3 right-3 text-gray-500"
 						></vue-feather>
 					</button>
+				</form>
+
+				<div class="">
+					<div class="mb-4 flex justify-between">
+						<h3 class="font-semibold">SORTED BY</h3>
+						<button
+							type="button "
+							class="text-sm font-bold underline"
+							@click="reset('sortedBy')"
+						>
+							Reset
+						</button>
+					</div>
+					<select
+						class="w-full border-gray-300"
+						v-model="selectedSortedBy"
+					>
+						<option
+							v-for="so in sortedByOptions"
+							:key="so.sort_value"
+							:value="so.sort_value"
+						>
+							{{ so.text }}
+						</option>
+					</select>
+				</div>
+
+				<div>
+					<div class="mb-4 flex justify-between">
+						<h3 class="font-semibold">FILTERS</h3>
+						<button
+							type="button "
+							class="text-sm font-bold underline"
+							@click="reset('filter')"
+						>
+							Reset
+						</button>
+					</div>
+					<ul>
+						<li
+							v-for="category in productTags"
+							:key="category.name"
+							class="py-1"
+							v-if="productTags.length > 0"
+						>
+							<label
+								for=""
+								class="flex translate-y-1 items-center"
+							>
+								<input
+									type="radio"
+									class="mb-1"
+									v-model="selectedTag"
+									:value="category._id"
+								/>
+								<span class="ml-2">{{ category.name }}</span>
+							</label>
+						</li>
+						<li v-else>No Filters Found!</li>
+					</ul>
+				</div>
+
+				<div>
+					<div class="mb-4 flex justify-between">
+						<h3 class="font-semibold">PRICE</h3>
+						<button
+							type="button "
+							class="text-sm font-bold underline"
+							@click="reset('priceRange')"
+						>
+							Reset
+						</button>
+					</div>
+					<div class="flex justify-between">
+						<h5>
+							The highest price is
+							<span class="font-sans font-bold"
+								>₱{{ numberFormat(productStore.highestPrice) }}
+							</span>
+						</h5>
+					</div>
+					<div
+						class="mt-2 grid grid-cols-12 items-center justify-between gap-1"
+					>
+						<div class="col-span-5">
+							<input
+								type="number"
+								v-model="priceRange.from"
+								placeholder="₱ Min"
+								class="w-full border-gray-300 font-sans"
+							/>
+						</div>
+						<div class="col-span-5">
+							<input
+								type="number"
+								v-model="priceRange.to"
+								placeholder="₱ Max"
+								class="w-full border-gray-300 font-sans"
+							/>
+						</div>
+						<button
+							@click="sortByPriceRange"
+							class="col-span-2 flex h-full items-center justify-center border border-gray-300 font-semibold"
+						>
+							<vue-feather
+								type="arrow-right"
+								size="18"
+								class="text-gray-500"
+							></vue-feather>
+						</button>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-span-9">
-			<div class="">
-				<div class="mb-8" v-if="collectionStore.item">
-					<h2 class="text-3xl font-bold uppercase">
-						{{ collectionStore.item.name }}
-					</h2>
-					<div class="pt-2 pb-4">
-						<hr />
+			<div class="col-span-full sm:col-span-9">
+				<div class="">
+					<div class="mb-8" v-if="collectionStore.item">
+						<h2 class="text-3xl font-bold uppercase">
+							{{ collectionStore.item.name }}
+						</h2>
+						<div class="pt-2 pb-4">
+							<hr />
+						</div>
+
+						<p>
+							{{ collectionStore.item.description }}
+						</p>
+
+						<div class="mt-4 h-52 bg-gray-200"></div>
 					</div>
+					<div class="mb-8 w-full" v-else>
+						<h2 class="text-3xl font-bold uppercase">
+							ALL PRODUCTS
+						</h2>
+						<div class="pt-2 pb-4">
+							<hr />
+						</div>
 
-					<p>
-						{{ collectionStore.item.description }}
-					</p>
-
-					<div class="mt-4 h-52 bg-gray-200"></div>
-				</div>
-				<div class="mb-8 w-full" v-else>
-					<h2 class="text-3xl font-bold uppercase">ALL PRODUCTS</h2>
-					<div class="pt-2 pb-4">
-						<hr />
-					</div>
-
-					<!-- <p>
+						<!-- <p>
 						Lorem, ipsum dolor sit amet consectetur adipisicing
 						elit. Eligendi mollitia praesentium magnam quia dolorum
 						odio deserunt debitis illo repudiandae fuga?
 					</p> -->
 
-					<div class="mt-4 h-52 bg-gray-200"></div>
-				</div>
+						<div class="mt-4 h-52 bg-gray-200"></div>
+					</div>
 
-				<Spinner v-if="productStore.isLoading" />
+					<Spinner v-if="productStore.isLoading" />
 
-				<div
-					class="grid w-full grid-cols-2 gap-4 px-0 md:grid-cols-4 md:gap-10 md:px-0"
-					v-if="productStore.list.length > 0"
-				>
-					<div v-for="(product, key) in productStore.list">
-						<Product
-							:key="product._id"
-							:index="key"
-							:product="product"
-							@openModal="openModal"
-							@addToCart="addToCart($event)"
-						/>
+					<div
+						class="grid w-full grid-cols-2 gap-4 px-0 md:grid-cols-4 md:gap-10 md:px-0"
+						v-if="productStore.list.length > 0"
+					>
+						<div v-for="(product, key) in productStore.list">
+							<Product
+								:key="product._id"
+								:index="key"
+								:product="product"
+								@openModal="openModal"
+								@addToCart="addToCart($event)"
+							/>
+						</div>
 					</div>
 				</div>
 			</div>

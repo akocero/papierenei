@@ -1,6 +1,6 @@
 <template>
-	<div class="wrapper py-20 px-40">
-		<h1 class="my-5 text-5xl font-bold">Order Tracking</h1>
+	<div class="wrapper sm:py-20 sm:px-40">
+		<h1 class="my-5 text-3xl font-bold sm:text-5xl">Order Tracking</h1>
 		<ul>
 			<li>
 				<h3 class="mt-6 mb-2 font-bold">

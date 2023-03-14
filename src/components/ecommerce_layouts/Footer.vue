@@ -41,7 +41,7 @@
 						</li>
 						<li>
 							<router-link :to="{ name: 'return-refund' }">
-								Privacy Policy
+								Return and Refund Policy
 							</router-link>
 						</li>
 					</ul>

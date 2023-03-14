@@ -1,5 +1,5 @@
 <template>
-	<div class="wrapper my-10 px-60">
+	<div class="wrapper">
 		<ProductHero
 			:product="product"
 			v-if="!productStore.isLoading && product"

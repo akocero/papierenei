@@ -1,8 +1,10 @@
 <template>
 	<div></div>
 
-	<div class="wrapper py-20 px-40">
-		<h1 class="my-5 text-5xl font-bold">Return and Refund Policy</h1>
+	<div class="wrapper sm:py-20 sm:px-40">
+		<h1 class="my-5 text-3xl font-bold sm:text-5xl">
+			Return and Refund Policy
+		</h1>
 		<p class="mb-4">
 			Thank you for shopping with us. We appreciate the fact that you like
 			to buy the stuff we build. We also want to make sure you have a

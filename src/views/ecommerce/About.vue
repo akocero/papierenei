@@ -1,6 +1,6 @@
 <template>
-	<div class="wrapper py-20 px-40">
-		<h1 class="my-5 text-5xl font-bold">About Us</h1>
+	<div class="wrapper sm:py-20 sm:px-40">
+		<h1 class="my-5 text-3xl font-bold sm:text-5xl">About Us</h1>
 		<p class="mb-4">
 			What started out as a small shop for digital products, Papier Renei
 			has grown into a specialty shop carrying a wide variety of Bearly

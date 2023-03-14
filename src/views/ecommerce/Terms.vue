@@ -1,9 +1,11 @@
 <template>
-	<div class="wrapper py-20 px-40">
+	<div class="wrapper sm:py-20 sm:px-40">
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Terms & Conditions</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">
+				Terms & Conditions
+			</h1>
 			<p>Updated at 2022-11-05</p>
-			<h1 class="my-5 text-5xl font-bold">General Terms</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">General Terms</h1>
 			<p>
 				By accessing and placing an order with Papier Renei, you confirm
 				that you are in agreement with and bound by the terms of service
@@ -26,7 +28,7 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">License</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">License</h1>
 			<p class="mb-4">
 				Papier Renei grants you a revocable, non-exclusive, non-
 				transferable, limited license to download, install and use the
@@ -39,7 +41,9 @@
 				install and use the website strictly in accordance with the
 				terms of this Agreement.
 			</p>
-			<h1 class="my-5 text-5xl font-bold">Definitions and key terms</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">
+				Definitions and key terms
+			</h1>
 			<p class="mb-4">For this Terms & Conditions:</p>
 			<ul class="list-disc space-y-4 pl-4">
 				<li>
@@ -114,7 +118,7 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Restrictions</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">Restrictions</h1>
 			<p class="mb-4">
 				You agree not to, and you will not permit others to:
 			</p>
@@ -140,7 +144,9 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Your Suggestions</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">
+				Your Suggestions
+			</h1>
 			<p class="mb-4">
 				Any feedback, comments, ideas, improvements or suggestions
 				(collectively, "Suggestions") provided by you to us with respect
@@ -152,7 +158,7 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Your Consent</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">Your Consent</h1>
 			<p class="mb-4">
 				We've updated our Terms & Conditions to provide you with
 				complete transparency into what is being set when you visit our
@@ -163,7 +169,9 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Links to Other Websites</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">
+				Links to Other Websites
+			</h1>
 			<p class="mb-4">
 				Our service may contain links to other websites that are not
 				operated by Us. If You click on a third party link, You will be
@@ -176,7 +184,7 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Cookies</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">Cookies</h1>
 			<p class="mb-4">
 				We use "Cookies" to identify the areas of our website that you
 				have visited. A Cookie is a small piece of data stored on your
@@ -195,7 +203,7 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">
 				Changes To Our Terms & Conditions
 			</h1>
 			<p class="mb-4">
@@ -215,7 +223,7 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">
 				Modifications to Our service
 			</h1>
 			<p class="mb-4">
@@ -227,7 +235,9 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Updates to Our service</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">
+				Updates to Our service
+			</h1>
 			<p class="mb-4">
 				We may from time to time provide enhancements or improvements to
 				the features/ functionality of the service, which may include
@@ -243,7 +253,9 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Third-Party Services</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">
+				Third-Party Services
+			</h1>
 			<p class="mb-4">
 				We may display, include or make available third-party content
 				(including data, information, applications and other products
@@ -262,7 +274,9 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Term and Termination</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">
+				Term and Termination
+			</h1>
 			<p class="mb-4">
 				This Agreement shall remain in effect until terminated by you or
 				us. We may, in its sole discretion, at any time and for any or
@@ -281,7 +295,7 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">
 				Copyright Infringement Notice
 			</h1>
 			<p class="mb-4">
@@ -301,7 +315,7 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">No Warranties</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">No Warranties</h1>
 			<p class="mb-4">
 				The service is provided to you "AS IS" and "AS AVAILABLE" and
 				with all faults and defects without warranty of any kind. To the
@@ -341,7 +355,9 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Limitation of Liability</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">
+				Limitation of Liability
+			</h1>
 			<p class="mb-4">
 				Notwithstanding any damages that you might incur, the entire
 				liability of us and any of our suppliers under any provision of
@@ -366,7 +382,7 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Severability</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">Severability</h1>
 			<p class="mb-4">
 				If any provision of this Agreement is held to be unenforceable
 				or invalid, such provision will be changed and interpreted to
@@ -395,7 +411,7 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Waiver</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">Waiver</h1>
 			<p class="mb-4">
 				Except as provided herein, the failure to exercise a right or to
 				require performance of an obligation under this Agreement shall
@@ -417,7 +433,7 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">
 				Amendments to this Agreement
 			</h1>
 			<p class="mb-4">
@@ -433,7 +449,9 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Entire Agreement</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">
+				Entire Agreement
+			</h1>
 			<p class="mb-4">
 				The Agreement constitutes the entire agreement between you and
 				us regarding your use of the service and supersedes all prior
@@ -445,7 +463,9 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Term and Termination</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">
+				Term and Termination
+			</h1>
 			<p class="mb-4">
 				This Agreement shall remain in effect until terminated by you or
 				us. We may, in its sole discretion, at any time and for any or
@@ -464,7 +484,9 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Updates to Our Terms</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">
+				Updates to Our Terms
+			</h1>
 			<p class="mb-4">
 				We may change our Service and policies, and we may need to make
 				changes to these Terms so that they accurately reflect our
@@ -479,7 +501,9 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Intellectual Property</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">
+				Intellectual Property
+			</h1>
 			<p class="mb-4">
 				Our platform and its entire contents, features and functionality
 				(including but not limited to all information, software, text,
@@ -497,7 +521,9 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Agreement to Arbitrate</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">
+				Agreement to Arbitrate
+			</h1>
 			<p class="mb-4">
 				This section applies to any dispute EXCEPT IT DOESN’T INCLUDE A
 				DISPUTE RELATING TO CLAIMS FOR INJUNCTIVE OR EQUITABLE RELIEF
@@ -512,7 +538,9 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Notice of Dispute</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">
+				Notice of Dispute
+			</h1>
 			<p class="mb-4">
 				In the event of a dispute, you or us must give the other a
 				Notice of Dispute, which is a written statement that sets forth
@@ -529,7 +557,9 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Binding Arbitration</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">
+				Binding Arbitration
+			</h1>
 			<p class="mb-4">
 				If you and us don’t resolve any dispute by informal negotiation,
 				any other effort to resolve the dispute will be conducted
@@ -549,7 +579,9 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Submissions and Privacy</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">
+				Submissions and Privacy
+			</h1>
 			<p class="mb-4">
 				In the event that you submit or post any ideas, creative
 				suggestions, designs, photographs, information, advertisements,
@@ -568,7 +600,7 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Promotions</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">Promotions</h1>
 			<p class="mb-4">
 				We may, from time to time, include contests, promotions,
 				sweepstakes, or other activities (“Promotions”) that require you
@@ -586,7 +618,9 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Typographical Errors</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">
+				Typographical Errors
+			</h1>
 			<p class="mb-4">
 				In the event a product and/or service is listed at an incorrect
 				price or with incorrect information due to typographical error,
@@ -602,7 +636,7 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Miscellaneous</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">Miscellaneous</h1>
 			<p class="mb-4">
 				If for any reason a court of competent jurisdiction finds any
 				provision or portion of these Terms & Conditions to be
@@ -630,7 +664,7 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Disclaimer</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">Disclaimer</h1>
 			<p class="mb-4">
 				We are not responsible for any content, code or any other
 				imprecision. We do not provide warranties or guarantees. In no
@@ -669,7 +703,7 @@
 		</div>
 
 		<div class="mb-10">
-			<h1 class="my-5 text-5xl font-bold">Contact Us</h1>
+			<h1 class="my-5 text-3xl font-bold sm:text-5xl">Contact Us</h1>
 
 			<p class="mb-4">
 				Don't hesitate to contact us if you have any questions.
