@@ -77,15 +77,17 @@
 			<ul
 				class="flex-col md:mx-auto md:flex md:h-full md:max-w-screen-2xl md:flex-row md:items-center md:justify-between md:space-y-0 md:pb-0"
 				:class="{ flex: openMenu, hidden: !openMenu }"
+				v-if="navbarLinks?.length > 0"
 			>
-				<li class="nav__item md:flex md:h-full md:items-center">
+				<li
+					class="nav__item md:flex md:h-full md:items-center"
+					v-for="link in navbarLinks"
+				>
 					<router-link
-						:to="{
-							name: 'home',
-						}"
-						class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue"
+						:to="link.routeObject"
+						class="flex h-full items-center justify-center px-4 py-2 uppercase hover:bg-lightBlue-2 hover:text-darkBlue"
 					>
-						HOME
+						{{ link.text }}
 					</router-link>
 				</li>
 				<!-- <li class="nav__item md:flex md:h-full md:items-center">
@@ -95,14 +97,15 @@
 						>NEW
 					</router-link>
 				</li> -->
-				<li class="nav__item md:flex md:h-full md:items-center">
+				<!-- <li class="nav__item md:flex md:h-full md:items-center">
 					<router-link
 						:to="{
 							name: 'shop',
 						}"
 						class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue"
-						>SHOP</router-link
 					>
+						SHOP
+					</router-link>
 					<div
 						class="nav__item--sub absolute left-0 top-14 hidden w-screen border-t border-lightBlue-3 bg-lightBlue-3 py-10 text-2xl text-white"
 					>
@@ -129,55 +132,9 @@
 								</ul>
 							</div>
 						</div>
-					</div>
-				</li>
-				<li class="md:flex md:h-full md:items-center">
-					<router-link
-						:to="{
-							name: 'shop',
-							query: { collection: '63be87f5266ce353db61dafb' },
-						}"
-						class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue"
-					>
-						STATIONERY</router-link
-					>
-					<ul></ul>
-				</li>
-				<li class="md:flex md:h-full md:items-center">
-					<router-link
-						:to="{
-							name: 'shop',
-							query: { collection: '63bd7ebcab01444f92149c92' },
-						}"
-						class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue"
-						>STICKERS
-					</router-link>
-				</li>
-				<li class="md:flex md:h-full md:items-center">
-					<router-link
-						:to="{
-							name: 'sale-products',
-						}"
-						class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue"
-						>SALE
-					</router-link>
-				</li>
-				<li class="md:flex md:h-full md:items-center">
-					<router-link
-						:to="{
-							name: 'collections',
-						}"
-						class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue"
-						>COLLECTIONS
-					</router-link>
-				</li>
-				<li class="md:flex md:h-full md:items-center">
-					<router-link
-						to="terms"
-						class="flex h-full items-center justify-center px-4 py-2 hover:bg-lightBlue-2 hover:text-darkBlue"
-						>FREEBIES
-					</router-link>
-				</li>
+					</div> 
+				</li>-->
+
 				<li class="hidden md:block">
 					<router-link
 						:to="{
@@ -210,6 +167,8 @@ import { ref, onBeforeMount } from 'vue';
 import { useCartStore } from '@/stores/cart';
 import { onBeforeRouteUpdate, useRouter } from 'vue-router';
 import { useEcommSettingStore } from '@/stores/ecomm_setting';
+import ecomProdData from '@/views/ecommerce/data/ecommerce.json';
+import ecomDevData from '@/views/ecommerce/data/dev_ecommerce.json';
 
 const ecommSettingsStore = useEcommSettingStore();
 const cartStore = useCartStore();
@@ -218,6 +177,16 @@ const router = useRouter();
 const openMenu = ref(false);
 const searchText = ref('');
 const isShowSearch = ref(true);
+const navbarLinks = ref([]);
+
+onBeforeMount(() => {
+	if (import.meta.env.VITE_ENV === 'production') {
+		navbarLinks.value = ecomProdData.navbarLinks;
+	} else {
+		navbarLinks.value = ecomDevData.navbarLinks;
+		console.log(ecomDevData.navbarLinks);
+	}
+});
 
 onBeforeRouteUpdate((to, from) => {
 	// if the current page is shop hide the search form

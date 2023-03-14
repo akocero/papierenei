@@ -4,5 +4,52 @@
 		"6405ae0106e95a6cfa44f5ee",
 		"6405ae1f06e95a6cfa44f5f7",
 		"6405ae4006e95a6cfa44f600"
+	],
+	"navbarLinks": [
+		{
+			"routeObject": {
+				"name": "home"
+			},
+			"text": "home"
+		},
+		{
+			"routeObject": {
+				"name": "shop"
+			},
+			"text": "shop"
+		},
+		{
+			"routeObject": {
+				"name": "shop",
+				"query": { "collection": "640b2eb88acb090fe8978b86" }
+			},
+			"text": "stationery"
+		},
+		{
+			"routeObject": {
+				"name": "shop",
+				"query": { "collection": "640b2eef8acb090fe8978b8c" }
+			},
+			"text": "stickers"
+		},
+		{
+			"routeObject": {
+				"name": "sale-products"
+			},
+			"text": "sale"
+		},
+		{
+			"routeObject": {
+				"name": "collections"
+			},
+			"text": "collections"
+		},
+		{
+			"routeObject": {
+				"name": "shop",
+				"query": { "collection": "640b2f038acb090fe8978b92" }
+			},
+			"text": "freebies"
+		}
 	]
 }

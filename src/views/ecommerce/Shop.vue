@@ -1,12 +1,12 @@
 <template>
-	<QuickView
-		@closeModal="closeModal"
-		:show="isModalOpen"
-		modalTitle="Default Modal"
-	>
-		<ProductHero :product="productModal" v-if="productModal" />
-	</QuickView>
 	<div class="wrapper my-10">
+		<QuickView
+			@closeModal="closeModal"
+			:show="isModalOpen"
+			modalTitle="Default Modal"
+		>
+			<ProductHero :product="productModal" v-if="productModal" />
+		</QuickView>
 		<div class="grid grid-cols-12 gap-y-10 sm:gap-10">
 			<div class="col-span-full space-y-8 sm:col-span-3">
 				<form class="relative" @submit.prevent="filterBySearch()">
