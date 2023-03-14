@@ -24,7 +24,7 @@ export const useCategoryStore = defineStore({
 			await storeHelpers.fetch(this, query);
 		},
 		async find(id) {
-			await storeHelpers.find(this, id);
+			return await storeHelpers.find(this, id);
 		},
 	},
 });

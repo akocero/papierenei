@@ -1,7 +1,8 @@
 <template>
 	<router-link
 		:to="{
-			name: 'coming-soon',
+			name: 'shop',
+			query: { category: ourProduct._id },
 		}"
 		class="group relative flex h-40 items-center justify-center overflow-hidden shadow-md md:h-80"
 	>
@@ -17,7 +18,7 @@
 			<div
 				class="mx-auto flex flex-col justify-center space-y-5 rounded-lg px-4 py-2 text-xl font-extrabold md:text-5xl"
 			>
-				<span class="uppercase">{{ ourProduct.name }}</span>
+				<span class="uppercase">{{ ourProduct.name }} </span>
 			</div>
 		</a>
 	</router-link>

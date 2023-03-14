@@ -124,11 +124,19 @@ onBeforeMount(async () => {
 	// for our products
 	await categoryStore.fetch('');
 
+	let ourProductsID = [];
+
+	if (import.meta.env.VITE_ENV === 'production') {
+		ourProductsID = ecomProdData.ourProducts.map((op) => op._id);
+	} else {
+		ourProductsID = ecomDevData.ourProducts.map((op) => op._id);
+	}
+
 	_ourProducts.value = categoryStore.list.filter((ct) => {
 		if (import.meta.env.VITE_ENV === 'production') {
-			return ecomProdData.ourProducts.includes(ct._id);
+			return ourProductsID.includes(ct._id);
 		} else {
-			return ecomDevData.ourProducts.includes(ct._id);
+			return ourProductsID.includes(ct._id);
 		}
 	});
 });

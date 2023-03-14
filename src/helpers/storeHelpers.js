@@ -37,7 +37,7 @@ const find = async (store, id) => {
 		store.error = null;
 		store.isLoading = false;
 		store.response = res.data;
-		return res.data;
+		return res.data.data;
 	} catch (err) {
 		store.isLoading = false;
 		// console.log(err.response);

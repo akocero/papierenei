@@ -1,9 +1,21 @@
 {
 	"ourProducts": [
-		"6401f0fa3c3d5cb4e6303f9c",
-		"63f9cccd30d8c7533b208d7a",
-		"6342b549d84510d5a0e3529a",
-		"6342b3a2d84510d5a0e35233"
+		{
+			"_id": "6401f0fa3c3d5cb4e6303f9c",
+			"name": "keane"
+		},
+		{
+			"_id": "63f9cccd30d8c7533b208d7a",
+			"name": "new category"
+		},
+		{
+			"_id": "6342b549d84510d5a0e3529a",
+			"name": "laptop"
+		},
+		{
+			"_id": "6342b3a2d84510d5a0e35233",
+			"name": "tablets"
+		}
 	],
 	"navbarLinks": [
 		{

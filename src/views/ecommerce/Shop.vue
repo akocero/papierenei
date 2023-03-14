@@ -138,16 +138,16 @@
 			</div>
 			<div class="col-span-full sm:col-span-9">
 				<div class="">
-					<div class="mb-8" v-if="collectionStore.item">
+					<div class="mb-8" v-if="filterBy">
 						<h2 class="text-3xl font-bold uppercase">
-							{{ collectionStore.item.name }}
+							{{ filterBy.name }}
 						</h2>
 						<div class="pt-2 pb-4">
 							<hr />
 						</div>
 
 						<p>
-							{{ collectionStore.item.description }}
+							{{ filterBy.description }}
 						</p>
 
 						<div class="mt-4 h-52 bg-gray-200"></div>
@@ -199,6 +199,7 @@ import useUtils from '@/composables/useUtils';
 import { useProductStore } from '@/stores/product';
 import { useTagStore } from '@/stores/tag';
 import { useCollectionStore } from '@/stores/collection';
+import { useCategoryStore } from '@/stores/category';
 import { useCartStore } from '@/stores/cart';
 import { onBeforeRouteUpdate, useRoute } from 'vue-router';
 import { computed } from '@vue/reactivity';
@@ -206,6 +207,7 @@ import ProductHero from '@/components/ecommerce/ProductHero.vue';
 
 const productStore = useProductStore();
 const collectionStore = useCollectionStore();
+const categoryStore = useCategoryStore();
 const cartStore = useCartStore();
 const tagStore = useTagStore();
 
@@ -243,8 +245,10 @@ const qrySelectedTag = ref('');
 const qrySelectedSortedBy = ref('');
 
 // Filter Products
-const qryCollection = ref('');
+const qryFilterBy = ref('');
 const qrySearch = ref('');
+
+const filterBy = ref(null);
 
 // API SAMPLE QUERY
 // db.tags.find({ tags: { $all: ["cheap", "blue"] } } )
@@ -269,11 +273,24 @@ onBeforeMount(async () => {
 	// check if there is a route query collection
 	if (route.query.collection) {
 		// find and filter the product base on the product collection
-		await collectionStore.find(route.query.collection);
+		filterBy.value = await collectionStore.find(route.query.collection);
 
 		// if the collection id is valid filter the products base on collection id
 		if (!collectionStore.error) {
-			qryCollection.value = `?collections[in][0]=${collectionStore.item._id}`;
+			qryFilterBy.value = `?collections[in][0]=${collectionStore.item._id}`;
+		}
+	}
+
+	// check if there is a route query collection
+	if (route.query.category) {
+		// find and filter the product base on the product collection
+		filterBy.value = await categoryStore.find(route.query.category);
+
+		console.log('filterBy.value', filterBy.value);
+
+		// if the collection id is valid filter the products base on collection id
+		if (!categoryStore.error) {
+			qryFilterBy.value = `?categories[in][0]=${categoryStore.item._id}`;
 		}
 	}
 
@@ -295,7 +312,7 @@ onBeforeRouteUpdate(async (to, from, next) => {
 	await collectionStore.find(to.query.collection);
 
 	if (!collectionStore.error) {
-		qryCollection.value = `?collections[in][0]=${collectionStore.item._id}`;
+		qryFilterBy.value = `?collections[in][0]=${collectionStore.item._id}`;
 	}
 
 	// fetch products no filter
@@ -321,13 +338,13 @@ const filterProducts = async () => {
 		query.value = query.value.replace('<SEARCH>', '');
 	}
 
-	if (!qryCollection.value) {
+	if (!qryFilterBy.value) {
 		query.value = query.value.replace('<COLLECTION>', '');
 	}
 
-	query.value = `${qryCollection.value}${qrySelectedTag.value}${qrySelectedPriceRange.value}${qrySelectedSortedBy.value}${qrySearch.value}&isPublished=1`;
+	query.value = `${qryFilterBy.value}${qrySelectedTag.value}${qrySelectedPriceRange.value}${qrySelectedSortedBy.value}${qrySearch.value}&isPublished=1`;
 
-	if (!qryCollection.value) {
+	if (!qryFilterBy.value) {
 		query.value = '?' + query.value.slice(1);
 	}
 
