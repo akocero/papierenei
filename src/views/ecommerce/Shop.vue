@@ -167,7 +167,16 @@
 							{{ filterBy.description }}
 						</p>
 
-						<div class="mt-4 h-52 bg-gray-200"></div>
+						<div
+							class="mt-4 h-52 bg-gray-200"
+							v-if="filterBy.coverPhoto.length > 0"
+						>
+							<img
+								:src="filterBy.coverPhoto[0].secure_url"
+								alt=""
+								class="h-full w-full object-cover"
+							/>
+						</div>
 					</div>
 					<div class="mb-8 w-full" v-else>
 						<h2 class="text-3xl font-bold uppercase">
@@ -183,7 +192,7 @@
 						odio deserunt debitis illo repudiandae fuga?
 					</p> -->
 
-						<div class="mt-4 h-52 bg-gray-200"></div>
+						<!-- <div class="mt-4 h-52 bg-gray-200"></div> -->
 					</div>
 
 					<div

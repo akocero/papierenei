@@ -2,11 +2,11 @@
 	<div
 		class="mt-10 w-full bg-lightBlue-2 text-[1rem] font-semibold text-customDarkBlue"
 	>
-		<div class="mx-auto flex max-w-screen-2xl flex-col md:flex-row">
+		<div class="wrapper flex flex-col md:flex-row">
 			<div
-				class="grid w-full grid-cols-1 gap-y-10 py-14 text-center md:grid-cols-12 md:gap-10 md:text-left"
+				class="grid w-full grid-cols-12 gap-y-10 py-14 text-left md:gap-10"
 			>
-				<div class="col-span-4 md:pr-20">
+				<div class="col-span-4 hidden sm:block md:pr-20">
 					<h3 class="text-xl">HEAL THROUGH CUTE ART!</h3>
 					<div class="mt-6">
 						<p class="mb-5">
@@ -16,7 +16,7 @@
 						<p>Have questions? <a href="">Contact us here</a></p>
 					</div>
 				</div>
-				<div class="col-span-2">
+				<div class="col-span-6 sm:col-span-2">
 					<h3 class="text-xl">INFORMATION</h3>
 					<ul class="mt-6 grow space-y-3">
 						<li>
@@ -31,7 +31,7 @@
 						</li>
 					</ul>
 				</div>
-				<div class="col-span-3">
+				<div class="col-span-6 sm:col-span-3">
 					<h3 class="text-xl">TERMS AND CONDITIONS</h3>
 					<ul class="mt-6 grow space-y-3">
 						<li>
@@ -46,8 +46,10 @@
 						</li>
 					</ul>
 				</div>
-				<div class="col-span-3">
-					<h3 class="text-xl">LET'S HANG OUT!</h3>
+				<div class="col-span-full sm:col-span-3">
+					<h3 class="text-center text-xl sm:text-left">
+						LET'S HANG OUT!
+					</h3>
 					<ul
 						class="mt-6 flex justify-center space-x-8 md:justify-start"
 					>

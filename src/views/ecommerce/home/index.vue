@@ -16,7 +16,10 @@
 		}"
 	>
 		<div class="">
-			<button
+			<router-link
+				:to="{
+					name: 'shop',
+				}"
 				class="mx-auto flex items-center space-x-3 rounded-lg bg-darkYellow py-3 pr-3 pl-5 text-xl font-bold text-white shadow-lg"
 			>
 				SHOP NOW
@@ -25,7 +28,7 @@
 					size="24"
 					class="ml-4 mb-1"
 				></vue-feather>
-			</button>
+			</router-link>
 		</div>
 	</header>
 
