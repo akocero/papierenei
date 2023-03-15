@@ -169,10 +169,10 @@
 
 						<div
 							class="mt-4 h-52 bg-gray-200"
-							v-if="filterBy.coverPhoto.length > 0"
+							v-if="filterBy.shopBanner.length > 0"
 						>
 							<img
-								:src="filterBy.coverPhoto[0].secure_url"
+								:src="filterBy.shopBanner[0].secure_url"
 								alt=""
 								class="h-full w-full object-cover"
 							/>

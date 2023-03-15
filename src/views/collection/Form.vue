@@ -40,6 +40,14 @@
 				v-if="store.item"
 				uploadType="single"
 			/>
+
+			<ImageManager
+				:store="store"
+				title="Shop Banner"
+				db_column="shopBanner"
+				v-if="store.item"
+				uploadType="single"
+			/>
 		</div>
 	</div>
 </template>

@@ -16,7 +16,7 @@
 						<p>Have questions? <a href="">Contact us here</a></p>
 					</div>
 				</div>
-				<div class="col-span-6 sm:col-span-2">
+				<div class="col-span-6 text-center sm:col-span-2 sm:text-left">
 					<h3 class="text-xl">INFORMATION</h3>
 					<ul class="mt-6 grow space-y-3">
 						<li>
@@ -31,7 +31,7 @@
 						</li>
 					</ul>
 				</div>
-				<div class="col-span-6 sm:col-span-3">
+				<div class="col-span-6 text-center sm:col-span-3 sm:text-left">
 					<h3 class="text-xl">TERMS AND CONDITIONS</h3>
 					<ul class="mt-6 grow space-y-3">
 						<li>

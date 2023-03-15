@@ -9,7 +9,11 @@
 		<TitleBar back_route_name="sales.orders" title="Update Order Info.">
 			<template #actions>
 				<BaseButton
-					v-if="store.item && !store.isLoading"
+					v-if="
+						store.item &&
+						!store.isLoading &&
+						store.item.status !== 'cancelled'
+					"
 					_type="button"
 					text="Send receipt"
 					@click="sendEmail(store.item._id)"

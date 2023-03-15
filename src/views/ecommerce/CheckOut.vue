@@ -245,8 +245,9 @@
 						</div>
 						<div class="flex justify-between">
 							<label>Shipping</label>
-							<span class="font-sans font-semibold"
-								>₱{{ numberFormat(shippingDetails.fee) }}</span
+							<span class=""
+								>Shipping will be calculated upon
+								confirmation.</span
 							>
 						</div>
 					</li>

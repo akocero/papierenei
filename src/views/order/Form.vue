@@ -48,7 +48,10 @@
 					/>
 				</div>
 			</DrawerCard>
-			<DrawerCard title="Payment Status" v-if="store.item">
+			<DrawerCard
+				title="Payment Status"
+				v-if="store.item && store.item.status !== 'cancelled'"
+			>
 				<div class="mb-2">
 					<BaseSelect
 						id="input_order-status"
