@@ -34,6 +34,34 @@
 							/>
 						</div>
 					</div>
+					<div class="mb-10 grid grid-cols-12 gap-2">
+						<h3 class="col-span-full mb-2 text-xl font-semibold">
+							Mode of Payment
+						</h3>
+						<div class="col-span-6">
+							<BaseSelect
+								id="input_payment-method"
+								label="Payment"
+								v-model="paymentMethod"
+								:error="store.error"
+								:errorField="
+									store.error?.errors?.paymentMethod || null
+								"
+								:options="[
+									{
+										value: 'GCash',
+										label: 'GCash',
+									},
+									{
+										value: 'BPI Family Savings',
+										label: 'BPI Family Savings',
+									},
+								]"
+								:emptyOption="false"
+								:required="true"
+							/>
+						</div>
+					</div>
 					<div class="mb-4 grid grid-cols-12 gap-2">
 						<h3 class="col-span-full text-xl font-semibold">
 							Shipping Address
@@ -256,6 +284,7 @@ const firstName = ref('');
 const lastName = ref('');
 const email = ref('');
 const contactNumber = ref('');
+const paymentMethod = ref('GCash');
 const address = ref({
 	streetAddress: '',
 	city: '',
@@ -309,6 +338,7 @@ const handleSumbit = async () => {
 		lastName: lastName.value,
 		email: email.value,
 		contactNumber: contactNumber.value,
+		paymentMethod: paymentMethod.value,
 		country: address.value.country,
 		streetAddress: address.value.streetAddress,
 		city: address.value.city,

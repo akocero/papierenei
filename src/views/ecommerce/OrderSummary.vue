@@ -21,10 +21,10 @@
 					<div class="col-span-6">
 						<label for="">Payment Method</label>
 						<p class="font-bold">
-							GCash -
+							{{ orderDetails.paymentMethod }} -
 							<span class="font-sans">
-								₱{{ numberFormat(orderDetails.total) }}PHP</span
-							>
+								₱{{ numberFormat(orderDetails.total) }}PHP
+							</span>
 						</p>
 					</div>
 					<div class="col-span-6">
