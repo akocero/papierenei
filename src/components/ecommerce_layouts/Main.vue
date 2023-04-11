@@ -1,6 +1,9 @@
 <template>
 	<div class="relative font-quicksand text-gray-800">
-		<Banner :text="store.activeBanner.text" v-if="store.item" />
+		<Banner
+			:text="store.activeBanner.text"
+			v-if="store.item && store?.activeBanner?.text"
+		/>
 		<Navbar />
 		<AlertList :alerts="alerts" />
 		<main class="">
