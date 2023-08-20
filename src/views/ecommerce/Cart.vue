@@ -2,9 +2,9 @@
 	<div class="wrapper my-4 sm:my-10">
 		<div class="flex items-baseline justify-between">
 			<h2 class="text-4xl font-semibold">Your Cart</h2>
-			<router-link to="shop" class="font-semibold underline"
-				>Continue Shopping</router-link
-			>
+			<router-link to="shop" class="font-semibold underline">
+				Continue Shopping
+			</router-link>
 		</div>
 		<div class="table-responsive mt-4 text-sm sm:border-0 sm:text-xl">
 			<table class="mb-5 w-full">
@@ -111,7 +111,7 @@
 						</td>
 					</tr>
 					<tr v-else>
-						<Spinner />
+						<Loading />
 					</tr>
 				</tbody>
 			</table>

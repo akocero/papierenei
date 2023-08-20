@@ -12,6 +12,7 @@ import TitleBar from './components/layouts/TitleBar.vue';
 import ErrorBar from './components/ErrorBar.vue';
 import ActionNavbar from './components/layouts/ActionNavbar.vue';
 import Spinner from './components/Spinner.vue';
+import Loading from './components/Loading.vue';
 
 /* Base Table Components */
 import TableData from './components/TableData.vue';
@@ -35,6 +36,7 @@ app.component('ActionNavbar', ActionNavbar);
 app.component('TitleBar', TitleBar);
 app.component('ErrorBar', ErrorBar);
 app.component('Spinner', Spinner);
+app.component('Loading', Loading);
 app.component('ImageManager', ImageManager);
 app.component('BaseSelect', BaseSelect);
 app.component('TableData', TableData);

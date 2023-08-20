@@ -6,7 +6,7 @@
 	>
 		<ProductHero :product="productModal" v-if="productModal" />
 	</QuickView>
-	<Spinner v-if="ecommSettingsStore.isLoading || productStore.isLoading" />
+	<Loading v-if="ecommSettingsStore.isLoading || productStore.isLoading" />
 	<header
 		class="relative mx-auto flex h-72 w-full max-w-screen-2xl items-center justify-center overflow-hidden bg-cover bg-center md:mt-8 md:h-screen"
 		v-if="ecommSettingsStore.item"
@@ -87,6 +87,7 @@ import { useProductStore } from '@/stores/product';
 import { useCartStore } from '@/stores/cart';
 /* Components */
 import Spinner from '@/components/Spinner.vue';
+import Loading from '@/components/Loading.vue';
 import OurProduct from '@/components/ecommerce/OurProduct.vue';
 import ProductHero from '@/components/ecommerce/ProductHero.vue';
 import QuickView from '@/components/ecommerce/QuickView.vue';

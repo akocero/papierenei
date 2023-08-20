@@ -7,7 +7,7 @@
 		>
 			<ProductHero :product="productModal" v-if="productModal" />
 		</QuickView>
-		<Spinner v-if="isLoading" />
+		<Loading v-if="isLoading" />
 		<button
 			class="mb-4 flex items-center px-1 hover:bg-gray-200 sm:hidden"
 			@click="isFilterOpen = !isFilterOpen"
