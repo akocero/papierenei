@@ -109,6 +109,11 @@ const router = createRouter({
 			],
 		},
 		{
+			path: '/maintenance',
+			name: 'maintenance',
+			component: () => import('../views/ecommerce/MaintenanceMode.vue'),
+		},
+		{
 			path: '/auth',
 			name: 'auth',
 			component: Auth,

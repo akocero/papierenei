@@ -18,6 +18,29 @@
 			/>
 		</div>
 	</div>
+	<div
+		v-if="store.item"
+		class="card"
+		:class="[store.item.is_maintenance ? 'bg-red-400 text-white' : '']"
+	>
+		<div class="flex items-center justify-between">
+			<h4 class="text-xl">Maintenance Mode</h4>
+			<label
+				class="relative inline-flex cursor-pointer items-center"
+				for="maint"
+			>
+				<input
+					id="maint"
+					type="checkbox"
+					class="peer sr-only"
+					v-model="store.item.is_maintenance"
+				/>
+				<div
+					class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800"
+				></div>
+			</label>
+		</div>
+	</div>
 	<div class="card">
 		<div class="mb-4 flex items-baseline justify-between">
 			<h4 class="text-xl">Banners</h4>
@@ -181,7 +204,7 @@ const handleSubmit = async () => {
 		return;
 	}
 	console.log({ res });
-	pushAlert('info', `Ecomm Settings <${res.name}> is updated!`);
+	pushAlert('info', `Ecomm Settings is updated!`);
 	// router.push({
 	// 	name: 'warehouse.products',
 	// });
