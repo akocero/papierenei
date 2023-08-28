@@ -5,7 +5,7 @@
 				<div class="col-span-6 pr-28">
 					<div class="w-full">
 						<img
-							src="@/assets/new_logo.svg"
+							src="@/assets/logo-t.png"
 							alt=""
 							class="w-44 2xl:w-64"
 						/>
@@ -38,7 +38,7 @@
 <script setup>
 import { onBeforeMount } from 'vue';
 import { useRouter } from 'vue-router';
-import notFoundImg from '@/assets/maintenance.svg';
+import notFoundImg from '@/assets/undermaintenance.svg';
 import { useEcommSettingStore } from '@/stores/ecomm_setting';
 
 const store = useEcommSettingStore();

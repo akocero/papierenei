@@ -107,7 +107,7 @@ const props = defineProps({
 const emit = defineEmits(['updateModelImages']);
 
 onBeforeMount(async () => {
-	await imageStore.fetch();
+	await imageStore.fetch('?page=1&limit=1000');
 	imageList.value = imageStore.list;
 });
 
