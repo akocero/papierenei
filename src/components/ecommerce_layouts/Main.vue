@@ -1,5 +1,8 @@
 <template>
-	<div class="relative font-quicksand text-gray-800">
+	<div
+		class="relative font-quicksand text-gray-800"
+		v-if="store.item && !store.item.is_maintenance"
+	>
 		<Banner
 			:text="store.activeBanner.text"
 			v-if="store.item && store?.activeBanner?.text"
