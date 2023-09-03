@@ -7,208 +7,75 @@
 		>
 			<ProductHero :product="productModal" v-if="productModal" />
 		</QuickView>
-		<Loading v-if="isLoading" />
-		<button
-			class="mb-4 flex items-center px-1 hover:bg-gray-200 sm:hidden"
-			@click="isFilterOpen = !isFilterOpen"
-		>
-			<vue-feather
-				type="filter"
-				size="18"
-				class="mr-2 text-gray-800"
-			></vue-feather>
-			<span class="font-semibold">FILTER</span>
-		</button>
-		<div class="grid grid-cols-12 gap-y-10 sm:gap-10" v-if="!isLoading">
+		<Spinner v-if="isLoading" />
+		<div v-if="!isLoading">
+			<!-- Title -->
 			<div
-				:class="[
-					'col-span-full space-y-8 sm:col-span-3',
-					isFilterOpen ? 'block' : 'hidden sm:block',
-				]"
+				v-if="filterBy"
+				class="mb-8 flex flex-col items-center justify-center rounded-2xl px-12 text-center"
+				:class="filterBy?.shopBanner[0] && 'h-40'"
+				:style="{
+					'background-image':
+						'url(' + filterBy?.shopBanner[0]?.secure_url + ')',
+					backgroundRepeat: 'no-repeat',
+					backgroundSize: 'cover',
+				}"
 			>
-				<form class="relative" @submit.prevent="filterBySearch()">
-					<input
-						type="text"
-						class="w-full border-gray-300 pr-8 font-sans"
-						v-model="searchText"
-						placeholder="Search..."
-					/>
-					<button @click="">
-						<vue-feather
-							type="search"
-							size="18"
-							class="absolute top-3 right-3 text-gray-500"
-						></vue-feather>
-					</button>
-				</form>
+				<h2
+					class="font-xnarrow text-3xl font-bold uppercase text-indigo-400"
+				>
+					{{ filterBy.name }}
+				</h2>
 
-				<div class="">
-					<div class="mb-4 flex justify-between">
-						<h3 class="font-semibold">SORTED BY</h3>
-						<button
-							type="button "
-							class="text-sm font-bold underline"
-							@click="reset('sortedBy')"
-						>
-							Reset
-						</button>
-					</div>
-					<select
-						class="w-full border-gray-300"
-						v-model="selectedSortedBy"
-					>
-						<option
-							v-for="so in sortedByOptions"
-							:key="so.sort_value"
-							:value="so.sort_value"
-						>
-							{{ so.text }}
-						</option>
-					</select>
-				</div>
-
-				<div>
-					<div class="mb-4 flex justify-between">
-						<h3 class="font-semibold">FILTERS</h3>
-						<button
-							type="button "
-							class="text-sm font-bold underline"
-							@click="reset('filter')"
-						>
-							Reset
-						</button>
-					</div>
-					<ul>
-						<li
-							v-for="category in productTags"
-							:key="category.name"
-							class="py-1"
-							v-if="productTags.length > 0"
-						>
-							<label
-								for=""
-								class="flex translate-y-1 items-center"
-							>
-								<input
-									type="radio"
-									class="mb-1"
-									v-model="selectedTag"
-									:value="category._id"
-								/>
-								<span class="ml-2">{{ category.name }}</span>
-							</label>
-						</li>
-						<li v-else>No Filters Found!</li>
-					</ul>
-				</div>
-
-				<div>
-					<div class="mb-4 flex justify-between">
-						<h3 class="font-semibold">PRICE</h3>
-						<button
-							type="button "
-							class="text-sm font-bold underline"
-							@click="reset('priceRange')"
-						>
-							Reset
-						</button>
-					</div>
-					<div class="flex justify-between">
-						<h5>
-							The highest price is
-							<span class="font-sans font-bold"
-								>₱{{ numberFormat(productStore.highestPrice) }}
-							</span>
-						</h5>
-					</div>
-					<div
-						class="mt-2 grid grid-cols-12 items-center justify-between gap-1"
-					>
-						<div class="col-span-5">
-							<input
-								type="number"
-								v-model="priceRange.from"
-								placeholder="₱ Min"
-								class="w-full border-gray-300 font-sans"
-							/>
-						</div>
-						<div class="col-span-5">
-							<input
-								type="number"
-								v-model="priceRange.to"
-								placeholder="₱ Max"
-								class="w-full border-gray-300 font-sans"
-							/>
-						</div>
-						<button
-							@click="sortByPriceRange"
-							class="col-span-2 flex h-full items-center justify-center border border-gray-300 font-semibold"
-						>
-							<vue-feather
-								type="arrow-right"
-								size="18"
-								class="text-gray-500"
-							></vue-feather>
-						</button>
-					</div>
-				</div>
+				<p class="text-gray-600">
+					{{ filterBy.description }}
+				</p>
 			</div>
-			<div class="col-span-full sm:col-span-9">
-				<div class="">
-					<div class="mb-8" v-if="filterBy">
-						<h2 class="text-3xl font-bold uppercase">
-							{{ filterBy.name }}
-						</h2>
-						<div class="pt-2 pb-4">
-							<hr />
-						</div>
+			<h2
+				class="mb-10 text-center font-xnarrow text-3xl font-bold uppercase text-indigo-400"
+				v-else
+			>
+				all products
+			</h2>
 
-						<p>
-							{{ filterBy.description }}
-						</p>
-
-						<div
-							class="mt-4 h-52 bg-gray-200"
-							v-if="filterBy.shopBanner.length > 0"
-						>
-							<img
-								:src="filterBy.shopBanner[0].secure_url"
-								alt=""
-								class="h-full w-full object-cover"
-							/>
-						</div>
-					</div>
-					<div class="mb-8 w-full" v-else>
-						<h2 class="text-3xl font-bold uppercase">
-							ALL PRODUCTS
-						</h2>
-						<div class="pt-2 pb-4">
-							<hr />
-						</div>
-
-						<!-- <p>
-						Lorem, ipsum dolor sit amet consectetur adipisicing
-						elit. Eligendi mollitia praesentium magnam quia dolorum
-						odio deserunt debitis illo repudiandae fuga?
-					</p> -->
-
-						<!-- <div class="mt-4 h-52 bg-gray-200"></div> -->
-					</div>
-
-					<div
-						class="grid w-full grid-cols-2 gap-4 px-0 md:grid-cols-4 md:gap-10 md:px-0"
-						v-if="productStore.list.length > 0"
+			<!-- Filters -->
+			<div class="mb-8 flex justify-between">
+				<span class="space-x-4">
+					<TagFilter :tags="productTags" v-model="selectedTag" />
+					<SortFilter
+						:sortOptions="_sortedByOptions"
+						v-model="selectedSortedBy"
+					/>
+				</span>
+				<span class="flex flex-col">
+					<PriceFilter
+						:highestPrice="numberFormat(productStore.highestPrice)"
+						@sortByPriceRange="sortByPriceRange"
+						:priceRange="priceRange"
+					/>
+					<button
+						class="mt-3 place-self-end rounded bg-gray-200 px-3 py-2 text-gray-600"
+						@click="reset('priceRange')"
+						v-if="priceRange.from || priceRange.to"
 					>
-						<div v-for="(product, key) in productStore.list">
-							<Product
-								:key="product._id"
-								:index="key"
-								:product="product"
-								@openModal="openModal"
-								@addToCart="addToCart($event)"
-							/>
-						</div>
-					</div>
+						Clear all
+					</button>
+				</span>
+			</div>
+
+			<!-- Products -->
+			<div
+				class="grid w-full grid-cols-2 gap-4 px-0 md:grid-cols-4 md:gap-10 md:px-0"
+				v-if="productStore.list.length > 0"
+			>
+				<div v-for="(product, key) in productStore.list">
+					<Product
+						:key="product._id"
+						:index="key"
+						:product="product"
+						@openModal="openModal"
+						@addToCart="addToCart($event)"
+					/>
 				</div>
 			</div>
 		</div>
@@ -219,17 +86,22 @@
 import { onBeforeMount, ref, watch, onUnmounted } from 'vue';
 import Product from '@/components/ecommerce/Product.vue';
 import QuickView from '@/components/ecommerce/QuickView.vue';
+import TagFilter from './shop/TagFilter.vue';
+import SortFilter from './shop/SortFilter.vue';
+import PriceFilter from './shop/PriceFIlter.vue';
+
 import useUtils from '@/composables/useUtils';
 import { useProductStore } from '@/stores/product';
 import { useTagStore } from '@/stores/tag';
 import { useCollectionStore } from '@/stores/collection';
+
 import { useCategoryStore } from '@/stores/category';
 import { useCartStore } from '@/stores/cart';
 import { onBeforeRouteUpdate, useRoute } from 'vue-router';
-import { computed } from '@vue/reactivity';
 import ProductHero from '@/components/ecommerce/ProductHero.vue';
 
 const productStore = useProductStore();
+
 const collectionStore = useCollectionStore();
 const categoryStore = useCategoryStore();
 const cartStore = useCartStore();
@@ -249,13 +121,28 @@ const selectedTag = ref(null);
 // this is to get selected sortedBy
 // select option filter
 const selectedSortedBy = ref('new_to_old');
-const sortedByOptions = ref([
-	{ text: 'Best Selling', sort_value: 'best_selling' },
-	{ text: 'Price, low to high', sort_value: 'low_to_high' },
-	{ text: 'Price, high to low', sort_value: 'high_to_low' },
-	{ text: 'Date, old to new', sort_value: 'old_to_new' },
-	{ text: 'Date, new to old', sort_value: 'new_to_old' },
-]);
+const _sortedByOptions = {
+	best_selling: {
+		query: '&sort=-soldCount',
+		text: 'Best Selling',
+	},
+	low_to_high: {
+		query: '&sort=unitCost',
+		text: 'Price, low to high',
+	},
+	high_to_low: {
+		query: '&sort=-unitCost',
+		text: 'Price, high to low',
+	},
+	old_to_new: {
+		query: '&sort=createdAt',
+		text: 'Date, old to new',
+	},
+	new_to_old: {
+		query: '&sort=-createdAt',
+		text: 'Date, new to old',
+	},
+};
 
 // price range filter
 const priceRange = ref({
@@ -263,7 +150,8 @@ const priceRange = ref({
 	to: '',
 });
 // Main Query
-const query = ref('<COLLECTION><TAG><PRICE><SORTED><SEARCH>');
+// const query = ref('<COLLECTION><TAG><PRICE><SORTED><SEARCH>');
+const query = ref('');
 // Filters Query
 const qrySelectedPriceRange = ref('');
 const qrySelectedTag = ref('');
@@ -279,6 +167,9 @@ const isFilterOpen = ref(false);
 // API SAMPLE QUERY
 // db.tags.find({ tags: { $all: ["cheap", "blue"] } } )
 
+//* query for tag tag is an array
+//&tags[in][0]=value
+
 //* query for price
 //* '?unitCost[gte]=1&unitCost[lt]=50'
 
@@ -293,32 +184,26 @@ const productModal = ref(null);
 // search input value
 const searchText = ref('');
 
+const productTags = ref([]);
+
 onBeforeMount(async () => {
 	isLoading.value = true;
 	await tagStore.fetch('');
 
-	// check if there is a route query collection
 	if (route.query.collection) {
-		// find and filter the product base on the product collection
-		filterBy.value = await collectionStore.find(route.query.collection);
-
-		// if the collection id is valid filter the products base on collection id
-		if (!collectionStore.error) {
-			qryFilterBy.value = `?collections[in][0]=${collectionStore.item._id}`;
-		}
+		filterBy.value = await filterByCollectionOrCategories({
+			_store: collectionStore,
+			pageQry: 'collection',
+			propertyName: 'collections',
+		});
 	}
 
-	// check if there is a route query collection
 	if (route.query.category) {
-		// find and filter the product base on the product collection
-		filterBy.value = await categoryStore.find(route.query.category);
-
-		console.log('filterBy.value', filterBy.value);
-
-		// if the collection id is valid filter the products base on collection id
-		if (!categoryStore.error) {
-			qryFilterBy.value = `?categories[in][0]=${categoryStore.item._id}`;
-		}
+		filterBy.value = await filterByCollectionOrCategories({
+			_store: categoryStore,
+			pageQry: 'category',
+			propertyName: 'categories',
+		});
 	}
 
 	// if no collection route query or not valid id
@@ -332,8 +217,27 @@ onBeforeMount(async () => {
 		filterBySearch();
 	}
 
+	productTags.value = getProductTags(productStore.list);
+
 	isLoading.value = false;
 });
+
+const filterByCollectionOrCategories = async ({
+	_store,
+	pageQry,
+	propertyName,
+}) => {
+	let _filterBy = null;
+	_filterBy = await _store.find(route.query[pageQry]);
+
+	if (_store.error) {
+		return false;
+	}
+
+	qryFilterBy.value = `?${propertyName}[in][0]=${_store.item._id}`;
+
+	return _filterBy;
+};
 
 // this function will refetch the shop page if the route collection query change
 // I did this because if you change the value of collection query the page won't refetch
@@ -372,34 +276,13 @@ onUnmounted(() => {
 
 // to filter products
 const filterProducts = async () => {
-	if (!qrySelectedTag.value) {
-		query.value = query.value.replace('<TAG>', '');
-	}
-
-	if (!qrySelectedSortedBy.value) {
-		query.value = query.value.replace('<SORTED>', '');
-	}
-
-	if (!qrySelectedPriceRange.value) {
-		query.value = query.value.replace('<PRICE>', '');
-	}
-
-	if (!qrySearch.value) {
-		query.value = query.value.replace('<SEARCH>', '');
-	}
-
-	if (!qryFilterBy.value) {
-		query.value = query.value.replace('<COLLECTION>', '');
-	}
-
 	query.value = `${qryFilterBy.value}${qrySelectedTag.value}${qrySelectedPriceRange.value}${qrySelectedSortedBy.value}${qrySearch.value}&isPublished=1`;
-
-	console.log('Filter Products', query.value);
 
 	if (!qryFilterBy.value) {
 		query.value = '?' + query.value.slice(1);
 	}
 
+	console.log('query.value', query.value);
 	await productStore.fetch(query.value);
 };
 
@@ -410,17 +293,18 @@ const filterBySearch = () => {
 };
 
 const reset = (str) => {
-	if ('filters') {
+	if (str === 'filter') {
 		selectedTag.value = null;
 		qrySelectedTag.value = '';
+		console.log('filters');
 	}
 
-	if ('sortedBy') {
+	if (str === 'sortedBy') {
 		selectedSortedBy.value = 'new_to_old';
 		qrySelectedSortedBy.value = '';
 	}
 
-	if ('priceRange') {
+	if (str === 'priceRange') {
 		qrySelectedPriceRange.value = '';
 		priceRange.value.from = '';
 		priceRange.value.to = '';
@@ -429,14 +313,16 @@ const reset = (str) => {
 	filterProducts();
 };
 
-const productTags = computed(() => {
+const getProductTags = (products) => {
 	let tags = [];
-	productStore.list.forEach((p) => {
+
+	products.forEach((p) => {
 		if (!p.tags) return;
 		p.tags.forEach((t) => {
 			tags.push(t);
 		});
 	});
+
 	const uniqueTags = [...new Set(tags)];
 
 	tags = tagStore.list.filter((t) => {
@@ -445,30 +331,13 @@ const productTags = computed(() => {
 	});
 
 	return sort(tags, 'name');
-});
+};
 
 // if selectedSortedBy is change, filter products accordingly
 watch(
 	() => selectedSortedBy.value,
 	(newVal, oldVal) => {
-		switch (newVal) {
-			case 'best_selling':
-				qrySelectedSortedBy.value = '&sort=-soldCount';
-				break;
-			case 'low_to_high':
-				qrySelectedSortedBy.value = '&sort=unitCost';
-				break;
-			case 'high_to_low':
-				qrySelectedSortedBy.value = '&sort=-unitCost';
-				break;
-			case 'old_to_new':
-				qrySelectedSortedBy.value = '&sort=createdAt';
-				break;
-			case 'new_to_old':
-				qrySelectedSortedBy.value = '&sort=-createdAt';
-				break;
-			default:
-		}
+		qrySelectedSortedBy.value = _sortedByOptions[newVal].query;
 		filterProducts();
 	},
 );
@@ -476,7 +345,6 @@ watch(
 watch(
 	() => selectedTag.value,
 	(newVal, oldVal) => {
-		// filterByCategories(newVal);
 		if (newVal) {
 			qrySelectedTag.value = `&tags[in][0]=${newVal}`;
 			filterProducts();
@@ -485,24 +353,12 @@ watch(
 );
 
 const sortByPriceRange = () => {
-	let _queryFrom = '';
-	let _queryTo = '';
-	qrySelectedPriceRange.value = '';
+	const min = priceRange.value.from ? priceRange.value.from : 0;
+	const max = priceRange.value.to
+		? priceRange.value.to
+		: Number.NEGATIVE_INFINITY;
 
-	if (!priceRange.value.from && !priceRange.value.to) {
-		return;
-	}
-
-	if (priceRange.value.from) {
-		_queryFrom = `&unitCost[gte]=${priceRange.value.from}`;
-	}
-
-	if (priceRange.value.to) {
-		_queryTo = `&unitCost[lt]=${priceRange.value.to}`;
-	}
-
-	qrySelectedPriceRange.value = _queryFrom + _queryTo;
-
+	qrySelectedPriceRange.value = `&unitCost[gte]=${min}&unitCost[lte]=${max}`;
 	filterProducts();
 };
 

@@ -1,7 +1,5 @@
 <template>
-	<div
-		class="mt-10 w-full bg-lightBlue-2 text-[1rem] font-semibold text-customDarkBlue"
-	>
+	<div class="mt-10 w-full bg-red-300 text-[1rem] font-semibold text-white">
 		<div class="wrapper flex flex-col md:flex-row">
 			<div
 				class="grid w-full grid-cols-12 gap-y-10 py-14 text-left md:gap-10"
@@ -58,7 +56,7 @@
 								:href="link.link"
 								target="_blank"
 								rel="noopener noreferrer"
-								class="flex h-12 w-12 items-center justify-center rounded-full bg-darkBlue text-white"
+								class="flex h-12 w-12 items-center justify-center rounded-full bg-red-400 text-white"
 							>
 								<vue-feather
 									:type="link.icon"
@@ -71,7 +69,7 @@
 			</div>
 		</div>
 
-		<div class="bg-lightBlue-3 text-white">
+		<div class="bg-red-400 text-white">
 			<div
 				class="mx-4 flex flex-col items-center md:mx-auto md:max-w-screen-2xl md:flex-row md:justify-between"
 			>

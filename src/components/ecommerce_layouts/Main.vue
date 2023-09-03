@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="relative font-quicksand text-gray-800"
+		class="relative bg-white font-karla text-gray-800"
 		v-if="store.item && !store.item.is_maintenance"
 	>
 		<Banner

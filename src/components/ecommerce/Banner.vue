@@ -1,7 +1,5 @@
 <template>
-	<div
-		class="bg-darkYellow p-2 text-center text-lg font-bold text-white md:text-3xl"
-	>
+	<div class="bg-indigo-300 p-2 text-center font-bold text-white">
 		<h1 class="drop-shadow-md">
 			{{ text }}
 		</h1>

@@ -6,6 +6,9 @@ import App from './App.vue';
 import router from './router';
 import './assets/index.css';
 
+/* Ecommerce Components */
+import SectionTitle from './components/ecommerce/SectionTitle.vue';
+
 /* Layouts Components */
 import DrawerCard from './components/DrawerCard.vue';
 import TitleBar from './components/layouts/TitleBar.vue';
@@ -30,7 +33,9 @@ import BaseTextArea from './components/BaseTextArea.vue';
 import ImageManager from './components/image_module/ImageManager.vue';
 
 const app = createApp(App);
+
 app.component(VueFeather.name, VueFeather);
+app.component('SectionTitle', SectionTitle);
 app.component('DrawerCard', DrawerCard);
 app.component('ActionNavbar', ActionNavbar);
 app.component('TitleBar', TitleBar);

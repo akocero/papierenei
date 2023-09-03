@@ -6,9 +6,15 @@ module.exports = {
 	content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
 	theme: {
 		extend: {
+			maxWidth: {
+				base: '1600px',
+			},
+
 			fontFamily: {
 				comfortaa: ['Comfortaa'],
 				quicksand: ['quicksand'],
+				xnarrow: ['hoss-round-xnarrow'],
+				karla: ['Karla'],
 			},
 			colors: {
 				lightBlue: {
