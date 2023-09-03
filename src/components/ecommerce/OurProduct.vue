@@ -1,6 +1,10 @@
 <template>
 	<div class="text-center">
-		<div
+		<router-link
+			:to="{
+				name: 'shop',
+				query: { category: ourProduct._id },
+			}"
 			class="group relative flex h-40 items-center justify-center overflow-hidden rounded-2xl md:h-96"
 		>
 			<img
@@ -8,7 +12,7 @@
 				alt=""
 				class="h-full w-full object-cover transition-all duration-500 group-hover:scale-110"
 			/>
-		</div>
+		</router-link>
 		<router-link
 			:to="{
 				name: 'shop',

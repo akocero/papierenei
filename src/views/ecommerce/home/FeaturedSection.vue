@@ -2,7 +2,7 @@
 	<section class="wrapper">
 		<SectionTitle title="Featured Products" />
 		<div
-			class="grid w-full grid-cols-2 gap-2 md:grid-cols-5 md:gap-8 md:px-0"
+			class="grid w-full grid-cols-2 gap-2 md:grid-cols-4 md:gap-8 md:px-0"
 			v-if="!productStore.isLoading"
 		>
 			<div v-for="(product, key) in productStore.list">
@@ -12,6 +12,7 @@
 					@addToCart="addToCart($event)"
 					:product="product"
 					:index="key"
+					:isLarge="true"
 				/>
 			</div>
 		</div>
@@ -29,7 +30,7 @@ const productStore = useProductStore();
 const { addToCart } = useCartStore();
 
 onBeforeMount(async () => {
-	await productStore.fetch('?isPublished=1&limit=10');
+	await productStore.fetch('?isPublished=1&limit=4');
 });
 </script>
 

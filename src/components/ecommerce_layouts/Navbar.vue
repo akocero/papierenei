@@ -68,7 +68,7 @@
 							v-model="searchText"
 							@focus="searchFocus"
 							@blur="searchBlur"
-							class="w-80 border-0 pl-10 text-lg text-gray-600 placeholder:text-gray-400 focus:ring-0"
+							class="w-80 border-0 pl-10 text-lg placeholder:text-gray-400 focus:ring-0"
 							placeholder="Search our store"
 						/>
 					</div>
@@ -77,7 +77,7 @@
 		</div>
 	</div>
 	<nav
-		class="sticky top-0 z-20 h-14 bg-lightBlue-3 text-white"
+		class="sticky top-0 z-20 h-14 bg-lightBlue-3"
 		:class="isNavbarSticky && 'shadow'"
 	>
 		<ul
@@ -111,7 +111,7 @@
 			</li>
 		</ul>
 		<div
-			class="absolute top-14 w-full bg-gray-100 pr-6 font-bold text-gray-600 md:relative md:top-0 md:h-full"
+			class="absolute top-14 w-full bg-gray-100 pr-6 font-bold md:relative md:top-0 md:h-full"
 		>
 			<ul
 				class="relative flex-col justify-center space-x-8 md:mx-auto md:flex md:h-full md:max-w-base md:flex-row md:items-center md:space-y-0 md:pb-0"

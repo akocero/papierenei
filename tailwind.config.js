@@ -15,6 +15,7 @@ module.exports = {
 				quicksand: ['quicksand'],
 				xnarrow: ['hoss-round-xnarrow'],
 				karla: ['Karla'],
+				nunito: ['Nunito'],
 			},
 			colors: {
 				lightBlue: {

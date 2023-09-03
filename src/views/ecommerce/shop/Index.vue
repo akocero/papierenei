@@ -1,5 +1,5 @@
 <template>
-	<div class="wrapper sm:my-10">
+	<div class="wrapper min-h-screen sm:my-10">
 		<QuickView
 			@closeModal="closeModal"
 			:show="isModalOpen"
@@ -27,7 +27,7 @@
 					{{ filterBy.name }}
 				</h2>
 
-				<p class="text-gray-600">
+				<p class="">
 					{{ filterBy.description }}
 				</p>
 			</div>
@@ -40,8 +40,17 @@
 
 			<!-- Filters -->
 			<div class="mb-8 flex justify-between">
-				<span class="space-x-4">
-					<TagFilter :tags="productTags" v-model="selectedTag" />
+				<span class="flex space-x-4">
+					<span class="flex flex-col">
+						<TagFilter :tags="productTags" v-model="selectedTag" />
+						<button
+							class="mt-3 place-self-start rounded bg-gray-200 px-3 py-2"
+							@click="reset('filter')"
+							v-if="selectedTag"
+						>
+							Clear all
+						</button>
+					</span>
 					<SortFilter
 						:sortOptions="_sortedByOptions"
 						v-model="selectedSortedBy"
@@ -54,7 +63,7 @@
 						:priceRange="priceRange"
 					/>
 					<button
-						class="mt-3 place-self-end rounded bg-gray-200 px-3 py-2 text-gray-600"
+						class="mt-3 place-self-end rounded bg-gray-200 px-3 py-2"
 						@click="reset('priceRange')"
 						v-if="priceRange.from || priceRange.to"
 					>
@@ -65,7 +74,7 @@
 
 			<!-- Products -->
 			<div
-				class="grid w-full grid-cols-2 gap-4 px-0 md:grid-cols-4 md:gap-10 md:px-0"
+				class="grid w-full grid-cols-2 gap-4 px-0 md:grid-cols-5 md:gap-8 md:px-0"
 				v-if="productStore.list.length > 0"
 			>
 				<div v-for="(product, key) in productStore.list">
@@ -78,6 +87,9 @@
 					/>
 				</div>
 			</div>
+			<div v-else class="">
+				<h4 class="text-2xl">No products found!</h4>
+			</div>
 		</div>
 	</div>
 </template>
@@ -86,9 +98,9 @@
 import { onBeforeMount, ref, watch, onUnmounted } from 'vue';
 import Product from '@/components/ecommerce/Product.vue';
 import QuickView from '@/components/ecommerce/QuickView.vue';
-import TagFilter from './shop/TagFilter.vue';
-import SortFilter from './shop/SortFilter.vue';
-import PriceFilter from './shop/PriceFIlter.vue';
+import TagFilter from './TagFilter.vue';
+import SortFilter from './SortFilter.vue';
+import PriceFilter from './PriceFIlter.vue';
 
 import useUtils from '@/composables/useUtils';
 import { useProductStore } from '@/stores/product';
@@ -141,6 +153,10 @@ const _sortedByOptions = {
 	new_to_old: {
 		query: '&sort=-createdAt',
 		text: 'Date, new to old',
+	},
+	sale: {
+		query: '&salePrice[gte]=0',
+		text: 'Sale',
 	},
 };
 
@@ -206,6 +222,12 @@ onBeforeMount(async () => {
 		});
 	}
 
+	if (route.query.sale) {
+		selectedSortedBy.value = 'sale';
+	} else {
+		selectedSortedBy.value = 'new_to_old';
+	}
+
 	// if no collection route query or not valid id
 	// fetch all products
 	await filterProducts();
@@ -218,6 +240,8 @@ onBeforeMount(async () => {
 	}
 
 	productTags.value = getProductTags(productStore.list);
+
+	console.log(productStore.list);
 
 	isLoading.value = false;
 });
@@ -262,6 +286,12 @@ onBeforeRouteUpdate(async (to, from, next) => {
 	if (!to.query.collection && !to.query.category) {
 		qryFilterBy.value = '';
 		filterBy.value = null;
+	}
+
+	if (to.query.sale) {
+		selectedSortedBy.value = 'sale';
+	} else {
+		selectedSortedBy.value = 'new_to_old';
 	}
 
 	// fetch products no filter

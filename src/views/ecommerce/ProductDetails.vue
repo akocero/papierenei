@@ -1,28 +1,124 @@
 <template>
-	<div class="wrapper">
-		<ProductHero
-			:product="product"
-			v-if="!productStore.isLoading && product"
-		/>
-	</div>
+	<section class="wrapper max-w-[82rem]">
+		<div class="grid grid-cols-12 gap-16" v-if="product">
+			<div v-if="coverImage" class="col-span-7">
+				<div class="h-[748px] overflow-hidden rounded-2xl">
+					<img
+						class="h-full w-full object-cover"
+						:src="coverImage.secure_url"
+						alt=""
+					/>
+				</div>
+
+				<ul v-if="product?.images?.length" class="mt-4 flex space-x-4">
+					<li
+						v-if="product?.coverPhoto?.length"
+						class="h-[139px] w-[139px]"
+						@click="setCoverImage(product.coverPhoto[0])"
+					>
+						<img
+							:src="product.coverPhoto[0].secure_url"
+							alt=""
+							class="rounded-xl"
+						/>
+					</li>
+					<li
+						v-for="image in product.images"
+						class="h-[139px] w-[139px]"
+						@click="setCoverImage(image)"
+					>
+						<img
+							:src="image.secure_url"
+							alt=""
+							class="rounded-xl"
+						/>
+					</li>
+				</ul>
+			</div>
+			<div
+				v-else
+				class="col-span-7 flex h-[748px] w-full items-center justify-center rounded-2xl bg-gray-300"
+			>
+				<VueFeather type="image" size="120" class="text-white" />
+			</div>
+			<div class="col-span-5" v-if="product">
+				<h1
+					class="font-nunito text-4xl font-black capitalize text-indigo-400"
+				>
+					{{ product.name }}
+				</h1>
+				<p class="mb-4 font-sans text-3xl" v-if="!product.salePrice">
+					₱{{ numberFormat(product.unitCost) }}
+				</p>
+
+				<p class="mb-4 font-sans text-3xl" v-if="product.salePrice">
+					<span class="text-lg line-through"
+						>₱{{ numberFormat(product.unitCost) }}</span
+					>
+					<span class="text-red-400">
+						₱{{ numberFormat(product.salePrice) }}
+					</span>
+				</p>
+
+				<label for="" class="mt-10 inline-block text-xl"
+					>Free Shipping on Orders $50+</label
+				>
+
+				<ButtonLink _class="w-full text-center mt-5">
+					Add to cart
+				</ButtonLink>
+				<button
+					class="mt-3 flex w-full items-center justify-center text-lg text-red-400"
+				>
+					<VueFeather type="heart" size="24" class="mr-2" />
+					<span>Add to Wishlist</span>
+				</button>
+
+				<p class="mt-8 text-lg">
+					These large ramune candies are so popular that they have
+					been sold for more than half a century already! Enjoy trying
+					out these cider-flavored sweets that come in a handy tube.
+				</p>
+			</div>
+		</div>
+	</section>
+	<section class="wrapper"></section>
 </template>
 
 <script setup>
+import { onBeforeMount, ref } from 'vue';
 import { useProductStore } from '@/stores/product';
 import { storeToRefs } from 'pinia';
-import { onBeforeMount, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import useUtils from '@/composables/useUtils';
 import ProductHero from '@/components/ecommerce/ProductHero.vue';
 
+const props = defineProps({
+	ecommSettingsStore: Object,
+});
+
 const route = useRoute();
 const productStore = useProductStore();
 const { item: product } = storeToRefs(productStore);
+const coverImage = ref(null);
 
 const { numberFormat } = useUtils();
 
 onBeforeMount(async () => {
 	await productStore.find(route.params.id);
+
+	if (product.value.coverPhoto?.length) {
+		coverImage.value = product.value.coverPhoto[0];
+	}
+
+	if (!product.value.coverPhoto?.length && product.value.images?.length) {
+		coverImage.value = product.value.images[0];
+	}
+
 	console.log(product.value);
 });
+
+const setCoverImage = (image) => {
+	coverImage.value = image;
+};
 </script>

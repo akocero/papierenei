@@ -63,3 +63,22 @@
 
 **Mobile Responsiveness:**
 - Ensure mobile-friendly design and layout.
+
+- dynamic website titles
+- discount in checkout enable
+- Capitalize products in  checkout
+- button up in shop and home page
+
+- sale page will be shop page, 
+- add sale on sorted by - done
+- remove stock labels - done
+- clickable our products images - done
+- footer white space in blank products - Done
+- separate design in product big and small - Done
+
+
+Note: need to add this on everyPage in ecommerce pages
+to remove the warning
+const props = defineProps({
+	ecommSettingsStore: Object,
+});

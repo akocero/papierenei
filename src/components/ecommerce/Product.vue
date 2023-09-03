@@ -1,30 +1,33 @@
 <template>
-	<div class="relative rounded-lg text-left text-gray-600" v-if="product">
+	<div class="relative rounded-lg text-left" v-if="product">
 		<span
-			class="absolute -left-2 top-3 z-10 flex items-center justify-center rounded-full bg-red-400 px-2 py-1 text-sm font-bold text-white"
+			class="absolute top-3 left-3 z-[5] rounded-2xl bg-red-400 px-3 py-2 capitalize text-white"
 			v-if="product.salePrice"
-			>SALE!</span
 		>
+			Sale
+		</span>
 
 		<span
 			:class="[
-				'absolute -left-2 z-10 flex items-center justify-center rounded-full bg-darkYellow px-2 py-1 text-sm font-bold text-white ',
-				product.salePrice ? 'top-11' : 'top-3',
+				'absolute top-3 left-3 z-[5] rounded-2xl bg-yellow-400 px-3 py-2 capitalize text-white',
+				product.salePrice ? 'top-16' : 'top-3',
 			]"
 			v-if="isNewProduct(product.createdAt)"
-			>NEW!</span
 		>
+			NEW!
+		</span>
 		<div class="group relative overflow-hidden rounded-2xl">
 			<RouterLink :to="{ name: 'product', params: { id: product._id } }">
 				<div
 					v-if="
 						product?.images?.length || product?.coverPhoto?.length
 					"
-					class="relative h-44 w-full md:h-72"
+					class="relative h-44 w-full"
+					:class="isLarge ? 'md:h-96' : 'md:h-72'"
 				>
 					<div
 						v-if="!product.quantity"
-						class="absolute bottom-3 right-3 rounded-2xl bg-gray-700 px-4 py-2 capitalize text-white"
+						class="absolute bottom-3 right-3 z-[5] rounded-2xl bg-gray-700 px-4 py-2 capitalize text-white"
 					>
 						sold out
 					</div>
@@ -69,7 +72,8 @@
 				</div>
 				<div
 					v-else
-					class="flex h-44 w-full items-center justify-center bg-gray-300 md:h-72"
+					class="flex h-44 w-full items-center justify-center bg-gray-300"
+					:class="isLarge ? 'md:h-96' : 'md:h-72'"
 				>
 					<div
 						v-if="!product.quantity"
@@ -81,13 +85,13 @@
 				</div>
 			</RouterLink>
 
-			<button
+			<!-- <button
 				class="absolute bottom-0 hidden w-full bg-black/75 py-1 text-sm font-bold uppercase text-white group-hover:block"
 				@click="$emit('openModal', product)"
 				v-if="product.quantity"
 			>
 				Quick View
-			</button>
+			</button> -->
 		</div>
 
 		<div class="mt-3 text-center text-xl">
@@ -111,12 +115,6 @@
 				>
 			</h5>
 
-			<p class="my-2 text-sm font-bold text-green-600">
-				<span v-if="product.quantity > 0"
-					>In stock, {{ product.quantity }} units</span
-				>
-			</p>
-
 			<!-- <button
 				class="w-full bg-darkBlue px-6 py-2 text-sm font-bold text-white"
 				@click="$emit('addToCart', product)"
@@ -137,6 +135,10 @@ const { numberFormat } = useUtils();
 const props = defineProps({
 	product: Object,
 	index: Number,
+	isLarge: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 const isNewProduct = (createdAt) => {

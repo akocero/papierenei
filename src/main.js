@@ -8,6 +8,7 @@ import './assets/index.css';
 
 /* Ecommerce Components */
 import SectionTitle from './components/ecommerce/SectionTitle.vue';
+import ButtonLink from './components/ecommerce/ButtonLink.vue';
 
 /* Layouts Components */
 import DrawerCard from './components/DrawerCard.vue';
@@ -35,7 +36,7 @@ import ImageManager from './components/image_module/ImageManager.vue';
 const app = createApp(App);
 
 app.component(VueFeather.name, VueFeather);
-app.component('SectionTitle', SectionTitle);
+
 app.component('DrawerCard', DrawerCard);
 app.component('ActionNavbar', ActionNavbar);
 app.component('TitleBar', TitleBar);
@@ -51,6 +52,10 @@ app.component('TablePagination', TablePagination);
 app.component('BaseButton', BaseButton);
 app.component('BaseInput', BaseInput);
 app.component('BaseTextArea', BaseTextArea);
+
+// ecom
+app.component('SectionTitle', SectionTitle);
+app.component('ButtonLink', ButtonLink);
 
 app.use(createPinia());
 app.use(router);

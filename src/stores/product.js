@@ -6,7 +6,7 @@ export const useProductStore = defineStore({
 	state: () => ({
 		list: [],
 		isLoading: false,
-		item: null,
+		item: {},
 		page: 1,
 		url: `items`,
 		response: null,

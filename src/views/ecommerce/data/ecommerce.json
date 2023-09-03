@@ -46,7 +46,8 @@
 		},
 		{
 			"routeObject": {
-				"name": "sale-products"
+				"name": "shop",
+				"query": { "sale": true }
 			},
 			"text": "sale"
 		},
