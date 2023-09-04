@@ -5,7 +5,7 @@
 	></div>
 	<div
 		class="relative w-full bg-white"
-		:class="isSearchFocus && 'z-40 shadow-xl'"
+		:class="isSearchFocus ? 'z-40 shadow-xl' : 'z-10'"
 		v-if="ecommSettingsStore.item"
 		:style="{
 			'background-image':
@@ -25,15 +25,25 @@
 				</router-link>
 			</a>
 			<div class="absolute right-2 space-x-3">
-				<a href="#">
-					<vue-feather type="user" size="28" class="text-gray-500" />
-				</a>
+				<button @click="EcomAppStore.toggleAuthModal">
+					<vue-feather
+						type="user"
+						size="28"
+						class="text-gray-500"
+						stroke-width="1.8"
+					/>
+				</button>
 				<a href="#" class="relative inline-block h-8">
 					<span
 						class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-gray-600 font-mono text-xs text-white"
 						>0</span
 					>
-					<vue-feather type="heart" size="28" class="text-gray-500" />
+					<vue-feather
+						type="heart"
+						size="28"
+						class="text-gray-500"
+						stroke-width="1.8"
+					/>
 				</a>
 				<router-link
 					:to="{
@@ -50,6 +60,7 @@
 						type="shopping-bag"
 						size="28"
 						class="text-gray-500"
+						stroke-width="1.8"
 					/>
 				</router-link>
 			</div>
@@ -77,7 +88,7 @@
 		</div>
 	</div>
 	<nav
-		class="sticky top-0 z-20 h-14 bg-lightBlue-3"
+		class="sticky top-0 z-20 h-[3.3rem] bg-lightBlue-3"
 		:class="isNavbarSticky && 'shadow'"
 	>
 		<ul
@@ -231,11 +242,13 @@ import { ref, onBeforeMount, onBeforeUnmount } from 'vue';
 import { useCartStore } from '@/stores/cart';
 import { onBeforeRouteLeave, onBeforeRouteUpdate, useRouter } from 'vue-router';
 import { useEcommSettingStore } from '@/stores/ecomm_setting';
+import { useEcomAppStore } from '@/stores/ecom_app';
 import ecomProdData from '@/views/ecommerce/data/ecommerce.json';
 import ecomDevData from '@/views/ecommerce/data/dev_ecommerce.json';
 
 const ecommSettingsStore = useEcommSettingStore();
 const cartStore = useCartStore();
+const EcomAppStore = useEcomAppStore();
 const router = useRouter();
 
 const openMenu = ref(false);

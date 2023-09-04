@@ -3,6 +3,7 @@
 		class="relative bg-white font-karla text-gray-600"
 		v-if="store.item && !store.item.is_maintenance"
 	>
+		<AuthModal />
 		<Banner
 			:text="store.activeBanner.text"
 			v-if="store.item && store?.activeBanner?.text"
@@ -24,6 +25,7 @@ import Footer from './Footer.vue';
 import Banner from '../ecommerce/Banner.vue';
 import useAlert from '@/composables/useAlert.js';
 import AlertList from '@/components/AlertList.vue';
+import AuthModal from '@/views/ecommerce/auth/Index.vue';
 import { useRouter } from 'vue-router';
 
 const { alerts } = useAlert();
