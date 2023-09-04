@@ -66,9 +66,9 @@ import 'swiper/css/scrollbar';
 import 'swiper/css/effect-fade';
 
 const onSwiper = (swiper) => {
-	console.log(swiper);
+	// console.log(swiper);
 };
 const onSlideChange = () => {
-	console.log('slide change');
+	// console.log('slide change');
 };
 </script>

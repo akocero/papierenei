@@ -1,6 +1,6 @@
 <template>
 	<h2
-		class="mb-10 rounded-lg text-center font-xnarrow text-2xl font-bold uppercase text-indigo-400 md:text-5xl"
+		class="mb-10 rounded-lg text-center font-nunito text-2xl font-black uppercase text-indigo-400 md:text-4xl"
 	>
 		{{ title }}
 	</h2>

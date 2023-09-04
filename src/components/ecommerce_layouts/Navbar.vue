@@ -264,7 +264,6 @@ const handleScroll = () => {
 		limitPosition.value < window.scrollY
 	) {
 		isNavbarSticky.value = true;
-		console.log('move up!');
 	}
 
 	if (
@@ -272,7 +271,6 @@ const handleScroll = () => {
 		limitPosition.value > window.scrollY
 	) {
 		isNavbarSticky.value = false;
-		console.log('move down!');
 	}
 
 	lastPosition.value = window.scrollY;
@@ -281,12 +279,11 @@ const handleScroll = () => {
 
 onBeforeMount(() => {
 	window.addEventListener('scroll', handleScroll);
-	console.log('sett', ecommSettingsStore.item);
+
 	if (import.meta.env.VITE_ENV === 'production') {
 		navbarLinks.value = ecomProdData.navbarLinks;
 	} else {
 		navbarLinks.value = ecomDevData.navbarLinks;
-		console.log(ecomDevData.navbarLinks);
 	}
 });
 
@@ -295,13 +292,10 @@ onBeforeUnmount(() => {
 });
 
 onBeforeRouteLeave(() => {
-	console.log('onBeforeRouteLeave');
 	window.scrollTo(0, 0);
 });
 
 onBeforeRouteUpdate((to, from) => {
-	// if the current page is shop hide the search form
-	console.log('onBeforeRouteUpdate');
 	window.scrollTo(0, 0);
 	openMenu.value = false;
 

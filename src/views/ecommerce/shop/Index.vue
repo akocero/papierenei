@@ -241,8 +241,6 @@ onBeforeMount(async () => {
 
 	productTags.value = getProductTags(productStore.list);
 
-	console.log(productStore.list);
-
 	isLoading.value = false;
 });
 
@@ -300,10 +298,6 @@ onBeforeRouteUpdate(async (to, from, next) => {
 	next();
 });
 
-onUnmounted(() => {
-	console.log('UNMOUNTED');
-});
-
 // to filter products
 const filterProducts = async () => {
 	query.value = `${qryFilterBy.value}${qrySelectedTag.value}${qrySelectedPriceRange.value}${qrySelectedSortedBy.value}${qrySearch.value}&isPublished=1`;
@@ -312,7 +306,6 @@ const filterProducts = async () => {
 		query.value = '?' + query.value.slice(1);
 	}
 
-	console.log('query.value', query.value);
 	await productStore.fetch(query.value);
 };
 
@@ -326,7 +319,6 @@ const reset = (str) => {
 	if (str === 'filter') {
 		selectedTag.value = null;
 		qrySelectedTag.value = '';
-		console.log('filters');
 	}
 
 	if (str === 'sortedBy') {

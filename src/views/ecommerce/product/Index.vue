@@ -14,7 +14,7 @@
 					<li
 						v-if="product?.coverPhoto?.length"
 						class="h-[139px] w-[139px]"
-						@click="setCoverImage(product.coverPhoto[0])"
+						@click="changeCoverImg(product.coverPhoto[0])"
 					>
 						<img
 							:src="product.coverPhoto[0].secure_url"
@@ -25,7 +25,7 @@
 					<li
 						v-for="image in product.images"
 						class="h-[139px] w-[139px]"
-						@click="setCoverImage(image)"
+						@click="changeCoverImg(image)"
 					>
 						<img
 							:src="image.secure_url"
@@ -82,16 +82,22 @@
 			</div>
 		</div>
 	</section>
-	<section class="wrapper"></section>
+	<section class="wrapper">
+		<JustForYou
+			:collectionID="product?.collections[0] || null"
+			v-if="product"
+		/>
+	</section>
 </template>
 
 <script setup>
 import { onBeforeMount, ref } from 'vue';
 import { useProductStore } from '@/stores/product';
 import { storeToRefs } from 'pinia';
-import { useRoute } from 'vue-router';
+import { useRoute, onBeforeRouteUpdate } from 'vue-router';
 import useUtils from '@/composables/useUtils';
 import ProductHero from '@/components/ecommerce/ProductHero.vue';
+import JustForYou from './JustForYou.vue';
 
 const props = defineProps({
 	ecommSettingsStore: Object,
@@ -106,19 +112,31 @@ const { numberFormat } = useUtils();
 
 onBeforeMount(async () => {
 	await productStore.find(route.params.id);
+	setCoverImg();
+});
 
+onBeforeRouteUpdate(async (to, from, next) => {
+	await productStore.find(to.params.id);
+	setCoverImg();
+
+	next();
+});
+
+const setCoverImg = () => {
 	if (product.value.coverPhoto?.length) {
 		coverImage.value = product.value.coverPhoto[0];
+		return;
 	}
 
 	if (!product.value.coverPhoto?.length && product.value.images?.length) {
 		coverImage.value = product.value.images[0];
+		return;
 	}
 
-	console.log(product.value);
-});
+	coverImage.value = null;
+};
 
-const setCoverImage = (image) => {
+const changeCoverImg = (image) => {
 	coverImage.value = image;
 };
 </script>

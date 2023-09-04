@@ -62,8 +62,6 @@ export const useEcommSettingStore = defineStore({
 		async load() {
 			const res = await storeHelpers.fetch(this, '?limit=1');
 
-			console.log(res);
-
 			/** Check if no data found and no error occur */
 			if (!this.error && res.data.length <= 0) {
 				/** Initialized or create dummy data
