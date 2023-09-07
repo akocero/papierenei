@@ -13,12 +13,20 @@
 			leave-to-class="translate-y-1 opacity-0"
 		>
 			<PopoverPanel
-				class="absolute left-1/2 mt-1 w-screen max-w-[200px] -translate-x-1/2 transform px-4 sm:px-0"
+				class="absolute left-1/2 mt-1 w-screen max-w-[240px] -translate-x-1/2 transform px-4 sm:px-0"
 			>
 				<div
 					class="overflow-hidden rounded-sm bg-white p-1 shadow-lg ring-1 ring-black ring-opacity-5"
 				>
 					<div class="grid">
+						<div
+							:to="{
+								name: 'account-details',
+							}"
+							class="flex items-center rounded-sm px-3 py-1 text-lg font-normal normal-case"
+						>
+							<span>Hello, {{ EcomAuthStore.user.name }}</span>
+						</div>
 						<router-link
 							:to="{
 								name: 'account-details',

@@ -36,6 +36,7 @@ const handleSubmit = async () => {
 
 	if (!store.error) {
 		router.push({ name: 'account-details' });
+		pushAlert('success', 'Succesfully Logged In.');
 	}
 };
 

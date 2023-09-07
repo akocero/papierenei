@@ -55,19 +55,21 @@
 import { ref, onUnmounted } from 'vue';
 import { useEcomAuthStore } from '@/stores/ecom_auth';
 import useAlert from '@/composables/useAlert';
+import { useRouter } from 'vue-router';
 
 const form = ref({});
-
 const { pushAlert } = useAlert();
 const email = ref('');
 const password = ref('');
 const store = useEcomAuthStore();
+const router = useRouter();
 
 const handleSubmit = async () => {
 	await store.signup(form.value);
 
 	if (!store.error) {
-		window.location.reload();
+		router.push({ name: 'account-details' });
+		// window.location.reload();
 	}
 };
 

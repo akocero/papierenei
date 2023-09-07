@@ -91,6 +91,14 @@
 				</li>
 			</ul>
 		</div>
+		<Banner
+			:text="ecommSettingsStore.activeBanner.text"
+			v-if="
+				ecommSettingsStore.item &&
+				ecommSettingsStore?.activeBanner?.text &&
+				isNavbarSticky
+			"
+		/>
 	</nav>
 </template>
 
@@ -106,6 +114,7 @@ import ecomProdData from '@/views/ecommerce/data/ecommerce.json';
 import ecomDevData from '@/views/ecommerce/data/dev_ecommerce.json';
 
 import NavActions from './NavActions.vue';
+import Banner from '../../ecommerce/Banner.vue';
 
 const ecommSettingsStore = useEcommSettingStore();
 const EcomAuthStore = useEcomAuthStore();

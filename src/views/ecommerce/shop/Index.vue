@@ -35,7 +35,7 @@
 				class="mb-10 text-center font-xnarrow text-3xl font-bold uppercase text-indigo-400"
 				v-else
 			>
-				all products
+				{{ shopTitle }}
 			</h2>
 
 			<!-- Filters -->
@@ -118,6 +118,8 @@ const collectionStore = useCollectionStore();
 const categoryStore = useCategoryStore();
 const cartStore = useCartStore();
 const tagStore = useTagStore();
+
+const shopTitle = ref('All Products');
 const isLoading = ref(false);
 
 const { numberFormat, sort } = useUtils();
@@ -229,9 +231,11 @@ onBeforeMount(async () => {
 	if (route.query.sale) {
 		selectedSortedBy.value = 'sale';
 		qrySelectedSortedBy.value = _sortedByOptions['sale'].query;
+		shopTitle.value = 'Sale';
 	} else {
 		selectedSortedBy.value = 'new_to_old';
 		qrySelectedSortedBy.value = _sortedByOptions['new_to_old'].query;
+		shopTitle.value = 'All Products';
 	}
 
 	// to check if there is route query search
@@ -303,9 +307,11 @@ onBeforeRouteUpdate(async (to, from, next) => {
 	if (to.query.sale) {
 		selectedSortedBy.value = 'sale';
 		qrySelectedSortedBy.value = _sortedByOptions['sale'].query;
+		shopTitle.value = 'Sale';
 	} else {
 		selectedSortedBy.value = 'new_to_old';
 		qrySelectedSortedBy.value = _sortedByOptions['new_to_old'].query;
+		shopTitle.value = 'All Products';
 	}
 
 	// fetch products no filter
