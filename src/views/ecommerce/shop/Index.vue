@@ -202,7 +202,10 @@ const searchText = ref('');
 
 const productTags = ref([]);
 
+const routeQryUpdate = ref(false);
+
 onBeforeMount(async () => {
+	console.log('MOUNT CALLED');
 	isLoading.value = true;
 	await tagStore.fetch('');
 
@@ -222,25 +225,28 @@ onBeforeMount(async () => {
 		});
 	}
 
+	routeQryUpdate.value = true;
 	if (route.query.sale) {
 		selectedSortedBy.value = 'sale';
+		qrySelectedSortedBy.value = _sortedByOptions['sale'].query;
 	} else {
 		selectedSortedBy.value = 'new_to_old';
+		qrySelectedSortedBy.value = _sortedByOptions['new_to_old'].query;
+	}
+
+	// to check if there is route query search
+	// if true filter products base on search value
+	if (route.query.search) {
+		searchText.value = route.query.search;
+		filterBySearch(true);
 	}
 
 	// if no collection route query or not valid id
 	// fetch all products
 	await filterProducts();
 
-	// to check if there is route query search
-	// if true filter products base on search value
-	if (route.query.search) {
-		searchText.value = route.query.search;
-		filterBySearch();
-	}
-
 	productTags.value = getProductTags(productStore.list);
-
+	routeQryUpdate.value = false;
 	isLoading.value = false;
 });
 
@@ -264,6 +270,12 @@ const filterByCollectionOrCategories = async ({
 // this function will refetch the shop page if the route collection query change
 // I did this because if you change the value of collection query the page won't refetch
 onBeforeRouteUpdate(async (to, from, next) => {
+	console.log('onBeforeRouteUpdate TRIGGERED');
+	if (to.fullPath === from.fullPath) {
+		next();
+		return;
+	}
+
 	isLoading.value = true;
 	if (to.query.collection) {
 		filterBy.value = await collectionStore.find(to.query.collection);
@@ -286,20 +298,26 @@ onBeforeRouteUpdate(async (to, from, next) => {
 		filterBy.value = null;
 	}
 
+	routeQryUpdate.value = true;
+
 	if (to.query.sale) {
 		selectedSortedBy.value = 'sale';
+		qrySelectedSortedBy.value = _sortedByOptions['sale'].query;
 	} else {
 		selectedSortedBy.value = 'new_to_old';
+		qrySelectedSortedBy.value = _sortedByOptions['new_to_old'].query;
 	}
 
 	// fetch products no filter
 	await filterProducts();
 	isLoading.value = false;
+	routeQryUpdate.value = false;
 	next();
 });
 
 // to filter products
 const filterProducts = async () => {
+	console.log('Filter Called');
 	query.value = `${qryFilterBy.value}${qrySelectedTag.value}${qrySelectedPriceRange.value}${qrySelectedSortedBy.value}${qrySearch.value}&isPublished=1`;
 
 	if (!qryFilterBy.value) {
@@ -309,10 +327,12 @@ const filterProducts = async () => {
 	await productStore.fetch(query.value);
 };
 
-const filterBySearch = () => {
+const filterBySearch = (isCalledInMount = false) => {
 	qrySearch.value = `&name[regex]=${searchText.value}`;
 
-	filterProducts();
+	if (isCalledInMount === false) {
+		filterProducts();
+	}
 };
 
 const reset = (str) => {
@@ -359,6 +379,10 @@ const getProductTags = (products) => {
 watch(
 	() => selectedSortedBy.value,
 	(newVal, oldVal) => {
+		if (routeQryUpdate.value) {
+			return;
+		}
+		console.log('WATCH selectedSortedBy CALLED');
 		qrySelectedSortedBy.value = _sortedByOptions[newVal].query;
 		filterProducts();
 	},
@@ -368,6 +392,7 @@ watch(
 	() => selectedTag.value,
 	(newVal, oldVal) => {
 		if (newVal) {
+			console.log('WATCH selectedTag CALLED');
 			qrySelectedTag.value = `&tags[in][0]=${newVal}`;
 			filterProducts();
 		}

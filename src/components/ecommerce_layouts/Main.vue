@@ -3,7 +3,7 @@
 		class="relative bg-white font-karla text-gray-600"
 		v-if="store.item && !store.item.is_maintenance"
 	>
-		<AuthModal />
+		<AuthModal v-if="EcomStore.isAuthModalOpen" />
 		<Banner
 			:text="store.activeBanner.text"
 			v-if="store.item && store?.activeBanner?.text"
@@ -20,7 +20,8 @@
 <script setup>
 import { onBeforeMount } from 'vue';
 import { useEcommSettingStore } from '@/stores/ecomm_setting';
-import Navbar from './Navbar.vue';
+import { useEcomAppStore } from '@/stores/ecom_app';
+import Navbar from './navbar/Index.vue';
 import Footer from './Footer.vue';
 import Banner from '../ecommerce/Banner.vue';
 import useAlert from '@/composables/useAlert.js';
@@ -29,6 +30,7 @@ import AuthModal from '@/views/ecommerce/auth/Index.vue';
 import { useRouter } from 'vue-router';
 
 const { alerts } = useAlert();
+const EcomStore = useEcomAppStore();
 const store = useEcommSettingStore();
 const router = useRouter();
 onBeforeMount(async () => {

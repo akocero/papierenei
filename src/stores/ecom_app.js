@@ -4,7 +4,7 @@ import { useLocalStorage } from '@vueuse/core';
 export const useEcomAppStore = defineStore({
 	id: 'ecom_app',
 	state: () => ({
-		isAuthModalOpen: true,
+		isAuthModalOpen: false,
 	}),
 	actions: {
 		toggleAuthModal() {

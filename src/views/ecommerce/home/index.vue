@@ -34,7 +34,7 @@
 		</div>
 	</header> -->
 	<div
-		class="absolute top-20 left-0 z-0 h-96 w-full bg-gradient-to-b from-indigo-200 to-white"
+		class="absolute top-0 left-0 h-96 w-full bg-gradient-to-b from-indigo-400 to-white"
 	></div>
 	<HeadingSection />
 

@@ -1,5 +1,5 @@
 <template>
-	<div class="wrapper overflow-hidden rounded-2xl">
+	<div class="wrapper overflow-hidden">
 		<swiper
 			:modules="[
 				Navigation,
@@ -24,21 +24,21 @@
 				<img
 					src="../../../assets/new_logos/slide1.webp"
 					alt=""
-					class="w-full"
+					class="w-full rounded-2xl"
 				/>
 			</swiper-slide>
 			<swiper-slide>
 				<img
 					src="../../../assets/new_logos/slide2.webp"
 					alt=""
-					class="w-full"
+					class="w-full rounded-2xl"
 				/>
 			</swiper-slide>
 			<swiper-slide>
 				<img
 					src="../../../assets/new_logos/slide3.webp"
 					alt=""
-					class="w-full"
+					class="w-full rounded-2xl"
 				/>
 			</swiper-slide>
 		</swiper>

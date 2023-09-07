@@ -1,20 +1,24 @@
 <template>
 	<div>
-		<form action="" class="mt-4 grid grid-cols-2 gap-x-4">
+		<form
+			action=""
+			class="mt-4 grid grid-cols-2 gap-x-4"
+			@submit.prevent="handleSubmit"
+		>
 			<div class="mb-6">
 				<Input
 					v-model="form.firstName"
-					type="email"
+					type="text"
 					label="First Name"
 				/>
 			</div>
 			<div class="mb-6">
-				<Input v-model="form.lastName" type="email" label="Last Name" />
+				<Input v-model="form.lastName" type="text" label="Last Name" />
 			</div>
 			<div class="col-span-full mb-6">
 				<Input
 					v-model="form.mobileNumber"
-					type="email"
+					type="text"
 					label="Mobile Number"
 				/>
 			</div>
@@ -48,9 +52,28 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onUnmounted } from 'vue';
+import { useEcomAuthStore } from '@/stores/ecom_auth';
+import useAlert from '@/composables/useAlert';
 
 const form = ref({});
+
+const { pushAlert } = useAlert();
+const email = ref('');
+const password = ref('');
+const store = useEcomAuthStore();
+
+const handleSubmit = async () => {
+	await store.signup(form.value);
+
+	if (!store.error) {
+		window.location.reload();
+	}
+};
+
+onUnmounted(() => {
+	store.error = null;
+});
 </script>
 
 <style lang="scss" scoped></style>

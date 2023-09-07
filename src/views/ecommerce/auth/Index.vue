@@ -10,6 +10,12 @@
 		>
 			{{ isLogin ? 'Sign in to your account' : 'Create your account' }}
 		</h2>
+		<div
+			class="mt-4 flex h-12 items-center rounded border-2 border-red-400 bg-red-400/90 py-2 px-4 text-lg text-white"
+			v-if="AuthStore.error"
+		>
+			{{ AuthStore.error.message }}
+		</div>
 		<div v-if="isLogin">
 			<Login />
 		</div>
@@ -35,14 +41,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import Login from './Login.vue';
+import { ref, onUnmounted } from 'vue';
+import { useEcomAuthStore } from '@/stores/ecom_auth';
 import { useEcomAppStore } from '@/stores/ecom_app';
+import Login from './Login.vue';
 import Modal from '@/components/ecommerce/Modal.vue';
 import Register from './Register.vue';
 
 const EcomStore = useEcomAppStore();
-const isLogin = ref(false);
+const AuthStore = useEcomAuthStore();
+const isLogin = ref(true);
 </script>
 
 <style lang="scss" scoped></style>
