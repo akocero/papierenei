@@ -11,6 +11,7 @@ import Main from '@/components/layouts/Main.vue';
 import EComm from '@/components/ecommerce_layouts/Main.vue';
 import Dashboard from '@/views/Dashboard.vue';
 import { useAuthStore } from '@/stores/auth';
+import { useEcomAuthStore } from '@/stores/ecom_auth';
 
 const authRequired = (to, from, next) => {
 	const auth = useAuthStore();
@@ -20,6 +21,11 @@ const authRequired = (to, from, next) => {
 const noAuthRequired = (to, from, next) => {
 	const auth = useAuthStore();
 	const unauthorized = auth.user ? next({ name: 'dashboard' }) : next();
+};
+
+const ecomAuthRequired = (to, from, next) => {
+	const auth = useEcomAuthStore();
+	const authorized = auth.user ? next() : next({ name: 'home' });
 };
 
 const router = createRouter({
@@ -106,6 +112,25 @@ const router = createRouter({
 					name: 'return-refund',
 					component: () =>
 						import('../views/ecommerce/ReturnRefund.vue'),
+				},
+			],
+		},
+		{
+			path: '/account',
+			name: 'account',
+			beforeEnter: ecomAuthRequired,
+			children: [
+				{
+					path: 'details',
+					name: 'account-details',
+					component: () =>
+						import('../views/ecommerce/account/Details.vue'),
+				},
+				{
+					path: 'orders',
+					name: 'account-orders',
+					component: () =>
+						import('../views/ecommerce/account/Orders.vue'),
 				},
 			],
 		},

@@ -19,8 +19,10 @@
 					class="overflow-hidden rounded-sm bg-white p-1 shadow-lg ring-1 ring-black ring-opacity-5"
 				>
 					<div class="grid">
-						<a
-							href=""
+						<router-link
+							:to="{
+								name: 'account-details',
+							}"
 							class="flex items-center rounded-sm px-3 py-1 text-lg font-normal capitalize hover:bg-indigo-100 hover:text-gray-700"
 						>
 							<vue-feather
@@ -30,9 +32,11 @@
 								stroke-width="2"
 							/>
 							<span>Account</span>
-						</a>
-						<a
-							href=""
+						</router-link>
+						<router-link
+							:to="{
+								name: 'account-orders',
+							}"
 							class="flex items-center rounded-sm px-3 py-1 text-lg font-normal capitalize hover:bg-indigo-100 hover:text-gray-700"
 						>
 							<vue-feather
@@ -42,7 +46,7 @@
 								stroke-width="2"
 							/>
 							<span>Orders</span>
-						</a>
+						</router-link>
 					</div>
 					<div class="bg-gray-100">
 						<button
