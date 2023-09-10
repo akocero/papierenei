@@ -12,7 +12,7 @@
 			:slides-per-view="1"
 			:space-between="50"
 			:autoplay="{
-				delay: 2500,
+				delay: 5000,
 				disableOnInteraction: false,
 			}"
 			:pagination="{ clickable: true }"
@@ -20,26 +20,31 @@
 			@slideChange="onSlideChange"
 			effect="fade"
 		>
-			<swiper-slide>
-				<img
-					src="../../../assets/new_logos/slide1.webp"
-					alt=""
-					class="w-full rounded-2xl"
-				/>
-			</swiper-slide>
-			<swiper-slide>
-				<img
-					src="../../../assets/new_logos/slide2.webp"
-					alt=""
-					class="w-full rounded-2xl"
-				/>
-			</swiper-slide>
-			<swiper-slide>
-				<img
-					src="../../../assets/new_logos/slide3.webp"
-					alt=""
-					class="w-full rounded-2xl"
-				/>
+			<swiper-slide v-for="hero in heros">
+				<router-link class="relative" :to="hero.link">
+					<img
+						v-if="hero?.coverPhoto?.length"
+						:src="hero.coverPhoto[0].secure_url"
+						alt=""
+						class="w-full rounded-2xl"
+					/>
+
+					<div
+						class="h-96 w-full rounded-2xl bg-gray-300"
+						v-else
+					></div>
+
+					<div class="absolute bottom-14 left-20 w-5/12">
+						<h1
+							class="mb-6 font-nunito text-6xl font-black capitalize text-white drop-shadow-double"
+						>
+							{{ hero.title }}
+						</h1>
+						<ButtonLink :link="hero.link">{{
+							hero.buttonText
+						}}</ButtonLink>
+					</div>
+				</router-link>
 			</swiper-slide>
 		</swiper>
 	</div>
@@ -64,6 +69,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'swiper/css/effect-fade';
+
+const props = defineProps(['heros']);
 
 const onSwiper = (swiper) => {
 	// console.log(swiper);

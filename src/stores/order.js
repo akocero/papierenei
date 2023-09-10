@@ -30,5 +30,12 @@ export const useOrderStore = defineStore({
 		async sendEmailOrderDetails(id) {
 			await storeHelpers.sendEmail(this, 'send_email_order_details', id);
 		},
+		async delete(id) {
+			await storeHelpers.destroy(this, id);
+
+			if (!this.error) {
+				this.list = this.list.filter((item) => item._id !== id);
+			}
+		},
 	},
 });

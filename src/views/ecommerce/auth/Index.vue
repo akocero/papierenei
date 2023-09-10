@@ -11,13 +11,14 @@
 			{{ isLogin ? 'Sign in to your account' : 'Create your account' }}
 		</h2>
 		<div
-			class="mt-4 flex h-12 items-center rounded border-2 border-red-400 bg-red-400/90 py-2 px-4 text-lg text-white"
+			class="mt-4 flex min-h-[3rem] items-center rounded border-2 border-red-400 bg-red-400/90 py-2 px-4 text-lg text-white"
 			v-if="AuthStore.error"
 		>
 			{{ AuthStore.error.message }}
 		</div>
 		<div v-if="isLogin">
-			<Login />
+			<Login v-if="!AuthStore.loginCodeToken" />
+			<EnterCode v-if="AuthStore.loginCodeToken" />
 		</div>
 		<div v-else>
 			<Register />
@@ -45,6 +46,7 @@ import { ref, onUnmounted } from 'vue';
 import { useEcomAuthStore } from '@/stores/ecom_auth';
 import { useEcomAppStore } from '@/stores/ecom_app';
 import Login from './Login.vue';
+import EnterCode from './EnterCode.vue';
 import Modal from '@/components/ecommerce/Modal.vue';
 import Register from './Register.vue';
 

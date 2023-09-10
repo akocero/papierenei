@@ -36,9 +36,9 @@
 	<div
 		class="absolute top-0 left-0 h-96 w-full bg-gradient-to-b from-indigo-400 to-white"
 	></div>
-	<HeadingSection />
+	<HeadingSection :heros="heroStore.list" />
 
-	<CollectionSection :products="_ourProducts" />
+	<CollectionSection :categories="categoryStore.list" />
 
 	<ClassificationSection />
 
@@ -51,6 +51,7 @@ import { onBeforeMount, ref } from 'vue';
 /* Stores */
 import { useCategoryStore } from '@/stores/category';
 import { useProductStore } from '@/stores/product';
+import { useHeroStore } from '@/stores/hero';
 
 /* Sections */
 import HeadingSection from './HeadingSection.vue';
@@ -69,6 +70,7 @@ import ecomProdData from '../data/ecommerce.json';
 
 const productStore = useProductStore();
 const categoryStore = useCategoryStore();
+const heroStore = useHeroStore();
 
 const isOpen = ref(false);
 const productModal = ref(null);
@@ -79,9 +81,12 @@ const props = defineProps({
 
 const _ourProducts = ref([]);
 
+// &isPublished=1
+
 onBeforeMount(async () => {
 	// for our products
 	await categoryStore.fetch('');
+	await heroStore.fetch('?isPublished=1');
 
 	let ourProductsID = [];
 

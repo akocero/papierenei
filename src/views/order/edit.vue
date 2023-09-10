@@ -65,11 +65,17 @@ onBeforeMount(async () => {
 		addedPayments.value = store.item.payments;
 	}
 
-	store.item.orderfulfilledDate = store.item.orderfulfilledDate.substring(
-		0,
-		10,
-	);
-	store.item.orderPaidDate = store.item.orderPaidDate.substring(0, 10);
+	if (store.item.orderfulfilledDate) {
+		store.item.orderfulfilledDate = store.item.orderfulfilledDate.substring(
+			0,
+			10,
+		);
+	}
+
+	if (store.item.orderPaidDate) {
+		store.item.orderPaidDate = store.item.orderPaidDate.substring(0, 10);
+	}
+	
 	// invoiceStore.item.datePaid = invoiceStore.item.datePaid
 	// 	? item.value.datePaid.substring(0, 10)
 	// 	: undefined;

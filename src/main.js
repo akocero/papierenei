@@ -33,12 +33,14 @@ import BaseTextArea from './components/BaseTextArea.vue';
 
 /* Special Components */
 import ImageManager from './components/image_module/ImageManager.vue';
+import Badge from './components/Badge.vue';
 
 const app = createApp(App);
 
 app.component(VueFeather.name, VueFeather);
 
 app.component('DrawerCard', DrawerCard);
+app.component('Badge', Badge);
 app.component('ActionNavbar', ActionNavbar);
 app.component('TitleBar', TitleBar);
 app.component('ErrorBar', ErrorBar);

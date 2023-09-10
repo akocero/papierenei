@@ -91,14 +91,20 @@
 				</li>
 			</ul>
 		</div>
-		<Banner
-			:text="ecommSettingsStore.activeBanner.text"
-			v-if="
-				ecommSettingsStore.item &&
-				ecommSettingsStore?.activeBanner?.text &&
-				isNavbarSticky
-			"
-		/>
+		<transition
+			enter-active-class="transition duration-500 ease-in"
+			enter-from-class="opacity-0"
+			enter-to-class="opacity-100"
+		>
+			<Banner
+				:text="ecommSettingsStore.activeBanner.text"
+				v-if="
+					ecommSettingsStore.item &&
+					ecommSettingsStore?.activeBanner?.text &&
+					isNavbarSticky
+				"
+			/>
+		</transition>
 	</nav>
 </template>
 

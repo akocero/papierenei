@@ -19,7 +19,6 @@
 			:data="store.list"
 			:headers="tableHeaders"
 			:isLoading="store.isLoading"
-			editRoute="sales.customers.edit"
 		>
 			<template #item-createdAt="item">
 				{{ moment(item.createdAt).format('MM/DD/YYYY') }}
@@ -38,6 +37,11 @@
 						name: 'sales.customers.edit',
 						params: { id: item._id },
 					}"
+				/>
+				<BaseTableActionButton
+					_type="button"
+					icon="trash"
+					@click="deleteItem(item._id)"
 				/>
 			</template>
 		</TableData>
@@ -96,6 +100,22 @@ const paginate = (page) => {
 
 const fetchData = async (page = 1, search = '', limit = 10) => {
 	await store.fetch(`?${search}page=${page}&limit=${limit}`);
+};
+
+const deleteItem = async (id) => {
+	let text = 'Are you sure you want to delete this data?';
+
+	if (confirm(text) == true) {
+		await store.delete(id);
+
+		if (store.error) {
+			pushAlert('error', store.error.message);
+		}
+
+		pushAlert('success', 'Deleted succesfully');
+	}
+
+	return;
 };
 </script>
 

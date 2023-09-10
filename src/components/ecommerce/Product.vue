@@ -27,7 +27,7 @@
 				>
 					<div
 						v-if="!product.quantity"
-						class="absolute bottom-3 right-3 z-[5] rounded-2xl bg-gray-700 px-4 py-2 capitalize text-white"
+						class="absolute top-3 left-3 z-[5] rounded-2xl bg-gray-700 px-3 py-2 capitalize text-white"
 					>
 						sold out
 					</div>
@@ -42,7 +42,7 @@
 					/>
 
 					<img
-						class="h-full w-full object-cover group-hover:hidden"
+						class="h-full w-full object-cover"
 						:src="product.coverPhoto[0].secure_url"
 						alt=""
 						v-if="
@@ -50,15 +50,19 @@
 							product?.images?.length >= 1
 						"
 					/>
-					<img
-						class="h-full w-full object-cover"
-						:src="product.images[0].secure_url"
-						alt=""
+					<div
 						v-if="
 							product.coverPhoto.length &&
 							product?.images?.length >= 1
 						"
-					/>
+						class="absolute top-0 left-0 h-full w-full scale-110 opacity-0 transition-all duration-500 group-hover:scale-100 group-hover:opacity-100"
+					>
+						<img
+							class="h-full w-full object-cover"
+							:src="product.images[0].secure_url"
+							alt=""
+						/>
+					</div>
 
 					<img
 						class="h-full w-full object-cover transition-all duration-500 group-hover:scale-110"
@@ -77,7 +81,7 @@
 				>
 					<div
 						v-if="!product.quantity"
-						class="absolute bottom-3 right-3 rounded-2xl bg-gray-700 px-4 py-2 capitalize text-white"
+						class="absolute top-3 left-3 z-[5] rounded-2xl bg-gray-700 px-3 py-2 capitalize text-white"
 					>
 						sold out
 					</div>

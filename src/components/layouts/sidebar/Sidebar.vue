@@ -120,6 +120,11 @@ const sidebarRoutes = ref([
 				routeObject: { name: 'ecomm.media' },
 				active: false,
 			},
+			{
+				text: 'Hero',
+				routeObject: { name: 'ecomm.heros' },
+				active: false,
+			},
 		],
 	},
 ]);

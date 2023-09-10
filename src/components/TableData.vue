@@ -127,7 +127,6 @@ const moveToEdit = (id) => {
 					:class="[
 						editRoute ? 'cursor-pointer hover:bg-gray-50' : '',
 					]"
-					@click="moveToEdit(item._id)"
 				>
 					<td v-for="td in headers" :class="td.cellClass">
 						<slot :name="`item-${td.value}`" v-bind="item">

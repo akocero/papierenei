@@ -113,11 +113,17 @@ const router = createRouter({
 					component: () =>
 						import('../views/ecommerce/ReturnRefund.vue'),
 				},
+				{
+					path: '/contact',
+					name: 'contact',
+					component: () => import('../views/ecommerce/ContactUs.vue'),
+				},
 			],
 		},
 		{
 			path: '/account',
 			name: 'account',
+			component: () => import('../views/ecommerce/account/Layout.vue'),
 			beforeEnter: ecomAuthRequired,
 			children: [
 				{
@@ -236,6 +242,21 @@ const router = createRouter({
 					path: 'warehouse/collections/edit/:id',
 					name: 'warehouse.collections.edit',
 					component: () => import('../views/collection/edit.vue'),
+				},
+				{
+					path: 'ecomm/heros',
+					name: 'ecomm.heros',
+					component: () => import('../views/hero/index.vue'),
+				},
+				{
+					path: 'ecomm/heros/create',
+					name: 'ecomm.heros.create',
+					component: () => import('../views/hero/create.vue'),
+				},
+				{
+					path: 'ecomm/heros/edit/:id',
+					name: 'ecomm.heros.edit',
+					component: () => import('../views/hero/edit.vue'),
 				},
 				{
 					path: 'sales/discounts',

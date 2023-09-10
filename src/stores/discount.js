@@ -28,5 +28,12 @@ export const useDiscountStore = defineStore({
 		async find(id) {
 			await storeHelpers.find(this, id);
 		},
+		async delete(id) {
+			await storeHelpers.destroy(this, id);
+
+			if (!this.error) {
+				this.list = this.list.filter((item) => item._id !== id);
+			}
+		},
 	},
 });

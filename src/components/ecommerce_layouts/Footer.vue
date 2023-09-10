@@ -11,7 +11,15 @@
 							We at Papier Renei strongly believe that all things
 							cute and colorful have healing powers!
 						</p>
-						<p>Have questions? <a href="">Contact us here</a></p>
+						<p>
+							Have questions?
+							<router-link
+								:to="{
+									name: 'contact',
+								}"
+								>Contact us here</router-link
+							>
+						</p>
 					</div>
 				</div>
 				<div class="col-span-6 text-center sm:col-span-2 sm:text-left">

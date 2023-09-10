@@ -59,8 +59,6 @@ import { useRouter } from 'vue-router';
 
 const form = ref({});
 const { pushAlert } = useAlert();
-const email = ref('');
-const password = ref('');
 const store = useEcomAuthStore();
 const router = useRouter();
 

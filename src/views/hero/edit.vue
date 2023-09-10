@@ -6,23 +6,23 @@
 			:discard_route_name="indexRoute"
 			:isLoading="store.isLoading"
 		/>
-		<TitleBar :back_route_name="indexRoute" title="Update Discount" />
+		<TitleBar :back_route_name="indexRoute" title="Update Hero" />
 		<Form :store="store" />
 	</div>
 </template>
 
 <script setup>
 import { onBeforeMount, ref, watch } from 'vue';
-import { useDiscountStore } from '@/stores/discount';
-import useAlert from '../../composables/useAlert';
+import { useHeroStore } from '@/stores/hero';
 import { useRoute, useRouter } from 'vue-router';
+import useAlert from '@/composables/useAlert';
 import Form from './Form.vue';
 
 const router = useRouter();
 const route = useRoute();
 const { pushAlert } = useAlert();
-const store = useDiscountStore();
-const indexRoute = 'sales.discounts';
+const store = useHeroStore();
+const indexRoute = 'ecomm.heros';
 
 onBeforeMount(async () => {
 	await store.find(route.params.id);
@@ -36,10 +36,10 @@ const handleSubmit = async () => {
 		pushAlert('error', store.error.message);
 		return;
 	}
-	console.log({ res });
-	pushAlert('info', `Discount <${res.code}> is updated!`);
+
+	pushAlert('info', `Hero <${res.name}> is updated!`);
 	router.push({
-		name: 'sales.discounts',
+		name: 'ecomm.heros',
 	});
 };
 </script>

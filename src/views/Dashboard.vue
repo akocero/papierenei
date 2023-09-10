@@ -24,9 +24,9 @@
 	</BaseModal> -->
 	<div class="card">
 		<!-- uncomment this to test the toast or modals -->
-		<button @click="showAlert">Open</button>
+		<!-- <button @click="showAlert">Open</button> -->
 		<div class="flex items-baseline justify-between">
-			<h4 class="text-xl">Welcome, Dashboard</h4>
+			<h4 class="text-xl">Welcome, {{ AuthStore.user.name }}</h4>
 		</div>
 	</div>
 </template>
@@ -36,9 +36,11 @@ import { ref } from 'vue';
 import BaseModal from '../components/BaseModal.vue';
 // import ManageImage from '@/components/ManageImage.vue';
 import useAlert from '../composables/useAlert';
+import { useAuthStore } from '../stores/auth';
 
 const { pushToast } = useAlert();
 const isOpen = ref(false);
+const AuthStore = useAuthStore();
 
 const showAlert = () => {
 	pushToast({

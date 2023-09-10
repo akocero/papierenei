@@ -1,9 +1,9 @@
 <template>
-	<TitleBar title="Categories">
+	<TitleBar title="Heros">
 		<template #actions>
 			<BaseButton
-				text="Add Category"
-				:routeObject="{ name: 'warehouse.categories.create' }"
+				text="Add Hero"
+				:routeObject="{ name: 'ecomm.heros.create' }"
 				color="primary"
 			/>
 		</template>
@@ -19,16 +19,26 @@
 			:data="store.list"
 			:headers="tableHeaders"
 			:isLoading="store.isLoading"
+			editRoute="ecomm.heros.edit"
 		>
 			<template #item-createdAt="item">
 				{{ moment(item.createdAt).format('MM/DD/YYYY') }}
+			</template>
+
+			<template #item-isPublished="item">
+				<Badge
+					text="Unpublished"
+					v-if="!item.isPublished"
+					color="warning"
+				/>
+				<Badge text="Published" v-else color="success" />
 			</template>
 
 			<template #item-actions="item">
 				<BaseTableActionButton
 					icon="edit"
 					:route-object="{
-						name: 'warehouse.collections.edit',
+						name: 'ecomm.heros.edit',
 						params: { id: item._id },
 					}"
 				/>
@@ -46,17 +56,18 @@
 
 <script setup>
 import { onBeforeMount, ref, watch } from 'vue';
-import { useCategoryStore } from '@/stores/category';
+import { useHeroStore } from '@/stores/hero';
 import useAlert from '@/composables/useAlert';
 import useUtils from '@/composables/useUtils';
 import moment from 'moment';
 
-const store = useCategoryStore();
+const store = useHeroStore();
 const { pushAlert } = useAlert();
 const searchString = ref('');
 const searchOptions = [{ label: 'SKU', value: 'sku' }];
 const tableHeaders = [
-	{ text: 'Name', value: 'name' },
+	{ text: 'Title', value: 'title' },
+	{ text: 'Published', value: 'isPublished' },
 	{ text: 'Created at', value: 'createdAt' },
 	{
 		text: 'Actions',
@@ -68,6 +79,8 @@ const tableHeaders = [
 onBeforeMount(async () => {
 	// if (store.list.length <= 0) {
 	await fetchData();
+
+	console.log(store.list);
 	// }
 	if (store.error) {
 		console.log('index', store.error);

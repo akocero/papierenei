@@ -129,16 +129,6 @@
 	<ImageManager
 		:store="store"
 		v-if="store.item"
-		title="Heros"
-		db_column="heros"
-		:setActiveFunc="true"
-		uploadType="multiple"
-		activeImage="activeHero"
-	/>
-
-	<ImageManager
-		:store="store"
-		v-if="store.item"
 		title="Navbar Backgrounds"
 		db_column="navbarBGs"
 		:setActiveFunc="true"

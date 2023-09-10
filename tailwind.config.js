@@ -6,6 +6,9 @@ module.exports = {
 	content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
 	theme: {
 		extend: {
+			dropShadow: {
+				double: ['5px 4px 0px rgb(134,134,219)'],
+			},
 			maxWidth: {
 				base: '1600px',
 			},

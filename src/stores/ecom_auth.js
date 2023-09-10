@@ -13,6 +13,7 @@ export const useEcomAuthStore = defineStore({
 		url: `guest/auth`,
 		response: null,
 		error: null,
+		loginCodeToken: null,
 	}),
 	actions: {
 		setUser(payload) {
@@ -175,6 +176,44 @@ export const useEcomAuthStore = defineStore({
 					window.location.reload();
 				}
 				this.isAuth = false;
+			}
+		},
+		async verifyEmail(email) {
+			this.isLoading = true;
+			this.error = null;
+			try {
+				const res = await axios.post(`${this.url}/loginEmail`, {
+					email,
+				});
+				this.error = null;
+				this.isLoading = false;
+				this.loginCodeToken = res.data.codeToken;
+				console.log(res);
+				return res.data;
+			} catch (err) {
+				this.isLoading = false;
+				console.log(err);
+				this.error = err.response.data;
+			}
+		},
+		async loginUsingCode(code) {
+			this.isLoading = true;
+			this.error = null;
+			try {
+				const res = await axios.post(`${this.url}/loginCode`, {
+					code,
+					codeToken: this.loginCodeToken,
+				});
+				console.log(res);
+				this.setUser(res.data);
+				this.loginCodeToken = null;
+				this.error = null;
+				this.isLoading = false;
+				return res.data;
+			} catch (err) {
+				this.isLoading = false;
+				console.log(err);
+				this.error = err.response.data;
 			}
 		},
 	},

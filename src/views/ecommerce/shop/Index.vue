@@ -22,7 +22,7 @@
 				}"
 			>
 				<h2
-					class="font-xnarrow text-3xl font-bold uppercase text-indigo-400"
+					class="font-nunito text-3xl font-black uppercase text-indigo-400"
 				>
 					{{ filterBy.name }}
 				</h2>
@@ -32,7 +32,7 @@
 				</p>
 			</div>
 			<h2
-				class="mb-10 text-center font-xnarrow text-3xl font-bold uppercase text-indigo-400"
+				class="mb-10 text-center font-nunito text-3xl font-black uppercase text-indigo-400"
 				v-else
 			>
 				{{ shopTitle }}
