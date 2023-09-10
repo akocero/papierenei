@@ -17,7 +17,7 @@
 				class="flex h-full w-full items-center justify-center bg-gray-300 text-white"
 				v-else
 			>
-				<VueFeather type="image" size="42" class="" />
+				<VueFeather type="image" size="92" class="" />
 			</div>
 		</router-link>
 		<router-link

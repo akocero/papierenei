@@ -28,7 +28,7 @@
 				<BaseTableActionButton
 					icon="edit"
 					:route-object="{
-						name: 'warehouse.collections.edit',
+						name: 'warehouse.categories.edit',
 						params: { id: item._id },
 					}"
 				/>
