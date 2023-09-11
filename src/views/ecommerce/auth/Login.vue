@@ -23,6 +23,7 @@
 <script setup>
 import { ref, onUnmounted } from 'vue';
 import { useEcomAuthStore } from '@/stores/ecom_auth';
+import { useEcomAppStore } from '@/stores/ecom_app';
 import useAlert from '@/composables/useAlert';
 import { useRouter } from 'vue-router';
 
@@ -30,15 +31,11 @@ const { pushAlert } = useAlert();
 const email = ref('');
 const password = ref('');
 const EcomAuthStore = useEcomAuthStore();
+const EcomAppStore = useEcomAppStore();
 const router = useRouter();
 
 const handleSubmit = async () => {
 	await EcomAuthStore.verifyEmail(email.value);
-
-	if (!EcomAuthStore.error) {
-		router.push({ name: 'account-details' });
-		pushAlert('success', 'Succesfully Logged In.');
-	}
 };
 
 onUnmounted(() => {

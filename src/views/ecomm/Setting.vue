@@ -18,114 +18,42 @@
 			/>
 		</div>
 	</div>
-	<div
-		v-if="store.item"
-		class="card"
-		:class="[store.item.is_maintenance ? 'bg-red-400 text-white' : '']"
-	>
-		<div class="flex items-center justify-between">
-			<h4 class="text-xl">Maintenance Mode</h4>
-			<label
-				class="relative inline-flex cursor-pointer items-center"
-				for="maint"
-			>
-				<input
-					id="maint"
-					type="checkbox"
-					class="peer sr-only"
-					v-model="store.item.is_maintenance"
-				/>
-				<div
-					class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800"
-				></div>
-			</label>
-		</div>
+
+	<!-- Maintenance  -->
+	<Maintenance v-if="store.item" />
+
+	<div class="flex items-start gap-x-4">
+		<ImageManager
+			:store="store"
+			title="Logo Base"
+			db_column="logoBase"
+			v-if="store.item"
+			uploadType="single"
+		/>
+
+		<ImageManager
+			:store="store"
+			title="Logo Small"
+			db_column="logoSm"
+			v-if="store.item"
+			uploadType="single"
+		/>
+
+		<ImageManager
+			:store="store"
+			title="Logo Flat"
+			db_column="logoFlat"
+			v-if="store.item"
+			uploadType="single"
+		/>
 	</div>
-	<div class="card">
-		<div class="mb-4 flex items-baseline justify-between">
-			<h4 class="text-xl">Banners</h4>
-		</div>
-		<div v-if="store.item" class="">
-			<!-- {{ store.item.banners }} -->
-			<div class="grid grid-cols-12 gap-4">
-				<div class="col-span-full md:col-span-3">
-					<BaseInput
-						id="input_name"
-						label="Banner Name"
-						v-model="_banner.name"
-						:error="null"
-						:errorField="null"
-						placeholder="Ex. ABC"
-						:required="true"
-					/>
-				</div>
-				<div class="col-span-full md:col-span-8">
-					<BaseInput
-						id="input_name"
-						label="Banner Text"
-						v-model="_banner.text"
-						:error="null"
-						:errorField="null"
-						placeholder="Ex. ABC"
-						:required="true"
-					/>
-				</div>
-				<div class="col-span-full flex items-end md:col-span-1">
-					<BaseButton
-						_type="button"
-						text="Add"
-						color="green"
-						_class="mt-2 w-full text-center"
-						@click="addBanner"
-					/>
-				</div>
-			</div>
-		</div>
-		<div v-if="store.item" class="mt-5">
-			<div v-if="store.item.banners.length">
-				<div
-					class="mt-3 flex flex-col border py-3 px-4 md:flex-row"
-					v-for="banner in store.item.banners"
-					:key="banner.name"
-				>
-					<div class="grow">
-						<h3 class="text-lg font-bold uppercase">
-							{{ banner.name }}
-						</h3>
-						<p>
-							{{ banner.text }}
-						</p>
-					</div>
-					<div class="mt-2 flex items-center justify-end md:w-[30%]">
-						<BaseButton
-							_type="button"
-							text="Set as active"
-							color="default"
-							v-if="!banner.isActive"
-							_class="mr-2"
-							@click="setBannerActive(banner.name)"
-						/>
-						<BaseButton
-							_type="button"
-							text="Set as inactive"
-							color="yellow"
-							v-if="banner.isActive"
-							_class="mr-2"
-							@click="setBannerInactive(banner.name)"
-						/>
-						<BaseButton
-							_type="button"
-							text="Delete"
-							color="red"
-							_class=""
-							@click="removeBanner(banner.name)"
-						/>
-					</div>
-				</div>
-			</div>
-			<div v-else>No banner found!</div>
-		</div>
-	</div>
+
+	<!-- Banners  -->
+	<DrawerCard title="Banners" :isCardOpen="false" v-if="store.item">
+		<Banners />
+	</DrawerCard>
+
+	<!-- Navbar BG  -->
 	<ImageManager
 		:store="store"
 		v-if="store.item"
@@ -135,57 +63,59 @@
 		uploadType="multiple"
 		activeImage="activeNavbarBG"
 	/>
+
+	<DrawerCard title="About Content" :isCardOpen="false" v-if="store.item">
+		<QuillEditor
+			theme="snow"
+			v-model:content="store.item.about"
+			content-type="html"
+		/>
+	</DrawerCard>
+
+	<DrawerCard
+		title="Order Tracking Content"
+		:isCardOpen="false"
+		v-if="store.item"
+	>
+		<QuillEditor
+			theme="snow"
+			v-model:content="store.item.orderTracking"
+			content-type="html"
+		/>
+	</DrawerCard>
+
+	<DrawerCard
+		title="Return Policy Content"
+		:isCardOpen="false"
+		v-if="store.item"
+	>
+		<QuillEditor
+			theme="snow"
+			v-model:content="store.item.returnPolicy"
+			content-type="html"
+		/>
+	</DrawerCard>
 </template>
 <script setup>
 import { onBeforeMount, ref } from 'vue';
 import ImageManager from '@/components/image_module/ImageManager.vue';
 import { useEcommSettingStore } from '@/stores/ecomm_setting';
-import BaseInput from '@/components/BaseInput.vue';
 import BaseButton from '@/components/BaseButton.vue';
 import useAlert from '@/composables/useAlert';
+import Maintenance from './Maintenance.vue';
+import Banners from './Banners.vue';
+import { QuillEditor } from '@vueup/vue-quill';
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 const { pushAlert } = useAlert();
 
 const store = useEcommSettingStore();
-const _banner = ref({
-	name: '',
-	text: '',
-	isActive: false,
-});
-
-console.log('store', store.item);
-
-const addBanner = () => {
-	const bannerIsAdded = store.item.banners.find(
-		(banner) => _banner.value.name.toLowerCase() === banner.name,
-	);
-
-	if (!_banner.value.name || !_banner.value.text) {
-		pushAlert('error', 'Invalid inputs, please fill required fields!');
-		return;
-	}
-
-	if (bannerIsAdded) {
-		pushAlert('error', 'Banner is already added!');
-		return;
-	}
-	_banner.value.name = _banner.value.name.toLowerCase();
-	store.item.banners.push(_banner.value);
-
-	_banner.value = {
-		name: '',
-		text: '',
-		isActive: false,
-	};
-};
 
 onBeforeMount(async () => {
 	await store.load();
 });
 
 const handleSubmit = async () => {
-	// console.log(store.item);
-	// return;
 	store.error = null;
 	const res = await store.update(store.item);
 
@@ -193,37 +123,7 @@ const handleSubmit = async () => {
 		pushAlert('error', store.error.message);
 		return;
 	}
-	console.log({ res });
+
 	pushAlert('info', `Ecomm Settings is updated!`);
-	// router.push({
-	// 	name: 'warehouse.products',
-	// });
-};
-
-const setBannerActive = (banner_name) => {
-	store.item.banners = store.item.banners.map((banner) => {
-		banner.isActive = false;
-		if (banner.name === banner_name) {
-			if (banner.isActive) banner.isActive = false;
-			else banner.isActive = true;
-		}
-		return banner;
-	});
-	console.log(store.item.banners);
-};
-
-const setBannerInactive = (banner_name) => {
-	store.item.banners = store.item.banners.map((banner) => {
-		banner.isActive = false;
-		return banner;
-	});
-};
-
-const removeBanner = (banner_name) => {
-	store.item.banners = store.item.banners.filter(
-		(banner) => banner.name !== banner_name,
-	);
-
-	pushAlert('info', `Banner <${banner_name}> is removed!`);
 };
 </script>

@@ -10,6 +10,7 @@ import './assets/index.css';
 import SectionTitle from './components/ecommerce/SectionTitle.vue';
 import ButtonLink from './components/ecommerce/ButtonLink.vue';
 import Input from './components/ecommerce/Input.vue';
+import Prose from './components/ecommerce/Prose.vue';
 
 /* Layouts Components */
 import DrawerCard from './components/DrawerCard.vue';
@@ -60,6 +61,7 @@ app.component('BaseTextArea', BaseTextArea);
 app.component('SectionTitle', SectionTitle);
 app.component('ButtonLink', ButtonLink);
 app.component('Input', Input);
+app.component('Prose', Prose);
 
 app.use(createPinia());
 app.use(router);

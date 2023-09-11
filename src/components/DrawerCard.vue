@@ -34,7 +34,9 @@ const props = defineProps({
 		type: String,
 		default: 'No Title',
 	},
+	isCardOpen: {
+		type: Boolean,
+		default: true,
+	},
 });
-
-const isCardOpen = ref(true);
 </script>

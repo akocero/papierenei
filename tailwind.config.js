@@ -6,6 +6,13 @@ module.exports = {
 	content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
 	theme: {
 		extend: {
+			typography: {
+				DEFAULT: {
+					css: {
+						maxWidth: '110ch', // add required value here
+					},
+				},
+			},
 			dropShadow: {
 				double: ['5px 4px 0px rgb(134,134,219)'],
 			},
@@ -83,5 +90,8 @@ module.exports = {
 			border: ['last'],
 		},
 	},
-	plugins: [require('@tailwindcss/forms')],
+	plugins: [
+		require('@tailwindcss/forms'),
+		require('@tailwindcss/typography'),
+	],
 };

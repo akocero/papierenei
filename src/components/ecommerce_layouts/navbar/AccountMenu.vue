@@ -23,9 +23,11 @@
 							:to="{
 								name: 'account-details',
 							}"
-							class="flex items-center rounded-sm px-3 py-1 text-lg font-normal normal-case"
+							class="flex items-center rounded-sm px-3 py-1 text-lg font-normal capitalize"
 						>
-							<span>Hello, {{ EcomAuthStore.user.name }}</span>
+							<span
+								>Hello, {{ EcomAuthStore.user.firstName }}</span
+							>
 						</div>
 						<router-link
 							:to="{
@@ -59,7 +61,7 @@
 					<div class="bg-gray-100">
 						<button
 							class="flex w-full items-center rounded-sm px-3 py-1 text-lg font-normal capitalize hover:bg-red-400 hover:text-white"
-							@click="EcomAuthStore.logout"
+							@click="logout"
 						>
 							<vue-feather
 								type="log-out"
@@ -83,4 +85,9 @@ import { useEcomAuthStore } from '@/stores/ecom_auth';
 const EcomAuthStore = useEcomAuthStore();
 
 defineProps(['user']);
+
+const logout = () => {
+	EcomAuthStore.logout();
+	window.reload();
+};
 </script>

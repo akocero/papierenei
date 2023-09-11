@@ -1,5 +1,19 @@
-**Form - Contact Us:**
-- Reference: Japan Candy.
+TODO:
+liitan un title sa collections
+and add minimum height
+collections page loading make it full page loading
+cart page minimum height
+search bar at shop to be visible
+capitalize account menu
+account info
+change it to firstName only
+make the button and text in hero center align
+logout add reload
+in login close modal after login
+fix email message and title not bind with the message 
+
+dynamic panel 1 and panel 2 in settings
+
 
 **About:**
 - Ability to change the content.
@@ -92,6 +106,9 @@ Customer Login Register
     - Maintain the image size.
     - Include additional images below the main image.
     - Implement hover scaling effect for images, especially if there are multiple images available.
+
+**Form - Contact Us:**
+- Reference: Japan Candy.
 
 
 

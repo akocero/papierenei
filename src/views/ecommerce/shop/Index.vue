@@ -21,22 +21,14 @@
 					backgroundSize: 'cover',
 				}"
 			>
-				<h2
-					class="font-nunito text-3xl font-black uppercase text-indigo-400"
-				>
-					{{ filterBy.name }}
-				</h2>
+				<SectionTitle :title="filterBy.name" size="md" />
 
 				<p class="">
 					{{ filterBy.description }}
 				</p>
 			</div>
-			<h2
-				class="mb-10 text-center font-nunito text-3xl font-black uppercase text-indigo-400"
-				v-else
-			>
-				{{ shopTitle }}
-			</h2>
+
+			<SectionTitle :title="shopTitle" size="md" v-else />
 
 			<!-- Filters -->
 			<div class="mb-8 flex justify-between">
@@ -314,6 +306,15 @@ onBeforeRouteUpdate(async (to, from, next) => {
 		shopTitle.value = 'All Products';
 	}
 
+	// to check if there is route query search
+	// if true filter products base on search value
+	if (to.query.search) {
+		searchText.value = to.query.search;
+		filterBySearch(true);
+	} else {
+		qrySearch.value = '';
+	}
+
 	// fetch products no filter
 	await filterProducts();
 	isLoading.value = false;
@@ -326,6 +327,7 @@ const filterProducts = async () => {
 	console.log('Filter Called');
 	query.value = `${qryFilterBy.value}${qrySelectedTag.value}${qrySelectedPriceRange.value}${qrySelectedSortedBy.value}${qrySearch.value}&isPublished=1`;
 
+	console.log(query.value);
 	if (!qryFilterBy.value) {
 		query.value = '?' + query.value.slice(1);
 	}

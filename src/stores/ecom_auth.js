@@ -132,15 +132,16 @@ export const useEcomAuthStore = defineStore({
 				const res = await axios.patch(
 					`${this.url}/updateMe`,
 					this.user,
+					{
+						headers: {
+							Authorization: `Bearer ${this.token}`,
+						},
+					},
 				);
 				this.error = null;
 				this.isLoading = false;
-				const { _id, name, email } = res.data.data;
-				this.setUserDetails({
-					_id,
-					name,
-					email,
-				});
+
+				this.setUserDetails(res.data.data);
 				return res.data.data;
 			} catch (err) {
 				this.isLoading = false;

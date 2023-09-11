@@ -1,10 +1,11 @@
 <template>
-	<div class="wrapper max-w-[82rem]">
+	<div class="wrapper min-h-screen">
+		<Spinner v-if="collectionStore.isLoading" />
 		<div v-if="collectionStore.list.length > 0">
-			<SectionTitle title="Collections" />
+			<SectionTitle title="Collections" size="md" />
 			<ul class="grid grid-cols-8 gap-4 sm:grid-cols-12">
 				<li
-					class="col-span-4 text-center"
+					class="col-span-3 text-center"
 					v-for="cl in collectionStore.list"
 				>
 					<router-link

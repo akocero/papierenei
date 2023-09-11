@@ -18,7 +18,6 @@
 				<form
 					class="absolute left-0 hidden md:block"
 					@submit.prevent="navigateToShop"
-					v-if="isShowSearch"
 				>
 					<div class="flex h-full items-center justify-end">
 						<div class="relative">
@@ -187,23 +186,11 @@ onBeforeRouteLeave(() => {
 
 onBeforeRouteUpdate((to, from) => {
 	window.scrollTo(0, 0);
-	openMenu.value = false;
-
-	if (to.query) {
-		openMenu.value = false;
-	}
-
-	if (to.name === 'shop') {
-		isShowSearch.value = false;
-		return;
-	}
-
-	isShowSearch.value = true;
 });
 
 const navigateToShop = () => {
 	router.push({ name: 'shop', query: { search: searchText.value } });
-	searchText.value = '';
+	searchBlur();
 };
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-	<div class="wrapper my-4 sm:my-10">
+	<div class="wrapper min-h-screen">
 		<div class="flex items-baseline justify-between">
 			<h2 class="text-4xl font-semibold">Your Cart</h2>
 			<router-link to="shop" class="font-semibold underline">

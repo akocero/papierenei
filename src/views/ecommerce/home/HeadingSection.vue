@@ -34,7 +34,7 @@
 						v-else
 					></div>
 
-					<div class="absolute bottom-14 left-20 w-5/12">
+					<div class="absolute bottom-14 left-20 top-[50%] w-5/12">
 						<h1
 							class="mb-6 font-nunito text-6xl font-black capitalize text-white drop-shadow-double"
 						>

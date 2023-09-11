@@ -2,7 +2,7 @@
 	<div class="relative bg-gray-100 font-karla text-gray-600">
 		<nav class="bg-white shadow-sm">
 			<ul
-				class="mx-auto flex h-28 max-w-base items-center justify-between px-10"
+				class="mx-auto flex h-24 max-w-base items-center justify-between px-10"
 			>
 				<li>
 					<router-link

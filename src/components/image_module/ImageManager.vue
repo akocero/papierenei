@@ -11,7 +11,7 @@
 				v-for="image in store.item[db_column]"
 				:key="image._id"
 				:class="[
-					'group relative  ',
+					'group relative border ',
 					store.item[db_column].length === 1
 						? 'col-span-6  h-40'
 						: 'col-span-3 h-20',
@@ -44,7 +44,7 @@
 				<img
 					:src="image.secure_url"
 					alt=""
-					class="h-full w-full object-cover"
+					class="h-full w-full object-contain"
 				/>
 			</div>
 		</div>
