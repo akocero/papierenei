@@ -82,7 +82,9 @@ const EcomAuthStore = useEcomAuthStore();
 const { numberFormat } = useUtils();
 
 onBeforeMount(async () => {
-	await GuestStore.getWishList();
+	if (EcomAuthStore.user) {
+		await GuestStore.getWishList();
+	}
 });
 </script>
 

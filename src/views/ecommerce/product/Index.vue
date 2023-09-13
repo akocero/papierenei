@@ -107,12 +107,12 @@
 				</p>
 			</div>
 		</div>
-	</section>
-	<section class="wrapper mt-10">
-		<JustForYou
-			:collectionID="product?.collections[0] || null"
-			v-if="product"
-		/>
+		<div class="mt-36">
+			<JustForYou
+				:collectionID="product?.collections[0] || null"
+				v-if="product"
+			/>
+		</div>
 	</section>
 </template>
 
