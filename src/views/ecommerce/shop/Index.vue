@@ -199,7 +199,7 @@ const productTags = ref([]);
 const routeQryUpdate = ref(false);
 
 onBeforeMount(async () => {
-	console.log('MOUNT CALLED');
+	// console.log('MOUNT CALLED');
 	isLoading.value = true;
 	await tagStore.fetch('');
 
@@ -266,13 +266,14 @@ const filterByCollectionOrCategories = async ({
 // this function will refetch the shop page if the route collection query change
 // I did this because if you change the value of collection query the page won't refetch
 onBeforeRouteUpdate(async (to, from, next) => {
-	console.log('onBeforeRouteUpdate TRIGGERED');
+	// console.log('ROUTE UPDATE');
 	if (to.fullPath === from.fullPath) {
 		next();
 		return;
 	}
 
 	isLoading.value = true;
+
 	if (to.query.collection) {
 		filterBy.value = await collectionStore.find(to.query.collection);
 
@@ -282,7 +283,8 @@ onBeforeRouteUpdate(async (to, from, next) => {
 	}
 
 	if (to.query.category) {
-		filterBy.value = await categoryStore.find(route.query.category);
+		const res = await categoryStore.find(to.query.category);
+		filterBy.value = res;
 
 		if (!categoryStore.error) {
 			qryFilterBy.value = `?categories[in][0]=${categoryStore.item._id}`;
@@ -324,13 +326,13 @@ onBeforeRouteUpdate(async (to, from, next) => {
 
 // to filter products
 const filterProducts = async () => {
-	console.log('Filter Called');
 	query.value = `${qryFilterBy.value}${qrySelectedTag.value}${qrySelectedPriceRange.value}${qrySelectedSortedBy.value}${qrySearch.value}&isPublished=1`;
 
-	console.log(query.value);
 	if (!qryFilterBy.value) {
 		query.value = '?' + query.value.slice(1);
 	}
+
+	// console.log('FETCH: ', query.value);
 
 	await productStore.fetch(query.value);
 };
@@ -390,7 +392,6 @@ watch(
 		if (routeQryUpdate.value) {
 			return;
 		}
-		console.log('WATCH selectedSortedBy CALLED');
 		qrySelectedSortedBy.value = _sortedByOptions[newVal].query;
 		filterProducts();
 	},
@@ -400,7 +401,6 @@ watch(
 	() => selectedTag.value,
 	(newVal, oldVal) => {
 		if (newVal) {
-			console.log('WATCH selectedTag CALLED');
 			qrySelectedTag.value = `&tags[in][0]=${newVal}`;
 			filterProducts();
 		}
