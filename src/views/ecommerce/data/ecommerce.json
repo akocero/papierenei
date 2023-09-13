@@ -26,44 +26,46 @@
 		},
 		{
 			"routeObject": {
+				"name": "shop",
+				"query": { "collection": "6501cc25bb5a4e46ff3183e2" }
+			},
+			"text": "new"
+		},
+		{
+			"routeObject": {
 				"name": "shop"
 			},
 			"text": "shop",
 			"children": [
 				{
 					"routeObject": {
-						"name": "shop"
+						"name": "shop",
+						"query": { "category": "6405ae4006e95a6cfa44f600" }
 					},
-					"text": "GUMMY BEAR"
+					"text": "Craft Products"
 				},
 				{
 					"routeObject": {
-						"name": "shop"
+						"name": "shop",
+						"query": { "category": "6405ae1f06e95a6cfa44f5f7" }
 					},
-					"text": "GUMMY DARE"
+					"text": "Digital Downloads"
+				},
+				{
+					"routeObject": {
+						"name": "shop",
+						"query": { "category": "6405ae0106e95a6cfa44f5ee" }
+					},
+					"text": "Stickers and Stationery"
+				},
+				{
+					"routeObject": {
+						"name": "shop",
+						"query": { "category": "6405ade506e95a6cfa44f5e5" }
+					},
+					"text": "Papercraft Kits"
 				}
 			]
-		},
-		{
-			"routeObject": {
-				"name": "shop",
-				"query": { "collection": "640b2eb88acb090fe8978b86" }
-			},
-			"text": "stationery"
-		},
-		{
-			"routeObject": {
-				"name": "shop",
-				"query": { "collection": "640b2eef8acb090fe8978b8c" }
-			},
-			"text": "stickers"
-		},
-		{
-			"routeObject": {
-				"name": "shop",
-				"query": { "sale": true }
-			},
-			"text": "sale"
 		},
 		{
 			"routeObject": {
@@ -77,6 +79,39 @@
 				"query": { "collection": "640b2f038acb090fe8978b92" }
 			},
 			"text": "freebies"
+		},
+		{
+			"routeObject": {
+				"name": "shop",
+				"query": { "sale": true }
+			},
+			"text": "sale"
+		},
+		{
+			"routeObject": {
+				"name": "about"
+			},
+			"text": "about",
+			"children": [
+				{
+					"routeObject": {
+						"name": "faq"
+					},
+					"text": "FAQs"
+				},
+				{
+					"routeObject": {
+						"name": "order-tracking"
+					},
+					"text": "Order tracking"
+				},
+				{
+					"routeObject": {
+						"name": "return-refund"
+					},
+					"text": "Return policy"
+				}
+			]
 		}
 	]
 }
