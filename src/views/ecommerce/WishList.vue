@@ -7,6 +7,7 @@
 		>
 			<div v-for="(product, key) in GuestStore.wishList" class="relative">
 				<button
+					v-if="EcomAuthStore.user"
 					@click="GuestStore.removeWishList(product._id)"
 					class="absolute top-3 right-3 z-[5] flex h-8 w-8 items-center justify-center rounded-xl bg-white/50 hover:bg-red-400 hover:text-white"
 				>
@@ -70,12 +71,15 @@
 <script setup>
 import { onBeforeMount } from 'vue';
 import { useGuestStore } from '@/stores/guest';
-import useUtils from '@/composables/useUtils';
 import { useCartStore } from '@/stores/cart';
+import { useEcomAuthStore } from '@/stores/ecom_auth';
+import useUtils from '@/composables/useUtils';
 
 const GuestStore = useGuestStore();
-const { numberFormat } = useUtils();
 const CartStore = useCartStore();
+const EcomAuthStore = useEcomAuthStore();
+
+const { numberFormat } = useUtils();
 
 onBeforeMount(async () => {
 	await GuestStore.getWishList();

@@ -19,14 +19,14 @@
 
 		<button
 			class="absolute top-4 right-4 z-[5]"
-			v-if="!GuestStore.isInWishList(product._id)"
+			v-if="!GuestStore.isInWishList(product._id) && EcomAuthStore.user"
 			@click="GuestStore.addWishList(product)"
 		>
 			<VueFeather type="heart" size="26" class="text-white" />
 		</button>
 
 		<VueFeather
-			v-else
+			v-if="GuestStore.isInWishList(product._id) && EcomAuthStore.user"
 			type="heart"
 			size="26"
 			class="absolute top-4 right-4 z-[5] text-white"
@@ -152,8 +152,10 @@
 import useUtils from '@/composables/useUtils';
 import moment from 'moment';
 import { useGuestStore } from '@/stores/guest';
+import { useEcomAuthStore } from '@/stores/ecom_auth';
 
 const GuestStore = useGuestStore();
+const EcomAuthStore = useEcomAuthStore();
 
 const { numberFormat } = useUtils();
 
