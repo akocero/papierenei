@@ -2,7 +2,7 @@
 	<div
 		class="absolute bottom-0 h-72 w-full bg-red-300 text-[1rem] font-semibold text-white"
 	>
-		<div class="wrapper flex flex-col md:flex-row">
+		<div class="mx-auto flex max-w-base flex-col pt-7 md:flex-row">
 			<div class="grid w-full grid-cols-12 gap-y-10 text-left md:gap-10">
 				<div class="col-span-4 hidden sm:block md:pr-20">
 					<h3 class="text-xl">HEAL THROUGH CUTE ART!</h3>
