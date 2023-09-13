@@ -14,19 +14,25 @@
 
 		<AccountMenu v-if="EcomAuthStore.user" :user="EcomAuthStore.user" />
 
-		<a href="#" class="relative inline-block h-8">
+		<router-link
+			:to="{
+				name: 'wish-list',
+			}"
+			class="relative inline-block h-8"
+		>
 			<span
-				class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-gray-600 font-mono text-xs text-white"
+				class="absolute -top-2 -right-2 flex h-[1.15rem] w-[1.15rem] items-center justify-center rounded-full border bg-gray-500 font-mono text-xs text-white"
 			>
-				0
+				{{ GuestStore.wishList.length }}
 			</span>
 			<vue-feather
 				type="heart"
 				size="28"
 				class="text-gray-500"
 				stroke-width="1.8"
+				:fill="GuestStore.wishList.length > 0 ? '#737373' : '#FFFFFF'"
 			/>
-		</a>
+		</router-link>
 		<router-link
 			:to="{
 				name: 'cart',
@@ -35,7 +41,7 @@
 			class="relative inline-block h-8"
 		>
 			<span
-				class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-gray-600 font-mono text-xs text-white"
+				class="absolute -top-2 -right-2 flex h-[1.15rem] w-[1.15rem] items-center justify-center rounded-full border bg-gray-500 font-mono text-xs text-white"
 				>{{ CartStore.list.length }}</span
 			>
 			<vue-feather
@@ -51,8 +57,11 @@
 <script setup>
 import AccountMenu from './AccountMenu.vue';
 import { useEcomAuthStore } from '@/stores/ecom_auth';
+import { useGuestStore } from '@/stores/guest';
 import { useEcomAppStore } from '@/stores/ecom_app';
 import { useCartStore } from '@/stores/cart';
+
+const GuestStore = useGuestStore();
 
 const EcomAuthStore = useEcomAuthStore();
 const CartStore = useCartStore();

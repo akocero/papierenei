@@ -1,6 +1,6 @@
 <template>
 	<div class="wrapper">
-		<Prose :htmlValue="store.item.about" />
+		<Prose :htmlValue="store.item.faq" />
 	</div>
 </template>
 

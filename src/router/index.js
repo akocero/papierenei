@@ -74,6 +74,11 @@ const router = createRouter({
 						import('../views/ecommerce/OrderSummary.vue'),
 				},
 				{
+					path: '/wish-list',
+					name: 'wish-list',
+					component: () => import('../views/ecommerce/WishList.vue'),
+				},
+				{
 					path: '/collections',
 					name: 'collections',
 					component: () =>
@@ -100,6 +105,11 @@ const router = createRouter({
 					path: '/terms',
 					name: 'terms',
 					component: () => import('../views/ecommerce/Terms.vue'),
+				},
+				{
+					path: '/faq',
+					name: 'faq',
+					component: () => import('../views/ecommerce/Faq.vue'),
 				},
 				{
 					path: '/order-tracking',
@@ -137,6 +147,12 @@ const router = createRouter({
 					name: 'account-orders',
 					component: () =>
 						import('../views/ecommerce/account/Orders.vue'),
+				},
+				{
+					path: 'orders/:id',
+					name: 'account-orders-view',
+					component: () =>
+						import('../views/ecommerce/account/OrderDetails.vue'),
 				},
 			],
 		},

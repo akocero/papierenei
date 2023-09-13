@@ -28,7 +28,23 @@
 			"routeObject": {
 				"name": "shop"
 			},
-			"text": "shop"
+			"text": "shop",
+			"children": [
+				{
+					"routeObject": {
+						"name": "shop",
+						"query": { "collection": "63bd7ebcab01444f92149c92" }
+					},
+					"text": "GUMMY BEAR"
+				},
+				{
+					"routeObject": {
+						"name": "shop",
+						"query": { "collection": "63bd7ebcab01444f92149c92" }
+					},
+					"text": "GUMMY DARE"
+				}
+			]
 		},
 		{
 			"routeObject": {

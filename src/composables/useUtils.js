@@ -26,6 +26,11 @@ export default function useUtils() {
 		return moment(date, 'YYYYMMDD').fromNow();
 	};
 
+	const formatDate = (value) => {
+		const date = new Date(value);
+		return moment(date).format('MMMM Do YYYY, h:mm:ss a');
+	};
+
 	const sort = (arrayObjects, propertyName) => {
 		arrayObjects.sort(function compare(a, b) {
 			if (a[propertyName] < b[propertyName]) {
@@ -46,5 +51,6 @@ export default function useUtils() {
 		sort,
 		convertToRelativeTime,
 		currencyFormat,
+		formatDate,
 	};
 }

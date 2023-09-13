@@ -1,5 +1,5 @@
 <template>
-	<div class="wrapper min-h-screen sm:my-10">
+	<div class="wrapper">
 		<QuickView
 			@closeModal="closeModal"
 			:show="isModalOpen"

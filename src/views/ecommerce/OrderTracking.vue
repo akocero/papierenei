@@ -1,5 +1,5 @@
 <template>
-	<div class="wrapper min-h-[50vh]">
+	<div class="wrapper">
 		<Prose :htmlValue="store.item.orderTracking" />
 	</div>
 </template>

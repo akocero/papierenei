@@ -64,15 +64,43 @@
 					>Free Shipping on Orders $50+</label
 				>
 
-				<ButtonLink _class="w-full text-center mt-5">
+				<MainButton
+					_class="w-full text-center mt-5"
+					v-if="product.quantity"
+					@click="CartStore.addToCart(product)"
+				>
 					Add to cart
-				</ButtonLink>
+				</MainButton>
+
 				<button
+					v-if="!product.quantity"
+					:disabled="true"
+					class="mt-5 block w-full rounded-xl bg-gray-300 py-2 text-center text-lg font-bold text-white"
+				>
+					Sold Out
+				</button>
+
+				<button
+					v-if="!GuestStore.isInWishList(product._id)"
+					@click="GuestStore.addWishList(product)"
 					class="mt-3 flex w-full items-center justify-center text-lg text-red-400"
 				>
 					<VueFeather type="heart" size="24" class="mr-2" />
 					<span>Add to Wishlist</span>
 				</button>
+
+				<div
+					v-if="GuestStore.isInWishList(product._id)"
+					class="mt-3 flex w-full items-center justify-center text-lg text-red-400"
+				>
+					<VueFeather
+						type="heart"
+						size="24"
+						class="mr-2"
+						fill="#F87171"
+					/>
+					<span>In wishlist</span>
+				</div>
 
 				<p class="mt-8 text-lg">
 					These large ramune candies are so popular that they have
@@ -98,6 +126,8 @@ import { useRoute, onBeforeRouteUpdate } from 'vue-router';
 import useUtils from '@/composables/useUtils';
 import ProductHero from '@/components/ecommerce/ProductHero.vue';
 import JustForYou from './JustForYou.vue';
+import { useCartStore } from '@/stores/cart';
+import { useGuestStore } from '@/stores/guest';
 
 const props = defineProps({
 	ecommSettingsStore: Object,
@@ -107,6 +137,8 @@ const route = useRoute();
 const productStore = useProductStore();
 const { item: product } = storeToRefs(productStore);
 const coverImage = ref(null);
+const CartStore = useCartStore();
+const GuestStore = useGuestStore();
 
 const { numberFormat } = useUtils();
 

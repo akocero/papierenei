@@ -1,5 +1,5 @@
 <template>
-	<div class="mx-auto min-h-screen max-w-[54rem]">
+	<div class="mx-auto max-w-[54rem]">
 		<div class="mx-10">
 			<h2 class="my-6 font-nunito text-3xl font-black text-indigo-400">
 				Account information
@@ -124,6 +124,7 @@
 								"
 								placeholder="Ex. ABC"
 								:required="false"
+								:disabled="true"
 							/>
 						</div>
 						<div class="col-span-6">

@@ -80,6 +80,7 @@ export const useCartStore = defineStore('cart', () => {
 		if (existingProduct) {
 			console.log('existing', existingProduct.name);
 			incQty(existingProduct._id, 1);
+			pushAlert('success', 'Succesfully added to cart!');
 			return;
 		}
 

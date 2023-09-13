@@ -1,5 +1,5 @@
 <template>
-	<div class="wrapper min-h-screen">
+	<div class="wrapper">
 		<Spinner v-if="collectionStore.isLoading" />
 		<div v-if="collectionStore.list.length > 0">
 			<SectionTitle title="Collections" size="md" />

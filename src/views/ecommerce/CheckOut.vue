@@ -1,5 +1,5 @@
 <template>
-	<div class="wrapper sm:my-10">
+	<div class="wrapper">
 		<div class="grid grid-cols-12 gap-y-10 sm:gap-y-0">
 			<div class="order-last col-span-full sm:order-first sm:col-span-7">
 				<form class="p-2 sm:p-20" @submit.prevent="handleSumbit">

@@ -16,6 +16,22 @@
 		>
 			NEW!
 		</span>
+
+		<button
+			class="absolute top-4 right-4 z-[5]"
+			v-if="!GuestStore.isInWishList(product._id)"
+			@click="GuestStore.addWishList(product)"
+		>
+			<VueFeather type="heart" size="26" class="text-white" />
+		</button>
+
+		<VueFeather
+			v-else
+			type="heart"
+			size="26"
+			class="absolute top-4 right-4 z-[5] text-white"
+			fill="#fff"
+		/>
 		<div class="group relative overflow-hidden rounded-2xl">
 			<RouterLink :to="{ name: 'product', params: { id: product._id } }">
 				<div
@@ -125,7 +141,9 @@
 				v-if="product.quantity"
 			>
 				Add to Cart
-			</button> -->
+			</button>  -->
+
+			<!-- <button @click="GuestStore.updateWishList(product._id)">add wishlist</button> -->
 		</div>
 	</div>
 </template>
@@ -133,6 +151,9 @@
 <script setup>
 import useUtils from '@/composables/useUtils';
 import moment from 'moment';
+import { useGuestStore } from '@/stores/guest';
+
+const GuestStore = useGuestStore();
 
 const { numberFormat } = useUtils();
 

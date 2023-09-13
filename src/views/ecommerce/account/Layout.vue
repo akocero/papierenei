@@ -1,5 +1,7 @@
 <template>
-	<div class="relative bg-gray-100 font-karla text-gray-600">
+	<div
+		class="relative min-h-screen bg-gray-100 pb-16 font-karla text-gray-600"
+	>
 		<nav class="bg-white shadow-sm">
 			<ul
 				class="mx-auto flex h-24 max-w-base items-center justify-between px-10"
@@ -43,46 +45,48 @@
 		<main class="">
 			<RouterView />
 		</main>
-		<div class="mx-auto max-w-base">
-			<hr />
-			<ul class="flex gap-10 p-4">
-				<li>
-					<router-link
-						:to="{ name: 'home' }"
-						class="font-semibold text-red-400 underline"
-						>Refund policy</router-link
-					>
-				</li>
-				<li>
-					<router-link
-						:to="{ name: 'home' }"
-						class="font-semibold text-red-400 underline"
-						>Terms of Service</router-link
-					>
-				</li>
-				<li>
-					<router-link
-						:to="{ name: 'home' }"
-						class="font-semibold text-red-400 underline"
-						>Order Tracking</router-link
-					>
-				</li>
-				<li>
-					<router-link
-						:to="{ name: 'home' }"
-						class="font-semibold text-red-400 underline"
-						>About</router-link
-					>
-				</li>
-				<li>
-					<router-link
-						:to="{ name: 'home' }"
-						class="font-semibold text-red-400 underline"
-						>Contact us</router-link
-					>
-				</li>
-			</ul>
-		</div>
+		<footer class="absolute bottom-0 mx-auto h-14 w-full">
+			<div class="mx-auto max-w-base">
+				<hr />
+				<ul class="flex gap-10 p-4">
+					<li>
+						<router-link
+							:to="{ name: 'home' }"
+							class="font-semibold text-red-400 underline"
+							>Refund policy</router-link
+						>
+					</li>
+					<li>
+						<router-link
+							:to="{ name: 'home' }"
+							class="font-semibold text-red-400 underline"
+							>Terms of Service</router-link
+						>
+					</li>
+					<li>
+						<router-link
+							:to="{ name: 'home' }"
+							class="font-semibold text-red-400 underline"
+							>Order Tracking</router-link
+						>
+					</li>
+					<li>
+						<router-link
+							:to="{ name: 'home' }"
+							class="font-semibold text-red-400 underline"
+							>About</router-link
+						>
+					</li>
+					<li>
+						<router-link
+							:to="{ name: 'home' }"
+							class="font-semibold text-red-400 underline"
+							>Contact us</router-link
+						>
+					</li>
+				</ul>
+			</div>
+		</footer>
 	</div>
 </template>
 

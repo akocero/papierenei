@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="relative bg-white font-karla text-gray-600"
+		class="relative min-h-screen bg-white pb-[21rem] font-karla text-gray-600"
 		v-if="store.item && !store.item.is_maintenance"
 	>
 		<AuthModal v-if="EcomStore.isAuthModalOpen" />

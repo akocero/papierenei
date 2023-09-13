@@ -77,13 +77,31 @@
 						/>
 					</button>
 				</li>
-				<li class="" v-for="link in navbarLinks">
+				<li class="group relative z-20" v-for="link in navbarLinks">
 					<router-link
 						:to="link.routeObject"
-						class="flex h-14 items-center border-b-2 border-gray-100 px-6 transition-all duration-500 hover:border-gray-500"
+						class="flex h-14 items-center border-b-[3px] border-gray-100 px-6 transition-all duration-500 hover:border-gray-500 group-hover:border-gray-500"
 					>
 						{{ link.text }}
 					</router-link>
+					<div
+						class="invisible absolute top-14 left-0 z-20 w-64 border-b-[3px] border-gray-500 bg-white opacity-0 shadow transition-all duration-300 ease-in group-hover:visible group-hover:opacity-100"
+						v-if="link.children"
+					>
+						<ul class="py-4 text-sm text-gray-400">
+							<li
+								class="mb-1 h-6"
+								v-for="childLink in link?.children"
+							>
+								<router-link
+									:to="childLink.routeObject"
+									class="flex h-full w-full items-center px-4 hover:text-gray-600"
+								>
+									<span>{{ childLink.text }}</span>
+								</router-link>
+							</li>
+						</ul>
+					</div>
 				</li>
 				<li class="absolute right-0" v-if="isNavbarSticky">
 					<NavActions />
@@ -110,21 +128,17 @@
 <script setup>
 import { ref, onBeforeMount, onBeforeUnmount } from 'vue';
 
-import { useCartStore } from '@/stores/cart';
+import { useGuestStore } from '@/stores/guest';
 import { onBeforeRouteLeave, onBeforeRouteUpdate, useRouter } from 'vue-router';
 import { useEcommSettingStore } from '@/stores/ecomm_setting';
-import { useEcomAuthStore } from '@/stores/ecom_auth';
-import { useEcomAppStore } from '@/stores/ecom_app';
 import ecomProdData from '@/views/ecommerce/data/ecommerce.json';
 import ecomDevData from '@/views/ecommerce/data/dev_ecommerce.json';
 
 import NavActions from './NavActions.vue';
 import Banner from '../../ecommerce/Banner.vue';
 
+const GuestStore = useGuestStore();
 const ecommSettingsStore = useEcommSettingStore();
-const EcomAuthStore = useEcomAuthStore();
-const cartStore = useCartStore();
-const EcomAppStore = useEcomAppStore();
 const router = useRouter();
 
 const openMenu = ref(false);

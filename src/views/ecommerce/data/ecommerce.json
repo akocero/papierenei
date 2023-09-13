@@ -28,7 +28,21 @@
 			"routeObject": {
 				"name": "shop"
 			},
-			"text": "shop"
+			"text": "shop",
+			"children": [
+				{
+					"routeObject": {
+						"name": "shop"
+					},
+					"text": "GUMMY BEAR"
+				},
+				{
+					"routeObject": {
+						"name": "shop"
+					},
+					"text": "GUMMY DARE"
+				}
+			]
 		},
 		{
 			"routeObject": {

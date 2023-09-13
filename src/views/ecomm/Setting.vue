@@ -95,6 +95,20 @@
 			content-type="html"
 		/>
 	</DrawerCard>
+
+	<DrawerCard
+		title="FAQ"
+		:isCardOpen="false"
+		v-if="store.item"
+	>
+		<QuillEditor
+			theme="snow"
+			v-model:content="store.item.faq"
+			content-type="html"
+		/>
+	</DrawerCard>
+
+	
 </template>
 <script setup>
 import { onBeforeMount, ref } from 'vue';

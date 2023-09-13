@@ -9,6 +9,7 @@ import './assets/index.css';
 /* Ecommerce Components */
 import SectionTitle from './components/ecommerce/SectionTitle.vue';
 import ButtonLink from './components/ecommerce/ButtonLink.vue';
+import MainButton from './components/ecommerce/MainButton.vue';
 import Input from './components/ecommerce/Input.vue';
 import Prose from './components/ecommerce/Prose.vue';
 
@@ -60,6 +61,7 @@ app.component('BaseTextArea', BaseTextArea);
 // ecom
 app.component('SectionTitle', SectionTitle);
 app.component('ButtonLink', ButtonLink);
+app.component('MainButton', MainButton);
 app.component('Input', Input);
 app.component('Prose', Prose);
 
