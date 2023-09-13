@@ -31,14 +31,18 @@
 							</router-link>
 						</li>
 						<li>
-							<router-link :to="{ name: 'order-tracking' }">
-								Order Tracking
+							<router-link :to="{ name: 'contact' }">
+								Contact
 							</router-link>
 						</li>
-
 						<li>
 							<router-link :to="{ name: 'faq' }">
-								FAQ
+								FAQs
+							</router-link>
+						</li>
+						<li>
+							<router-link :to="{ name: 'order-tracking' }">
+								Order Tracking
 							</router-link>
 						</li>
 					</ul>

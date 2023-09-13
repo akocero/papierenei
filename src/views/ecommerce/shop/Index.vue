@@ -319,6 +319,7 @@ onBeforeRouteUpdate(async (to, from, next) => {
 
 	// fetch products no filter
 	await filterProducts();
+	productTags.value = getProductTags(productStore.list);
 	isLoading.value = false;
 	routeQryUpdate.value = false;
 	next();
