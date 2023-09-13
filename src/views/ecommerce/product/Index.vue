@@ -60,12 +60,12 @@
 					</span>
 				</p>
 
-				<label for="" class="mt-10 inline-block text-xl"
+				<!-- <label for="" class="mt-10 inline-block text-xl"
 					>Free Shipping on Orders $50+</label
-				>
+				> -->
 
 				<MainButton
-					_class="w-full text-center mt-5"
+					_class="w-full text-center mt-10"
 					v-if="product.quantity"
 					@click="CartStore.addToCart(product)"
 				>
@@ -75,7 +75,7 @@
 				<button
 					v-if="!product.quantity"
 					:disabled="true"
-					class="mt-5 block w-full rounded-xl bg-gray-300 py-2 text-center text-lg font-bold text-white"
+					class="mt-10 block w-full rounded-xl bg-gray-300 py-2 text-center text-lg font-bold text-white"
 				>
 					Sold Out
 				</button>
@@ -103,14 +103,12 @@
 				</div>
 
 				<p class="mt-8 text-lg">
-					These large ramune candies are so popular that they have
-					been sold for more than half a century already! Enjoy trying
-					out these cider-flavored sweets that come in a handy tube.
+					{{ product.description }}
 				</p>
 			</div>
 		</div>
 	</section>
-	<section class="wrapper">
+	<section class="wrapper mt-10">
 		<JustForYou
 			:collectionID="product?.collections[0] || null"
 			v-if="product"
