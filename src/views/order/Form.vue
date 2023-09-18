@@ -148,13 +148,25 @@
 					/>
 				</div>
 
-				<div class="col-span-6">
+				<!-- <div class="col-span-6">
 					<BaseInput
 						id="input_name"
 						label="State"
 						v-model="store.item.state"
 						:error="store.error"
 						:errorField="store.error?.errors?.state || null"
+						placeholder="Ex. ABC"
+
+					/>
+				</div> -->
+
+				<div class="col-span-6">
+					<BaseInput
+						id="input_barangay"
+						label="Baranagay"
+						v-model="store.item.barangay"
+						:error="store.error"
+						:errorField="store.error?.errors?.barangay || null"
 						placeholder="Ex. ABC"
 						:required="true"
 					/>
@@ -192,6 +204,17 @@
 						:errorField="store.error?.errors?.zipCode || null"
 						placeholder="Ex. ABC"
 						:required="true"
+					/>
+				</div>
+
+				<div class="col-span-6">
+					<BaseInput
+						id="input_province"
+						label="Province"
+						v-model="store.item.province"
+						:error="store.error"
+						:errorField="store.error?.errors?.province || null"
+						placeholder="Ex. ABC"
 					/>
 				</div>
 			</div>

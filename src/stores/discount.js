@@ -25,6 +25,9 @@ export const useDiscountStore = defineStore({
 		async fetch(query) {
 			await storeHelpers.fetch(this, query);
 		},
+		async getDiscount(code) {
+			return await storeHelpers.fetch(this, '/findByCode/' + code);
+		},
 		async find(id) {
 			await storeHelpers.find(this, id);
 		},

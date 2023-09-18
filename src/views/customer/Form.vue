@@ -2,7 +2,7 @@
 	<ErrorBar :error="store.error" v-if="store.error && store.error.errors" />
 	<Spinner v-if="store.isLoading" />
 	<div class="" v-if="store.item">
-		<form @submit.prevent="" >
+		<form @submit.prevent="">
 			<div class="card grid grid-cols-12 gap-4">
 				<div class="col-span-full md:col-span-6">
 					<BaseInput
@@ -68,11 +68,11 @@
 				</div>
 				<div class="col-span-full md:col-span-6">
 					<BaseInput
-						id="input_state"
-						label="State"
-						v-model="store.item.state"
+						id="input_barangay"
+						label="Barangay"
+						v-model="store.item.barangay"
 						:error="store.error"
-						:errorField="store.error?.errors?.state || null"
+						:errorField="store.error?.errors?.barangay || null"
 						placeholder="Ex. ABC"
 						:required="false"
 					/>
@@ -96,6 +96,18 @@
 						v-model="store.item.zipCode"
 						:error="store.error"
 						:errorField="store.error?.errors?.zipCode || null"
+						placeholder="Ex. ABC"
+						:required="false"
+					/>
+				</div>
+
+				<div class="col-span-full md:col-span-6">
+					<BaseInput
+						id="input_province"
+						label="Province"
+						v-model="store.item.province"
+						:error="store.error"
+						:errorField="store.error?.errors?.province || null"
 						placeholder="Ex. ABC"
 						:required="false"
 					/>

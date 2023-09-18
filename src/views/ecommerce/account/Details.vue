@@ -57,9 +57,15 @@
 							}}</span>
 						</li>
 						<li>
-							State:
+							Barangay:
 							<span class="text-gray-600">{{
-								EcomAuthStore.user.state
+								EcomAuthStore.user.barangay
+							}}</span>
+						</li>
+						<li>
+							Province:
+							<span class="text-gray-600">{{
+								EcomAuthStore.user.province
 							}}</span>
 						</li>
 						<li>
@@ -164,13 +170,29 @@
 						</div>
 						<div class="col-span-6">
 							<BaseInput
-								id="input_state"
+								id="input_barangay"
 								type="text"
-								label="State"
-								v-model="EcomAuthStore.user.state"
+								label="Barangay"
+								v-model="EcomAuthStore.user.barangay"
 								:error="EcomAuthStore.error"
 								:errorField="
-									EcomAuthStore.error?.errors?.state || null
+									EcomAuthStore.error?.errors?.barangay ||
+									null
+								"
+								placeholder="Ex. ABC"
+								:required="false"
+							/>
+						</div>
+						<div class="col-span-6">
+							<BaseInput
+								id="input_province"
+								type="text"
+								label="Province"
+								v-model="EcomAuthStore.user.province"
+								:error="EcomAuthStore.error"
+								:errorField="
+									EcomAuthStore.error?.errors?.province ||
+									null
 								"
 								placeholder="Ex. ABC"
 								:required="false"

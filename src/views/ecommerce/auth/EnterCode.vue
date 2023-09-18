@@ -40,11 +40,11 @@ const router = useRouter();
 const handleSubmit = async () => {
 	await EcomAuthStore.loginUsingCode(code.value);
 
-	if (!EcomAuthStore.error) {
-		router.push({ name: 'account-details' });
-		pushAlert('success', 'Succesfully Logged In.');
-		EcomAppStore.isAuthModalOpen = false;
-	}
+	// if (!EcomAuthStore.error) {
+	// 	router.push({ name: 'account-details' });
+	// 	pushAlert('success', 'Succesfully Logged In.');
+	// 	EcomAppStore.isAuthModalOpen = false;
+	// }
 };
 
 onUnmounted(() => {

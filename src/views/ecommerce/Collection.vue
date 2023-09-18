@@ -6,7 +6,7 @@
 			<ul class="grid grid-cols-8 gap-4 sm:grid-cols-12">
 				<li
 					class="col-span-3 text-center"
-					v-for="cl in collectionStore.list"
+					v-for="cl in sortedCollection"
 				>
 					<router-link
 						:to="{
@@ -48,15 +48,22 @@
 </template>
 
 <script setup>
-import { onBeforeMount, ref } from 'vue';
+import { onBeforeMount, ref, computed } from 'vue';
 import { useCollectionStore } from '@/stores/collection';
 import OurProduct from '@/components/ecommerce/OurProduct.vue';
+import useUtils from '@/composables/useUtils';
 
 const collectionStore = useCollectionStore();
+const { sortString } = useUtils();
 
 onBeforeMount(async () => {
 	await collectionStore.fetch('');
+});
 
-	console.log(collectionStore.list);
+const sortedCollection = computed(() => {
+	if (collectionStore.list.length > 0) {
+		return sortString(collectionStore.list, 'name');
+		// return collectionStore.list;
+	}
 });
 </script>

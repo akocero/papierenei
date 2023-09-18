@@ -45,6 +45,20 @@ export default function useUtils() {
 		return arrayObjects;
 	};
 
+	const sortString = (arrayObjects, propertyName) => {
+		arrayObjects.sort(function compare(a, b) {
+			if (a[propertyName].toLowerCase() < b[propertyName].toLowerCase()) {
+				return -1;
+			}
+			if (a[propertyName].toLowerCase() > b[propertyName].toLowerCase()) {
+				return 1;
+			}
+			return 0;
+		});
+
+		return arrayObjects;
+	};
+
 	return {
 		capitalize,
 		numberFormat,
@@ -52,5 +66,6 @@ export default function useUtils() {
 		convertToRelativeTime,
 		currencyFormat,
 		formatDate,
+		sortString,
 	};
 }

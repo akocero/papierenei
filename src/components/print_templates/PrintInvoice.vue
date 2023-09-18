@@ -33,7 +33,7 @@
 					}}</span>
 					<br />
 					{{ item?.invoiceFor?.streetAddress || '' }} <br />
-					{{ item?.invoiceFor?.state || '' }} <br />
+					{{ item?.invoiceFor?.barangay || '' }} <br />
 					{{ item?.invoiceFor?.city || '' }},
 					{{ item?.invoiceFor?.zipCode || '' }} <br />
 					{{ item?.invoiceFor?.email || '' }} <br />

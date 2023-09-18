@@ -110,6 +110,12 @@
 						"name": "return-refund"
 					},
 					"text": "Return policy"
+				},
+				{
+					"routeObject": {
+						"name": "contact"
+					},
+					"text": "Contact Us"
 				}
 			]
 		}

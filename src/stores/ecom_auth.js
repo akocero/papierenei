@@ -45,6 +45,8 @@ export const useEcomAuthStore = defineStore({
 			);
 
 			this.setUser(data);
+
+			window.location.href = '/account/details';
 			return data;
 		},
 
@@ -78,14 +80,19 @@ export const useEcomAuthStore = defineStore({
 				`${this.url}/loginCode`,
 				payload,
 			);
+
+			if (this.error) {
+				console.log(this.error);
+				return;
+			}
+
 			localStorage.setItem(
 				'guest_wish_list',
 				JSON.stringify(data.customer.wishList),
 			);
 			this.setUser(data);
-			this.loginCodeToken = null;
 
-			window.location.reload();
+			window.location.href = '/account/details';
 
 			return data;
 		},

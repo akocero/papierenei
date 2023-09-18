@@ -232,12 +232,26 @@
 						</div>
 						<div class="col-span-full md:col-span-2">
 							<BaseInput
-								id="state"
-								label="State"
-								v-model="selectedInvoiceFor.state"
+								id="barangay"
+								label="Barangay"
+								v-model="selectedInvoiceFor.barangay"
 								:error="invoiceStore.error"
 								:errorField="
-									invoiceStore.error?.errors?.state || null
+									invoiceStore.error?.errors?.barangay || null
+								"
+								placeholder="Ex. ABC"
+								:required="false"
+								:disabled="true"
+							/>
+						</div>
+						<div class="col-span-full md:col-span-2">
+							<BaseInput
+								id="province"
+								label="Province"
+								v-model="selectedInvoiceFor.province"
+								:error="invoiceStore.error"
+								:errorField="
+									invoiceStore.error?.errors?.province || null
 								"
 								placeholder="Ex. ABC"
 								:required="false"

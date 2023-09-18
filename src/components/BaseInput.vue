@@ -14,6 +14,7 @@
 				error && errorField
 					? 'border-2 border-red-400'
 					: 'border-gray-300',
+				_class,
 			]"
 			:id="id"
 			:placeholder="placeholder"
@@ -64,6 +65,7 @@ export default {
 				);
 			},
 		},
+		_class: String,
 	},
 };
 </script>

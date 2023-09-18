@@ -25,7 +25,7 @@
 			<div class="col-span-full mb-6">
 				<Input v-model="form.email" type="email" label="Your Email" />
 			</div>
-			<div class="col-span-full mb-6">
+			<!-- <div class="col-span-full mb-6">
 				<Input
 					v-model="form.password"
 					type="password"
@@ -38,7 +38,7 @@
 					type="password"
 					label="Password Cofirm"
 				/>
-			</div>
+			</div> -->
 			<div class="col-span-full mb-2 flex justify-end">
 				<button
 					type="submit"

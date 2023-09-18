@@ -1,7 +1,7 @@
 <template>
 	<div class="wrapper">
-		<div class="flex items-baseline justify-between">
-			<h2 class="text-4xl font-semibold">Your Cart</h2>
+		<SectionTitle title="Your Cart" size="sm" />
+		<div class="flex items-baseline justify-end">
 			<router-link to="shop" class="font-semibold underline">
 				Continue Shopping
 			</router-link>

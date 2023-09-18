@@ -112,3 +112,53 @@ Customer Login Register
 
 
 
+Note:
+Refactor Address add:
+	- Barangay
+	- Province
+	- City na label change to city/municipality
+	(Orders, Invoice, Account Info, Checkout, Customer)
+
+Digital Prod
+	- Separate Email refer to the message 
+	- Refactor Customer Page Admin
+
+Refactor Shipping Feee can select the region now
+	- Checkout page
+
+Add Discount to checkout
+
+Change loading in ecommerce make full page loading
+
+add, add to cart to shop page
+
+change the logos base uploaded logo on admin panel
+
+loading screen change the color and logo
+
+change the email and logo and colorsceme in linktree /links mailto:papierenei@gmail.com
+
+panel 1 and 2 can change content
+
+change to shop-policy https://papierenei.vercel.app/return-refund
+Return Policy Content to Shop Policy
+
+
+refactor terms and service
+
+product page add qty before add toca
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+

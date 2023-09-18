@@ -17,8 +17,9 @@
 								:to="{
 									name: 'contact',
 								}"
-								>Contact us here</router-link
 							>
+								Contact us here
+							</router-link>
 						</p>
 					</div>
 				</div>

@@ -1,7 +1,11 @@
 <template>
 	<div class="wrapper">
+		<SectionTitle title="Checkout" size="sm" />
 		<div class="grid grid-cols-12 gap-y-10 sm:gap-y-0">
-			<div class="order-last col-span-full sm:order-first sm:col-span-7">
+			<div
+				class="order-last col-span-full sm:order-first sm:col-span-7"
+				v-if="EcomAuthStore.user"
+			>
 				<form class="p-2 sm:p-20" @submit.prevent="handleSumbit">
 					<div class="mb-10 grid grid-cols-12 gap-2">
 						<h3 class="col-span-full mb-2 text-xl font-semibold">
@@ -17,6 +21,7 @@
 								placeholder="Ex. sample@gmail.com"
 								type="email"
 								:required="true"
+								:disabled="true"
 							/>
 						</div>
 						<div class="col-span-6">
@@ -61,6 +66,18 @@
 								:required="true"
 							/>
 						</div>
+						<div class="col-span-6">
+							<BaseSelect
+								id="input_status"
+								label="Shipping to"
+								v-model="shipping"
+								:error="store.error"
+								:errorField="
+									store.error?.errors?.shipping || null
+								"
+								:options="shippingOps"
+							/>
+						</div>
 					</div>
 					<div class="mb-4 grid grid-cols-12 gap-2">
 						<h3 class="col-span-full text-xl font-semibold">
@@ -71,6 +88,7 @@
 								id="input_first_name"
 								label="First Name"
 								v-model="firstName"
+								_class="capitalize"
 								:error="store.error"
 								:errorField="
 									store.error?.errors?.firstName || null
@@ -85,6 +103,7 @@
 								id="input_last_name"
 								label="Last Name"
 								v-model="lastName"
+								_class="capitalize"
 								:error="store.error"
 								:errorField="
 									store.error?.errors?.lastName || null
@@ -94,7 +113,7 @@
 								:required="true"
 							/>
 						</div>
-						<div class="col-span-full">
+						<div class="col-span-6">
 							<BaseInput
 								id="input_street"
 								label="Street Address"
@@ -108,7 +127,21 @@
 								:required="true"
 							/>
 						</div>
-						<div class="col-span-full">
+						<div class="col-span-6">
+							<BaseInput
+								id="input_barangay"
+								label="Barangay"
+								v-model="address.barangay"
+								:error="store.error"
+								:errorField="
+									store.error?.errors?.barangay || null
+								"
+								placeholder="Ex."
+								type="text"
+								:required="true"
+							/>
+						</div>
+						<div class="col-span-6">
 							<BaseInput
 								id="input_city"
 								label="City"
@@ -120,7 +153,7 @@
 								:required="true"
 							/>
 						</div>
-						<div class="col-span-4">
+						<!-- <div class="col-span-6">
 							<BaseInput
 								id="input_country"
 								label="Country"
@@ -133,20 +166,23 @@
 								type="text"
 								:required="true"
 							/>
-						</div>
-						<div class="col-span-4">
+						</div> -->
+
+						<div class="col-span-6">
 							<BaseInput
-								id="input_state"
-								label="State"
-								v-model="address.state"
+								id="input_province"
+								label="Province"
+								v-model="address.province"
 								:error="store.error"
-								:errorField="store.error?.errors?.state || null"
+								:errorField="
+									store.error?.errors?.province || null
+								"
 								placeholder="Ex."
 								type="text"
 								:required="true"
 							/>
 						</div>
-						<div class="col-span-4">
+						<div class="col-span-6">
 							<BaseInput
 								id="input_zipcode"
 								label="Zip Code"
@@ -229,34 +265,64 @@
 								</span>
 							</div>
 							<div class="ml-4 font-semibold">
-								<label>{{ ct.name }}</label>
+								<label class="capitalize">{{ ct.name }}</label>
 							</div>
-							<label class="ml-auto font-sans font-semibold"
-								>₱{{ numberFormat(ct.cartTotal) }}</label
-							>
+							<label class="ml-auto font-sans font-semibold">
+								₱{{ numberFormat(ct.cartTotal) }}
+							</label>
 						</div>
+					</li>
+					<li
+						class="grid grid-cols-12 items-start gap-2"
+						v-if="!discount.valid"
+					>
+						<div class="col-span-9">
+							<BaseInput
+								id="input_zipcode"
+								v-model="discount.code"
+								:error="discount.error"
+								:errorField="discount.error?.message || null"
+								placeholder="Ex."
+								type="text"
+							/>
+						</div>
+
+						<button
+							@click="applyDiscount"
+							:disabled="
+								!discount.code || discountStore.isLoading
+							"
+							class="col-span-3 mt-1 h-11 rounded bg-red-400 font-semibold text-white disabled:bg-gray-400"
+						>
+							Apply
+						</button>
 					</li>
 					<li class="space-y-2 border-b py-4" v-if="cartStore.list">
 						<div class="flex justify-between">
 							<label>Subtotal</label>
-							<span class="font-sans font-semibold"
-								>₱{{ numberFormat(cartStore.subTotal) }}</span
-							>
+							<span class="font-sans font-semibold">
+								₱{{ numberFormat(cartStore.subTotal) }}
+							</span>
 						</div>
 						<div class="flex justify-between">
 							<label>Shipping</label>
-							<span class=""
-								>Shipping will be calculated upon
-								confirmation.</span
-							>
+							<span class="font-sans font-semibold">
+								-₱{{ numberFormat(discountPrice) }}
+							</span>
+						</div>
+						<div class="flex justify-between" v-if="discount.valid">
+							<label>Discount</label>
+							<span class="font-sans font-semibold">
+								-₱{{ numberFormat(discountPrice) }}
+							</span>
 						</div>
 					</li>
 					<li class="space-y-2 border-b py-4">
 						<div class="flex justify-between">
 							<label class="font-semibold">Total</label>
-							<span class="font-sans text-xl font-semibold"
-								>₱{{ numberFormat(total) }}</span
-							>
+							<span class="font-sans text-xl font-semibold">
+								₱{{ numberFormat(total) }}
+							</span>
 						</div>
 					</li>
 				</ul>
@@ -269,18 +335,50 @@
 import { onBeforeMount, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useOrderStore } from '@/stores/order';
+import { useEcomAuthStore } from '@/stores/ecom_auth';
 import { useCartStore } from '@/stores/cart';
+import { useDiscountStore } from '@/stores/discount';
 import useAlert from '../../composables/useAlert';
 import useUtils from '@/composables/useUtils';
 
 const store = useOrderStore();
 const cartStore = useCartStore();
+const discountStore = useDiscountStore();
+const EcomAuthStore = useEcomAuthStore();
+
 const router = useRouter();
 const { pushAlert } = useAlert();
 const { numberFormat } = useUtils();
+const discount = ref({
+	code: '',
+	error: null,
+	valid: false,
+	discountKind: '',
+	discountValue: 0,
+});
 const shippingDetails = ref({
 	fee: 149,
 });
+const shipping = ref({});
+
+const shippingOps = [
+	{
+		label: 'NCR',
+		value: 'ncr',
+		price: 149,
+	},
+	{
+		label: 'Visayas',
+		value: 'visayas',
+		price: 249,
+	},
+	{
+		label: 'Mindanao',
+		value: 'mindanao',
+		price: 299,
+	},
+];
+
 const firstName = ref('');
 const lastName = ref('');
 const email = ref('');
@@ -302,6 +400,22 @@ onBeforeMount(async () => {
 		});
 
 		return;
+	}
+
+	if (EcomAuthStore.user) {
+		const user = EcomAuthStore.user;
+		firstName.value = user.firstName;
+		lastName.value = user.lastName;
+		email.value = user.email;
+		contactNumber.value = user.mobileNumber;
+		address.value = {
+			streetAddress: user.streetAddress,
+			city: user.city,
+			state: user.state,
+			zipCode: user.zipCode,
+			barangay: user.barangay,
+			province: user.province,
+		};
 	}
 
 	// this is for handleSumbit function so you dont need to change the property field name
@@ -329,8 +443,41 @@ onBeforeMount(async () => {
 // });
 
 const total = computed(() => {
-	return cartStore.subTotal + shippingDetails.value.fee;
+	return cartStore.subTotal - discountPrice.value + shippingDetails.value.fee;
 });
+
+const discountPrice = computed(() => {
+	if (discount.value.valid) {
+		if (discount.value.discountKind === 'amount') {
+			if (discount.value.discountValue > cartStore.subTotal) {
+				return cartStore.subTotal;
+			}
+
+			return discount.value.discountValue;
+		}
+
+		const _percent = parseFloat(discount.value.discountValue) / 100;
+		return parseFloat(cartStore.subTotal * _percent);
+	}
+
+	return 0;
+});
+
+const applyDiscount = async () => {
+	discount.value.error = null;
+	const res = await discountStore.getDiscount(discount.value.code);
+
+	if (discountStore.error) {
+		discount.value.error = { message: 'Enter a valid discount code' };
+		return;
+	}
+
+	discount.value.valid = true;
+	discount.value = { ...discount.value, ...res.data };
+
+	console.log(discount.value);
+};
+
 const handleSumbit = async () => {
 	store.error = null;
 
