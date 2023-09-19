@@ -87,7 +87,7 @@ import { useGuestStore } from '@/stores/guest';
 import useUtils from '@/composables/useUtils';
 
 const GuestStore = useGuestStore();
-const { convertToRelativeTime, currencyFormat } = useUtils();
+const { convertToRelativeTime, currencyFormat, sortByDate } = useUtils();
 
 onMounted(async () => {
 	const res = await GuestStore.getOrders();

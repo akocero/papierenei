@@ -62,7 +62,6 @@
 										label: 'BPI Family Savings',
 									},
 								]"
-								:emptyOption="false"
 								:required="true"
 							/>
 						</div>
@@ -109,8 +108,9 @@
 								v-model="selectedShipping"
 								:error="store.error"
 								:errorField="
-									store.error?.errors?.shippingDetails?.fee ||
-									null
+									store.error?.errors[
+										'shippingDetails.fee'
+									] || null
 								"
 								:options="shippingOps"
 								:required="true"
@@ -275,16 +275,40 @@
 							</label>
 						</div>
 					</li>
-					<li>
-						<span class="border">
-							<div class="flex">
-								<VueFeather type="tag" size="18" class="" />
-								<span>INIT2</span>
-								<button>
-									<VueFeather type="x" size="18" class="" />
-								</button>
-							</div>
-						</span>
+					<li v-if="discount.valid" class="mt-1">
+						<div
+							class="relative flex h-10 items-center rounded border border-green-400 bg-green-400/70 px-4 font-bold text-white"
+						>
+							<VueFeather
+								type="tag"
+								size="18"
+								class="mr-2"
+								stroke-width="2"
+							/>
+							<span
+								class=""
+								v-if="discount.discountKind === 'percent'"
+								>{{ discount.code }} -
+								{{ discount.discountValue }}% OFF</span
+							>
+							<span class="" v-else
+								>{{ discount.code }} - ₱{{
+									numberFormat(discount.discountValue)
+								}}
+								OFF</span
+							>
+							<button
+								class="absolute right-2"
+								@click="discount = {}"
+							>
+								<VueFeather
+									type="x"
+									size="20"
+									class="mt-2"
+									stroke-width="3"
+								/>
+							</button>
+						</div>
 					</li>
 					<li
 						class="grid grid-cols-12 items-start gap-2"
@@ -401,7 +425,7 @@ const firstName = ref('');
 const lastName = ref('');
 const email = ref('');
 const contactNumber = ref('');
-const paymentMethod = ref('GCash');
+const paymentMethod = ref('');
 const address = ref({
 	streetAddress: '',
 	city: '',
@@ -506,6 +530,10 @@ const applyDiscount = async () => {
 const handleSumbit = async () => {
 	store.error = null;
 
+	const _shippingDetails = shippingOps.find(
+		(sh) => sh.value === selectedShipping.value,
+	);
+
 	const data = {
 		firstName: firstName.value,
 		lastName: lastName.value,
@@ -518,11 +546,25 @@ const handleSumbit = async () => {
 		state: address.value.state,
 		zipCode: address.value.zipCode,
 		items: items.value,
-		shippingDetails: shippingDetails.value,
 		subtotal: cartStore.subTotal,
-		total: cartStore.subTotal,
+		total: total.value,
 		notes: '',
 	};
+
+
+	if (discount.value.valid) {
+		data.discount = {
+			...discount.value,
+			discountTotal: discountTotal.value
+		};
+	}
+
+	if (_shippingDetails) {
+		data.shippingDetails = {
+			fee: _shippingDetails.price,
+			place: _shippingDetails.value,
+		};
+	}
 
 	const res = await store.create(data);
 

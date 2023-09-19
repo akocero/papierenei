@@ -245,6 +245,9 @@
 				</div>
 
 				<div class="card grid grid-cols-12 gap-4">
+					<div class="col-span-full -mt-3 font-semibold">
+						Other details
+					</div>
 					<div class="col-span-full md:col-span-6">
 						<BaseTextArea
 							id="input_description"
@@ -252,6 +255,20 @@
 							v-model="store.item.notes"
 							:error="store.error"
 							:errorField="store.error?.errors?.notes || null"
+							placeholder="Ex. ABC"
+							:required="true"
+						/>
+					</div>
+					<div class="col-span-full md:col-span-6">
+						<BaseInput
+							id="input_tracking-number"
+							type="text"
+							label="Tracking Number"
+							v-model="store.item.trackingNumber"
+							:error="store.error"
+							:errorField="
+								store.error?.errors?.trackingNumber || null
+							"
 							placeholder="Ex. ABC"
 							:required="true"
 						/>

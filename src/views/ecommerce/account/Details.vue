@@ -2,7 +2,7 @@
 	<div class="mx-auto max-w-[54rem]">
 		<div class="mx-10">
 			<h2 class="my-6 font-nunito text-3xl font-black text-indigo-400">
-				Account information
+				Account Information
 			</h2>
 
 			<div
@@ -47,7 +47,7 @@
 					</ul>
 					<hr class="mt-4" />
 					<h3 class="mb-3 mt-4 font-nunito font-bold text-indigo-400">
-						Address
+						Default Shipping Address
 					</h3>
 					<ul class="capitalize text-gray-400">
 						<li>
@@ -152,7 +152,7 @@
 						<h3
 							class="col-span-full font-nunito font-bold text-indigo-400"
 						>
-							Address
+							Default Shipping Address
 						</h3>
 						<div class="col-span-6">
 							<BaseInput
@@ -232,7 +232,7 @@
 					<div class="mt-4 flex justify-end space-x-2">
 						<button
 							class="rounded-lg bg-gray-200 px-4 py-2 text-gray-600 hover:bg-gray-400 hover:text-white"
-							@click="editInfo = false"
+							@click="calcelEdit"
 						>
 							Cancel
 						</button>
@@ -253,7 +253,6 @@
 import { onMounted, ref } from 'vue';
 import { useEcomAuthStore } from '@/stores/ecom_auth';
 import useAlert from '@/composables/useAlert';
-import SectionTitle from '../../../components/ecommerce/SectionTitle.vue';
 
 const EcomAuthStore = useEcomAuthStore();
 const form = ref({});
@@ -275,6 +274,10 @@ const handleUpdateMe = async () => {
 	}
 	editInfo.value = false;
 	pushAlert('success', 'Updated successfully');
+};
+
+const calcelEdit = () => {
+	window.location.reload();
 };
 </script>
 

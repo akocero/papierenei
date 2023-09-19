@@ -15,8 +15,9 @@ export const useGuestStore = defineStore({
 		async getOrders() {
 			const { data } = await guestStoreHelpers.get(
 				this,
-				this.url + '/orders?limit=1000',
+				this.url + '/orders',
 			);
+			data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 			this.orders = data;
 			return data;
 		},

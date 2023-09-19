@@ -55,6 +55,7 @@
 						</h5>
 
 						<MainButton
+							v-if="product.quantity"
 							_class="mt-4 w-full"
 							@click="CartStore.addToCart(product)"
 						>

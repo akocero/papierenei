@@ -70,6 +70,21 @@
 									}}
 								</td>
 							</tr>
+							<tr class="border-b bg-white" v-if="order.discount">
+								<th
+									scope="row"
+									class="whitespace-nowrap px-6 py-4 font-medium text-gray-900"
+								></th>
+								<td class="px-6 py-4">Discount</td>
+								<td class="px-6 py-4">
+									- ₱
+									{{
+										currencyFormat(
+											order.discount.discountTotal,
+										)
+									}}
+								</td>
+							</tr>
 							<tr class="bg-white">
 								<th
 									scope="row"
@@ -83,6 +98,25 @@
 						</tbody>
 					</table>
 				</div>
+			</div>
+			<div class="card" v-if="order">
+				<h3
+					class="mb-3 font-nunito font-bold capitalize text-indigo-400"
+				>
+					Other order details
+				</h3>
+				<ul class="text-gray-400">
+					<li>
+						Notes:
+						<span class="text-gray-600">{{ order.notes }}</span>
+					</li>
+					<li>
+						Tracking #:
+						<span class="text-gray-600">{{
+							order.trackingNumber
+						}}</span>
+					</li>
+				</ul>
 			</div>
 			<div class="mt-4 grid grid-cols-2 gap-4" v-if="order">
 				<div class="card">

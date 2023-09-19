@@ -45,6 +45,12 @@ export default function useUtils() {
 		return arrayObjects;
 	};
 
+	const sortByDate = (arrayObjects, propertyName) => {
+		return arrayObjects.sort(
+			(a, b) => new Date(a[propertyName]) - new Date(b[propertyName]),
+		);
+	};
+
 	const sortString = (arrayObjects, propertyName) => {
 		arrayObjects.sort(function compare(a, b) {
 			if (a[propertyName].toLowerCase() < b[propertyName].toLowerCase()) {
@@ -63,6 +69,7 @@ export default function useUtils() {
 		capitalize,
 		numberFormat,
 		sort,
+		sortByDate,
 		convertToRelativeTime,
 		currencyFormat,
 		formatDate,
