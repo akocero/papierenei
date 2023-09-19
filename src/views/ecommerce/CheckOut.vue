@@ -275,6 +275,17 @@
 							</label>
 						</div>
 					</li>
+					<li>
+						<span class="border">
+							<div class="flex">
+								<VueFeather type="tag" size="18" class="" />
+								<span>INIT2</span>
+								<button>
+									<VueFeather type="x" size="18" class="" />
+								</button>
+							</div>
+						</span>
+					</li>
 					<li
 						class="grid grid-cols-12 items-start gap-2"
 						v-if="!discount.valid"

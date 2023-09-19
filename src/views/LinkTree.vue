@@ -11,13 +11,13 @@
 
 			<img v-else src="../assets/logo-t.png" alt="" />
 		</div>
-		<h3 class="-mt-2 mb-8 text-2xl font-bold">@papierenei</h3>
+		<h3 class="mt-2 mb-8 text-2xl font-bold">@papierenei</h3>
 		<ul class="w-[90%] sm:w-[30%]">
 			<li v-for="link in links" class="">
 				<a
 					:href="link.link"
 					target="_blank"
-					class="mb-4 flex h-20 w-full items-center justify-center rounded-xl bg-indigo-500 text-2xl text-white"
+					class="mb-4 flex h-20 w-full items-center justify-center rounded-xl bg-indigo-400 text-2xl text-white"
 				>
 					{{ link.text }}
 				</a>
@@ -40,7 +40,7 @@ onMounted(async () => {
 
 const links = ref([
 	{
-		link: 'https://papierenei@gmail.com',
+		link: 'mailto:papierenei@gmail.com',
 		text: 'Email',
 	},
 	{
@@ -54,6 +54,10 @@ const links = ref([
 	{
 		link: 'https://instagram.com/papierenei',
 		text: 'Instagram',
+	},
+	{
+		link: 'https://tiktok.com/papierenei',
+		text: 'Tiktok',
 	},
 	{
 		link: 'https://youtube.com/@papierenei',

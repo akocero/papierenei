@@ -52,7 +52,7 @@
 			</div>
 		</form>
 		<div class="w-full md:w-[36%]">
-			<DrawerCard title="Product Status" v-if="store.item">
+			<DrawerCard title="Discount Status" v-if="store.item">
 				<BaseSelect
 					id="input_status"
 					v-model="store.item.isPublished"

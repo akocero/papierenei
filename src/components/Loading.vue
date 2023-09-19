@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="fixed top-0 left-0 z-40 flex h-screen w-full flex-col items-center justify-center bg-indigo-500"
+		class="fixed top-0 left-0 z-40 flex h-screen w-full flex-col items-center justify-center bg-indigo-400"
 	>
 		<img
 			v-if="ecommSettingsStore.item"
@@ -11,16 +11,18 @@
 
 		<img v-else :src="LogoT" alt="" class="z-50 -ml-5 w-48" />
 		<h3
-			class="mb-4 mt-6 font-quicksand text-3xl font-extrabold text-lightBlue-1 drop-shadow-xl"
+			class="mb-4 mt-6 font-quicksand text-3xl font-extrabold text-white drop-shadow-xl"
 		>
 			Loading the Best Deals for You
 		</h3>
-		<p class="max-w-2xl font-quicksand text-lightBlue-1 drop-shadow-xl">
-			"Your shopping journey is just a heartbeat away. Like a skilled
+		<p
+			class="max-w-2xl text-center font-quicksand text-white drop-shadow-xl"
+		>
+			Your shopping journey is just a heartbeat away. Like a skilled
 			artisan crafting perfection, our app is meticulously preparing an
 			experience tailored to your desires. The cart is being loaded, the
 			pixels aligning, and soon your world of online shopping will come to
-			life. Thank you for your patience as we make every click count."
+			life. Thank you for your patience as we make every click count.
 		</p>
 	</div>
 </template>
