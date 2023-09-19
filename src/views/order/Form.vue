@@ -163,7 +163,7 @@
 				<div class="col-span-6">
 					<BaseInput
 						id="input_barangay"
-						label="Baranagay"
+						label="Barangay"
 						v-model="store.item.barangay"
 						:error="store.error"
 						:errorField="store.error?.errors?.barangay || null"
