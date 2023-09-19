@@ -1,6 +1,6 @@
 <template>
 	<div class="wrapper">
-		<SectionTitle title="Checkout" size="sm" />
+		<SectionTitle title="Checkout" size="md" />
 		<div class="grid grid-cols-12 gap-y-10 sm:gap-y-0">
 			<div
 				class="order-last col-span-full sm:order-first sm:col-span-7"

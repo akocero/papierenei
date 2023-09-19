@@ -160,7 +160,6 @@
 					</div>
 				</div>
 			</form>
-			
 		</div>
 		<div class="w-full md:w-[36%]">
 			<DrawerCard title="Product Status" v-if="store.item">

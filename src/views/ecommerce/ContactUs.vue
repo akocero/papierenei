@@ -1,6 +1,6 @@
 <template>
 	<div class="wrapper max-w-[52rem] text-lg">
-		<SectionTitle title="Contact Us" />
+		<SectionTitle title="Contact Us" size="md" />
 		<p class="mb-4">
 			Have you got any inquiries? Send us a message, and we'll get back to
 			you in a day or two. We sincerely appreciate comments and ideas for
@@ -20,6 +20,7 @@
 				<a
 					href="https://m.me/papierenei"
 					class="text-red-400 underline hover:text-red-700"
+					target="_blank"
 					>Facebook Messenger</a
 				>
 			</li>

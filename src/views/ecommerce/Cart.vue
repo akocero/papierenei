@@ -1,6 +1,6 @@
 <template>
 	<div class="wrapper">
-		<SectionTitle title="Your Cart" size="sm" />
+		<SectionTitle title="Your Cart" size="md" />
 		<div class="flex items-baseline justify-end">
 			<router-link to="shop" class="font-semibold underline">
 				Continue Shopping
