@@ -2,7 +2,9 @@
 	<div
 		class="absolute bottom-0 h-72 w-full bg-red-300 text-[1rem] font-semibold text-white"
 	>
-		<div class="mx-auto flex max-w-base flex-col pt-7 md:flex-row">
+		<div
+			class="mx-auto flex max-w-base flex-col px-8 pt-7 md:flex-row 2xl:px-0"
+		>
 			<div class="grid w-full grid-cols-12 gap-y-10 text-left md:gap-10">
 				<div class="col-span-4 hidden sm:block md:pr-20">
 					<h3 class="text-xl">HEAL THROUGH CUTE ART!</h3>
@@ -14,6 +16,7 @@
 						<p>
 							Have questions?
 							<router-link
+								class="text-red-500 underline"
 								:to="{
 									name: 'contact',
 								}"
@@ -58,7 +61,7 @@
 						</li>
 						<li>
 							<router-link :to="{ name: 'return-refund' }">
-								Return and Refund Policy
+								Shop Policy
 							</router-link>
 						</li>
 					</ul>
@@ -89,9 +92,7 @@
 		</div>
 
 		<div class="absolute bottom-0 w-full bg-red-400 text-white">
-			<div
-				class="mx-4 flex flex-col items-center md:mx-auto md:max-w-screen-2xl md:flex-row md:justify-between"
-			>
+			<div class="mx-auto max-w-base px-8 2xl:px-0">
 				<h4 class="my-3">
 					© Papier Renei {{ new Date().getFullYear() }} - All rights
 					reserved.

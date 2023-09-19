@@ -96,11 +96,7 @@
 		/>
 	</DrawerCard>
 
-	<DrawerCard
-		title="FAQ"
-		:isCardOpen="false"
-		v-if="store.item"
-	>
+	<DrawerCard title="FAQ" :isCardOpen="false" v-if="store.item">
 		<QuillEditor
 			theme="snow"
 			v-model:content="store.item.faq"
@@ -108,7 +104,13 @@
 		/>
 	</DrawerCard>
 
-	
+	<DrawerCard title="Terms of service" :isCardOpen="false" v-if="store.item">
+		<QuillEditor
+			theme="snow"
+			v-model:content="store.item.servicesTerms"
+			content-type="html"
+		/>
+	</DrawerCard>
 </template>
 <script setup>
 import { onBeforeMount, ref } from 'vue';

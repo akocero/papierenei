@@ -25,7 +25,7 @@
 				name: 'shop',
 				query: { category: ourProduct._id },
 			}"
-			class="mt-4 inline-block font-karla text-xl font-semibold text-red-400 underline underline-offset-2"
+			class="mt-4 inline-block font-karla text-xl font-semibold capitalize text-red-400 underline underline-offset-2"
 		>
 			{{ ourProduct.name }}
 		</router-link>

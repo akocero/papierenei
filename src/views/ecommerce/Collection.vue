@@ -1,6 +1,8 @@
 <template>
 	<div class="wrapper">
-		<Spinner v-if="collectionStore.isLoading" />
+		<MainTransition>
+			<Loading v-if="collectionStore.isLoading" />
+		</MainTransition>
 		<div v-if="collectionStore.list.length > 0">
 			<SectionTitle title="Collections" size="md" />
 			<ul class="grid grid-cols-8 gap-4 sm:grid-cols-12">

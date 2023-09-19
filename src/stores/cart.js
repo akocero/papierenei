@@ -1,8 +1,3 @@
-/**
- * * This is a Setup Type of Store
- *
- */
-
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import useAlert from '@/composables/useAlert';
@@ -103,7 +98,6 @@ export const useCartStore = defineStore('cart', () => {
 		list.value.push(payload);
 	};
 
-	// remove cart
 	const removeToCart = (_id) => {
 		if (confirm('This item will be removed!')) {
 			list.value = list.value.filter((cartItem) => cartItem._id != _id);
@@ -117,9 +111,8 @@ export const useCartStore = defineStore('cart', () => {
 			pushAlert('warning', 'Product quantity exceeded!');
 			return false;
 		}
-		// increase cartQty base on the value given
+
 		cartItem.cartQuantity += value;
-		// Update cartTotal
 		cartItem.cartTotal = cartItem.cartPrice * cartItem.cartQuantity;
 	};
 
@@ -135,11 +128,9 @@ export const useCartStore = defineStore('cart', () => {
 		cartItem.cartTotal = cartItem.cartPrice * cartItem.cartQuantity;
 	};
 
-	//* this computed function will fire everytime 'list' variable changed
 	const subTotal = computed(() => {
 		let subTotal = 0;
 		list.value.forEach((cartItem) => {
-			//* check if the product is on sale
 			if (cartItem.salePrice) {
 				return (subTotal += cartItem.salePrice * cartItem.cartQuantity);
 			}

@@ -12,6 +12,7 @@ import ButtonLink from './components/ecommerce/ButtonLink.vue';
 import MainButton from './components/ecommerce/MainButton.vue';
 import Input from './components/ecommerce/Input.vue';
 import Prose from './components/ecommerce/Prose.vue';
+import MainTransition from './components/ecommerce/MainTransition.vue';
 
 /* Layouts Components */
 import DrawerCard from './components/DrawerCard.vue';
@@ -64,6 +65,7 @@ app.component('ButtonLink', ButtonLink);
 app.component('MainButton', MainButton);
 app.component('Input', Input);
 app.component('Prose', Prose);
+app.component('MainTransition', MainTransition);
 
 app.use(createPinia());
 app.use(router);

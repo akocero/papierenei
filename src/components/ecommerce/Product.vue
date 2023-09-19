@@ -135,15 +135,13 @@
 				>
 			</h5>
 
-			<!-- <button
-				class="w-full bg-darkBlue px-6 py-2 text-sm font-bold text-white"
+			<MainButton
+				_class="w-full mt-4"
 				@click="$emit('addToCart', product)"
-				v-if="product.quantity"
+				v-if="product.quantity && !isLarge"
 			>
 				Add to Cart
-			</button>  -->
-
-			<!-- <button @click="GuestStore.updateWishList(product._id)">add wishlist</button> -->
+			</MainButton>
 		</div>
 	</div>
 </template>

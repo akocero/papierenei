@@ -4,8 +4,15 @@
 			<div
 				class="relative mx-20 grid h-full grid-cols-12 rounded-xl bg-white p-10 shadow-2xl 2xl:p-20"
 			>
-				<div class="absolute left-10 -top-20 2xl:left-20 2xl:-top-32">
+				<div class="absolute left-10 -top-20 2xl:left-20 2xl:-top-12">
 					<img
+						v-if="EcommSettingStore.item?.logoBase?.length > 0"
+						:src="EcommSettingStore.item.logoBase[0].secure_url"
+						alt=""
+						class="w-44 2xl:w-64"
+					/>
+					<img
+						v-else
 						src="@/assets/logo-t.png"
 						alt=""
 						class="w-44 2xl:w-64"
@@ -43,14 +50,14 @@ import { useRouter } from 'vue-router';
 import notFoundImg from '@/assets/undermaintenance.svg';
 import { useEcommSettingStore } from '@/stores/ecomm_setting';
 
-const store = useEcommSettingStore();
+const EcommSettingStore = useEcommSettingStore();
 const router = useRouter();
 
 onBeforeMount(async () => {
 	// Load Ecommerce Store Data e.g Banner, Hero, Bg's
-	await store.load();
+	await EcommSettingStore.load();
 
-	if (!store.item.is_maintenance) {
+	if (!EcommSettingStore.item.is_maintenance) {
 		router.push({ name: 'home' });
 	}
 });

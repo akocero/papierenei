@@ -1,14 +1,19 @@
 <template>
-	<div class="flex h-screen items-center bg-main p-32">
+	<div class="flex h-screen items-center bg-indigo-500 p-32">
 		<div class="mx-auto h-full w-full rounded-2xl bg-white p-14 shadow-xl">
 			<div class="grid h-full grid-cols-12">
 				<div class="col-span-6 pr-28">
 					<div class="w-52">
-						<img src="../assets/logo-t.png" alt="" />
+						<img
+							v-if="EcommSettingStore.item?.logoBase?.length > 0"
+							:src="EcommSettingStore.item.logoBase[0].secure_url"
+							alt=""
+						/>
+						<img v-else src="../assets/logo-t.png" alt="" />
 					</div>
-					<div class="pl-10">
+					<div class="">
 						<h2
-							class="mb-6 font-sans text-7xl font-bold text-yellow-400"
+							class="mb-6 font-sans text-7xl font-bold text-indigo-400"
 						>
 							YOU SEEM TO BE LOST!
 						</h2>
@@ -37,10 +42,20 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import notFoundImg from '../assets/404.svg';
+import { useEcommSettingStore } from '@/stores/ecomm_setting';
+
+const EcommSettingStore = useEcommSettingStore();
 
 const router = useRouter();
+
+onMounted(async () => {
+	if (!EcommSettingStore.item) {
+		await EcommSettingStore.load();
+	}
+});
 
 const goBack = () => {
 	router.go(-1);

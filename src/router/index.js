@@ -118,7 +118,7 @@ const router = createRouter({
 						import('../views/ecommerce/OrderTracking.vue'),
 				},
 				{
-					path: '/return-refund',
+					path: '/shop-policy',
 					name: 'return-refund',
 					component: () =>
 						import('../views/ecommerce/ReturnRefund.vue'),

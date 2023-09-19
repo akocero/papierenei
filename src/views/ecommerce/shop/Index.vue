@@ -7,7 +7,11 @@
 		>
 			<ProductHero :product="productModal" v-if="productModal" />
 		</QuickView>
-		<Spinner v-if="isLoading" />
+		<!-- <Spinner v-if="isLoading" /> -->
+
+		<MainTransition>
+			<Loading v-if="isLoading" />
+		</MainTransition>
 		<div v-if="!isLoading">
 			<!-- Title -->
 			<div

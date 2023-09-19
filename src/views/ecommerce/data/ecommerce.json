@@ -49,7 +49,7 @@
 						"name": "shop",
 						"query": { "category": "6405ae1f06e95a6cfa44f5f7" }
 					},
-					"text": "Digital Downloads"
+					"text": "Downloadables"
 				},
 				{
 					"routeObject": {
@@ -109,7 +109,7 @@
 					"routeObject": {
 						"name": "return-refund"
 					},
-					"text": "Return policy"
+					"text": "Shop policy"
 				},
 				{
 					"routeObject": {

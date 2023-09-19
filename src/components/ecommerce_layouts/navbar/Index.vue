@@ -44,6 +44,16 @@
 				<a href="#">
 					<router-link to="/">
 						<img
+							v-if="ecommSettingsStore.item?.logoFlat?.length > 0"
+							:src="
+								ecommSettingsStore.item.logoFlat[0].secure_url
+							"
+							alt=""
+							class="h-24 md:h-[4.2rem]"
+						/>
+
+						<img
+							v-else
 							src="@/assets/new_logos/flat.svg"
 							alt=""
 							class="h-24 md:h-[4.2rem]"

@@ -66,23 +66,12 @@
 								:required="true"
 							/>
 						</div>
-						<div class="col-span-6">
-							<BaseSelect
-								id="input_status"
-								label="Shipping to"
-								v-model="shipping"
-								:error="store.error"
-								:errorField="
-									store.error?.errors?.shipping || null
-								"
-								:options="shippingOps"
-							/>
-						</div>
 					</div>
 					<div class="mb-4 grid grid-cols-12 gap-2">
 						<h3 class="col-span-full text-xl font-semibold">
 							Shipping Address
 						</h3>
+
 						<div class="col-span-6">
 							<BaseInput
 								id="input_first_name"
@@ -110,6 +99,20 @@
 								"
 								placeholder="Ex. Doe"
 								type="text"
+								:required="true"
+							/>
+						</div>
+						<div class="col-span-6">
+							<BaseSelect
+								id="input_status"
+								label="Shipping to"
+								v-model="selectedShipping"
+								:error="store.error"
+								:errorField="
+									store.error?.errors?.shippingDetails?.fee ||
+									null
+								"
+								:options="shippingOps"
 								:required="true"
 							/>
 						</div>
@@ -301,19 +304,19 @@
 						<div class="flex justify-between">
 							<label>Subtotal</label>
 							<span class="font-sans font-semibold">
-								₱{{ numberFormat(cartStore.subTotal) }}
+								₱ {{ numberFormat(cartStore.subTotal) }}
 							</span>
 						</div>
-						<div class="flex justify-between">
+						<div class="flex justify-between" v-if="shippingTotal">
 							<label>Shipping</label>
 							<span class="font-sans font-semibold">
-								-₱{{ numberFormat(discountPrice) }}
+								₱ {{ numberFormat(shippingTotal) }}
 							</span>
 						</div>
-						<div class="flex justify-between" v-if="discount.valid">
+						<div class="flex justify-between" v-if="discountTotal">
 							<label>Discount</label>
 							<span class="font-sans font-semibold">
-								-₱{{ numberFormat(discountPrice) }}
+								-₱ {{ numberFormat(discountTotal) }}
 							</span>
 						</div>
 					</li>
@@ -349,6 +352,7 @@ const EcomAuthStore = useEcomAuthStore();
 const router = useRouter();
 const { pushAlert } = useAlert();
 const { numberFormat } = useUtils();
+
 const discount = ref({
 	code: '',
 	error: null,
@@ -356,16 +360,19 @@ const discount = ref({
 	discountKind: '',
 	discountValue: 0,
 });
-const shippingDetails = ref({
-	fee: 149,
-});
-const shipping = ref({});
+const shippingDetails = ref(null);
+const selectedShipping = ref(null);
 
 const shippingOps = [
 	{
 		label: 'NCR',
 		value: 'ncr',
 		price: 149,
+	},
+	{
+		label: 'Luzon',
+		value: 'luzon',
+		price: 199,
 	},
 	{
 		label: 'Visayas',
@@ -430,23 +437,30 @@ onBeforeMount(async () => {
 	});
 });
 
-// const items = computed(() => {
-// 	return cartStore.list.map((cartItem) => {
-// 		return {
-// 			item_id: cartItem._id,
-// 			name: cartItem.name,
-// 			qty: cartItem.cartQuantity,
-// 			price: cartItem.cartPrice,
-// 			total: cartItem.cartTotal,
-// 		};
-// 	});
-// });
-
 const total = computed(() => {
-	return cartStore.subTotal - discountPrice.value + shippingDetails.value.fee;
+	let total = 0;
+	total =
+		parseFloat(cartStore.subTotal) -
+		parseFloat(discountTotal.value) +
+		parseFloat(shippingTotal.value);
+
+	return total;
 });
 
-const discountPrice = computed(() => {
+const shippingTotal = computed(() => {
+	if (selectedShipping.value) {
+		console.log(selectedShipping.value);
+		const _shipping = shippingOps.find(
+			(prd) => prd.value == selectedShipping.value,
+		);
+
+		return _shipping.price;
+	}
+
+	return 0;
+});
+
+const discountTotal = computed(() => {
 	if (discount.value.valid) {
 		if (discount.value.discountKind === 'amount') {
 			if (discount.value.discountValue > cartStore.subTotal) {
@@ -495,7 +509,7 @@ const handleSumbit = async () => {
 		items: items.value,
 		shippingDetails: shippingDetails.value,
 		subtotal: cartStore.subTotal,
-		total: cartStore.subTotal + shippingDetails.value.fee,
+		total: cartStore.subTotal,
 		notes: '',
 	};
 

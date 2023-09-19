@@ -51,7 +51,7 @@
 				<img
 					:src="image.secure_url"
 					alt=""
-					class="h-full w-full rounded-md object-cover"
+					class="h-full w-full rounded-md border object-contain"
 				/>
 				<input
 					type="checkbox"

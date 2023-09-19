@@ -7,7 +7,11 @@
 		<ProductHero :product="productModal" v-if="productModal" />
 	</QuickView>
 
-	<Loading v-if="ecommSettingsStore.isLoading || productStore.isLoading" />
+	<MainTransition>
+		<Loading
+			v-if="ecommSettingsStore.isLoading || productStore.isLoading"
+		/>
+	</MainTransition>
 
 	<!-- <header
 		class="relative mx-auto flex h-72 w-full max-w-base items-center justify-center overflow-hidden rounded-2xl bg-cover bg-center shadow-xl md:mt-8 md:h-screen"

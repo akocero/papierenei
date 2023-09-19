@@ -1,8 +1,15 @@
 <template>
 	<div
-		class="fixed top-0 left-0 z-40 flex h-screen w-full flex-col items-center justify-center bg-darkBlue"
+		class="fixed top-0 left-0 z-40 flex h-screen w-full flex-col items-center justify-center bg-indigo-500"
 	>
-		<img :src="LogoT" alt="" class="loading z-50 -ml-5 w-48" />
+		<img
+			v-if="ecommSettingsStore.item"
+			:src="ecommSettingsStore.item.logoBase[0].secure_url"
+			alt=""
+			class="z-50 -ml-5 w-48"
+		/>
+
+		<img v-else :src="LogoT" alt="" class="z-50 -ml-5 w-48" />
 		<h3
 			class="mb-4 mt-6 font-quicksand text-3xl font-extrabold text-lightBlue-1 drop-shadow-xl"
 		>
@@ -19,7 +26,10 @@
 </template>
 
 <script setup>
+import { useEcommSettingStore } from '@/stores/ecomm_setting';
 import LogoT from '@/assets/logo-t.png';
+
+const ecommSettingsStore = useEcommSettingStore();
 </script>
 
 <style>
