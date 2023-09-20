@@ -129,8 +129,12 @@
 							<span class="text-gray-600">{{ order.city }}</span>
 						</li>
 						<li>
-							State:
-							<span class="text-gray-600">{{ order.state }}</span>
+							Barangay:
+							<span class="text-gray-600">{{ order.barangay }}</span>
+						</li>
+						<li>
+							Province:
+							<span class="text-gray-600">{{ order.province }}</span>
 						</li>
 						<li>
 							Street address:
@@ -157,8 +161,12 @@
 							<span class="text-gray-600">{{ order.city }}</span>
 						</li>
 						<li>
-							State:
-							<span class="text-gray-600">{{ order.state }}</span>
+							Barangay:
+							<span class="text-gray-600">{{ order.barangay }}</span>
+						</li>
+						<li>
+							Province:
+							<span class="text-gray-600">{{ order.province }}</span>
 						</li>
 						<li>
 							Street address:
