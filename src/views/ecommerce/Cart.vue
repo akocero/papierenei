@@ -116,17 +116,7 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="mt-10 flex flex-col sm:flex-row sm:justify-between">
-			<div class="">
-				<label for="">Order special instructions</label>
-				<textarea
-					name=""
-					id=""
-					cols="30"
-					rows="1"
-					class="w-full"
-				></textarea>
-			</div>
+		<div class="mt-10 flex flex-col sm:flex-row sm:justify-end">
 			<div class="">
 				<div class="text-right">
 					<h4 class="">

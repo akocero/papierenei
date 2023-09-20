@@ -182,7 +182,6 @@
 								"
 								placeholder="Ex."
 								type="text"
-								:required="true"
 							/>
 						</div>
 						<div class="col-span-6">
@@ -197,6 +196,20 @@
 								placeholder="Ex."
 								type="text"
 								:required="true"
+							/>
+						</div>
+						<h3 class="col-span-full mt-8 text-xl font-semibold">
+							Order Instructions
+						</h3>
+						<div class="col-span-full">
+							<BaseInput
+								id="input_notes"
+								label="Instructions"
+								v-model="notes"
+								:error="store.error"
+								:errorField="store.error?.errors?.notes || null"
+								placeholder="Ex."
+								type="text"
 							/>
 						</div>
 						<div class="col-span-full mt-4">
@@ -424,6 +437,7 @@ const shippingOps = [
 const firstName = ref('');
 const lastName = ref('');
 const email = ref('');
+const notes = ref('');
 const contactNumber = ref('');
 const paymentMethod = ref('');
 const address = ref({
@@ -540,22 +554,21 @@ const handleSumbit = async () => {
 		email: email.value,
 		contactNumber: contactNumber.value,
 		paymentMethod: paymentMethod.value,
-		country: address.value.country,
+		province: address.value.province,
+		barangay: address.value.barangay,
 		streetAddress: address.value.streetAddress,
 		city: address.value.city,
-		state: address.value.state,
 		zipCode: address.value.zipCode,
 		items: items.value,
 		subtotal: cartStore.subTotal,
 		total: total.value,
-		notes: '',
+		notes: notes.value,
 	};
-
 
 	if (discount.value.valid) {
 		data.discount = {
 			...discount.value,
-			discountTotal: discountTotal.value
+			discountTotal: discountTotal.value,
 		};
 	}
 
