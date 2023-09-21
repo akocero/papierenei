@@ -1,5 +1,5 @@
 <template>
-	<div class="card">
+	<div class="card" v-if="!store.isLoading">
 		<form class="">
 			<div class="">
 				<div class="relative w-full">
@@ -147,7 +147,7 @@ const props = defineProps({
 
 onBeforeMount(async () => {
 	// fetching data limti to 100
-	await props.store.fetch(`?limit=100`);
+	await props.store.fetch(`?limit=1000`);
 });
 
 // this will filter the data/document base on the input value which is the 'name'

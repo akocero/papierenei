@@ -23,6 +23,7 @@
 				:errorField="store.error?.errors?.payments?.amount || null"
 				placeholder="Ex. ABC"
 				:required="true"
+				type="number"
 			/>
 		</div>
 		<div class="col-span-full md:col-span-3">
@@ -71,7 +72,7 @@
 				</li>
 				<li
 					class="flex border-b py-2"
-					v-for="pm in addedPayments"
+					v-for="pm in store.item.payments"
 					:key="pm._id"
 				>
 					<span class="w-[34%]">{{ pm.transactionNumber }}</span>
@@ -106,11 +107,7 @@ const props = defineProps({
 const { pushAlert } = useAlert();
 const addedPayments = ref([]);
 
-onMounted(() => {
-	if (props.store.item.payments.length) {
-		addedPayments.value = props.store.item.payments;
-	}
-});
+onMounted(() => {});
 
 const payment = ref({
 	status: '',
@@ -129,13 +126,16 @@ const addPayment = () => {
 		pushAlert('error', 'Please fill out required fields!');
 		return;
 	}
+	payment.value.amount = parseFloat(payment.value.amount)
 	payment.value._id = 'custom-payment-' + uuidv4();
-	addedPayments.value.push(payment.value);
+	props.store.item.payments.push(payment.value);
 
 	payment.value = {};
 };
 
 const deletePayment = (id) => {
-	addedPayments.value = addedPayments.value.filter((el) => el._id !== id);
+	props.store.item.payments = props.store.item.payments.filter(
+		(el) => el._id !== id,
+	);
 };
 </script>

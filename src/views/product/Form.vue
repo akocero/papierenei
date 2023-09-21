@@ -144,24 +144,44 @@
 							:required="false"
 						/>
 					</div>
-
-					<div class="col-span-4">
-						<BaseInput
-							id="input_fileDownloadLink"
-							type="text"
-							label="Download Link"
-							v-model="store.item.fileDownloadLink"
-							:error="store.error"
-							:errorField="
-								store.error?.errors?.fileDownloadLink || null
-							"
-							placeholder="Ex. ABC"
-						/>
-					</div>
 				</div>
 			</form>
 		</div>
 		<div class="w-full md:w-[36%]">
+			<DrawerCard title="Product Type" v-if="store.item">
+				<div>
+					<BaseSelect
+						id="input_product-type"
+						v-model="store.item.productType"
+						:error="store.error"
+						:errorField="store.error?.errors?.productType || null"
+						:options="[
+							{
+								value: 'physical',
+								label: 'Physical',
+							},
+							{
+								value: 'digital',
+								label: 'Digital',
+							},
+						]"
+					/>
+				</div>
+
+				<div class="mt-4" v-if="store.item.productType === 'digital'">
+					<BaseInput
+						id="input_fileDownloadLink"
+						type="text"
+						label="Download Link"
+						v-model="store.item.fileDownloadLink"
+						:error="store.error"
+						:errorField="
+							store.error?.errors?.fileDownloadLink || null
+						"
+						placeholder="Ex. ABC"
+					/>
+				</div>
+			</DrawerCard>
 			<DrawerCard title="Product Status" v-if="store.item">
 				<BaseSelect
 					id="input_status"
@@ -189,7 +209,7 @@
 			/>
 			<BaseSearchSelectCard
 				v-model="store.item.categories"
-				v-if="store.item && !store.isLoading"
+				v-if="store.item"
 				:store="categoryStore"
 				label="Categories"
 				placeholder="Find categories"
@@ -197,7 +217,7 @@
 
 			<BaseSearchSelectCard
 				v-model="store.item.collections"
-				v-if="store.item && !store.isLoading"
+				v-if="store.item"
 				:store="collectionStore"
 				label="Collections"
 				placeholder="Find collections"
@@ -205,7 +225,7 @@
 
 			<BaseSearchSelectCard
 				v-model="store.item.tags"
-				v-if="store.item && !store.isLoading"
+				v-if="store.item"
 				:store="tagStore"
 				:canCreateItem="true"
 				label="Tags"

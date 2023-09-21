@@ -41,6 +41,10 @@ onBeforeMount(() => {
 const handleSubmit = async () => {
 	store.error = null;
 
+	if (store.item.productType === 'physical' || !store.item.productType) {
+		store.item.fileDownloadLink = undefined;
+	}
+
 	const res = await store.create(store.item);
 
 	if (store.error) {

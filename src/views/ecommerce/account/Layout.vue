@@ -49,39 +49,11 @@
 			<div class="mx-auto max-w-base">
 				<hr />
 				<ul class="flex gap-10 p-4">
-					<li>
+					<li v-for="link in links" :key="link.text">
 						<router-link
-							:to="{ name: 'home' }"
+							:to="link.to"
 							class="font-semibold text-red-400 underline"
-							>Refund policy</router-link
-						>
-					</li>
-					<li>
-						<router-link
-							:to="{ name: 'home' }"
-							class="font-semibold text-red-400 underline"
-							>Terms of Service</router-link
-						>
-					</li>
-					<li>
-						<router-link
-							:to="{ name: 'home' }"
-							class="font-semibold text-red-400 underline"
-							>Order Tracking</router-link
-						>
-					</li>
-					<li>
-						<router-link
-							:to="{ name: 'home' }"
-							class="font-semibold text-red-400 underline"
-							>About</router-link
-						>
-					</li>
-					<li>
-						<router-link
-							:to="{ name: 'home' }"
-							class="font-semibold text-red-400 underline"
-							>Contact us</router-link
+							>{{ link.text }}</router-link
 						>
 					</li>
 				</ul>
@@ -102,6 +74,39 @@ const { alerts } = useAlert();
 const store = useEcomAuthStore();
 const router = useRouter();
 onBeforeMount(async () => {});
+
+const links = [
+	{
+		to: {
+			name: 'return-refund',
+		},
+		text: 'Shop policy',
+	},
+	{
+		to: {
+			name: 'terms',
+		},
+		text: 'Terms of Service',
+	},
+	{
+		to: {
+			name: 'order-tracking',
+		},
+		text: 'Order Tracking',
+	},
+	{
+		to: {
+			name: 'about',
+		},
+		text: 'About',
+	},
+	{
+		to: {
+			name: 'contact',
+		},
+		text: 'Contact us',
+	},
+];
 </script>
 
 <style></style>

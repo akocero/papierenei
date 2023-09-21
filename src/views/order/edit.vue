@@ -75,7 +75,7 @@ onBeforeMount(async () => {
 	if (store.item.orderPaidDate) {
 		store.item.orderPaidDate = store.item.orderPaidDate.substring(0, 10);
 	}
-	
+
 	// invoiceStore.item.datePaid = invoiceStore.item.datePaid
 	// 	? item.value.datePaid.substring(0, 10)
 	// 	: undefined;
@@ -93,7 +93,7 @@ const sendEmail = async (id) => {
 	return;
 };
 
-/* Subscribe: This code will run if there is a changes on the state
+/* Subscribe: This code will run if there is a changes on the state store
 store.$subscribe((mutation, state) => {
 	if (state.item?.paymentStatus) {
 		if (state.item.paymentStatus === 'paid') {
@@ -108,7 +108,7 @@ store.$subscribe((mutation, state) => {
 
 const handleSubmit = async () => {
 	store.error = null;
-
+	// console.log('payments', store.item.payments);
 	removeTempPaymentsID();
 	// store.item.payments = addedPayments.value;
 	store.item.total =
@@ -138,7 +138,7 @@ const _addedItemsTotal = computed(() => {
 });
 
 const removeTempPaymentsID = () => {
-	addedPayments.value = addedPayments.value.map((pm) => {
+	store.item.payments = store.item.payments.map((pm) => {
 		if (pm._id && pm._id.includes('custom-payment')) {
 			delete pm._id;
 		}

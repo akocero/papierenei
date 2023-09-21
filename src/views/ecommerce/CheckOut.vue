@@ -3,6 +3,22 @@
 		<SectionTitle title="Checkout" size="md" />
 		<div class="grid grid-cols-12 gap-y-10 sm:gap-y-0">
 			<div
+				v-if="!EcomAuthStore.user"
+				class="order-last col-span-full sm:order-first sm:col-span-7"
+			>
+				<div class="mt-20 text-center">
+					<p class="text-xl">
+						Please login or create your account to proceed.
+					</p>
+					<MainButton
+						@click="EcomAppStore.toggleAuthModal"
+						_class="mt-4"
+					>
+						Login / Register
+					</MainButton>
+				</div>
+			</div>
+			<div
 				class="order-last col-span-full sm:order-first sm:col-span-7"
 				v-if="EcomAuthStore.user"
 			>
@@ -387,6 +403,7 @@ import { onBeforeMount, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useOrderStore } from '@/stores/order';
 import { useEcomAuthStore } from '@/stores/ecom_auth';
+import { useEcomAppStore } from '@/stores/ecom_app';
 import { useCartStore } from '@/stores/cart';
 import { useDiscountStore } from '@/stores/discount';
 import useAlert from '../../composables/useAlert';
@@ -396,6 +413,7 @@ const store = useOrderStore();
 const cartStore = useCartStore();
 const discountStore = useDiscountStore();
 const EcomAuthStore = useEcomAuthStore();
+const EcomAppStore = useEcomAppStore();
 
 const router = useRouter();
 const { pushAlert } = useAlert();
@@ -433,7 +451,7 @@ const shippingOps = [
 		price: 299,
 	},
 ];
-
+const customerID = ref('');
 const firstName = ref('');
 const lastName = ref('');
 const email = ref('');
@@ -460,6 +478,7 @@ onBeforeMount(async () => {
 
 	if (EcomAuthStore.user) {
 		const user = EcomAuthStore.user;
+		customerID.value = user._id;
 		firstName.value = user.firstName;
 		lastName.value = user.lastName;
 		email.value = user.email;
@@ -549,6 +568,7 @@ const handleSumbit = async () => {
 	);
 
 	const data = {
+		customerID: customerID.value,
 		firstName: firstName.value,
 		lastName: lastName.value,
 		email: email.value,
