@@ -96,6 +96,34 @@ export const useEcomAuthStore = defineStore({
 
 			return data;
 		},
+		async login(email, password) {
+			const payload = {
+				email,
+				password,
+			};
+
+			const data = await guestStoreHelpers.store(
+				this,
+				`${this.url}/login`,
+				payload,
+			);
+
+			if (this.error) {
+				console.log(this.error);
+				return;
+			}
+
+			localStorage.setItem(
+				'guest_wish_list',
+				JSON.stringify(data.customer.wishList),
+			);
+
+			this.setUser(data);
+
+			window.location.href = '/account/details';
+
+			return data;
+		},
 		logout() {
 			Cookies.remove('guest_user');
 			Cookies.remove('guest_token');

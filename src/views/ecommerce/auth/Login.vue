@@ -4,16 +4,16 @@
 			<div class="mb-6">
 				<Input v-model="email" type="email" label="Your Email" />
 			</div>
-			<!-- <div class="mb-6">
+			<div class="mb-6">
 				<Input v-model="password" type="password" label="Password" />
-			</div> -->
+			</div>
 			<div class="mb-2 flex justify-end">
 				<button
 					type="submit"
 					class="w-full rounded bg-indigo-500 px-5 py-3 text-center text-lg font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300 disabled:bg-gray-300 disabled:text-gray-400"
 					:disabled="EcomAuthStore.isLoading"
 				>
-					Continue
+					Login
 				</button>
 			</div>
 		</form>
@@ -35,7 +35,7 @@ const EcomAppStore = useEcomAppStore();
 const router = useRouter();
 
 const handleSubmit = async () => {
-	await EcomAuthStore.verifyEmail(email.value);
+	await EcomAuthStore.login(email.value, password.value);
 };
 
 onUnmounted(() => {
