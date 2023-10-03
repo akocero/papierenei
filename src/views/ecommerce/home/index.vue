@@ -1,42 +1,10 @@
 <template>
-	<QuickView
-		@closeModal="closeModal"
-		:show="isOpen"
-		modalTitle="Default Modal"
-	>
-		<ProductHero :product="productModal" v-if="productModal" />
-	</QuickView>
-
 	<MainTransition>
 		<Loading
 			v-if="ecommSettingsStore.isLoading || productStore.isLoading"
 		/>
 	</MainTransition>
 
-	<!-- <header
-		class="relative mx-auto flex h-72 w-full max-w-base items-center justify-center overflow-hidden rounded-2xl bg-cover bg-center shadow-xl md:mt-8 md:h-screen"
-		v-if="ecommSettingsStore.item"
-		:style="{
-			'background-image':
-				'url(' + ecommSettingsStore?.activeHero?.secure_url + ')',
-		}"
-	>
-		<div class="">
-			<router-link
-				:to="{
-					name: 'shop',
-				}"
-				class="mx-auto flex items-center space-x-3 rounded-lg bg-darkYellow py-3 pr-3 pl-5 text-xl font-bold text-white shadow-lg"
-			>
-				SHOP NOW
-				<vue-feather
-					type="shopping-bag"
-					size="24"
-					class="ml-4 mb-1"
-				></vue-feather>
-			</router-link>
-		</div>
-	</header> -->
 	<div
 		class="absolute top-0 left-0 h-96 w-full bg-gradient-to-b from-indigo-400 to-white"
 	></div>

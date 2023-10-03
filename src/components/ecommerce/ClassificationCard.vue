@@ -4,18 +4,26 @@
 		:class="is_reverse ? 'flex-col-reverse' : 'flex-col'"
 	>
 		<div>
-			<img src="../../assets/new_logos/classi_img.webp" alt="" />
+			<img :src="item.img" alt="" v-if="item.img" />
+			<div
+				class="flex h-[32rem] items-center justify-center bg-gray-300"
+				v-else
+			>
+				<vue-feather
+					type="image"
+					size="120"
+					class="text-white"
+				></vue-feather>
+			</div>
 		</div>
-		<div>
-			<div class="min-h-[18rem] p-10">
-				<p class="mb-10 text-center text-xl font-bold text-white">
-					Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-					Ullam doloremque quas reprehenderit quasi perspiciatis
-					dolores deserunt. Vero ipsa eveniet sunt animi perspiciatis,
-					blanditiis officiis numquam! Corrupti dolor laboriosam
-					corporis eos.
+		<div class="">
+			<div class="p-10 py-14">
+				<p class="mb-10 text-center text-3xl font-bold text-white">
+					{{ item.details }}
 				</p>
-				<ButtonLink link="/shop"> Shop Adhesives </ButtonLink>
+				<ButtonLink :link="item.link">
+					{{ item.buttonText }}
+				</ButtonLink>
 			</div>
 		</div>
 	</div>
