@@ -9,7 +9,7 @@
 			class="z-50 -ml-5 w-48"
 		/>
 
-		<img v-else :src="LogoT" alt="" class="z-50 -ml-5 w-48" />
+		<img v-else :src="regularLogo" alt="" class="z-50 -ml-5 w-48" />
 		<h3
 			class="mb-4 mt-6 font-quicksand text-3xl font-extrabold text-white drop-shadow-xl"
 		>
@@ -29,7 +29,7 @@
 
 <script setup>
 import { useEcommSettingStore } from '@/stores/ecomm_setting';
-import LogoT from '@/assets/logo-t.png';
+import regularLogo from '@/assets/new_logos/regular.svg';
 
 const ecommSettingsStore = useEcommSettingStore();
 </script>

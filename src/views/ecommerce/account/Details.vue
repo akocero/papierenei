@@ -260,10 +260,6 @@ const form = ref({});
 const editInfo = ref(false);
 const { pushAlert } = useAlert();
 
-onMounted(() => {
-	console.log(EcomAuthStore.user);
-});
-
 const handleUpdateMe = async () => {
 	EcomAuthStore.error = null;
 

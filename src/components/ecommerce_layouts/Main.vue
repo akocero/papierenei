@@ -15,10 +15,13 @@
 		</main>
 		<Footer />
 	</div>
+	<MainTransition v-if="mainIsLoading">
+		<Loading />
+	</MainTransition>
 </template>
 
 <script setup>
-import { onBeforeMount } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import { useEcommSettingStore } from '@/stores/ecomm_setting';
 import { useEcomAppStore } from '@/stores/ecom_app';
 import Navbar from './navbar/Index.vue';
@@ -33,13 +36,19 @@ const { alerts } = useAlert();
 const EcomStore = useEcomAppStore();
 const store = useEcommSettingStore();
 const router = useRouter();
+const mainIsLoading = ref(false);
 onBeforeMount(async () => {
 	// Load Ecommerce Store Data e.g Banner, Hero, Bg's
+
+	mainIsLoading.value = true;
 	await store.load();
 
 	if (store.item.is_maintenance) {
+		mainIsLoading.value = false;
 		router.push({ name: 'maintenance' });
 	}
+
+	mainIsLoading.value = false;
 });
 </script>
 

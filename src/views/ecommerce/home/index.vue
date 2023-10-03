@@ -64,7 +64,6 @@ import ClassificationSection from './ClassificationSection.vue';
 import FeaturedSection from './FeaturedSection.vue';
 
 /* Components */
-import Loading from '@/components/Loading.vue';
 import ProductHero from '@/components/ecommerce/ProductHero.vue';
 import QuickView from '@/components/ecommerce/QuickView.vue';
 
