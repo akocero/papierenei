@@ -35,7 +35,7 @@
 			<SectionTitle :title="shopTitle" size="md" v-else />
 
 			<!-- Filters -->
-			<div class="mb-8 flex justify-between">
+			<div class="mb-8 hidden justify-between lg:flex">
 				<span class="flex space-x-4">
 					<span class="flex flex-col">
 						<TagFilter :tags="productTags" v-model="selectedTag" />

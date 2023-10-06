@@ -1,12 +1,14 @@
 <template>
 	<div
-		class="absolute bottom-0 h-72 w-full bg-red-300 text-[1rem] font-semibold text-white"
+		class="absolute bottom-0 w-full bg-red-300 text-[1rem] font-semibold text-white lg:h-72"
 	>
 		<div
-			class="mx-auto flex max-w-base flex-col px-8 pt-7 md:flex-row 2xl:px-0"
+			class="mx-auto flex max-w-base flex-col px-5 pt-7 md:flex-row 2xl:px-0"
 		>
-			<div class="grid w-full grid-cols-12 gap-y-10 text-left md:gap-10">
-				<div class="col-span-4 hidden sm:block md:pr-20">
+			<div
+				class="mb-8 grid w-full grid-cols-12 gap-y-10 text-left md:gap-10"
+			>
+				<div class="col-span-full md:pr-20 lg:col-span-4">
 					<h3 class="text-xl">HEAL THROUGH CUTE ART!</h3>
 					<div class="mt-6">
 						<p class="mb-5">
@@ -26,7 +28,7 @@
 						</p>
 					</div>
 				</div>
-				<div class="col-span-6 text-center sm:col-span-2 sm:text-left">
+				<div class="col-span-full text-left sm:col-span-2">
 					<h3 class="text-xl">INFORMATION</h3>
 					<ul class="mt-6 grow space-y-3">
 						<li>
@@ -51,7 +53,7 @@
 						</li>
 					</ul>
 				</div>
-				<div class="col-span-6 text-center sm:col-span-3 sm:text-left">
+				<div class="col-span-full sm:col-span-3">
 					<h3 class="text-xl">TERMS AND CONDITIONS</h3>
 					<ul class="mt-6 grow space-y-3">
 						<li>
@@ -67,12 +69,8 @@
 					</ul>
 				</div>
 				<div class="col-span-full sm:col-span-3">
-					<h3 class="text-center text-xl sm:text-left">
-						LET'S HANG OUT!
-					</h3>
-					<ul
-						class="mt-6 flex justify-center space-x-8 md:justify-start"
-					>
+					<h3 class="text-xl">LET'S HANG OUT!</h3>
+					<ul class="mt-6 flex justify-start space-x-8">
 						<li class="" v-for="link in links" :key="link.icon">
 							<a
 								:href="link.link"
@@ -91,8 +89,8 @@
 			</div>
 		</div>
 
-		<div class="absolute bottom-0 w-full bg-red-400 text-white">
-			<div class="mx-auto max-w-base px-8 2xl:px-0">
+		<div class="absolute w-full bg-red-400 text-white lg:bottom-0">
+			<div class="max-w-base px-8 lg:mx-auto 2xl:px-0">
 				<h4 class="my-3">
 					© Papier Renei {{ new Date().getFullYear() }} - All rights
 					reserved.

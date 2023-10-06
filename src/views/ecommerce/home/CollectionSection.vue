@@ -6,6 +6,20 @@
 			:space-between="36"
 			@swiper="onSwiper"
 			@slideChange="onSlideChange"
+			:breakpoints="{
+				'1': {
+					slidesPerView: 1,
+					spaceBetween: 20,
+				},
+				'768': {
+					slidesPerView: 2,
+					spaceBetween: 40,
+				},
+				'1024': {
+					slidesPerView: 4,
+					spaceBetween: 50,
+				},
+			}"
 			navigation
 		>
 			<swiper-slide v-for="category in categories">

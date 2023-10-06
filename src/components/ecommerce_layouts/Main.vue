@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="relative min-h-screen bg-white pb-[21rem] font-karla text-gray-600"
+		class="relative min-h-screen bg-white pb-[48rem] font-karla text-gray-600 lg:pb-[21rem]"
 		v-if="store.item && !store.item.is_maintenance"
 	>
 		<AuthModal v-if="EcomStore.isAuthModalOpen" />
@@ -24,7 +24,7 @@
 import { onBeforeMount, ref } from 'vue';
 import { useEcommSettingStore } from '@/stores/ecomm_setting';
 import { useEcomAppStore } from '@/stores/ecom_app';
-import Navbar from './navbar/Index.vue';
+import Navbar from './navbar/Navbar.vue';
 import Footer from './Footer.vue';
 import Banner from '../ecommerce/Banner.vue';
 import useAlert from '@/composables/useAlert.js';

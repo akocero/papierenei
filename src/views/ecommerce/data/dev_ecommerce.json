@@ -35,14 +35,42 @@
 						"name": "shop",
 						"query": { "collection": "63bd7ebcab01444f92149c92" }
 					},
-					"text": "GUMMY BEAR"
+					"text": "gummy candy"
 				},
 				{
 					"routeObject": {
 						"name": "shop",
 						"query": { "collection": "63bd7ebcab01444f92149c92" }
 					},
-					"text": "GUMMY DARE"
+					"text": "hard candy"
+				},
+				{
+					"routeObject": {
+						"name": "shop",
+						"query": { "collection": "63bd7ebcab01444f92149c92" }
+					},
+					"text": "gummy candy"
+				},
+				{
+					"routeObject": {
+						"name": "shop",
+						"query": { "collection": "63bd7ebcab01444f92149c92" }
+					},
+					"text": "hard candy"
+				},
+				{
+					"routeObject": {
+						"name": "shop",
+						"query": { "collection": "63bd7ebcab01444f92149c92" }
+					},
+					"text": "gummy candy"
+				},
+				{
+					"routeObject": {
+						"name": "shop",
+						"query": { "collection": "63bd7ebcab01444f92149c92" }
+					},
+					"text": "hard candy"
 				}
 			]
 		},

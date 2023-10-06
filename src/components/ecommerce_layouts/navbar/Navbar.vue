@@ -4,7 +4,7 @@
 		v-if="isSearchFocus"
 	></div>
 	<div
-		class="relative w-full bg-white"
+		class="relative hidden w-full bg-white lg:block"
 		:class="isSearchFocus ? 'z-40 shadow-xl' : 'z-20'"
 		v-if="ecommSettingsStore.item"
 		:style="{
@@ -68,8 +68,10 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Desktop navbar list  -->
 	<nav
-		class="sticky top-0 z-10 w-full bg-gray-100"
+		class="sticky top-0 z-10 hidden w-full bg-gray-100 sm:block"
 		:class="[isNavbarSticky && 'shadow']"
 	>
 		<!-- Routes -->
@@ -133,6 +135,180 @@
 			/>
 		</transition>
 	</nav>
+
+	<!-- Mobile navbar links  -->
+	<nav
+		class="sticky top-0 z-20 w-full bg-white sm:hidden"
+		:class="[isNavbarSticky && 'shadow']"
+	>
+		<div class="mx-4 flex h-16 items-center">
+			<button @click="toggleMenu">
+				<vue-feather
+					type="menu"
+					size="24"
+					class="mt-2"
+					stroke-width="1.8"
+				/>
+			</button>
+
+			<!--  logo -->
+			<a href="#" class="ml-3 mt-1">
+				<router-link to="/">
+					<img
+						v-if="ecommSettingsStore.item?.logoFlat?.length > 0"
+						:src="ecommSettingsStore.item.logoFlat[0].secure_url"
+						alt=""
+						class="h-9"
+					/>
+
+					<img
+						v-else
+						src="@/assets/new_logos/flat.svg"
+						alt=""
+						class="h-24 md:h-[4.2rem]"
+					/>
+				</router-link>
+			</a>
+
+			<!-- Actions -->
+			<div class="absolute right-6 mt-2">
+				<NavActions />
+			</div>
+		</div>
+		<transition
+			enter-active-class="transition duration-500 ease-in"
+			enter-from-class="opacity-0"
+			enter-to-class="opacity-100"
+		>
+			<Banner
+				:text="ecommSettingsStore.activeBanner.text"
+				v-if="
+					ecommSettingsStore.item &&
+					ecommSettingsStore?.activeBanner?.text &&
+					isNavbarSticky
+				"
+			/>
+		</transition>
+	</nav>
+
+	<transition
+		enter-active-class="transition duration-500 ease-in"
+		enter-from-class="opacity-0"
+		enter-to-class="opacity-100"
+	>
+		<div
+			class="fixed top-0 left-0 z-20 h-screen w-full overflow-scroll bg-gray-100"
+			v-if="isMenuOpen"
+		>
+			<div class="mx-6 mt-6 flex flex-col items-start">
+				<button @click="toggleMenu">
+					<vue-feather
+						type="x"
+						size="32"
+						class="mt-2 text-gray-800"
+						stroke-width="1.8"
+					/>
+				</button>
+				<label
+					for="input_search_menu"
+					class="relative mt-4 block h-14 w-full overflow-hidden rounded bg-gray-200"
+				>
+					<vue-feather
+						type="search"
+						size="28"
+						class="absolute top-3 left-3 text-gray-800"
+						stroke-width="1.8"
+					/>
+					<input
+						type="text"
+						id="input_search_menu"
+						placeholder="Search our store"
+						class="h-full w-full border-0 bg-gray-300 pl-12"
+					/>
+				</label>
+				<nav class="mt-4 w-full text-xl font-semibold text-gray-800">
+					<ul class="">
+						<li
+							v-for="link in navbarLinks"
+							class="relative border-b"
+						>
+							<div class="flex">
+								<router-link
+									@click="toggleMenu"
+									:to="link.routeObject"
+									class="flex h-16 flex-grow items-center border-gray-300 px-2 capitalize transition-all duration-500 hover:border-gray-500 group-hover:border-gray-500"
+								>
+									{{ link.text }}
+								</router-link>
+								<button
+									class="w-16"
+									v-if="link.children"
+									@click="
+										link.openChildren = !link.openChildren
+									"
+								>
+									<vue-feather
+										type="chevron-down"
+										size="20"
+										class="mt-2 transform text-gray-900 transition-all"
+										:class="
+											link.openChildren
+												? 'rotate-180'
+												: 'rotate-0'
+										"
+										stroke-width="1.8"
+									/>
+								</button>
+							</div>
+							<!--  TODO: this animation need to be dynamic height to work -->
+							<div
+								class="overflow-y-hidden transition-all duration-500 ease-in-out"
+								:class="
+									link.children && link.openChildren
+										? ''
+										: 'h-0'
+								"
+							>
+								<ul class="text-xl">
+									<li
+										class="h-14"
+										v-for="childLink in link?.children"
+									>
+										<router-link
+											@click="toggleMenu"
+											:to="childLink.routeObject"
+											class="flex h-full items-center pl-5 capitalize"
+										>
+											<span>{{ childLink.text }}</span>
+										</router-link>
+									</li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</transition>
+
+	<div class="relative z-10 w-full bg-gray-100 lg:hidden">
+		<div class="relative z-10 mx-4 flex h-16 items-center">
+			<label for="input_search" class="flex items-center">
+				<vue-feather
+					type="search"
+					size="28"
+					class="text-gray-800"
+					stroke-width="1.8"
+				/>
+				<input
+					type="text"
+					id="input_search"
+					placeholder="Search our store"
+					class="border-0 bg-transparent focus:ring-0"
+				/>
+			</label>
+		</div>
+	</div>
 </template>
 
 <script setup>
@@ -146,6 +322,7 @@ import ecomDevData from '@/views/ecommerce/data/dev_ecommerce.json';
 
 import NavActions from './NavActions.vue';
 import Banner from '../../ecommerce/Banner.vue';
+import DesktopNavList from './DesktopNavList.vue';
 
 const GuestStore = useGuestStore();
 const ecommSettingsStore = useEcommSettingStore();
@@ -160,6 +337,7 @@ const isSearchFocus = ref(false);
 const limitPosition = ref(200);
 const isNavbarSticky = ref(false);
 const lastPosition = ref(0);
+const isMenuOpen = ref(false);
 
 const searchFocus = () => {
 	isSearchFocus.value = true;
@@ -169,6 +347,16 @@ const searchFocus = () => {
 const searchBlur = () => {
 	isSearchFocus.value = false;
 	document.body.classList.remove('overflow-y-hidden', 'h-screen');
+};
+
+const toggleMenu = () => {
+	isMenuOpen.value = !isMenuOpen.value;
+
+	if (isMenuOpen.value === false) {
+		document.body.classList.remove('overflow-y-hidden', 'h-screen');
+		return;
+	}
+	document.body.classList.add('overflow-y-hidden', 'h-screen');
 };
 
 const handleScroll = () => {

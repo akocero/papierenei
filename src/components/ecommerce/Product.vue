@@ -1,7 +1,7 @@
 <template>
 	<div class="relative rounded-lg text-left" v-if="product">
 		<span
-			class="absolute top-3 left-3 z-[5] rounded-2xl bg-red-400 px-3 py-2 capitalize text-white"
+			class="absolute top-3 left-3 z-[5] rounded-lg lg:rounded-2xl bg-red-400 px-3 py-2 capitalize text-white"
 			v-if="product.salePrice"
 		>
 			Sale
@@ -9,7 +9,7 @@
 
 		<span
 			:class="[
-				'absolute top-3 left-3 z-[5] rounded-2xl bg-yellow-400 px-3 py-2 capitalize text-white',
+				'absolute top-3 left-3 z-[5] rounded-lg lg:rounded-2xl bg-yellow-400 px-3 py-2 capitalize text-white',
 				product.salePrice ? 'top-16' : 'top-3',
 			]"
 			v-if="isNewProduct(product.createdAt)"
@@ -32,7 +32,7 @@
 			class="absolute top-4 right-4 z-[5] text-white"
 			fill="#fff"
 		/>
-		<div class="group relative overflow-hidden rounded-2xl">
+		<div class="group relative overflow-hidden rounded-lg lg:rounded-2xl">
 			<RouterLink :to="{ name: 'product', params: { id: product._id } }">
 				<div
 					v-if="
@@ -43,7 +43,7 @@
 				>
 					<div
 						v-if="!product.quantity"
-						class="absolute top-3 left-3 z-[5] rounded-2xl bg-gray-700 px-3 py-2 capitalize text-white"
+						class="absolute top-3 left-3 z-[5] rounded-lg lg:rounded-2xl bg-gray-700 px-3 py-2 capitalize text-white"
 					>
 						sold out
 					</div>
@@ -97,7 +97,7 @@
 				>
 					<div
 						v-if="!product.quantity"
-						class="absolute top-3 left-3 z-[5] rounded-2xl bg-gray-700 px-3 py-2 capitalize text-white"
+						class="absolute top-3 left-3 z-[5] rounded-lg lg:rounded-2xl bg-gray-700 px-3 py-2 capitalize text-white"
 					>
 						sold out
 					</div>
@@ -115,7 +115,7 @@
 		</div>
 
 		<div class="mt-3 text-center text-xl">
-			<h4 class="capitalize sm:text-xl md:text-[1.13rem]">
+			<h4 class="text-lg capitalize lg:text-[1.13rem]">
 				{{ product.name }}
 			</h4>
 
@@ -136,7 +136,7 @@
 			</h5>
 
 			<MainButton
-				_class="w-full mt-4"
+				_class="w-full mt-4 "
 				@click="$emit('addToCart', product)"
 				v-if="product.quantity && !isLarge"
 			>

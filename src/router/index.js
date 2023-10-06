@@ -48,8 +48,7 @@ const router = createRouter({
 				{
 					path: '/shop',
 					name: 'shop',
-					component: () =>
-						import('../views/ecommerce/shop/Index.vue'),
+					component: () => import('../views/ecommerce/shop/Shop.vue'),
 				},
 				{
 					path: '/product/:id',

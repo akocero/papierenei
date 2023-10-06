@@ -1,5 +1,5 @@
 <template>
-	<div class="wrapper overflow-hidden">
+	<div class="wrapper mt-0 overflow-hidden px-0 lg:mt-8 lg:px-4">
 		<swiper
 			:modules="[
 				Navigation,
@@ -26,21 +26,24 @@
 						v-if="hero?.coverPhoto?.length"
 						:src="hero.coverPhoto[0].secure_url"
 						alt=""
-						class="w-full rounded-2xl"
+						class="w-full lg:rounded-2xl"
 					/>
 
 					<div
-						class="h-96 w-full rounded-2xl bg-gray-300"
+						class="h-96 w-full bg-gray-300 lg:rounded-2xl"
 						v-else
 					></div>
 
-					<div class="absolute bottom-14 left-20 top-[50%] w-5/12">
+					<div
+						class="relative top-[50%] z-10 mx-auto -mt-6 flex min-h-[14rem] w-11/12 flex-col justify-center rounded-2xl bg-indigo-300 px-8 text-center lg:absolute lg:bottom-14 lg:left-20 lg:block lg:w-5/12 lg:bg-transparent lg:text-left"
+					>
 						<h1
-							class="mb-6 font-nunito text-6xl font-black capitalize text-white drop-shadow-double"
+							class="mb-6 font-nunito text-4xl font-black capitalize text-white drop-shadow-double lg:text-left lg:text-6xl"
 						>
 							{{ hero.title }}
 						</h1>
-						<ButtonLink :link="hero.link">{{
+
+						<ButtonLink :link="hero.link" _class="mx-auto">{{
 							hero.buttonText
 						}}</ButtonLink>
 					</div>

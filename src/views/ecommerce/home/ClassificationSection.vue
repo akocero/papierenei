@@ -1,10 +1,10 @@
 <template>
 	<section class="wrapper">
-		<div class="grid grid-cols-12 md:gap-8">
-			<div class="col-span-6">
+		<div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+			<div class="">
 				<ClassificationCard :item="class1" />
 			</div>
-			<div class="col-span-6">
+			<div class="">
 				<ClassificationCard :item="class2" :is_reverse="true" />
 			</div>
 		</div>

@@ -6,7 +6,7 @@
 		<div>
 			<img :src="item.img" alt="" v-if="item.img" />
 			<div
-				class="flex h-[32rem] items-center justify-center bg-gray-300"
+				class="flex h-60 items-center justify-center bg-gray-300 lg:h-[32rem]"
 				v-else
 			>
 				<vue-feather
@@ -17,8 +17,10 @@
 			</div>
 		</div>
 		<div class="">
-			<div class="p-10 py-14">
-				<p class="mb-10 text-center text-3xl font-bold text-white">
+			<div class="p-10 lg:py-14">
+				<p
+					class="mb-4 text-center text-xl font-bold text-white lg:mb-10 lg:text-3xl"
+				>
 					{{ item.details }}
 				</p>
 				<ButtonLink :link="item.link">

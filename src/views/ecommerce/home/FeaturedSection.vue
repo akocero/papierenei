@@ -2,7 +2,7 @@
 	<section class="wrapper">
 		<SectionTitle title="Featured Products" />
 		<div
-			class="grid w-full grid-cols-2 gap-2 md:grid-cols-4 md:gap-8 md:px-0"
+			class="grid w-full grid-cols-2 gap-4 md:gap-8 md:px-0 lg:grid-cols-4"
 			v-if="!productStore.isLoading"
 		>
 			<div v-for="(product, key) in productStore.list">
