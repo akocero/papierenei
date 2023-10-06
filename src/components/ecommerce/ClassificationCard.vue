@@ -11,8 +11,7 @@
 			>
 				<vue-feather
 					type="image"
-					size="120"
-					class="text-white"
+					class="h-16 text-white lg:h-28"
 				></vue-feather>
 			</div>
 		</div>

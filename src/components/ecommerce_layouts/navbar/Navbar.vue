@@ -209,23 +209,27 @@
 						stroke-width="1.8"
 					/>
 				</button>
-				<label
-					for="input_search_menu"
-					class="relative mt-4 block h-14 w-full overflow-hidden rounded bg-gray-200"
-				>
-					<vue-feather
-						type="search"
-						size="28"
-						class="absolute top-3 left-3 text-gray-800"
-						stroke-width="1.8"
-					/>
-					<input
-						type="text"
-						id="input_search_menu"
-						placeholder="Search our store"
-						class="h-full w-full border-0 bg-gray-300 pl-12"
-					/>
-				</label>
+				<form class="w-full" @submit.prevent="navigateToShop">
+					<label
+						for="input_search_menu"
+						class="relative mt-4 block h-14 overflow-hidden rounded bg-gray-200"
+					>
+						<vue-feather
+							type="search"
+							size="28"
+							class="absolute top-3 left-3 text-gray-800"
+							stroke-width="1.8"
+						/>
+						<input
+							type="text"
+							id="input_search_menu"
+							v-model="searchText"
+							placeholder="Search our store"
+							class="h-full w-full border-0 bg-gray-300 pl-12"
+						/>
+					</label>
+				</form>
+
 				<nav class="mt-4 w-full text-xl font-semibold text-gray-800">
 					<ul class="">
 						<li
@@ -292,7 +296,10 @@
 	</transition>
 
 	<div class="relative z-10 w-full bg-gray-100 lg:hidden">
-		<div class="relative z-10 mx-4 flex h-16 items-center">
+		<form
+			@submit.prevent="navigateToShop"
+			class="relative z-10 mx-4 flex h-16 items-center"
+		>
 			<label for="input_search" class="flex items-center">
 				<vue-feather
 					type="search"
@@ -303,11 +310,12 @@
 				<input
 					type="text"
 					id="input_search"
+					v-model="searchText"
 					placeholder="Search our store"
 					class="border-0 bg-transparent focus:ring-0"
 				/>
 			</label>
-		</div>
+		</form>
 	</div>
 </template>
 
@@ -403,6 +411,9 @@ onBeforeRouteUpdate((to, from) => {
 const navigateToShop = () => {
 	router.push({ name: 'shop', query: { search: searchText.value } });
 	searchBlur();
+
+	isMenuOpen.value = false;
+	document.body.classList.remove('overflow-y-hidden', 'h-screen');
 };
 </script>
 

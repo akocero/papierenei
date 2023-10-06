@@ -5,11 +5,8 @@
 		</MainTransition>
 		<div v-if="collectionStore.list.length > 0">
 			<SectionTitle title="Collections" size="md" />
-			<ul class="grid grid-cols-8 gap-4 sm:grid-cols-12">
-				<li
-					class="col-span-3 text-center"
-					v-for="cl in sortedCollection"
-				>
+			<ul class="grid grid-cols-2 gap-4 lg:grid-cols-4">
+				<li class="text-center" v-for="cl in sortedCollection">
 					<router-link
 						:to="{
 							name: 'shop',
@@ -29,8 +26,7 @@
 						>
 							<vue-feather
 								type="image"
-								size="120"
-								class="text-white"
+								class="h-16 text-white lg:h-28"
 							/>
 						</div>
 					</router-link>

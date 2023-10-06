@@ -1,5 +1,5 @@
 <template>
-	<div class="wrapper overflow-hidden">
+	<div class="wrapper collection--section overflow-hidden">
 		<swiper
 			:modules="[Navigation]"
 			:slides-per-view="4"
@@ -59,3 +59,25 @@ const onSlideChange = () => {
 	// console.log('slide change');
 };
 </script>
+
+<style>
+.collection--section .swiper-button-next,
+.collection--section .swiper-button-prev {
+	background-color: white;
+	opacity: 70%;
+	color: black;
+	border-radius: 1rem;
+	height: 3rem;
+	width: 3rem;
+}
+
+.swiper-button-prev.swiper-button-disabled,
+.swiper-button-next.swiper-button-disabled {
+	display: none;
+}
+
+.collection--section .swiper-button-next::after,
+.collection--section .swiper-button-prev::after {
+	font-size: 20px;
+}
+</style>

@@ -11,12 +11,12 @@
 
 		<img v-else :src="regularLogo" alt="" class="z-50 -ml-5 w-48" />
 		<h3
-			class="mb-4 mt-6 font-quicksand text-3xl font-extrabold text-white drop-shadow-xl"
+			class="mb-4 mt-6 font-quicksand text-xl font-extrabold text-white drop-shadow-xl lg:text-3xl"
 		>
 			Loading the Best Deals for You
 		</h3>
 		<p
-			class="max-w-2xl text-center font-quicksand text-white drop-shadow-xl"
+			class="max-w-2xl px-6 text-center font-quicksand text-white drop-shadow-xl"
 		>
 			Your shopping journey is just a heartbeat away. Like a skilled
 			artisan crafting perfection, our app is meticulously preparing an

@@ -119,12 +119,12 @@
 				{{ product.name }}
 			</h4>
 
-			<h5 class="mt-1 text-2xl text-gray-700" v-if="!product.salePrice">
+			<h5 class="mt-1 text-xl lg:text-2xl text-gray-700" v-if="!product.salePrice">
 				₱ {{ numberFormat(product.unitCost) }}
 			</h5>
 
 			<h5
-				class="mt-1 space-x-1 text-2xl text-gray-700"
+				class="mt-1 space-x-1 text-xl lg:text-2xl text-gray-700"
 				v-if="product.salePrice"
 			>
 				<span class="text-red-400">
