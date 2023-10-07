@@ -6,9 +6,17 @@
 			>
 				<div class="w-full">
 					<img
-						src="../../assets/logo-t.png"
+						v-if="ecommSettingsStore.item?.logoBase?.length > 0"
+						:src="ecommSettingsStore.item.logoBase[0].secure_url"
 						alt=""
-						class="mx-auto h-40"
+						class="mx-auto h-28"
+					/>
+
+					<img
+						v-else
+						src="@/assets/new_logos/regular.svg"
+						alt=""
+						class="mx-auto h-28"
 					/>
 					<div class="mb-7">
 						<h2 class="mb-4 text-4xl">Log in</h2>
@@ -59,14 +67,14 @@
 						<div class="mb-5">
 							<RouterLink
 								:to="{ name: 'forgot-password' }"
-								class="text-blue-500"
+								class="text-indigo-500"
 								>Forgot password</RouterLink
 							>
 						</div>
 						<input
 							v-if="!store.isLoading"
 							type="submit"
-							class="block w-full rounded bg-lightBlue-3 px-2 py-2 text-white shadow transition-all hover:bg-main focus:outline-none focus:ring focus:ring-gray-300 active:bg-gray-700"
+							class="block w-full rounded bg-main px-2 py-2 text-white shadow transition-all hover:bg-main focus:outline-none focus:ring focus:ring-gray-300 active:bg-gray-700"
 							value="Log-in"
 						/>
 						<input
@@ -81,7 +89,7 @@
 						Don't have an account?
 						<RouterLink
 							:to="{ name: 'signup' }"
-							class="text-blue-500"
+							class="text-indigo-500"
 							>Sign up</RouterLink
 						>
 					</div>
@@ -106,11 +114,12 @@ import { ref } from '@vue/reactivity';
 import { useAuthStore } from '@/stores/auth';
 import useAlert from '@/composables/useAlert';
 import bgUrl from '@/assets/login-bg-2.jpg';
-
+import { useEcommSettingStore } from '@/stores/ecomm_setting';
 const { pushAlert } = useAlert();
 const email = ref('');
 const password = ref('');
 const store = useAuthStore();
+const ecommSettingsStore = useEcommSettingStore();
 
 const handleSubmit = async () => {
 	await store.login(email.value, password.value);

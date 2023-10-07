@@ -34,7 +34,7 @@ module.exports = {
 					3: '#89DEEA',
 				},
 				customDarkBlue: '#055560',
-				main: '#66dcfd',
+				main: '#F87171',
 				darkBlue: '#05A0B5',
 				darkYellow: '#FEC126',
 				accent: {
