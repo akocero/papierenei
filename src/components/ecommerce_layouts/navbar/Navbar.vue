@@ -300,7 +300,7 @@
 			@submit.prevent="navigateToShop"
 			class="relative z-10 mx-4 flex h-16 items-center"
 		>
-			<label for="input_search" class="flex items-center">
+			<label for="input_search" class="flex w-full items-center">
 				<vue-feather
 					type="search"
 					size="28"
@@ -312,7 +312,7 @@
 					id="input_search"
 					v-model="searchText"
 					placeholder="Search our store"
-					class="border-0 bg-transparent focus:ring-0"
+					class="w-full border-0 bg-transparent focus:ring-0"
 				/>
 			</label>
 		</form>

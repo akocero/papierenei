@@ -17,7 +17,7 @@
 			</h5>
 		</div> -->
 		<div
-			class="flex h-[3.8rem] min-w-[14rem] justify-between rounded-lg border border-gray-300 text-gray-500"
+			class="flex h-[3.8rem] w-full justify-between rounded-lg border border-gray-300 text-gray-500 lg:min-w-[14rem]"
 		>
 			<div class="w-[43%]">
 				<input

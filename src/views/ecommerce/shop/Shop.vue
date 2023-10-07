@@ -16,7 +16,7 @@
 			<!-- Title -->
 			<div
 				v-if="filterBy"
-				class="mb-8 flex flex-col items-center justify-center rounded-2xl px-12 text-center"
+				class="mb-8 flex flex-col items-center justify-center rounded-2xl px-2 text-center lg:px-12"
 				:class="filterBy?.shopBanner[0] && 'h-40'"
 				:style="{
 					'background-image':
@@ -35,12 +35,12 @@
 			<SectionTitle :title="shopTitle" size="md" v-else />
 
 			<!-- Filters -->
-			<div class="mb-8 hidden justify-between lg:flex">
-				<span class="flex space-x-4">
+			<div class="mb-8 flex flex-col justify-between gap-y-4 lg:flex-row">
+				<span class="flex flex-col gap-y-4 lg:flex-row lg:space-x-4">
 					<span class="flex flex-col">
 						<TagFilter :tags="productTags" v-model="selectedTag" />
 						<button
-							class="mt-3 place-self-start rounded bg-gray-200 px-3 py-2"
+							class="mt-3 mb-4 place-self-start rounded bg-gray-200 px-3 py-2"
 							@click="reset('filter')"
 							v-if="selectedTag"
 						>

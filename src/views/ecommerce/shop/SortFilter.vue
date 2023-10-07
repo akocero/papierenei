@@ -2,7 +2,7 @@
 	<Menu as="div" class="relative inline-block text-left">
 		<div>
 			<MenuButton
-				class="flex h-[3.8rem] min-w-[14rem] items-center justify-between rounded-lg border border-gray-300 pl-4 pr-3 text-gray-500"
+				class="flex h-[3.8rem] w-full items-center justify-between rounded-lg border border-gray-300 pl-4 pr-3 text-gray-500 lg:min-w-[14rem]"
 			>
 				<div class="text-left">
 					<div class="text-sm text-gray-400">Sorted by</div>

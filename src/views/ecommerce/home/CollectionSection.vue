@@ -66,7 +66,7 @@ const onSlideChange = () => {
 	background-color: white;
 	opacity: 70%;
 	color: black;
-	border-radius: 1rem;
+	border-radius: 0.8rem;
 	height: 3rem;
 	width: 3rem;
 }
@@ -79,5 +79,6 @@ const onSlideChange = () => {
 .collection--section .swiper-button-next::after,
 .collection--section .swiper-button-prev::after {
 	font-size: 20px;
+	font-weight: 600;
 }
 </style>
