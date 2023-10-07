@@ -128,16 +128,15 @@
 					<p>Taxes and shipping calculated at checkout</p>
 				</div>
 
-				<BaseButton
-					_type="link"
+				<ButtonLink
 					v-if="list.length"
-					:routeObject="{
+					:link="{
 						name: 'check_out',
 					}"
-					text="Check out"
-					color="primary"
 					_class="w-full  text-center mt-4"
-				/>
+				>
+					Check out
+				</ButtonLink>
 			</div>
 		</div>
 	</div>

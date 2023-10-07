@@ -1,36 +1,61 @@
 <template>
 	<section class="wrapper">
-		<SectionTitle title="JOIN THE PAPIER RENEI FAM!" size="md" />
-		<ul class="grid w-full grid-cols-4 gap-x-8">
-			<li v-for="link in socialLinks" class="">
-				<button
-					class="h-72 overflow-hidden rounded-2xl"
-					@click="isSocialModalOpen = true"
-				>
-					<img :src="link.img" alt="" class="" />
-				</button>
+		<SectionTitle title="JOIN THE PAPIER RENEI FAM!" />
+		<ul class="grid w-full grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-8">
+			<li
+				v-for="link in socialLinks"
+				class="h-48 cursor-pointer overflow-hidden rounded-2xl lg:h-96"
+				@click="openSocialAccountModal(link)"
+			>
+				<img
+					:src="link.img"
+					alt=""
+					class="h-full w-full object-cover"
+				/>
 			</li>
 		</ul>
 	</section>
 	<Modal
-		:show="isSocialModalOpen"
-		@closeModal="isSocialModalOpen = false"
+		v-if="activeAccount && isSocialModalOpen"
+		:show="true"
+		@closeModal="closeSocialAccountModal"
 		:backdropClose="false"
-		size="md"
+		size="xl"
+		_class="p-0 rounded-2xl"
 	>
-		<div>
-			<div>
-				<img src="" alt="" />
+		<div class="socia--account flex flex-col lg:flex-row">
+			<div class="h-60 lg:h-auto lg:w-[55%]">
+				<img
+					:src="activeAccount.img"
+					alt=""
+					class="h-full w-full object-cover"
+				/>
 			</div>
-			<div>
-				<div>
-					<div><img src="" alt="" /></div>
-					<div>
-						<label for="">Instragram User</label><br />
-						<span> 9 months ago </span>
+			<div class="overflow-auto p-5 lg:h-[38rem] lg:w-[45%]">
+				<div class="flex items-start">
+					<div
+						class="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#E50085]"
+					>
+						<vueFeather
+							type="instagram"
+							size="21"
+							class="text-gray-800"
+						/>
+					</div>
+					<div class="ml-2">
+						<span class="block">Instragram User</span>
+						<span
+							class="-mt-1 block font-mono text-sm text-gray-400"
+						>
+							{{ activeAccount.postedDate }} ago
+						</span>
 					</div>
 				</div>
-				<div></div>
+
+				<div
+					v-html="activeAccount.body"
+					class="text-gray-500 before:prose prose-p:my-4 prose-p:leading-tight prose-a:font-semibold prose-a:text-indigo-700 prose-a:no-underline"
+				></div>
 			</div>
 		</div>
 	</Modal>
@@ -44,6 +69,8 @@ import mycat2 from '@/assets/social_media/mycat2.jpg';
 import jelacrafts from '@/assets/social_media/jelacrafts.jpg';
 import papierrenei from '@/assets/social_media/papierrenei.jpg';
 
+const activeAccount = ref(null);
+
 const socialLinks = ref([
 	{
 		img: mycat2,
@@ -56,14 +83,29 @@ const socialLinks = ref([
 	{
 		img: jelacrafts,
 		body: `<p>
-        August was ✨<br /><br />
-        Hopefully the rest of the year will also be char 😂<br /><br />
-        Thank you <a href="@heyitsrenei">@heyitsrenei</a> for these fab gifts 😍<br /><br />
-        Hi friends, please do like and follow her and her shop <a href="@papierenei">@papierenei</a>, much appreciated ~ thank youuu 🌟<br /><br />
-        <a href="@bearlyarts">@bearlyarts</a> products ✨<br /><br />
-        <a href="#crafts">#crafts</a> <a href="#bearlyarts">#bearlyarts</a> <a href="#craftglue">#craftglue</a> <a href="#papierenei">#papierenei</a> <a href="#gift">#gift</a>
-        </p>
-        `,
+  August was ✨
+</p>
+
+<p>
+  Hopefully the rest of the year will also be char 😂
+</p>
+
+<p>
+  Thank you <a href="@heyitsrenei" class="text-indigo-600">@heyitsrenei</a> for these fab gifts 😍
+</p>
+
+<p>
+  Hi friends, please do like and follow her and her shop <a href="@papierenei" class="text-indigo-600">@papierenei</a>, much appreciated ~ thank youuu 🌟
+</p>
+
+<p>
+  <a href="@bearlyarts" class="text-indigo-600">@bearlyarts</a> products ✨
+</p>
+
+<p>
+  <a href="#crafts" class="text-indigo-600">#crafts</a> <a href="#bearlyarts" class="text-indigo-600">#bearlyarts</a> <a href="#craftglue" class="text-indigo-600">#craftglue</a> <a href="#papierenei" class="text-indigo-600">#papierenei</a> <a href="#gift" class="text-indigo-600">#gift</a>
+</p>
+`,
 		postedDate: '3w',
 	},
 	{
@@ -91,4 +133,20 @@ const socialLinks = ref([
 ]);
 
 const isSocialModalOpen = ref(false);
+
+const openSocialAccountModal = (account) => {
+	activeAccount.value = account;
+	isSocialModalOpen.value = true;
+};
+
+const closeSocialAccountModal = (account) => {
+	activeAccount.value = null;
+	isSocialModalOpen.value = false;
+};
 </script>
+
+<style scoped>
+.social-link {
+	color: #4f46e5 !important;
+}
+</style>

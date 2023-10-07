@@ -94,7 +94,15 @@
 						:to="link.routeObject"
 						class="flex h-14 items-center border-b-[3px] border-gray-100 px-6 transition-all duration-500 hover:border-gray-500 group-hover:border-gray-500"
 					>
-						{{ link.text }}
+						<span>{{ link.text }}</span>
+
+						<vue-feather
+							v-if="link.children"
+							type="chevron-down"
+							size="18"
+							class="ml-2"
+							stroke-width="1.8"
+						/>
 					</router-link>
 					<div
 						class="invisible absolute top-14 left-0 z-20 w-64 border-b-[3px] border-gray-500 bg-white opacity-0 shadow transition-all duration-300 ease-in group-hover:visible group-hover:opacity-100"

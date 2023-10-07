@@ -3,7 +3,7 @@
 		<SectionTitle title="Wishlist" />
 		<div
 			class="grid w-full grid-cols-2 gap-4 px-0 md:grid-cols-5 md:gap-8 md:px-0"
-			v-if="GuestStore.wishList.length > 0"
+			v-if="GuestStore.wishList.length > 0 && EcomAuthStore.user"
 		>
 			<div v-for="(product, key) in GuestStore.wishList" class="relative">
 				<button
@@ -65,7 +65,12 @@
 				</router-link>
 			</div>
 		</div>
-		<div v-else class="text-center text-xl">Your wishlist is empty</div>
+		<div
+			v-if="!GuestStore.wishList.length || !EcomAuthStore.user"
+			class="text-center text-xl"
+		>
+			Your wishlist is empty
+		</div>
 	</div>
 </template>
 

@@ -27,8 +27,11 @@
 						leave-to="opacity-0 scale-95"
 					>
 						<DialogPanel
-							class="w-full transform overflow-hidden rounded-sm bg-white p-6 text-left align-middle shadow-xl transition-all"
-							:class="modalSize[size]"
+							:class="[
+								'w-full transform overflow-hidden rounded-sm bg-white  p-6 text-left align-middle shadow-xl transition-all',
+								modalSize[size],
+								_class,
+							]"
 						>
 							<DialogTitle
 								v-if="modalTitle"
@@ -93,6 +96,9 @@ const props = defineProps({
 			// note: modify this validator base on modalSize value
 			return ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'].includes(value);
 		},
+	},
+	_class: {
+		type: String,
 	},
 });
 
