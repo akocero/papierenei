@@ -15,6 +15,8 @@
 	<ClassificationSection />
 
 	<FeaturedSection @openModal="openModal" />
+
+	<SocialMediaSection />
 </template>
 
 <script setup>
@@ -38,6 +40,7 @@ import QuickView from '@/components/ecommerce/QuickView.vue';
 /* JSON */
 import ecomDevData from '../data/dev_ecommerce.json';
 import ecomProdData from '../data/ecommerce.json';
+import SocialMediaSection from './SocialMediaSection.vue';
 
 const productStore = useProductStore();
 const categoryStore = useCategoryStore();

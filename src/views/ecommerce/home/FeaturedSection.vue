@@ -26,11 +26,24 @@ import { useCartStore } from '@/stores/cart';
 
 import Product from '@/components/ecommerce/Product.vue';
 
+import ecomProdData from '@/views/ecommerce/data/ecommerce.json';
+import ecomDevData from '@/views/ecommerce/data/dev_ecommerce.json';
+
 const productStore = useProductStore();
 const { addToCart } = useCartStore();
 
+//
 onBeforeMount(async () => {
-	await productStore.fetch('?isPublished=1&limit=4');
+	let featureProductCollectionID = '';
+	if (import.meta.env.VITE_ENV === 'production') {
+		featureProductCollectionID = ecomProdData.featuredColID;
+	} else {
+		featureProductCollectionID = ecomDevData.featuredColID;
+	}
+
+	await productStore.fetch(
+		'?isPublished=1&collections[in][0]=' + featureProductCollectionID,
+	);
 });
 </script>
 

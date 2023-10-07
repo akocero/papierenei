@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="absolute bottom-0 w-full bg-red-300 text-[1rem] font-semibold text-white lg:h-72"
+		class="absolute bottom-0 w-full bg-indigo-300 text-[1rem] font-semibold text-white lg:h-72"
 	>
 		<div
 			class="mx-auto flex max-w-base flex-col px-5 pt-7 md:flex-row 2xl:px-0"
@@ -16,14 +16,14 @@
 							cute and colorful have healing powers!
 						</p>
 						<p>
-							Have questions?
+							Have questions? Contact us
 							<router-link
-								class="text-red-500 underline"
+								class="text-indigo-500 underline"
 								:to="{
 									name: 'contact',
 								}"
 							>
-								Contact us here
+								here
 							</router-link>
 						</p>
 					</div>
@@ -76,7 +76,7 @@
 								:href="link.link"
 								target="_blank"
 								rel="noopener noreferrer"
-								class="flex h-12 w-12 items-center justify-center rounded-full bg-red-400 text-white"
+								class="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-400 text-white"
 							>
 								<vue-feather
 									:type="link.icon"
@@ -89,7 +89,7 @@
 			</div>
 		</div>
 
-		<div class="absolute w-full bg-red-400 text-white lg:bottom-0">
+		<div class="absolute w-full bg-indigo-400 text-white lg:bottom-0">
 			<div class="max-w-base px-8 lg:mx-auto 2xl:px-0">
 				<h4 class="my-3">
 					© Papier Renei {{ new Date().getFullYear() }} - All rights

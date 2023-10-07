@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Login from '@/views/auth/Login.vue';
-import Home from '@/views/ecommerce/home/index.vue';
+import Home from '@/views/ecommerce/home/Home.vue';
 import ForgotPassword from '@/views/auth/ForgotPassword.vue';
 import Auth from '@/components/layouts/Auth.vue';
 import Signup from '@/views/auth/Signup.vue';

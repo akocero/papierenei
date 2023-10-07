@@ -25,7 +25,7 @@
 					backgroundSize: 'cover',
 				}"
 			>
-				<SectionTitle :title="filterBy.name" size="md" />
+				<SectionTitle :title="filterBy.name" size="md" _class="" />
 
 				<p class="">
 					{{ filterBy.description }}

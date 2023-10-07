@@ -1,7 +1,10 @@
 <template>
 	<h2
-		class="mb-10 rounded-lg text-center font-nunito text-2xl font-black uppercase text-indigo-400"
-		:class="[textSize[size]]"
+		:class="[
+			'mb-4 rounded-lg text-center font-nunito text-2xl font-black uppercase text-indigo-400 lg:mb-10',
+			textSize[size],
+			_class,
+		]"
 	>
 		{{ title }}
 	</h2>
@@ -16,6 +19,9 @@ const props = defineProps({
 	size: {
 		type: String,
 		default: 'lg',
+	},
+	_class: {
+		type: String,
 	},
 });
 
