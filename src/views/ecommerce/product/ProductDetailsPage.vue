@@ -1,8 +1,11 @@
 <template>
 	<section class="wrapper max-w-[82rem]">
-		<div class="grid grid-cols-12 gap-16" v-if="product">
-			<div v-if="coverImage" class="col-span-7">
-				<div class="h-[748px] overflow-hidden rounded-2xl">
+		<div
+			class="grid w-full grid-cols-12 gap-y-10 lg:gap-16 lg:gap-y-1"
+			v-if="product"
+		>
+			<div v-if="coverImage" class="col-span-full lg:col-span-7">
+				<div class="overflow-hidden rounded-2xl lg:h-[748px]">
 					<img
 						class="h-full w-full object-cover"
 						:src="coverImage.secure_url"
@@ -10,7 +13,10 @@
 					/>
 				</div>
 
-				<ul v-if="product?.images?.length" class="mt-4 flex space-x-4">
+				<ul
+					v-if="product?.images?.length"
+					class="mt-4 flex w-full space-x-4 overflow-x-auto"
+				>
 					<li
 						v-if="product?.coverPhoto?.length"
 						class="h-[139px] w-[139px]"
@@ -37,13 +43,13 @@
 			</div>
 			<div
 				v-else
-				class="col-span-7 flex h-[748px] w-full items-center justify-center rounded-2xl bg-gray-300"
+				class="col-span-full flex h-[748px] w-full items-center justify-center rounded-2xl bg-gray-300 lg:col-span-7"
 			>
 				<VueFeather type="image" size="120" class="text-white" />
 			</div>
-			<div class="col-span-5" v-if="product">
+			<div class="col-span-full lg:col-span-5" v-if="product">
 				<h1
-					class="font-nunito text-4xl font-black capitalize text-indigo-400"
+					class="font-nunito text-2xl font-black capitalize text-indigo-400 lg:text-4xl"
 				>
 					{{ product.name }}
 				</h1>

@@ -1,22 +1,20 @@
 <template>
-	<section class="wrapper">
-		<SectionTitle title="Just For You" />
-		<div
-			class="grid w-full grid-cols-2 gap-2 md:grid-cols-5 md:gap-8 md:px-0"
-			v-if="!productStore.isLoading"
-		>
-			<div v-for="(product, key) in productStore.list">
-				<Product
-					:key="product"
-					@openModal="$emit('openModal', product)"
-					@addToCart="addToCart($event)"
-					:product="product"
-					:index="key"
-					:isLarge="false"
-				/>
-			</div>
+	<SectionTitle title="Just For You" />
+	<div
+		class="grid w-full grid-cols-2 gap-2 md:grid-cols-5 md:gap-8 md:px-0"
+		v-if="!productStore.isLoading"
+	>
+		<div v-for="(product, key) in productStore.list">
+			<Product
+				:key="product"
+				@openModal="$emit('openModal', product)"
+				@addToCart="addToCart($event)"
+				:product="product"
+				:index="key"
+				:isLarge="false"
+			/>
 		</div>
-	</section>
+	</div>
 </template>
 
 <script setup>

@@ -16,16 +16,19 @@
 				<router-link
 					:to="{ name: 'product', params: { id: product._id } }"
 				>
-					<div class="h-72" v-if="product.coverPhoto.length > 0">
+					<div
+						class="h-44 lg:h-72"
+						v-if="product.coverPhoto.length > 0"
+					>
 						<img
 							:src="product.coverPhoto[0].secure_url"
 							alt=""
-							class="h-full w-full rounded-2xl"
+							class="h-full w-full rounded-2xl object-cover"
 						/>
 					</div>
 
 					<div
-						class="flex h-72 items-center justify-center rounded-2xl bg-gray-300"
+						class="flex h-44 items-center justify-center rounded-2xl bg-gray-300 lg:h-72"
 						v-else
 					>
 						<VueFeather type="image" size="90" class="text-white" />

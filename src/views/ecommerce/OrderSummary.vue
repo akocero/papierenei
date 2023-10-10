@@ -1,6 +1,6 @@
 <template>
-	<div class="wrapper my-10 flex" v-if="orderDetails">
-		<div class="w-[60%] p-8" v-if="orderDetails">
+	<div class="wrapper my-10 flex flex-col lg:flex-row" v-if="orderDetails">
+		<div class="w-full lg:w-[60%]">
 			<h2 class="mb-4 text-4xl">Papier Renei</h2>
 			<h3 class="mb-4 text-2xl font-bold capitalize">
 				Thank you {{ orderDetails.firstName }}!
@@ -13,12 +13,12 @@
 
 			<div class="border p-6">
 				<h2 class="mb-4 text-2xl">Contact Information</h2>
-				<div class="grid grid-cols-12 gap-y-8">
-					<div class="col-span-6">
+				<div class="grid grid-cols-1 gap-y-8 lg:grid-cols-2">
+					<div class="">
 						<label for="">Contact Info.</label>
 						<p class="font-bold">{{ orderDetails.email }}</p>
 					</div>
-					<div class="col-span-6">
+					<div class="">
 						<label for="">Payment Method</label>
 						<p class="font-bold">
 							{{ orderDetails.paymentMethod }} -
@@ -27,7 +27,7 @@
 							</span>
 						</p>
 					</div>
-					<div class="col-span-6">
+					<div class="">
 						<label for="">Shipping Address</label>
 						<p class="font-bold">
 							{{ orderDetails.streetAddress }},
@@ -37,7 +37,7 @@
 							}})
 						</p>
 					</div>
-					<div class="col-span-6">
+					<div class="">
 						<label for="">Billing Address</label>
 						<p class="font-bold"></p>
 					</div>
@@ -54,12 +54,9 @@
 				>
 			</div>
 		</div>
-		<!-- <div v-if="!orderStore.isLoading && orderDetails.items.length > 0">
-			{{ orderDetails.items }}
-		</div> -->
 
 		<div
-			class="col-span-5 w-[40%] p-12 shadow-lg"
+			class="col-span-5 w-full p-12 shadow-lg lg:w-[40%]"
 			v-if="!orderStore.isLoading && orderDetails.items.length > 0"
 		>
 			<h3 class="col-span-full mb-2 text-xl font-semibold">
@@ -69,29 +66,6 @@
 			<ul>
 				<li class="border-b py-4" v-for="ct in orderDetails.items">
 					<div class="flex items-center">
-						<!-- <div
-							v-if="ct.images.length || ct.coverPhoto"
-							class="relative h-24 w-24"
-						>
-							<img
-								class="h-full w-full object-cover"
-								:src="ct.coverPhoto.secure_url"
-								alt=""
-								v-if="ct.coverPhoto"
-							/>
-							<img
-								class="h-full w-full object-cover"
-								:src="ct.images[0].secure_url"
-								alt=""
-								v-else
-							/>
-
-							<span
-								class="absolute -top-3 -right-3 flex h-6 w-6 items-center justify-center rounded-full bg-gray-600 font-sans text-white"
-							>
-								{{ ct.cartQuantity }}
-							</span>
-						</div> -->
 						<div class="relative h-24 w-24">
 							<img
 								class="h-full w-full object-cover"

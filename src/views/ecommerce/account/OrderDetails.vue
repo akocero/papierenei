@@ -5,7 +5,7 @@
 				Order Info
 			</h2>
 			<div class="card" v-if="order">
-				<div class="mb-2 flex justify-between">
+				<div class="mb-2 flex flex-col justify-between lg:flex-row">
 					<h2 class="mb-3 font-nunito font-bold text-indigo-400">
 						Order #{{ order._id }}
 					</h2>
@@ -118,7 +118,10 @@
 					</li>
 				</ul>
 			</div>
-			<div class="mt-4 grid grid-cols-2 gap-4" v-if="order">
+			<div
+				class="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2"
+				v-if="order"
+			>
 				<div class="card">
 					<h3 class="mb-3 font-nunito font-bold text-indigo-400">
 						Billing Address
@@ -130,11 +133,15 @@
 						</li>
 						<li>
 							Barangay:
-							<span class="text-gray-600">{{ order.barangay }}</span>
+							<span class="text-gray-600">{{
+								order.barangay
+							}}</span>
 						</li>
 						<li>
 							Province:
-							<span class="text-gray-600">{{ order.province }}</span>
+							<span class="text-gray-600">{{
+								order.province
+							}}</span>
 						</li>
 						<li>
 							Street address:
@@ -162,11 +169,15 @@
 						</li>
 						<li>
 							Barangay:
-							<span class="text-gray-600">{{ order.barangay }}</span>
+							<span class="text-gray-600">{{
+								order.barangay
+							}}</span>
 						</li>
 						<li>
 							Province:
-							<span class="text-gray-600">{{ order.province }}</span>
+							<span class="text-gray-600">{{
+								order.province
+							}}</span>
 						</li>
 						<li>
 							Street address:

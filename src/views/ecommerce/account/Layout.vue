@@ -4,7 +4,7 @@
 	>
 		<nav class="bg-white shadow-sm">
 			<ul
-				class="mx-auto flex h-24 max-w-base items-center justify-between px-10"
+				class="mx-auto flex h-24 max-w-base items-center justify-between px-4 lg:px-10"
 			>
 				<li>
 					<router-link
@@ -34,7 +34,7 @@
 						:to="{
 							name: 'home',
 						}"
-						class="rounded-lg bg-red-400 py-4 px-3 font-semibold text-white"
+						class="hidden rounded-lg bg-red-400 py-4 px-3 font-semibold text-white lg:block"
 					>
 						Go to store
 					</router-link>
@@ -45,7 +45,7 @@
 		<main class="">
 			<RouterView />
 		</main>
-		<footer class="absolute bottom-0 mx-auto h-14 w-full">
+		<footer class="absolute bottom-0 mx-auto hidden h-14 w-full lg:block">
 			<div class="mx-auto max-w-base">
 				<hr />
 				<ul class="flex gap-10 p-4">
