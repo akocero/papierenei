@@ -22,6 +22,8 @@
 			</button>
 		</div>
 	</BaseModal> -->
+
+	
 	<div class="card">
 		<!-- uncomment this to test the toast or modals -->
 		<!-- <button @click="showAlert">Open</button> -->
